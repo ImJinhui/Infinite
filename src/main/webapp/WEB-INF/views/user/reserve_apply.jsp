@@ -5,52 +5,69 @@
 
 <%@ page isELIgnored="false"%>
 
+<!-- left collapse -->
+<script>
+(function($) {
+	$(function() {
+
+$('.collapsible').collapsible({
+  
+}
+);
+
+	}); // End Document Ready
+})(jQuery); // End of jQuery name space
+
+</script>
+<!-- /left collapse -->
 
   <!-- main -->
   <div class="main_body">
   <!-- 수정부분 -->
-  <div class="row">
-    <form class="col s12">
-      <div class="row">
-        <div class="input-field col s6">
-          <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-          <label for="first_name">First Name</label>
-        </div>
-        <div class="input-field col s6">
-          <input id="last_name" type="text" class="validate">
-          <label for="last_name">Last Name</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input disabled value="I am not editable" id="disabled" type="text" class="validate">
-          <label for="disabled">Disabled</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="password" type="password" class="validate">
-          <label for="password">Password</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="email" type="email" class="validate">
-          <label for="email">Email</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          This is an inline input field:
-          <div class="input-field inline">
-            <input id="email_inline" type="email" class="validate">
-            <label for="email_inline">Email</label>
-            <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
-          </div>
-        </div>
-      </div>
-    </form>
+  <!-- left -->
+  <div class="col s3">
+	  <ul class="collapsible">
+	    <li>
+	      <div class="collapsible-header"><i class="material-icons">filter_drama</i>3D Printer</div>
+	      
+	      <div class="collapsible-body collection">
+	        <a href="#!" class="collection-item">Printer 1</a>
+	        <a href="#!" class="collection-item">Printer 2</a>
+	        <a href="#!" class="collection-item">Printer 3</a>
+	        <a href="#!" class="collection-item">Printer 4</a>
+	      </div>
+	      
+	    </li>
+	    <li>
+	      <div class="collapsible-header"><i class="material-icons">place</i>Laser Cutter</div>
+	      <div class="collapsible-body collection">
+	        <a href="#!" class="collection-item">Cutter 1</a>
+	        <a href="#!" class="collection-item">Cutter 2</a>
+	        <a href="#!" class="collection-item">Cutter 3</a>
+	        <a href="#!" class="collection-item">Cutter 4</a>
+	      </div>
+	    </li>
+	    <li>
+	      <div class="collapsible-header"><i class="material-icons">whatshot</i>Computer</div>
+	      <div class="collapsible-body collection">
+	        <a href="#!" class="collection-item">Computer 1</a>
+	        <a href="#!" class="collection-item">Computer 2</a>
+	        <a href="#!" class="collection-item">Computer 3</a>
+	        <a href="#!" class="collection-item">Computer 4</a>
+	      </div>
+	    </li>
+	  </ul>
   </div>
+  <!-- /left -->
+  
+  <!-- center -->
+  <div class="col s6"></div>
+  <!-- /center -->
+  
+  <!-- right -->
+  <div class="col s3"></div>
+  <!-- /right -->
+  
   <!-- /수정부분 -->
   </div>
   <!-- /main -->

@@ -45,6 +45,14 @@ public class AdminEquipController {
 			
 		} else if ("result_manage".equalsIgnoreCase(action)) {
 			
+		} else if ("ability_list".equalsIgnoreCase(action)) {
+			
+		} else if ("ability_edit".equalsIgnoreCase(action)) {
+			
+		} else if ("place_list".equalsIgnoreCase(action)) {
+			
+		} else if ("place_edit".equalsIgnoreCase(action)) {
+			
 		}
 		
 
