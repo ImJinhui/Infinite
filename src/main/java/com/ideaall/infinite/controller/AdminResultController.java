@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class AdminEquipController {
-	private final static String MAPPING = "/admin/equip/";
+public class AdminResultController {
+	private final static String MAPPING = "/admin/result/";
 
 
     
@@ -31,29 +31,9 @@ public class AdminEquipController {
 		List<Object> resultList = new ArrayList<Object>();
 
 		// divided depending on action value
-		if ("equip_list".equalsIgnoreCase(action)) {
+		if ("result_manage".equalsIgnoreCase(action)) {
 			
-		} else if ("equip_edit".equalsIgnoreCase(action)) {
-			
-		} else if ("equip_read".equalsIgnoreCase(action)) {
-			
-		} /*else if ("member_list".equalsIgnoreCase(action)) {
-			
-		} else if ("member_edit".equalsIgnoreCase(action)) {
-			
-		} else if ("member_read".equalsIgnoreCase(action)) {
-			
-		} else if ("result_manage".equalsIgnoreCase(action)) {
-			
-		} else if ("ability_list".equalsIgnoreCase(action)) {
-			
-		} else if ("ability_edit".equalsIgnoreCase(action)) {
-			
-		} else if ("place_list".equalsIgnoreCase(action)) {
-			
-		} else if ("place_edit".equalsIgnoreCase(action)) {
-			
-		}*/
+		} 
 		
 
 		if(forwardView != null){

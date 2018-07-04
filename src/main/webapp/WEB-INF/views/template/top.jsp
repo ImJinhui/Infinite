@@ -24,8 +24,8 @@ $('.dropdown-trigger').dropdown({
 
 <!-- Dropdown 내부리스트 -->
 <ul id="dropdown_equip" class="dropdown-content">
-  <li><a href="<c:url value='/admin/equip_list'/>">장비관리</a></li>	
-  <li><a href="<c:url value='/admin/place_list'/>">장소관리</a></li>
+  <li><a href="<c:url value='/admin/equip/equip_list'/>">장비관리</a></li>	
+  <li><a href="<c:url value='/admin/place/place_list'/>">장소관리</a></li>
 </ul>
 <ul id="dropdown_member" class="dropdown-content">
   <li><a href="<c:url value='/common/login'/>">로그인</a></li>	
@@ -43,12 +43,11 @@ $('.dropdown-trigger').dropdown({
     <div class="nav-wrapper container"><a id="logo-container" href="<c:url value='/'/>" class="brand-logo">무한상상실</a>
       <ul class="right hide-on-med-and-down">
         <li><a class="dropdown-trigger" href="#!" data-target="dropdown_reserve">예약<i class="material-icons right">arrow_drop_down</i></a></li>
-        <li><a href="<c:url value='/admin/member_list'/>">회원관리</a></li>
-        <li><a href="<c:url value='/admin/ability_list'/>">능력관리</a></li>
+        <li><a href="<c:url value='/admin/member/member_list'/>">회원관리</a></li>
+        <li><a href="<c:url value='/admin/ability/ability_list'/>">능력관리</a></li>
         <li><a class="dropdown-trigger" href="#!" data-target="dropdown_equip">장비·장소 관리<i class="material-icons right">arrow_drop_down</i></a></li>
         <li><a class="dropdown-trigger" href="#!" data-target="dropdown_member">로그인<i class="material-icons right">arrow_drop_down</i></a></li>
-        <%-- <li><a href="<c:url value='/common/login'/>">로그인</a></li>
-        <li><a href="<c:url value='/common/signup'/>">회원가입</a></li> --%>
+
       </ul>
 
       <ul id="nav-mobile" class="sidenav">	

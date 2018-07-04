@@ -7,15 +7,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<tiles:insertAttribute name="layout.header" />
-<title><tiles:getAsString name="layout.title" /></title>
+<tiles:insertAttribute name="layout.header"/>
+<title><tiles:getAsString name="layout.title"/></title>
 </head>
 <body>
 
-		<tiles:insertAttribute name="layout.top" />
-		<tiles:insertAttribute name="layout.body" />
-		<tiles:insertAttribute name="layout.footer" />
+		<tiles:insertAttribute name="layout.top"/>
+		<tiles:insertAttribute name="layout.body" ignore="true" />
+		<tiles:insertAttribute name="layout.footer"/>
 	
-	<!-- /#wrapper -->
 </body>
 </html>

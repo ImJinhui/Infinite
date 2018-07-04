@@ -22,13 +22,13 @@ $('.collapsible').collapsible({
 <!-- /left collapse -->
 
   <!-- main -->
-  <div class="main_body">
+  <div class="main_body row">
   <!-- 수정부분 -->
   <!-- left -->
   <div class="col s3">
 	  <ul class="collapsible">
 	    <li>
-	      <div class="collapsible-header"><i class="material-icons">filter_drama</i>3D Printer</div>
+	      <div class="collapsible-header">3D Printer</div>
 	      
 	      <div class="collapsible-body collection">
 	        <a href="#!" class="collection-item">Printer 1</a>
@@ -39,7 +39,7 @@ $('.collapsible').collapsible({
 	      
 	    </li>
 	    <li>
-	      <div class="collapsible-header"><i class="material-icons">place</i>Laser Cutter</div>
+	      <div class="collapsible-header">Laser Cutter</div>
 	      <div class="collapsible-body collection">
 	        <a href="#!" class="collection-item">Cutter 1</a>
 	        <a href="#!" class="collection-item">Cutter 2</a>
@@ -61,11 +61,64 @@ $('.collapsible').collapsible({
   <!-- /left -->
   
   <!-- center -->
-  <div class="col s6"></div>
+  <div class="col s6">
+  <table>
+        <tbody>
+          <tr>
+            <td>Alan</td>
+            <td>Jellybean</td>
+            <td>$3.76</td>
+            <td>$3.76</td>
+            <td>$3.76</td>
+            <td>$3.76</td>
+            <td>$3.76</td>
+          </tr>
+          <tr>
+            <td>Alan</td>
+            <td>Jellybean</td>
+            <td>$3.76</td>
+            <td>$3.76</td>
+            <td>$3.76</td>
+            <td>$3.76</td>
+            <td>$3.76</td>
+          </tr>
+          
+        </tbody>
+      </table>
+  
+  </div>
   <!-- /center -->
   
   <!-- right -->
-  <div class="col s3"></div>
+  <div class="col s3">
+ 	<ul class="collection with-header">
+ 	
+      <li class="collection-header"><h5>선택목록</h5></li>
+      
+      <li class="card" style="width: 90%;">
+        <div class="card-content">
+          <p class="card-title">3D Printer</p>
+          <p>2018년 7월 4일</p>
+          <p>12:00 ~ 13:00</p>
+        </div>
+      </li>
+      <li class="card" style="width: 90%;">
+        <div class="card-content">
+          <span class="card-title">3D Printer</span>
+          <p>2018년 7월 4일</p>
+          <p>13:00 ~ 14:00</p>
+        </div>
+      </li>
+      <li class="card" style="width: 90%;">
+        <div class="card-content">
+          <span class="card-title">Laser Cutter</span>
+          <p>2018년 7월 4일</p>
+          <p>12:00 ~ 13:00</p>
+        </div>
+      </li>
+    
+  	</ul>
+  </div>
   <!-- /right -->
   
   <!-- /수정부분 -->
