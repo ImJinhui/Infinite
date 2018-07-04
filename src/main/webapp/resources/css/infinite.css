@@ -6,15 +6,17 @@
  * Made By 즐겨찾기
  */
 
-
-
+/* main 틀 */
+html{
+	font: Montserrat, sans-serif;
+}
 .main_body {
   margin: 5% auto;
   max-width: 1280px;
-  width: 90%;
+  width: 90%; 
 }
 
-@media only screen and (min-width: 601px) {
+/* @media only screen and (min-width: 601px) {
   .main_body {
     width: 85%;
   }
@@ -24,4 +26,22 @@
   .main_body {
     width: 70%;
   }
+} */
+/* -main 틀 */
+
+/* reserve_apply */
+
+#date_table{
+	/* border: 1px solid rgba(0, 0, 0, 0.12); */
 }
+
+#date_table tr{
+	border-bottom: none;
+}
+
+#date_table tr .btn{
+	
+}
+
+/* -reserve_apply */
+

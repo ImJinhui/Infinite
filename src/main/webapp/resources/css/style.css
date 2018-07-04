@@ -5,11 +5,13 @@
  *
  * Made By MaterializeCSS.com
  */
-
+/* jin */
 nav ul a,
 nav .brand-logo {
-  color: #444;
+  /* color: #444; */
+  color: #ffffff;
 }
+/* -jin */
 
 p {
   line-height: 2rem;

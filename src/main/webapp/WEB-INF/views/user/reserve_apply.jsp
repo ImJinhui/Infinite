@@ -21,6 +21,16 @@ $('.collapsible').collapsible({
 </script>
 <!-- /left collapse -->
 
+<style>
+.date_card{
+	height: 70px;
+	background-color: #2ec5b6;
+	
+}
+
+
+</style>
+
   <!-- main -->
   <div class="main_body row">
   <!-- 수정부분 -->
@@ -28,7 +38,7 @@ $('.collapsible').collapsible({
   <div class="col s3">
 	  <ul class="collapsible">
 	    <li>
-	      <div class="collapsible-header">3D Printer</div>
+	      <div class="collapsible-header"><i class="material-icons">print</i>3D Printer</div>
 	      
 	      <div class="collapsible-body collection">
 	        <a href="#!" class="collection-item">Printer 1</a>
@@ -39,7 +49,7 @@ $('.collapsible').collapsible({
 	      
 	    </li>
 	    <li>
-	      <div class="collapsible-header">Laser Cutter</div>
+	      <div class="collapsible-header"><i class="material-icons">content_cut</i>Laser Cutter</div>
 	      <div class="collapsible-body collection">
 	        <a href="#!" class="collection-item">Cutter 1</a>
 	        <a href="#!" class="collection-item">Cutter 2</a>
@@ -48,7 +58,7 @@ $('.collapsible').collapsible({
 	      </div>
 	    </li>
 	    <li>
-	      <div class="collapsible-header"><i class="material-icons">whatshot</i>Computer</div>
+	      <div class="collapsible-header"><i class="material-icons">computer</i>Computer</div>
 	      <div class="collapsible-body collection">
 	        <a href="#!" class="collection-item">Computer 1</a>
 	        <a href="#!" class="collection-item">Computer 2</a>
@@ -62,62 +72,71 @@ $('.collapsible').collapsible({
   
   <!-- center -->
   <div class="col s6">
-  <table>
-        <tbody>
-          <tr>
-            <td>Alan</td>
-            <td>Jellybean</td>
-            <td>$3.76</td>
-            <td>$3.76</td>
-            <td>$3.76</td>
-            <td>$3.76</td>
-            <td>$3.76</td>
-          </tr>
-          <tr>
-            <td>Alan</td>
-            <td>Jellybean</td>
-            <td>$3.76</td>
-            <td>$3.76</td>
-            <td>$3.76</td>
-            <td>$3.76</td>
-            <td>$3.76</td>
-          </tr>
-          
-        </tbody>
-      </table>
+ 	 <div class="row" style="text-align: center;">
+  	 
+      <div class="col s2 card date_card btn">07/02</div>
+      <div class="col s2 card date_card btn">07/02</div>
+      <div class="col s2 card date_card btn">07/02</div>
+      <div class="col s2 card date_card btn">07/02</div>
+      <div class="col s2 card date_card btn">07/02</div>
+      <div class="col s2 card date_card btn">07/02</div>
+      
+      <div class="col s2 card date_card btn">07/02</div>
+      <div class="col s2 card date_card btn">07/02</div>
+      <div class="col s2 card date_card btn">07/02</div>
+      <div class="col s2 card date_card btn">07/02</div>
+      <div class="col s2 card date_card btn">07/02</div>
+      <div class="col s2 card date_card btn">07/02</div>
+      
+  
+  
+  	</div>
+  	
+  	
+  	
+  	<div class="row">
+  	<div class="card">
+  	 <div class="collection">
+        <a href="#!" class="collection-item">Alvin</a>
+        <a href="#!" class="collection-item">Alvin</a>
+        <a href="#!" class="collection-item">Alvin</a>
+        <a href="#!" class="collection-item">Alvin</a>
+      </div>
+  	</div>
+  	</div>
   
   </div>
   <!-- /center -->
   
   <!-- right -->
   <div class="col s3">
- 	<ul class="collection with-header">
  	
-      <li class="collection-header"><h5>선택목록</h5></li>
-      
-      <li class="card" style="width: 90%;">
+      <div class="card">
         <div class="card-content">
-          <p class="card-title">3D Printer</p>
+        <i class="close material-icons right">close</i>
+          <div class="card-title">3D Printer</div>
           <p>2018년 7월 4일</p>
           <p>12:00 ~ 13:00</p>
         </div>
-      </li>
-      <li class="card" style="width: 90%;">
+      </div>
+      <div class="card">
         <div class="card-content">
+        <i class="close material-icons right">close</i>
           <span class="card-title">3D Printer</span>
           <p>2018년 7월 4일</p>
           <p>13:00 ~ 14:00</p>
         </div>
-      </li>
-      <li class="card" style="width: 90%;">
+      </div>
+      <div class="card">
         <div class="card-content">
+        <i class="close material-icons right">close</i>
           <span class="card-title">Laser Cutter</span>
           <p>2018년 7월 4일</p>
           <p>12:00 ~ 13:00</p>
         </div>
-      </li>
+      </div>
     
-  	</ul>
+  
   </div>
   <!-- /right -->
   
