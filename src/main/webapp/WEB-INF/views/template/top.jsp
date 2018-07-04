@@ -44,7 +44,7 @@ $('.dropdown-trigger').dropdown({
       <ul class="right hide-on-med-and-down">
         <li><a class="dropdown-trigger" href="#!" data-target="dropdown_reserve">예약<i class="material-icons right">arrow_drop_down</i></a></li>
         <li><a href="<c:url value='/admin/member_list'/>">회원관리</a></li>
-        <li><a href="<c:url value='/admin/result_manage'/>">실적관리</a></li>
+        <li><a href="<c:url value='/admin/result_manage'/>">능력관리</a></li>
         <li><a class="dropdown-trigger" href="#!" data-target="dropdown_equip">장비·장소 관리<i class="material-icons right">arrow_drop_down</i></a></li>
         <li><a class="dropdown-trigger" href="#!" data-target="dropdown_member">로그인<i class="material-icons right">arrow_drop_down</i></a></li>
         <%-- <li><a href="<c:url value='/common/login'/>">로그인</a></li>
@@ -56,7 +56,7 @@ $('.dropdown-trigger').dropdown({
         <li><a href="<c:url value='/user/reserve_view'/>">예약 현황</a></li>
         <li><a href="<c:url value='/admin/member_manage'/>">회원관리</a></li>
         <li><a href="<c:url value='/admin/equip_manage'/>">장비관리</a></li>
-        <li><a href="<c:url value='/admin/result_manage'/>">실적관리</a></li>
+        <li><a href="<c:url value='/admin/result_manage'/>">능력관리</a></li>
         <li><a href="<c:url value='/common/login'/>">로그인</a></li>
         <li><a href="<c:url value='/common/signup'/>">회원가입</a></li>
       </ul>
