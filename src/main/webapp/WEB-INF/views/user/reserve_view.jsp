@@ -5,9 +5,12 @@
 <%@ page isELIgnored="false"%>
 
 <link href="<c:url value='/resources/css/customize_fullcalendar.css'/>" type="text/css"	rel="stylesheet"/>
+<link href="<c:url value='/resources/css/style.css'/>" type="text/css"	rel="stylesheet"/>
+<script src="<c:url value='/resources/js/ko.js'/> "></script>
 <script>
 
   $(document).ready(function() {
+	  var initialLocaleCode = 'ko';
 
     $('#calendar').fullCalendar({
       header: {
@@ -16,6 +19,7 @@
         right: 'month,agendaWeek,agendaDay,listMonth'
       },
       defaultDate: '2018-03-12',
+      locale: initialLocaleCode,
       navLinks: true, // can click day/week names to navigate views
       businessHours: true, // display business hours
       editable: true,
