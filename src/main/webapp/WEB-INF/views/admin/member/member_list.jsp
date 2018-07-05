@@ -7,13 +7,6 @@
 
 <!-- 검색카테고리 script -->
 <script>
-	document.addEventListener('DOMContentLoaded', function() {
-		var elems = document.querySelectorAll('select');
-		var instances = M.FormSelect.init(elems, options);
-	});
-
-	// Or with jQuery
-
 	$(document).ready(function() {
 		$('select').formSelect();
 	});
@@ -21,7 +14,15 @@
 
 <!-- 검색카테고리 script -->
 
+<style>
+.card {
+	padding: 2rem;
+}
 
+.row {
+	margin-bottom: 0;
+}
+</style>
 <!-- main -->
 <div class="main_body" style="width: 70%">
 	<!-- 수정부분 -->
@@ -63,52 +64,55 @@
 	<!-- 검색카테고리 -->
 
 
-	<div class="search" >
-	<label>검색</label>
-		<div>
-			<div class="input-field col s12"
-				style="display: inline-block; width: 30%;">
-				<select>
-					<option value="" disabled selected>검색 목록 선택</option>
-					<option value="1">이름</option>
-					<option value="2">전화번호</option>
-				</select>
-			</div>
-			<!-- /검색카테고리 -->
+	<div class="search">
+		<div class="card">
+			<label>회원 검색</label>
+			<div class="row"  style="padding-left: 4rem"> 
+				<div class="input-field col s3">
+					<!-- style="display: inline-block; width: 30%;" -->
+					<select>
+						<option value="" disabled selected>검색 목록 선택</option>
+						<option value="1">이름</option>
+						<option value="2">전화번호</option>
+					</select>
+				</div>
+				<!-- /검색카테고리 -->
 
-			<!-- 검색부분 -->
-			<div class="input_box" style="display: inline-block; width: 60%;">
-				<label for="kwd" class="hide">검색어 입력</label> <input type="text"
-					name="key" id="key" value="" placeholder="검색어를 입력해주세요.">
-			</div>
+				<!-- 검색부분 -->
+				<!-- <div class="input_box col s9" >style="display: inline-block; width: 60%;"
+				<input class="input-field inline" type="text"	name="key" id="key" value="" placeholder="검색어를 입력해주세요.">
 			<a onclick="find_string();"
-				style="cursor: pointer; background-color: white;" class="st_sch_btn"><span
-				class="m_txt" style="color:black;">검색</span></a>
+				style="cursor: pointer; background-color: white;" class="btn-small"><span
+				class="m_txt" style="color: black;">검색</span></a>
+			</div> -->
 
-		</div>
-		<!-- 	<nav style="width: 70%; float: left;">
-			<div class="nav-wrapper">
-				<form>
-					<div class="input-field" style="background-color: white;">
-						<input id="search" type="search" required> <label
-							class="label-icon" for="search"><i class="material-icons">search</i></label>
-						<i class="material-icons">close</i>
+				<form class="col s9">
+					<div class="row">
+						<div class="input-field col s10">
+							<input id="name" type="text" class="validate"> <label
+								for="name">검색어를 입력하세요</label>
+						</div>
+						<div class="input-field col s2">
+							<button class="btn waves-effect waves-light" type="submit"
+								name="action">검색</button>
+						</div>
 					</div>
 				</form>
+
+
 			</div>
-		</nav> -->
-
+		</div>
 		<!-- /검색부분 -->
-
 
 		<a class="waves-effect waves-light btn-small"
 			href="<c:url value='/admin/member/member_edit'/>">수정</a> <a
 			class="waves-effect waves-light btn-small"
 			href="<c:url value='/admin/member/member_read'/>">읽기</a>
 
-		<div class="body">
 
-			<table>
+		<!-- 회원목록 table -->
+		<div class="card">
+			<table class="highlight centered">
 				<thead>
 					<tr>
 						<th>회원번호</th>
@@ -146,7 +150,7 @@
 						<td>임진희</td>
 						<td>wlsgml</td>
 						<td>dla</td>
-						<td>경기도 인천시</td>
+						<td>인천광역시</td>
 						<td>010788788999</td>
 						<td>3D 두들러펜, 목공직소톱</td>
 					</tr>
@@ -235,23 +239,26 @@
 			</table>
 
 		</div>
+		<!-- 회원목록 table -->
+
 
 		<!-- pagenation -->
 		<div class="pagination " style="text-align: center;">
-		<ul class="pagination">
-			<li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-			<li class="active"><a href="#!">1</a></li>
-			<li class="waves-effect"><a href="#!">2</a></li>
-			<li class="waves-effect"><a href="#!">3</a></li>
-			<li class="waves-effect"><a href="#!">4</a></li>
-			<li class="waves-effect"><a href="#!">5</a></li>
-			<li class="waves-effect"><a href="#!"><i
-					class="material-icons">chevron_right</i></a></li>
-		</ul>
+			<ul class="pagination">
+				<li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+				<li class="active"><a href="#!">1</a></li>
+				<li class="waves-effect"><a href="#!">2</a></li>
+				<li class="waves-effect"><a href="#!">3</a></li>
+				<li class="waves-effect"><a href="#!">4</a></li>
+				<li class="waves-effect"><a href="#!">5</a></li>
+				<li class="waves-effect"><a href="#!"><i
+						class="material-icons">chevron_right</i></a></li>
+			</ul>
 		</div>
 
-		<!-- pagenation -->
+		<!-- /pagenation -->
 
 		<!-- /수정부분 -->
 	</div>
 	<!-- /main -->
+</div>

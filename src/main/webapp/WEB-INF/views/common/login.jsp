@@ -9,7 +9,7 @@
   <!-- main -->
   <div class="main_body" style="width: 50%;">
   <!-- 수정부분 -->
-  <div class="row">
+  <div class="row card" style="padding: 2rem">
   	<div class="row">
         <div class="input-field col s12">
 			<h4>로그인</h4>

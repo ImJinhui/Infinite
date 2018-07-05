@@ -5,7 +5,7 @@
 <%@ page isELIgnored="false"%>
 
 <link href="<c:url value='/resources/css/customize_fullcalendar.css'/>" type="text/css"	rel="stylesheet"/>
-<link href="<c:url value='/resources/css/style.css'/>" type="text/css"	rel="stylesheet"/>
+<link href="<c:url value='/resources/css/infinite.css'/>" type="text/css"	rel="stylesheet"/>
 <script src="<c:url value='/resources/js/ko.js'/> "></script>
 <script>
 

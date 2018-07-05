@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="main_body" style="width: 50%;">
   <!-- 수정부분 -->
   
-  <div class="row">
+  <div class="row card" style="padding: 2rem">
  	 <div class="row">
         <div class="input-field col s12">
 			<h4>회원가입</h4>
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       </div>
       <div class="row">
-			<div class="input-field col s3">
+			<div class="input-field col s4">
       		<i class="material-icons prefix">home</i>
 				<select>
 					<option value="" disabled selected>Choose your option</option>

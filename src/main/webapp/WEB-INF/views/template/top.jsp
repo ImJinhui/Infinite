@@ -53,13 +53,17 @@ $('.dropdown-trigger').dropdown({
       </ul>
 
       <ul id="nav-mobile" class="sidenav">	
-        <li><a href="<c:url value='/user/reserve_apply'/>">예약 신청</a></li>
-        <li><a href="<c:url value='/user/reserve_view'/>">예약 현황</a></li>
-        <li><a href="<c:url value='/admin/member_manage'/>">회원관리</a></li>
-        <li><a href="<c:url value='/admin/equip_manage'/>">장비관리</a></li>
-        <li><a href="<c:url value='/admin/ability_list'/>">능력관리</a></li>
-        <li><a href="<c:url value='/common/login'/>">로그인</a></li>
-        <li><a href="<c:url value='/common/signup'/>">회원가입</a></li>
+        <li><a href="<c:url value='/user/reserve_apply'/>">예약신청</a></li>	
+  		<li><a href="<c:url value='/user/reserve_view'/>">예약현황</a></li>
+  <li class="divider"></li>
+        <li><a href="<c:url value='/admin/member/member_list'/>">회원관리</a></li>
+        <li><a href="<c:url value='/admin/ability/ability_list'/>">능력관리</a></li>
+        <li><a href="<c:url value='/admin/equip/equip_list'/>">장비관리</a></li>	
+ 		<li><a href="<c:url value='/admin/place/place_list'/>">장소관리</a></li>
+  <li class="divider"></li>
+		<li><a href="<c:url value='/common/login'/>">로그인</a></li>	
+  		<li><a href="<c:url value='/common/signup'/>">회원가입</a></li>	
+  		<li><a href="<c:url value='/common/mypage'/>">마이페이지</a></li>	
       </ul>
       <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </div>

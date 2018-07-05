@@ -28,3 +28,34 @@ html{
   }
 } */
 /* -main 틀 */
+
+/* navbar */
+nav ul a,
+nav .brand-logo {
+  color: #444;
+  
+  }
+
+@media only screen and (min-width: 601px) {
+
+  nav{
+    height: 7rem;
+    line-height: 5rem;
+    padding:  1rem;
+  }
+}
+/* -navbar */
+
+body {
+	background-color: #f4f4f4;
+	font-family: Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue",
+		sans-serif;
+	
+}
+/* reserve_apply */
+.collapsible-body {
+  padding: 0;
+}
+/* reserve_apply */
+
+
