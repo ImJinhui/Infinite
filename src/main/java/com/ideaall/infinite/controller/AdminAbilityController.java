@@ -35,6 +35,8 @@ public class AdminAbilityController {
 			
 		} else if ("ability_edit".equalsIgnoreCase(action)) {
 			
+		} else if ("ability_insert".equalsIgnoreCase(action)) {
+			
 		} 
 		
 

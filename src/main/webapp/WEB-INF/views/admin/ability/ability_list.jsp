@@ -6,54 +6,57 @@
 <%@ page isELIgnored="false"%>
 
 
-  <!-- main -->
-  <div class="main_body">
-  <!-- 수정부분 -->
-  <div class="row">
-    <form class="col s12">
-      <div class="row">
-        <div class="input-field col s6">
-          <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-          <label for="first_name">First Name</label>
-        </div>
-        <div class="input-field col s6">
-          <input id="last_name" type="text" class="validate">
-          <label for="last_name">Last Name</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input disabled value="I am not editable" id="disabled" type="text" class="validate">
-          <label for="disabled">Disabled</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="password" type="password" class="validate">
-          <label for="password">Password</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="email" type="email" class="validate">
-          <label for="email">Email</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          This is an inline input field:
-          <div class="input-field inline">
-            <input id="email_inline" type="email" class="validate">
-            <label for="email_inline">Email</label>
-            <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-  <!-- /수정부분 -->
-  </div>
-  <!-- /main -->
-  
-  
+<!-- main -->
+<div class="main_body" style="width:70%">
+	<!-- 수정부분 -->
+	<table>
+		<thead>
+			<tr>
+				<th>능력번호</th>
+				<th>능력 이름</th>
+				<th>등록일</th>
+				<th>담당자</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr>
+				<td>af876e5ty</td>
+				<td>3D프린터</td>
+				<td>2017.05.01</td>
+				<td>김은지</td>
+				<a class="waves-effect waves-light btn-small"  href="<c:url value='/admin/ability/ability_edit'/>" >수정</a>
+				<a class="waves-effect waves-light btn-small"  href="<c:url value='/admin/ability/ability_read'/>" >읽기</a>
+			</tr>
+			<tr>
+				<td>af876e5tr</td>
+				<td>레이저커터</td>
+				<td>2017.05.01</td>
+				<td>이대연</td>
+				
+			</tr>
+			<tr>
+				<td>af876e5te</td>
+				<td>목공기계</td>
+				<td>2017.05.01</td>
+				<td>임진희</td>
+			</tr>
+			<tr>
+				<td>af876e5te</td>
+				<td>봉제기계</td>
+				<td>2017.05.30</td>
+				<td>임진희</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div id="insert" style="position: center; ">
+	<center><a style="position: absolute; right: 0;" class="waves-effect waves-light btn-large" href="<c:url value='/admin/ability/ability_insert'/>"> 능력 추가</a></center>
+	</div>
+	
+	<!-- /수정부분 -->
+</div>
+<!-- /main -->
+
+
 

@@ -9,10 +9,8 @@
 <!-- main -->
 <div class="main_body" style="width:70%">
 	<!-- 수정부분 -->
-
 	<div class="row">
-		<form class="col s12" method="POST"
-			action="<c:url value='/admin/ability/ability_list'/>">
+		<form class="col s12">
 
 			<div class="row">
 				<div class="input-field col s12">
@@ -40,10 +38,10 @@
 						for="manager">담당자</label>
 				</div>
 			</div>
-			<button class="btn waves-effect waves-light" type="submit"
-				name="action" style="position: absolute; right: 0;">
-				수정 <i class="material-icons right">send</i>
-			</button>
+
+		
+			<a class="waves-effect waves-light btn-large">삭제</a>
+			
 		</form>
 	</div>
 	<!-- /수정부분 -->

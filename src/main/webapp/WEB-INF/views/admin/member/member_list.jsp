@@ -7,7 +7,7 @@
 
 
 <!-- main -->
-<div class="main_body">
+<div class="main_body" style="width:70%">
 	<!-- 수정부분 -->
 	<table>
 		<thead>
@@ -31,6 +31,8 @@
 				<td>서울시 서대문구</td>
 				<td>01011112222</td>
 				<td>3D 프린터, 레이저커터</td>
+				<a class="waves-effect waves-light btn-small"  href="<c:url value='/admin/member/member_edit'/>" >수정</a>
+				<a class="waves-effect waves-light btn-small"  href="<c:url value='/admin/member/member_read'/>" >읽기</a>
 			</tr>
 			<tr>
 				<td>member2</td>
@@ -131,9 +133,9 @@
 				<td>01011112222</td>
 				<td>3D 프린터, 레이저커터</td>
 			</tr>
-
 		</tbody>
 	</table>
+
 
 	<!-- /수정부분 -->
 </div>
