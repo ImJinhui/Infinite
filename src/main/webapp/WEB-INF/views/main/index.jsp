@@ -6,7 +6,7 @@
 
 <style>
 	#index-banner{
-		background-image: url("<c:url value='/resources/image/infinite_main2.jpg'/>");
+		background-image: url("<c:url value='/resources/images/infinite_main2.jpg'/>");
 		height: 23rem;
 	}
 </style>

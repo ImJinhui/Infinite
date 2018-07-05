@@ -40,7 +40,7 @@ $('.dropdown-trigger').dropdown({
 
 <!-- nav bar -->
   <nav class="white" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="<c:url value='/'/>" class="brand-logo"><img alt="logo" src="<c:url value='/resources/image/head_logo.jpg'/> "> <!-- 무한상상실 --></a>
+    <div class="nav-wrapper container"><a id="logo-container" href="<c:url value='/'/>" class="brand-logo"><img alt="logo" src="<c:url value='/resources/images/head_logo.jpg'/> "> <!-- 무한상상실 --></a>
       <ul class="right hide-on-med-and-down">
         <!-- <li><a class="dropdown-trigger" href="#!" data-target="dropdown_reserve">예약<i class="material-icons right">arrow_drop_down</i></a></li> -->
         <li><a href="<c:url value='/user/reserve_apply'/>">예약신청</a></li>	
