@@ -50,9 +50,8 @@
 		</tbody>
 	</table>
 	
-	<div id="insert" style="position: center; ">
-	<center><a style="position: absolute; right: 0;" class="waves-effect waves-light btn-large" href="<c:url value='/admin/ability/ability_insert'/>"> 능력 추가</a></center>
-	</div>
+  	<a class="waves-effect waves-light btn-large"
+			style="float: right; color: teal lighten-2">능력추가</a>
 	
 	<!-- /수정부분 -->
 </div>
