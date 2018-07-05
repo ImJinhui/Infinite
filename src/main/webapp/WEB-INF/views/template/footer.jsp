@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- footer -->
-  <footer class="page-footer orange">
+  <footer class="page-footer blue-grey">
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
@@ -34,7 +34,7 @@
     </div>
     <div class="footer-copyright">
       <div class="container">
-      Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      Made by <a class="white-text" href="http://materializecss.com">TEAM.FAVORITE</a>
       </div>
     </div>
   </footer>

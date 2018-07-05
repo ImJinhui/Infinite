@@ -39,10 +39,12 @@ $('.dropdown-trigger').dropdown({
 </ul>
 
 <!-- nav bar -->
-  <nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="<c:url value='/'/>" class="brand-logo">무한상상실</a>
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="<c:url value='/'/>" class="brand-logo"><img alt="logo" src="<c:url value='/resources/image/head_logo.jpg'/> "> <!-- 무한상상실 --></a>
       <ul class="right hide-on-med-and-down">
-        <li><a class="dropdown-trigger" href="#!" data-target="dropdown_reserve">예약<i class="material-icons right">arrow_drop_down</i></a></li>
+        <!-- <li><a class="dropdown-trigger" href="#!" data-target="dropdown_reserve">예약<i class="material-icons right">arrow_drop_down</i></a></li> -->
+        <li><a href="<c:url value='/user/reserve_apply'/>">예약신청</a></li>	
+  		<li><a href="<c:url value='/user/reserve_view'/>">예약현황</a></li>
         <li><a href="<c:url value='/admin/member/member_list'/>">회원관리</a></li>
         <li><a href="<c:url value='/admin/ability/ability_list'/>">능력관리</a></li>
         <li><a class="dropdown-trigger" href="#!" data-target="dropdown_equip">장비·장소 관리<i class="material-icons right">arrow_drop_down</i></a></li>

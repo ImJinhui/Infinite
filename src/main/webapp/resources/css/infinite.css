@@ -28,20 +28,3 @@ html{
   }
 } */
 /* -main 틀 */
-
-/* reserve_apply */
-
-#date_table{
-	/* border: 1px solid rgba(0, 0, 0, 0.12); */
-}
-
-#date_table tr{
-	border-bottom: none;
-}
-
-#date_table tr .btn{
-	
-}
-
-/* -reserve_apply */
-
