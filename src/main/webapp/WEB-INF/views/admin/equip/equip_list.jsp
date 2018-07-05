@@ -4,7 +4,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ page isELIgnored="false"%>
+<script>
 
+	document.addEventListener('DOMContentLoaded', function() {
+		var elem = document.querySelectorAll('.modal');
+		var instances = M.Modal.init(elem, options);
+		var elems = document.querySelectorAll('select');
+		var instances = M.FormSelect.init(elems, options);
+	});
+
+	// Or with jQuery
+
+	$(document).ready(function() {
+		$('.modal').modal();
+	});
+	$(document).ready(function() {
+		$('select').formSelect();
+	});
+</script>
 
 <!-- main -->
 <div class="main_body" style="width: 70%">
@@ -305,10 +322,60 @@
 
 
 	</div>
-	<a class="waves-effect waves-light btn-large"
+	<a class="waves-effect waves-light btn modal-trigger" href="#modal1"
 		style="color: teallighten-2; float: right;">장비추가</a>
 
 </div>
+<div id="modal1" class="modal">
+    <div class="modal-content">
+      <div class="row">
+      
+ 	 <div class="row">
+        <div class="input-field col s12">
+        <i class="material-icons Medium">build</i>
+			<h4 style="display:inline-block;">장비추가</h4>
+        </div>
+      </div>
+    <form class="col s12">
+    	<div class="row">
+			<div class="input-field col s6">
+				<select>
+					<option value="" disabled selected>Choose your option</option>
+					<option value="1">Option 1</option>
+					<option value="2">Option 2</option>
+					<option value="3">Option 3</option>
+				</select> <label>장비종류</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<select>
+					<option value="" disabled selected>Choose your option</option>
+					<option value="1">Option 1</option>
+					<option value="2">Option 2</option>
+					<option value="3">Option 3</option>
+				</select> <label>관리자</label>
+			</div>
+		</div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="name" type="text" class="validate">
+          <label for="name">장비명</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="manufacturer" type="text" class="validate">
+          <label for="manufacturer">제조사</label>
+        </div>
+      </div>
+    </form>
+  </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">장비추가</a>
+    </div>
+  </div>
 <!-- end of main_body -->
 
 

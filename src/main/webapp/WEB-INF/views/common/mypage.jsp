@@ -2,15 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <%@ page isELIgnored="false"%>
 
-
-  <!-- main -->
-  <div class="main_body">
   <!-- 수정부분 -->
   <div class="row">
-    <form class="col s12">
+<!--     <form class="col s12">
       <div class="row">
         <div class="input-field col s6">
           <input placeholder="Placeholder" id="first_name" type="text" class="validate">
@@ -49,7 +45,8 @@
           </div>
         </div>
       </div>
-    </form>
+    </form> -->
+
   </div>
   <!-- /수정부분 -->
   </div>
