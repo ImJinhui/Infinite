@@ -43,6 +43,17 @@ $('.collapsible').collapsible({
 	/* padding-left: 0.7rem; */
 }
 </style>
+ <!-- 페이지 이름 -->
+<nav class="teal">
+    <div class="nav-wrapper">
+      <div class="bread_div">
+        <a href="#!" class="breadcrumb">예약</a>
+        <a href="#!" class="breadcrumb">예약신청</a>
+      </div>
+    </div>
+  </nav>
+<!-- /페이지 이름 -->
+ 
 
   <!-- main -->
   <div class="main_body row">

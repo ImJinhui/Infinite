@@ -5,6 +5,17 @@
 
 <%@ page isELIgnored="false"%>
 
+<!-- 페이지 이름 -->
+<nav class="teal">
+     <div class="nav-wrapper">
+      <div class="bread_div">
+        <a href="#!" class="breadcrumb">회원관리</a>
+        <a href="#!" class="breadcrumb">회원조회</a>
+      </div>
+    </div>
+  </nav>
+<!-- /페이지 이름 -->
+
 
   <!-- main -->
 <div class="main_body" style="width:70%">

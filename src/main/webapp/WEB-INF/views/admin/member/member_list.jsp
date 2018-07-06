@@ -15,59 +15,32 @@
 <!-- 검색카테고리 script -->
 
 <style>
-.card {
-	padding: 2rem;
-}
+
 
 .row {
 	margin-bottom: 0;
 }
 </style>
 <!-- main -->
+
+<!-- 페이지 이름 -->
+<nav class="teal">
+	<div class="nav-wrapper">
+		<div class="bread_div">
+			<a href="#!" class="breadcrumb">회원관리</a> 
+			<a href="#!" class="breadcrumb">회원목록</a>
+		</div>
+	</div>
+</nav>
+<!-- /페이지 이름 -->
+
 <div class="main_body" style="width: 70%">
 	<!-- 수정부분 -->
 
-	<!-- 	<div class="search">
-		<form name="sub_form" id="sub_form" method="get"
-			action="/equip/equipment.php" onsubmit="return find_string()"
-			class="sub_sch_box">
-			<input type="hidden" name="tsort" value="3"> <input
-				type="hidden" name="msort" value="12"> <input type="hidden"
-				name="page" value="51">
-			row
-			<div class="row">
-				<label for="search">검색</label>
-				<div class="slt_box" style="width: 17%;">
-					<select name="s_agency_area" id="s_agency_area"
-						onchange="agency_no_change(this.value,'')">
-						<option value="" disabled selected>검색목록 선택</option>
-						<option value="seach_name">이름</option>
-						<option value="seach_tel">전화번호</option>
-
-					</select>
-				</div>
-
-				<div class="input_box">
-					<label for="kwd" class="hide">검색어 입력</label> <input type="text"
-						name="key" id="key" value="" placeholder="검색어를 입력해주세요.">
-				</div>
-			</div>
-			// row
-			<a onclick="find_string();" style="cursor: pointer"
-				class="st_sch_btn"><span class="m_txt">검색</span></a>
-		</form>
-
-	</div>
-</div>
- -->
-
 	<!-- 검색카테고리 -->
-
-
 	<div class="search">
-		<div class="card">
-			<label>회원 검색</label>
-			<div class="row"  style="padding-left: 4rem"> 
+		<div class="box">
+			<div class="row" style="padding-left: 4rem">
 				<div class="input-field col s3">
 					<!-- style="display: inline-block; width: 30%;" -->
 					<select>
@@ -77,14 +50,6 @@
 					</select>
 				</div>
 				<!-- /검색카테고리 -->
-
-				<!-- 검색부분 -->
-				<!-- <div class="input_box col s9" >style="display: inline-block; width: 60%;"
-				<input class="input-field inline" type="text"	name="key" id="key" value="" placeholder="검색어를 입력해주세요.">
-			<a onclick="find_string();"
-				style="cursor: pointer; background-color: white;" class="btn-small"><span
-				class="m_txt" style="color: black;">검색</span></a>
-			</div> -->
 
 				<form class="col s9">
 					<div class="row">
@@ -98,20 +63,12 @@
 						</div>
 					</div>
 				</form>
-
-
 			</div>
 		</div>
 		<!-- /검색부분 -->
 
-		<a class="waves-effect waves-light btn-small"
-			href="<c:url value='/admin/member/member_edit'/>">수정</a> <a
-			class="waves-effect waves-light btn-small"
-			href="<c:url value='/admin/member/member_read'/>">읽기</a>
-
-
 		<!-- 회원목록 table -->
-		<div class="card">
+		<div class="box">
 			<table class="highlight centered">
 				<thead>
 					<tr>
@@ -255,9 +212,13 @@
 						class="material-icons">chevron_right</i></a></li>
 			</ul>
 		</div>
-
 		<!-- /pagenation -->
 
+
+		<a class="waves-effect waves-light btn-small"
+			href="<c:url value='/admin/member/member_edit'/>">수정</a> <a
+			class="waves-effect waves-light btn-small"
+			href="<c:url value='/admin/member/member_read'/>">읽기</a>
 		<!-- /수정부분 -->
 	</div>
 	<!-- /main -->

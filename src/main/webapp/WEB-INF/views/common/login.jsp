@@ -4,17 +4,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ page isELIgnored="false"%>
-
+<!-- 페이지 이름 -->
+<nav class="teal">
+    <div class="nav-wrapper">
+      <div class="bread_div">
+        <a href="#!" class="breadcrumb">로그인</a>
+      </div>
+    </div>
+  </nav>
+<!-- /페이지 이름 -->
 
   <!-- main -->
   <div class="main_body" style="width: 50%;">
   <!-- 수정부분 -->
-  <div class="row card" style="padding: 2rem">
-  	<div class="row">
-        <div class="input-field col s12">
-			<h4>로그인</h4>
-        </div>
-      </div>
+  <div class="row" style="padding: 2rem">
     <form class="col s12">
       <div class="row">
         <div class="input-field col s12">

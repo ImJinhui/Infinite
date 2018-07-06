@@ -7,26 +7,35 @@
  */
 
 /* main 틀 */
-html{
-	font: Montserrat, sans-serif;
+
+body {
+	background-color:#ffffff;
+	font-family: Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	
 }
 .main_body {
-  margin: 5% auto;
-  max-width: 1280px;
+  margin: 4% auto;
   width: 90%; 
 }
 
-/* @media only screen and (min-width: 601px) {
+@media only screen and (min-width: 601px) {
   .main_body {
-    width: 85%;
+    width: 90%;
   }
 }
 
 @media only screen and (min-width: 993px) {
   .main_body {
-    width: 70%;
+    width: 80%;
   }
-} */
+} 
+
+.box {
+	padding: 2rem;
+	border: 1.3px solid #d4d4d4;
+	margin: 1.5rem;
+}
+
 /* -main 틀 */
 
 /* navbar */
@@ -44,14 +53,19 @@ nav .brand-logo {
     padding:  1rem;
   }
 }
-/* -navbar */
 
-body {
-	background-color: #f4f4f4;
-	font-family: Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue",
-		sans-serif;
+.bread_div{
+	padding-left: 16rem;
+	/* background-color: #0795d3; */
+}
+
+.bread_div a{
+	font-size: x-large;
+	font-weight: bold;
 	
 }
+/* -navbar */
+
 /* reserve_apply */
 .collapsible-body {
   padding: 0;

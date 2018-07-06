@@ -83,13 +83,24 @@
 
 
 <!-- main -->
+<!-- 페이지 이름 -->
+<nav class="teal">
+    <div class="nav-wrapper">
+      <div class="bread_div">
+        <a href="#!" class="breadcrumb">예약</a>
+        <a href="#!" class="breadcrumb">예약현황</a>
+      </div>
+    </div>
+  </nav>
+<!-- /페이지 이름 -->
+ 
   <div class="main_body">
   <!-- 수정부분 -->
 
-	<!-- /수정부분 -->
-	<div class="card">
+	
 	<div id='calendar'></div>
-	</div>
+	
+	<!-- /수정부분 -->
   </div>
   <!-- /main -->
   

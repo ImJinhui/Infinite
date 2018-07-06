@@ -11,6 +11,16 @@
 }
 </style>
 
+<!-- 페이지 이름 -->
+<nav class="teal">
+    <div class="nav-wrapper">
+      <div class="bread_div">
+        <a href="#!" class="breadcrumb">능력카드관리</a>
+        <a href="#!" class="breadcrumb">능력카드목록</a>
+      </div>
+    </div>
+  </nav>
+<!-- /페이지 이름 -->
 <!-- main -->
 <div class="main_body" style="width: 70%">
 	<!-- 수정부분 -->

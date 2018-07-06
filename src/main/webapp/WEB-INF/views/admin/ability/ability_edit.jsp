@@ -4,7 +4,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ page isELIgnored="false"%>
-
+<!-- 페이지 이름 -->
+<nav class="teal">
+    <div class="nav-wrapper">
+      <div class="bread_div">
+        <a href="#!" class="breadcrumb">능력카드관리</a>
+        <a href="#!" class="breadcrumb">능력카드수정</a>
+      </div>
+    </div>
+  </nav>
+<!-- /페이지 이름 -->
 
 <!-- main -->
 <div class="main_body" style="width:70%">

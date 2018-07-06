@@ -2,9 +2,18 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <%@ page isELIgnored="false"%>
-
+<!-- 페이지 이름 -->
+<nav class="teal">
+     <div class="nav-wrapper">
+      <div class="bread_div">
+        <a href="#!" class="breadcrumb">장비·장소관리</a>
+        <a href="#!" class="breadcrumb">장소관리</a>
+        <a href="#!" class="breadcrumb">장소목록</a>
+      </div>
+    </div>
+  </nav>
+<!-- /페이지 이름 -->
 
   <!-- main -->
   <div class="main_body">
