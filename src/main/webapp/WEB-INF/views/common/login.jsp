@@ -17,7 +17,7 @@
   <!-- main -->
   <div class="main_body" style="width: 50%;">
   <!-- 수정부분 -->
-  <div class="row" style="padding: 2rem">
+  <div class="row box">
     <form class="col s12">
       <div class="row">
         <div class="input-field col s12">

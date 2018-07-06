@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="main_body" style="width: 50%;">
   <!-- 수정부분 -->
   
-  <div class="row" style="padding: 2rem">
+  <div class="row box">
     <form class="col s12">
       <div class="row">
         <div class="input-field col s12">
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       </div>
       <div class="row">
-			<div class="input-field col s4">
+			<div class="input-field col s5">
       		<i class="material-icons prefix">home</i>
 				<select>
 					<option value="" disabled selected>Choose your option</option>
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					<option value="3">Option 3</option>
 				</select> <label>주소</label>
 			</div>
-			<div class="input-field col s3">
+			<div class="input-field col s4">
     			  <select>
 					<option value="" disabled selected>Choose your option</option>
 					<option value="1">Option 1</option>

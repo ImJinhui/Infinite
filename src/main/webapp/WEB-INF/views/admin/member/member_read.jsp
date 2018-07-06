@@ -21,7 +21,7 @@
 <div class="main_body" style="width:70%">
 
 	<!-- 수정부분 -->
-	<div class="row">
+	<div class="row box">
 		<form class="col s12" method="POST"
 			action="<c:url value='/admin/member/member_list'/>">
 
@@ -73,9 +73,10 @@
 						for="member_ability">보유 능력</label>
 				</div>
 			</div>
-
-
-				<a class="waves-effect waves-light btn-large">삭제</a>
+			<button class="btn waves-effect waves-light right" type="submit"
+				name="action">
+				삭제 <i class="material-icons right">delete</i>
+			</button>
 		</form>
 	</div>
 	<!-- /수정부분 -->

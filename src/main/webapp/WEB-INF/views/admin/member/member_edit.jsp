@@ -72,8 +72,8 @@
 				</div>
 			</div>
 
-			<button class="btn waves-effect waves-light" type="submit" name="action">
-				Submit <i class="material-icons right">send</i>
+			<button class="right btn-large waves-effect waves-light" type="submit" name="action">
+				수정 <i class="material-icons right">edit</i>
 			</button>
 		</form>
 	</div>

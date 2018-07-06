@@ -9,6 +9,7 @@
 <nav class="teal">
      <div class="nav-wrapper">
       <div class="bread_div">
+      	<a href="#!" class="breadcrumb">장비·장소관리</a>
         <a href="#!" class="breadcrumb">장비관리</a>
         <a href="#!" class="breadcrumb">장비조회</a>
       </div>

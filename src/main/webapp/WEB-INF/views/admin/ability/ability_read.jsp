@@ -18,7 +18,7 @@
 <!-- main -->
 <div class="main_body" style="width:70%">
 	<!-- 수정부분 -->
-	<div class="row">
+	<div class="row box">
 		<form class="col s12">
 
 			<div class="row">
@@ -47,10 +47,11 @@
 						for="manager">담당자</label>
 				</div>
 			</div>
+			<button class="btn waves-effect waves-light right" type="submit"
+				name="action">
+				삭제 <i class="material-icons right">delete</i>
+			</button>
 
-		
-			<a class="waves-effect waves-light btn-large">삭제</a>
-			
 		</form>
 	</div>
 	<!-- /수정부분 -->

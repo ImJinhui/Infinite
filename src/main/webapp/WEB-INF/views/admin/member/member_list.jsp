@@ -15,8 +15,6 @@
 <!-- 검색카테고리 script -->
 
 <style>
-
-
 .row {
 	margin-bottom: 0;
 }

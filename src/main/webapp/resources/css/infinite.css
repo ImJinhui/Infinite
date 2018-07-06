@@ -72,4 +72,33 @@ nav .brand-logo {
 }
 /* reserve_apply */
 
+.pagination li.active {
+  background-color: #009688;
+}
 
+.tabs{
+	background-color: #ffffff;
+}
+
+.tabs .tab a {
+  color:  #009688;
+  font-size: large;
+}
+
+.tabs .tab a:hover, .tabs .tab a.active {
+  background-color: transparent;
+  color: #009688;
+}
+
+.tabs .indicator {
+  position: absolute;
+  bottom: 0;
+  height: 4px;
+  background-color: #b2dfdb;
+  will-change: left, right;
+}
+
+.tabs .tab a:focus, .tabs .tab a:focus.active {
+  background-color: #e0f2f1;
+  outline: none;
+}

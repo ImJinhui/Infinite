@@ -8,6 +8,7 @@
 <nav class="teal">
      <div class="nav-wrapper">
       <div class="bread_div">
+      	<a href="#!" class="breadcrumb">장비·장소관리</a>
         <a href="#!" class="breadcrumb">장비관리</a>
         <a href="#!" class="breadcrumb">장비수정</a>
       </div>
@@ -16,50 +17,49 @@
 <!-- /페이지 이름 -->
 
   <!-- main -->
-  <div class="main_body">
+  <div class="main_body" style="width:70%">
   <!-- 수정부분 -->
-  <div class="row">
-    <form class="col s12">
-      <div class="row">
-        <div class="input-field col s6">
-          <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-          <label for="first_name">First Name</label>
-        </div>
-        <div class="input-field col s6">
-          <input id="last_name" type="text" class="validate">
-          <label for="last_name">Last Name</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input disabled value="I am not editable" id="disabled" type="text" class="validate">
-          <label for="disabled">Disabled</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="password" type="password" class="validate">
-          <label for="password">Password</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="email" type="email" class="validate">
-          <label for="email">Email</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          This is an inline input field:
-          <div class="input-field inline">
-            <input id="email_inline" type="email" class="validate">
-            <label for="email_inline">Email</label>
-            <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
+  <div class="row box" >
+		<form class="col s12" method="POST"
+			action="<c:url value='/admin/equip/equip_list'/>">
+
+			<div class="row">
+				<div class="input-field col s12">
+				<i class="material-icons prefix">play_arrow</i>
+					<input id="member_seq" type="text" class="validate"> <label
+						for="ability_seq">장비 번호</label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="input-field col s12">
+				<i class="material-icons prefix">play_arrow</i>
+					<input id="member_name" type="text" class="validate"> <label
+						for="member_name">장비명</label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="input-field col s12">
+				<i class="material-icons prefix">play_arrow</i>
+					<input id="member_pass" type="text" class="validate"> <label
+						for="member_address">제조사</label>
+				</div>
+			</div>
+
+			<div class="row">
+					<div class="input-field col s12">
+					<i class="material-icons prefix">play_arrow</i>
+						<textarea id="textarea1" class="materialize-textarea"></textarea>
+						<label for="textarea1">장비 설명</label>
+					</div>
+			</div>
+
+			<button class="right btn-large waves-effect waves-light" type="submit" name="action">
+				수정 <i class="material-icons right">edit</i>
+			</button>
+		</form>
+	</div>
   <!-- /수정부분 -->
   </div>
   <!-- /main -->

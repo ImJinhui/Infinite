@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="main_body" style="width: 50%;">
   <!-- 수정부분 -->
   
-  <div class="row" style="padding: 2rem">
+  <div class="row box">
     <form class="col s12">
       <div class="row">
         <div class="input-field col s12">
@@ -68,15 +68,16 @@ document.addEventListener('DOMContentLoaded', function() {
           <label for="tel">전화번호</label>
         </div>
       </div>
+	  <div class="row">
+	     <div class="input-field col s12">
+	       	<i class="material-icons prefix">email</i>	
+	        <input id="email" type="email" class="validate">
+	        <label for="email">이메일</label>
+	        <span class="helper-text" data-error="이메일 형식이 아닙니다." data-success="이메일 형식이 맞습니다."></span>
+	      </div>
+	  </div>
       <div class="row">
-        <div class="input-field col s12">
-          <i class="material-icons prefix">email</i>
-          <input id="email" type="email" class="validate">
-          <label for="email">이메일</label>
-        </div>
-      </div>
-      <div class="row">
-			<div class="input-field col s4">
+			<div class="input-field col s5">
       		<i class="material-icons prefix">home</i>
 				<select>
 					<option value="" disabled selected>Choose your option</option>
@@ -85,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					<option value="3">Option 3</option>
 				</select> <label>주소</label>
 			</div>
-			<div class="input-field col s3">
+			<div class="input-field col s4">
     			  <select>
 					<option value="" disabled selected>Choose your option</option>
 					<option value="1">Option 1</option>
