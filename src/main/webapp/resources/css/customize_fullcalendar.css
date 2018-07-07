@@ -9110,11 +9110,11 @@ td, th {
 .chat-input .chat-input-bar {
 	display: flex
 }
-
+/* 
 html {
 	height: 100%
 }
-
+ */
 body {
 	background-color: #f4f4f4;
 	font-family: Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue",

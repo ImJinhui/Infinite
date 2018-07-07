@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <%@ page isELIgnored="false"%>
 
 <!-- left collapse -->
@@ -57,9 +56,12 @@ $('.collapsible').collapsible({
 
   <!-- main -->
   <div class="main_body row">
+
+  
+  
   <!-- 수정부분 -->
   <!-- left -->
-  <div class="col s3">
+  <!-- <div class="col s3">
 	  <ul class="collapsible">
 	    <li class="active">
 	      <div class="collapsible-header"><i class="material-icons">print</i>3D Printer</div>
@@ -90,32 +92,13 @@ $('.collapsible').collapsible({
 	        <a href="#!" class="collection-item">Computer 4</a>
 	      </div>
 	    </li>
-	    <li>
-	      <div class="collapsible-header"><i class="material-icons">computer</i>Computer</div>
-	      <div class="collapsible-body collection">
-	        <a href="#!" class="collection-item">Computer 1</a>
-	        <a href="#!" class="collection-item">Computer 2</a>
-	        <a href="#!" class="collection-item">Computer 3</a>
-	        <a href="#!" class="collection-item">Computer 4</a>
-	      </div>
-	    </li>
-	    <li>
-	      <div class="collapsible-header"><i class="material-icons">computer</i>Computer</div>
-	      <div class="collapsible-body collection">
-	        <a href="#!" class="collection-item">Computer 1</a>
-	        <a href="#!" class="collection-item">Computer 2</a>
-	        <a href="#!" class="collection-item">Computer 3</a>
-	        <a href="#!" class="collection-item">Computer 4</a>
-	      </div>
-	    </li>
 	  </ul>
-  </div>
+  </div> -->
   <!-- /left -->
   
   <!-- center -->
-  <div class="col s6">
+<!--   <div class="col s6">
  	<div class="row" style="text-align: center;">
-  	 
 		<div id="dates">	 
 	
 	      <div class="col s2 card date_card btn"><p>07/02</p></div>
@@ -133,8 +116,6 @@ $('.collapsible').collapsible({
      	</div>  
   	</div>
   	
-  	
-  	
   	<div class="row">
   	<div class="card ">
   	 <div class="collection">
@@ -147,17 +128,14 @@ $('.collapsible').collapsible({
         <a href="#!" class="collection-item">15:00 ~ 16:00</a>
         <a href="#!" class="collection-item">16:00 ~ 17:00</a>
         <a href="#!" class="collection-item">17:00 ~ 18:00</a>
-        
       </div>
   	</div>
   	</div>
-  
-  </div>
+  </div> -->
   <!-- /center -->
   
   <!-- right -->
-  <div class="col s3">
- 	
+<!--   <div class="col s3">
       <div class="card">
         <div class="card-content">
         <i class="close material-icons right">close</i>
@@ -182,9 +160,7 @@ $('.collapsible').collapsible({
           <p>12:00 ~ 13:00</p>
         </div>
       </div>
-    
-  
-  </div>
+  </div> -->
   <!-- /right -->
   
   <!-- /수정부분 -->

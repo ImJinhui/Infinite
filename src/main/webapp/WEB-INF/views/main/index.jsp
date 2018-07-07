@@ -4,6 +4,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
 
+<script>
+$(document).ready(function(){
+    $('.slider').slider();
+  });
+
+</script>
+
 <style>
 	#index-banner{
 		background-image: url("<c:url value='/resources/images/infinite_main2.jpg'/>");
@@ -13,9 +20,25 @@
 
 
   <!-- main -->
-  <div class="section no-pad-bot" id="index-banner">
-
+  
+  <div class="slider">
+    <ul class="slides">
+      <li>
+        <img src="<c:url value='/resources/images/infinite_main1.jpg'/>">
+      </li>
+      <li>
+        <img src="<c:url value='/resources/images/infinite_main2.jpg'/>"> 
+      </li>
+      <li>
+        <img src="<c:url value='/resources/images/infinite_main3.jpg'/>"> 
+      </li>
+    </ul>
   </div>
+  
+  
+  <!-- <div class="section no-pad-bot" id="index-banner">
+
+  </div> -->
 
 
   <div class="container">

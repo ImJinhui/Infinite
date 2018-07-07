@@ -39,7 +39,7 @@
  	  <div class="row" >
         <div class="col s12" >
           <div style="border-top:1px solid #EAEAEA; padding-top:2%;">
-          	<a href="<c:url value='/common/signup'/>" style="text-decoration: none; color: #ABABAB;">회원가입</a>
+          	 <a href="<c:url value='/common/signup'/>" style="text-decoration: none; color: #ABABAB;">회원가입</a> 
          </div>
         </div>
       </div>

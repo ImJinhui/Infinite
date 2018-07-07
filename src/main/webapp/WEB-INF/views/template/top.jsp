@@ -39,7 +39,7 @@ $('.dropdown-trigger').dropdown({
 </ul>
 
 <!-- nav bar -->
-  <nav class="white" role="navigation">
+  <nav id="top_nav" class="white" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="<c:url value='/'/>" class="brand-logo">
     <img alt="logo" src="<c:url value='/resources/images/head_logo.jpg'/> "></a>
       <ul class="right hide-on-med-and-down">
