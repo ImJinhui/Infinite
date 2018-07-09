@@ -41,7 +41,7 @@
 <div class="main_body" style="width: 70%">
 
 	<!-- 수정부분 -->
-
+	<!-- 장비관리list -->
 	<div class="row">
 		<div class="card col s12" style="padding: 0">
 			<ul class="tabs">
@@ -170,8 +170,7 @@
 			<div class="row"></div>
 		</div>
 	</div>
-
-	<!-- 장비관리list -->
+	<!--/ 장비관리list -->
 </div>
 
 <!-- modal -->
@@ -219,20 +218,19 @@
 			</form>
 		</div>
 	</div>
-	 <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-teal btn">장비추가</a>
-    </div>
+	<div class="modal-footer">
+		<a href="#!" class="modal-close waves-effect waves-teal btn">장비추가</a>
+	</div>
 </div>
 <!-- modal -->
-<!-- end of main_body -->
-
-
+<!-- 추가버튼 -->
 <div class="fixed-action-btn">
 	<a class="btn-floating btn-large red modal-trigger" href="#modal1">
 		<i class="large material-icons">add</i>
 	</a>
 </div>
-<!--/ 장비관리list -->
+<!-- /추가버튼 -->
+
 
 
 <!-- /수정부분 -->

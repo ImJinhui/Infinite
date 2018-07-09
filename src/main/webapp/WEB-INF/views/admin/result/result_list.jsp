@@ -21,40 +21,28 @@
     <form class="col s12">
       <div class="row">
         <div class="input-field col s6">
-          <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-          <label for="first_name">First Name</label>
+          <input id="reserve_seq" type="text" class="validate">
+          <label for="reserve_seq">대여번호</label>
         </div>
         <div class="input-field col s6">
-          <input id="last_name" type="text" class="validate">
-          <label for="last_name">Last Name</label>
+          <input id="reserve_mem" type="text" class="validate">
+          <label for="reserve_mem">대여자</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input disabled value="I am not editable" id="disabled" type="text" class="validate">
-          <label for="disabled">Disabled</label>
+          <input id="reserve_item" type="text" class="validate">
+          <label for="reserve_item">대여장비 및 장소</label>
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s12">
-          <input id="password" type="password" class="validate">
-          <label for="password">Password</label>
+        <div class="input-field col s6">
+          <input id="reserve_date" type="text" class="validate">
+          <label for="reserve_date">예약일</label>
         </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="email" type="email" class="validate">
-          <label for="email">Email</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          This is an inline input field:
-          <div class="input-field inline">
-            <input id="email_inline" type="email" class="validate">
-            <label for="email_inline">Email</label>
-            <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
-          </div>
+        <div class="input-field col s6">
+          <input id="reserve_time" type="text" class="validate">
+          <label for="reserve_time">예약시간</label>
         </div>
       </div>
     </form>
