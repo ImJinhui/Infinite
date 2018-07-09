@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member">
+
+<select id="list" resultType="Map" parameterType="Map">
+select m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, m.SUB_ADDR_SEQ, ma.ABILITY_NAME
+from MEMBER m, MEMBER_ABILITY_REL mr, ABILITIES ma
+where mr.ABILITY_SEQ = ma.ABILITY_SEQ 
+and mr.MEMBER_SEQ = m.MEMBER_SEQ
+</select>
+
+<select id="abilitylist" resultType="Map" parameterType="Map">
+select ma.ABILITY_NAME
+from MEMBER m, MEMBER_ABILITY_REL mr, ABILITIES ma
+where mr.ABILITY_SEQ = ma.ABILITY_SEQ 
+and mr.MEMBER_SEQ = m.MEMBER_SEQ
+
+</select>
+
+
+	<!-- <insert id="insert1" parameterType="Map">
+		insert into MEMBER_INFO (
+		SEQ_ID,ID,PASSWORD, NAME, TEL, EMAIL
+		)
+		values(
+		#{SEQ_ID},
+		#{MEMBER_ID},
+		#{PASSWORD},
+		#{NAME},
+		#{TEL},
+		#{EMAIL}
+		)
+
+
+	</insert>
+
+
+	<select id="insert2">
+		select SEQ_ID
+		from MEMBER_INFO
+		where SEQ_ID=#{SEQ_ID}
+	</select>
+
+
+	<insert id="insert3"> insert into AUTHORITY_REL(
+		SEQ_ID, AUTHORITY_NUM)
+		values(
+		#{SEQ_ID},
+		100
+		)
+	</insert>
+
+
+	<select id="check" parameterType="Map" resultType="Map">
+
+		select
+		PASSWORD,ID,권한 from MEMBER_INFO where ID=#{MEMBER_ID}
+
+	</select>
+
+	<select id="getid" parameterType="Map" resultType="Map">
+
+		select ID
+		from MEMBER_INFO
+		where SEQ_ID=#{SEQ_ID}
+
+	</select>
+
+	INSERT INTO CIP_ORGANIZATION ( ORGANIZATION_SEQ 조직 일련번호 , NAME 명칭 , 
+		TELEPHONE 대표 전화번호 , ORDER_NUMBER 정렬순서 , PARENT_ORGANIZATION_SEQ 상위 조직 일련번호 
+		) values( #{ORGANIZATION_SEQ} 조직 일련번호 , #{NAME} 명칭 , #{TELEPHONE} 대표 전화번호 
+		, #{ORDER_NUMBER} 정렬순서 , #{PARENT_ORGANIZATION_SEQ} 상위 조직 일련번호 )
+
+	<select id="idDoubleCheck" parameterType="Map" resultType="Map">
+
+		select ID from MEMBER_INFO where ID=#{MEMBER_ID}
+
+	</select>
+
+	<delete id="delete" parameterType="Map">
+		delete from CIP_MEMBER
+		where
+		MEMBER_SEQ = #{MEMBER_SEQ}
+	</delete>
+
+
+ -->
+
+</mapper>

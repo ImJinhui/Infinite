@@ -81,17 +81,18 @@
 				</thead>
 
 				<tbody>
-					<tr>
-						<td>member1</td>
-						<td>김은지</td>
-						<td>eunji</td>
-						<td>12345</td>
-						<td>서울시 서대문구</td>
-						<td>01011112222</td>
-						<td>3D 프린터, 레이저커터</td>
+				<c:forEach items="${resultList}" var="resultData" varStatus="loop">
+					<tr class="${(loop.index+1)%2 == 2 ? 'odd gradeX' : 'even gradeC'}">
+						<td>${resultData.MEMBER_SEQ}</td>
+						<td>${resultData.NAME}</td>
+						<td>${resultData.ID}</td>
+						<td>${resultData.PASSWORD}</td>
+						<td>${resultData.SUB_ADDR_SEQ}</td>
+						<td>${resultData.TEL}</td>
+						<td>${resultData.ABILITY_NAME}</td>
 
 					</tr>
-					<tr>
+					<!-- <tr>
 						<td>member2</td>
 						<td>이대연</td>
 						<td>dleodus</td>
@@ -189,7 +190,8 @@
 						<td>서울시 서대문구</td>
 						<td>01011112222</td>
 						<td>3D 프린터, 레이저커터</td>
-					</tr>
+					</tr> -->
+					</c:forEach>
 				</tbody>
 			</table>
 
