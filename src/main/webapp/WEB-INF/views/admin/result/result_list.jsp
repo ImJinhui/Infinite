@@ -7,18 +7,17 @@
 <nav class="teal">
      <div class="nav-wrapper">
       <div class="bread_div">
-        <a href="#!" class="breadcrumb">장비·장소관리</a>
-        <a href="#!" class="breadcrumb">장소관리</a>
-        <a href="#!" class="breadcrumb">장소목록</a>
+        <a href="#!" class="breadcrumb">결과물관리</a>
+        <a href="#!" class="breadcrumb">결과물조회</a>
       </div>
     </div>
   </nav>
 <!-- /페이지 이름 -->
 
   <!-- main -->
-  <div class="main_body">
+  <div class="main_body" style="width: 70%">
   <!-- 수정부분 -->
-  <div class="row">
+  <div class="row box">
     <form class="col s12">
       <div class="row">
         <div class="input-field col s6">
