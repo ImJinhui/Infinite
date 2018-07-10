@@ -3,6 +3,13 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
+
+<script>
+$(document).ready(function(){
+    $('.materialboxed').materialbox();
+  });
+</script>
+
 <!-- 페이지 이름 -->
 <nav class="teal">
      <div class="nav-wrapper">
@@ -44,6 +51,16 @@
           <input id="reserve_time" type="text" class="validate">
           <label for="reserve_time">예약시간</label>
         </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="reserve_item" type="text" class="validate">
+          <label for="reserve_item">대여장비 및 장소</label>
+        </div>
+      </div>
+      	<label for="result_img">결과물</label>
+      <div id="result_img" class="row box">
+      	<img class="materialboxed" width="100%" src="<c:url value='/resources/images/cat2.jpg'/>">
       </div>
     </form>
   </div>

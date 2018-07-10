@@ -47,8 +47,8 @@ $(document).ready(function() {
 					<c:forEach items="${resultList}" var="resultData" varStatus="loop" >
 						<tr
 							class="${(loop.index+1)%2 == 2 ? 'odd gradeX' : 'even gradeC'}">
-							<td>${resultData.ABILITY_SEQ}</td>
-							<td>${resultData.ABILITY_NAME}</td>
+							<td>${resultData.test_col}</td>
+							<%-- <td>${resultData.ABILITY_NAME}</td> --%>
 							<td><a class="waves-effect waves-light btn-small"
 								href="<c:url value='/admin/ability/ability_edit'/>">수정</a></td>
 							<td><a class="waves-effect waves-light btn-small"

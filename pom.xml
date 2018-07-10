@@ -105,10 +105,10 @@
 
 		<dependency>
 			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc6</artifactId>
+			<artifactId>ojdbc7</artifactId>
 			<version>11</version>
 			<scope>system</scope>
-			<systemPath>${basedir}/src/lib/ojdbc6.jar</systemPath> <!-- must match file name -->
+			<systemPath>${basedir}/src/lib/ojdbc7.jar</systemPath> <!-- must match file name -->
 		</dependency>
 
 		<dependency>
