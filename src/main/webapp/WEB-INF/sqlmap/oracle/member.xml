@@ -7,10 +7,15 @@
 <mapper namespace="member">
 
 <select id="list" resultType="Map" parameterType="Map">
-select m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, m.SUB_ADDR_SEQ, ma.ABILITY_NAME
+<!-- select m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, m.SUB_ADDR_SEQ, ma.ABILITY_NAME
 from MEMBER m, MEMBER_ABILITY_REL mr, ABILITIES ma
 where mr.ABILITY_SEQ = ma.ABILITY_SEQ 
 and mr.MEMBER_SEQ = m.MEMBER_SEQ
+order by m.MEMBER_SEQ -->
+
+select m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, m.SUB_ADDR_SEQ
+from MEMBER m
+order by m.MEMBER_SEQ
 </select>
 
 <select id="abilitylist" resultType="Map" parameterType="Map">
@@ -18,9 +23,16 @@ select ma.ABILITY_NAME
 from MEMBER m, MEMBER_ABILITY_REL mr, ABILITIES ma
 where mr.ABILITY_SEQ = ma.ABILITY_SEQ 
 and mr.MEMBER_SEQ = m.MEMBER_SEQ
+and m.MEMBER_SEQ = #{MEMBER_SEQ}
 
 </select>
 
+
+<select id="check" resultType="Map" parameterType="Map">
+select ID, PASSWORD
+from MEMBER 
+where ID = #{id}
+</select>
 
 	<!-- <insert id="insert1" parameterType="Map">
 		insert into MEMBER_INFO (

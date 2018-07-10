@@ -25,8 +25,8 @@
 <nav class="teal">
 	<div class="nav-wrapper">
 		<div class="bread_div">
-			<a href="#!" class="breadcrumb">회원관리</a> 
-			<a href="#!" class="breadcrumb">회원목록</a>
+			<a href="#!" class="breadcrumb">회원관리</a> <a href="#!"
+				class="breadcrumb">회원목록</a>
 		</div>
 	</div>
 </nav>
@@ -79,9 +79,24 @@
 						<th>보유능력</th>
 					</tr>
 				</thead>
-
 				<tbody>
-				<c:forEach items="${resultList}" var="resultData" varStatus="loop">
+					<c:forEach items="${resultList}" var="resultData" varStatus="loop">
+						<tr
+							class="${(loop.index+1)%2 == 2 ? 'odd gradeX' : 'even gradeC'}">
+							<td>${resultData.MEMBER_SEQ}</td>
+							<td>${resultData.NAME}</td>
+							<td>${resultData.ID}</td>
+							<td>${resultData.PASSWORD}</td>
+							<td>${resultData.SUB_ADDR_SEQ}</td>
+							<td>${resultData.TEL}</td>
+							<td><c:forEach items="${resultData.ABILITY_NAMES}" var="NAMES" varStatus="loop2">
+							${NAMES.ABILITY_NAME},
+							</c:forEach></td>
+
+						</tr>
+
+						<%-- <tbody>
+				<c:forEach items="${resultMap}" var="resultData" varStatus="loop">
 					<tr class="${(loop.index+1)%2 == 2 ? 'odd gradeX' : 'even gradeC'}">
 						<td>${resultData.MEMBER_SEQ}</td>
 						<td>${resultData.NAME}</td>
@@ -89,10 +104,13 @@
 						<td>${resultData.PASSWORD}</td>
 						<td>${resultData.SUB_ADDR_SEQ}</td>
 						<td>${resultData.TEL}</td>
-						<td>${resultData.ABILITY_NAME}</td>
-
-					</tr>
-					<!-- <tr>
+						<td>
+					<c:forEach items="${resultMap}" var="resultAbility" varStatus="loop">
+						${resultAbility.ABILITY_NAME}
+					</c:forEach>
+					</td>
+					</tr> --%>
+						<!-- <tr>
 						<td>member2</td>
 						<td>이대연</td>
 						<td>dleodus</td>
