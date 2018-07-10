@@ -18,6 +18,13 @@ public class CommonService {
 		return resultObject;
 	}
 	
+	
+	public Object getInfo(Object dataMap) {
+		String sqlMapId = "member.info";
+		Object resultObject = dao.getList(sqlMapId, dataMap);
+
+		return resultObject;
+	}
 	public Object getList(Object dataMap) {
 //		String sqlMapId = "member.list";
 //

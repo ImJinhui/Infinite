@@ -41,6 +41,7 @@ CommonService commonservice;
 		} else if ("signup".equalsIgnoreCase(action)) {
 			
 		} else if ("mypage".equalsIgnoreCase(action)) {
+			resultMap = (Map<String, Object>) commonservice.getInfo(paramMap);
 			
 		} else if("check".equalsIgnoreCase(action)) {
 			resultMap = (Map) commonservice.membercheck(paramMap);
