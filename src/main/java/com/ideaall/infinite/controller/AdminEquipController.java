@@ -37,23 +37,7 @@ public class AdminEquipController {
 			
 		} else if ("equip_read".equalsIgnoreCase(action)) {
 			
-		} /*else if ("member_list".equalsIgnoreCase(action)) {
-			
-		} else if ("member_edit".equalsIgnoreCase(action)) {
-			
-		} else if ("member_read".equalsIgnoreCase(action)) {
-			
-		} else if ("result_manage".equalsIgnoreCase(action)) {
-			
-		} else if ("ability_list".equalsIgnoreCase(action)) {
-			
-		} else if ("ability_edit".equalsIgnoreCase(action)) {
-			
-		} else if ("place_list".equalsIgnoreCase(action)) {
-			
-		} else if ("place_edit".equalsIgnoreCase(action)) {
-			
-		}*/
+		} 
 		
 
 		if(forwardView != null){

@@ -4,12 +4,16 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-<mapper namespace="ability">
+<mapper namespace="equip">
 	<select id="list" resultType="Map" parameterType="Map" timeout="10">
 		select 
-			ABILITY_SEQ	
-			,ABILITY_NAME	
-		from ABILITIES
+			EQUIP_PLACE_SEQ	
+			,EQUIP_PLACE_NAME	
+			,SUB_CATEGORY_SEQ	
+			,DESCRIPTION	
+			,EQUIP_PLACE_NAME	
+			,EQUIP_PLACE_NAME	
+		from EQUIP_PLACE
 	</select>
 	
 	<!-- <insert id="insert" parameterType="Map">

@@ -13,9 +13,7 @@
 	});
 	$(document).ready(function() {
 		$('select').formSelect();
-
 	});
-
 	$(document).ready(function() {
 		$('.tabs').tabs();
 	});
@@ -52,9 +50,7 @@
 			</ul>
 		</div>
 		<div id="equip1" class="col s12">
-
 			<div class="row">
-
 				<div class="col s12 m4">
 					<div class="card">
 						<div class="card-image waves-effect waves-block waves-light">
@@ -82,59 +78,10 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="col s12 m4">
-					<div class="card">
-						<div class="card-image waves-effect waves-block waves-light">
-							<img class="activator"
-								src="<c:url value='/resources/images/lasercutter.PNG'/>">
-						</div>
-						<div class="card-content">
-							<span class="card-title activator grey-text text-darken-4">레이저커터
-								<i class="material-icons right">more_vert</i>
-							</span>
-							<p>레이저픽스코리아</p>
-						</div>
-						<div class="card-reveal">
-							<span class="card-title grey-text text-darken-4">레이저커터<i
-								class="material-icons right">close</i></span>
-							<p>
-								◎ 모델명 : CUBICON Single Plus​ <br>◎ 방식: FDM(FFF) 방식​ <br>◎​
-								재료 : PLA 필라멘트 / 흰색 <br>◎ 노줄직경 : 0.4mm <br>◎​ 조형크기: 최대
-								240 x 190 x 200​​mm(W x D x H) 50 x 50 x 50mm 이하 파일을 권장합니다. <br>​◎지원포멧
-								: STL 파일
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col s12 m4">
-					<div class="card">
-						<div class="card-image waves-effect waves-block waves-light">
-							<img class="activator"
-								src="<c:url value='/resources/images/lasercutter.PNG'/>">
-						</div>
-						<div class="card-content">
-							<span class="card-title activator grey-text text-darken-4">레이저커터
-								<i class="material-icons right">more_vert</i>
-							</span>
-							<p>레이저픽스코리아</p>
-						</div>
-						<div class="card-reveal">
-							<span class="card-title grey-text text-darken-4">레이저커터<i
-								class="material-icons right">close</i></span>
-							<p>
-								◎ 모델명 : CUBICON Single Plus​ <br>◎ 방식: FDM(FFF) 방식​ <br>◎​
-								재료 : PLA 필라멘트 / 흰색 <br>◎ 노줄직경 : 0.4mm <br>◎​ 조형크기: 최대
-								240 x 190 x 200​​mm(W x D x H) 50 x 50 x 50mm 이하 파일을 권장합니다. <br>​◎지원포멧
-								: STL 파일
-							</p>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
+		
 		<div id="equip2" class="col s12">
-
 			<div class="row">
 				<div class="col s12 m4">
 					<div class="card">
