@@ -3,7 +3,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
-
+<script src="<c:url value='/resources/js/reservation.js'/> "></script>
 <!-- left collapse -->
 <script>
 (function($) {
@@ -19,7 +19,57 @@ $('.collapsible').collapsible({
 
 </script>
 <!-- /left collapse -->
+<script language="javascript">
 
+function printDate() {
+        var date = new Date();
+		for(var i = 0; i<=13; i++){
+			if(i!=0){
+				date.setTime(date.getTime()+(24*60*60*1000));
+			}
+			var day  = date.getDate();
+	        var month = date.getMonth() + 1;
+	        var year = date.getYear();
+	        var dow = date.getDay();
+	        year = (year < 1000) ? year + 1900 : year;
+	        switch(dow){
+			case 0:dow="일";break;
+			case 1:dow="월";break;
+			case 2:dow="화";break;
+			case 3:dow="수";break;
+			case 4:dow="목";break;
+			case 5:dow="금";break;
+			case 6:dow="토";break;
+			default:break;
+			}
+	        var selectdate = year+"-"+month+"-"+day;
+
+/* 			document.write(year+""+month+""+day+dow); */
+			var text = "<label class='date_label'>"+"<span class='date_span'>"+dow+"</span>"+"<span class='date_em' value="+selectdate+">"+day+"</span>"+"</label>"; 
+			document.write(text);
+			
+		}
+/*         document.write(year + "년 "+ month + "월 " + day + "일 "+ dow +"요일"); 
+        document.write(date.toLocaleString());
+        document.write("---------");
+        var newtimems=date.getTime()+(30*24*60*60*1000);
+        document.write(newtimems);
+		date.setTime(newtimems);
+        document.write("---------");
+        document.write(date.getDate()); */
+}
+</script>
+<script>
+var ss="";
+$(document).on("click",".date_em",function(){
+	var ss = $(this).attr('value');
+	$(this).css("color","#ffffff")
+	.css("border-radius","80%")
+    .css("background","#6C6C6C");
+
+	alert(ss);
+});
+</script>
 <style>
 .date_card{
 	height: 60px;
@@ -41,6 +91,27 @@ $('.collapsible').collapsible({
 #dates{
 	/* padding-left: 0.7rem; */
 }
+.date_label{
+	display:inline-block;
+	font-size:3vw;
+	width:5%;
+	margin-left:1.5vw;
+}
+.date_span{
+	display:block;
+	font-size:1.5vw;
+}
+.date_em{
+    display: block;
+	cursor:pointer;
+    text-align: center;
+    width: 4vw;
+    height: 4vw;
+}
+/* .date_em:before {
+    content: "";
+    padding-top: 100%; /* 1:1 비율 */
+} */
 </style>
  <!-- 페이지 이름 -->
 <nav class="teal">
@@ -56,12 +127,14 @@ $('.collapsible').collapsible({
 
   <!-- main -->
   <div class="main_body row">
-
-  
-  
+	<div class="col s12" style="display:center;text-align:center;">
+		<script>
+		printDate();
+		</script>
+	</div>
   <!-- 수정부분 -->
   <!-- left -->
-  <!-- <div class="col s3">
+<div class="col s3">
 	  <ul class="collapsible">
 	    <li class="active">
 	      <div class="collapsible-header"><i class="material-icons">print</i>3D Printer</div>
@@ -93,12 +166,13 @@ $('.collapsible').collapsible({
 	      </div>
 	    </li>
 	  </ul>
-  </div> -->
+  </div>
   <!-- /left -->
   
   <!-- center -->
-<!--   <div class="col s6">
- 	<div class="row" style="text-align: center;">
+ <div class="col s6">
+ 
+ 	<!-- <div class="row" style="text-align: center;">
 		<div id="dates">	 
 	
 	      <div class="col s2 card date_card btn"><p>07/02</p></div>
@@ -114,7 +188,7 @@ $('.collapsible').collapsible({
 	      <div class="col s2 card date_card btn"><p>07/13</p></div>
      
      	</div>  
-  	</div>
+  	</div> -->
   	
   	<div class="row">
   	<div class="card ">
@@ -131,11 +205,11 @@ $('.collapsible').collapsible({
       </div>
   	</div>
   	</div>
-  </div> -->
+  </div>
   <!-- /center -->
   
   <!-- right -->
-<!--   <div class="col s3">
+<div class="col s3">
       <div class="card">
         <div class="card-content">
         <i class="close material-icons right">close</i>
@@ -160,7 +234,7 @@ $('.collapsible').collapsible({
           <p>12:00 ~ 13:00</p>
         </div>
       </div>
-  </div> -->
+  </div>
   <!-- /right -->
   
   <!-- /수정부분 -->

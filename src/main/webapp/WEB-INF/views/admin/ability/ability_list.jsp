@@ -47,12 +47,12 @@ $(document).ready(function() {
 					<c:forEach items="${resultList}" var="resultData" varStatus="loop" >
 						<tr
 							class="${(loop.index+1)%2 == 2 ? 'odd gradeX' : 'even gradeC'}">
-							<td>${resultData.test_col}</td>
-							<%-- <td>${resultData.ABILITY_NAME}</td> --%>
+							<td>${resultData.ABILITY_SEQ}</td>
+							 <td>${resultData.ABILITY_NAME}</td> 
 							<td><a class="waves-effect waves-light btn-small"
-								href="<c:url value='/admin/ability/ability_edit'/>">수정</a></td>
+								href="<c:url value='/admin/ability/ability_read?ABILITY_SEQ=${resultData.ABILITY_SEQ}'/>">수정</a></td>
 							<td><a class="waves-effect waves-light btn-small"
-								href="<c:url value='/admin/ability/ability_read'/>">삭제</a></td>
+								href="<c:url value='/admin/ability/ability_read?ABILITY_SEQ=${resultData.ABILITY_SEQ}'/>">삭제</a></td>
 						</tr>
 						</c:forEach>
 						</tbody>
@@ -67,19 +67,26 @@ $(document).ready(function() {
 						<h4>능력추가</h4>
 					</div>
 				</div>
-				<form class="col s12">
+				<div class="col s12">
+				<form action="<c:url value='/admin/ability/ability_merge'/>" role="form" method="POST">
+				<input type="hidden" name="forwardView" value="/admin/ability/ability_list" />
 					<div class="row">
 						<div class="input-field col s12">
-							<input id="name" type="text" class="validate"> <label
+							<input name ="ABILITY_NAME" id="name" type="text" class="validate"> <label
 								for="name">능력 이름</label>
 						</div>
 					</div>
-				</form>
+				
+				</div>
 			</div>
 		</div>
 		<div class="modal-footer">
-			<a href="#!" class="modal-close waves-effect waves-teal btn">능력추가</a>
+			<!-- <a href="#!" class="modal-close waves-effect waves-teal btn">능력추가</a> -->
+			<button class="btn waves-effect waves-light" type="submit" name="action">
+				추가 <i class="material-icons right">add</i>
+			</button>
 		</div>
+		</form>
 	</div>
 
 
