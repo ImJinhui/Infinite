@@ -8,21 +8,37 @@
 	$(document).ready(function() {
 		$('.modal').modal({
 			endingTop : '5%'
-		}
-		);
+		});
 	});
 	$(document).ready(function() {
 		$('select').formSelect();
 	});
-	$(document).ready(function() {
+/* 	$(document).click(function() {
 		$('.tabs').tabs();
-	});
+	}); */
+	
+	$( function() {
+	    $( ".tabs" ).tabs({
+	      collapsible: true
+	    });
+	  } );
+
+	$(document).ready(function(){
+	    $('.collapsible').collapsible();
+	  });
 </script>
 
 <style>
-.card {
-	
+.box {
+	border:none;
+	margin:0;
 }
+.tabs {
+
+  height: 100%;
+
+}
+
 </style>
 
 <!-- 페이지 이름 -->
@@ -33,92 +49,68 @@
 				class="breadcrumb">장비관리</a> <a href="#!" class="breadcrumb">장비목록</a>
 		</div>
 	</div>
+	
 </nav>
 <!-- /페이지 이름 -->
 <!-- main -->
-<div class="main_body" style="width: 70%">
+<div class="main_body row tabs" style="width: 70%">
 
 	<!-- 수정부분 -->
 	<!-- 장비관리list -->
-	<div class="row">
-		<div class="card col s12" style="padding: 0">
-			<ul class="tabs">
-				<li class="tab col m3 s12"><a class="active" href="#equip1">레이저커터</a></li>
-				<li class="tab col m3 s12"><a href="#equip2">3D 프린터</a></li>
-				<li class="tab col m3 s12"><a href="#equip3">목공기계</a></li>
-				<li class="tab col m3 s12"><a href="#equip4">봉제기계</a></li>
-			</ul>
-		</div>
-		<div id="equip1" class="col s12">
-			<div class="row">
-				<div class="col s12 m4">
-					<div class="card">
-						<div class="card-image waves-effect waves-block waves-light">
-							<img class="activator"
-								src="<c:url value='/resources/images/lasercutter.PNG'/>">
-						</div>
-						<div class="card-content">
-							<span class="card-title activator grey-text text-darken-4">레이저커터
-								<i class="material-icons right">more_vert</i>
-							</span>
-							<p>레이저픽스코리아</p>
-							<p>
-								<a href="#">예약내역</a>
-							</p>
-						</div>
-						<div class="card-reveal">
-							<span class="card-title grey-text text-darken-4">레이저커터<i
-								class="material-icons right">close</i></span>
-							<p>
-								◎ 모델명 : CUBICON Single Plus​ <br>◎ 방식: FDM(FFF) 방식​ <br>◎​
-								재료 : PLA 필라멘트 / 흰색 <br>◎ 노줄직경 : 0.4mm <br>◎​ 조형크기: 최대
-								240 x 190 x 200​​mm(W x D x H) 50 x 50 x 50mm 이하 파일을 권장합니다. <br>​◎지원포멧
-								: STL 파일
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div id="equip2" class="col s12">
-			<div class="row">
-				<div class="col s12 m4">
-					<div class="card">
-						<div class="card-image waves-effect waves-block waves-light">
-							<img class="activator"
-								src="<c:url value='/resources/images/lasercutter.PNG'/>">
-						</div>
-						<div class="card-content">
-							<span class="card-title activator grey-text text-darken-4">3D
-								프린터 <i class="material-icons right">more_vert</i>
-							</span>
-							<p>레이저픽스코리아</p>
-						</div>
-						<div class="card-reveal">
-							<span class="card-title grey-text text-darken-4">3D 프린터<i
-								class="material-icons right">close</i></span>
-							<p>
-								◎ 모델명 : CUBICON Single Plus​ <br>◎ 방식: FDM(FFF) 방식​ <br>◎​
-								재료 : PLA 필라멘트 / 흰색 <br>◎ 노줄직경 : 0.4mm <br>◎​ 조형크기: 최대
-								240 x 190 x 200​​mm(W x D x H) 50 x 50 x 50mm 이하 파일을 권장합니다. <br>​◎지원포멧
-								: STL 파일
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="equip3" class="col s12">
+	
 
-			<div class="row"></div>
+<!-- 좌측카테고리 -->
+
+		<div class="box col s2">
+			<div class="collection tabs">
+				<c:forEach items="${resultMap.resultCateObject}" var="resultData" varStatus="loop">
+					<div
+						class="${(loop.index+1)%2 == 2 ? 'odd gradeX' : 'even gradeC'}">
+						<a href="#equip${loop.index}" class="collection-item">${resultData.SUB_CATEGORY_NAME}</a>
+					</div>
+				</c:forEach>
+			</div>
 		</div>
-		<div id="equip4" class="col s12">
-			<div class="row"></div>
+		<!-- /좌측카테고리 -->
+
+
+		<div id="equip0" class="col s10">
+			<div class="row">
+				<c:forEach items="${resultMap.resultEquipObject}" var="resultData" varStatus="loop">
+					<div
+						class="${(loop.index+1)%2 == 2 ? 'odd gradeX' : 'even gradeC'}">
+						<div class="col s12 m4">
+							<div class="card">
+								<div class="card-image waves-effect waves-block waves-light">
+									<img class="activator"
+										src="<c:url value='/resources/images/lasercutter.PNG'/>">
+								</div>
+								<div class="card-content">
+									<span class="card-title activator grey-text text-darken-4">${resultData.EQUIP_PLACE_NAME}
+										<i class="material-icons right">more_vert</i>
+									</span>
+									<p>${resultData.MANUFACTURER}</p>
+									<!-- <p><a href="#">예약내역</a></p> -->
+								</div>
+								<div class="card-reveal">
+									<span class="card-title grey-text text-darken-4">${resultData.EQUIP_PLACE_NAME}<i
+										class="material-icons right">close</i></span>
+									<p>${resultData.DESCRIPTION}</p>
+									<p>${resultData.SUB_CATEGORY_SEQ}</p>
+									<p>${resultData.EQIP_PLACE_SEQ}</p>
+									<p>${resultData.MANAGER}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
 		</div>
+		<div id="equip1" class="col s10">equip1</div>
 	</div>
+	
 	<!--/ 장비관리list -->
-</div>
+
 
 <!-- modal -->
 <div id="modal1" class="modal modal-fixed-footer">

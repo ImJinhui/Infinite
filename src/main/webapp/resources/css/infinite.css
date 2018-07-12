@@ -67,12 +67,12 @@ nav .brand-logo {
 }
 
 .bread_div{
-	padding-left: 16rem;
+	padding-left: 15%;
 	/* background-color: #0795d3; */
 }
 
 .bread_div a{
-	font-size: x-large;
+	font-size: 1.5rem;
 	font-weight: bold;
 	
 }
