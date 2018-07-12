@@ -34,6 +34,22 @@ public class CommonService {
 		return 0;
 	}
 	
+	public Object getSubADDList(Object dataMap) {
+		String sqlMapId = "member.subaddlist";
+
+		Object resultObject = dao.getList(sqlMapId, dataMap);
+		
+		return resultObject;
+	}
+	
+	public Object getADDList(Object dataMap) {
+		String sqlMapId = "member.addlist";
+
+		Object resultObject = dao.getList(sqlMapId, dataMap);
+		
+		return resultObject;
+	}
+	
 	public Object getObject(Object dataMap) {
 //		String sqlMapId = "member.read";
 //

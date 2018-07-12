@@ -24,7 +24,6 @@ from MEMBER m, MEMBER_ABILITY_REL mr, ABILITIES ma
 where mr.ABILITY_SEQ = ma.ABILITY_SEQ 
 and mr.MEMBER_SEQ = m.MEMBER_SEQ
 and m.MEMBER_SEQ = #{MEMBER_SEQ}
-
 </select>
 
 
@@ -32,6 +31,21 @@ and m.MEMBER_SEQ = #{MEMBER_SEQ}
 select ID, PASSWORD
 from MEMBER 
 where ID = #{id}
+</select>
+
+
+
+ <select id="subaddlist" resultType="Map" parameterType="Map">
+select sub.SUB_ADDR_NAME, sub.SUB_ADDR_SEQ
+from sub_address sub, address addr
+where sub.ADDR_SEQ = addr.ADDR_SEQ
+and addr.ADDR_SEQ=#{ADDR_SEQ}
+</select> 
+
+<select id="addlist" resultType="Map" parameterType="Map">
+select *
+from address
+order by ADDR_SEQ
 </select>
 
 	<!-- <insert id="insert1" parameterType="Map">
