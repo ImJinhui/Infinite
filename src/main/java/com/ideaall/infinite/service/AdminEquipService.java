@@ -25,6 +25,10 @@ public class AdminEquipService {
 		Object resultCateObject = dao.getList(sqlMapId, dataMap);
 		resultObject.put("resultCateObject", resultCateObject);
 		
+		sqlMapId = "equip.subcatelist";
+		Object resultSubCateObject = dao.getList(sqlMapId, dataMap);
+		resultObject.put("resultSubCateObject", resultSubCateObject);
+		
 		
 		return resultObject;
 	}

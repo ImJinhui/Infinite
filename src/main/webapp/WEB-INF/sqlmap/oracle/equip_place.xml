@@ -21,10 +21,19 @@
 	
 	<select id="catelist" resultType="Map" parameterType="Map" timeout="10">
 		select 
+			CATEGORY_SEQ
+			,CATEGORY_NAME
+		from CATEGORY 
+		
+	</select> 
+	
+	<select id="subcatelist" resultType="Map" parameterType="Map" timeout="10">
+		select 
 			SUB_CATEGORY_SEQ
 			,SUB_CATEGORY_NAME
 			,CATEGORY_SEQ
 		from SUB_CATEGORY
+	<!-- 	where #{CATEGORY_SEQ} -->
 	</select> 
 
 	<insert id="merge">

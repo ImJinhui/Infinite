@@ -37,7 +37,7 @@ public class AdminEquipController {
 		// divided depending on action value
 		if ("equip_list".equalsIgnoreCase(action)) {
 			resultMap =  (Map<String, Object>) service.getList(paramMap);
-			resultList = (List<Object>) resultMap.get("resultCateList");
+			
 		} else if ("equip_edit".equalsIgnoreCase(action)) {
 			
 		} else if ("equip_read".equalsIgnoreCase(action)) {

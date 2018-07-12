@@ -3,17 +3,15 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
-<style>
-.box {
-	border:none;
-	margin:0;
-}
-</style>
-
 <script>
 $(document).ready(function(){
     $('.collapsible').collapsible();
   });
+	$( function() {
+	    $( ".tabs" ).tabs({
+	      collapsible: true
+	    });
+	  } );
 	$(document).ready(function() {
 		$('.modal').modal({
 			endingTop : '5%'
@@ -22,47 +20,23 @@ $(document).ready(function(){
 	$(document).ready(function() {
 		$('select').formSelect();
 	});
-
-</script>
-<!-- 카테고리별 장비 목록 불러오는 ajax -->
-<script>
-var fn_cate_equipList = function(url, id, params) {
-	$.ajax({
-		type : "POST", 
-		url : url, 
-		data : {"CATEGORY_SEQ" : params}, 
-		cache: false,
-		success : function(data) {
-			var formTag = "";
-			
-			formTag += "<div class='text-center'><h5>"+data.CATEGORY_NAME + "</h5></div>";
-			formTag += "<div class='text-center'><h2>"+data.BOARD_TITLE + "</h2></div>";
-			formTag += "<div class='row'>";
-			formTag += "<p class='col-sm-4 text-center'>"+data.BOARD_DATE+"</p>";
-			formTag += "<div class='col-sm-5'></div><div class='col-sm-3 text-center'>";
-			formTag += "<a href='<c:url value='/board/update?BOARD_SEQ="+data.BOARD_SEQ+"'/>'>수정&nbsp;&nbsp;&nbsp;&nbsp;</a>";
-			formTag += "<a href='<c:url value='/board/delete?BOARD_SEQ="+data.BOARD_SEQ+"'/>'>삭제</a>";
-			formTag += "</div></div><hr>";
-			formTag += "<div style='padding: 2%'>"+data.BOARD_CONT+"</div>";
-			
-			$('#'+id).html(formTag);
-		}, 
-		error : function(xhr, status, exception){
-			alert("Failure \n ("+status+")");
-			return false; 
-		}
-		});
-	}
-
-
-			function equipList() {
-				alert("f");
-				fn_cate_equipList("<c:url value='/ws/equipList'/>",
-						"setBoardContent", "${paramMap.CATEGORY_SEQ}");
-			};
+/* 	$(document).click(function() {
+		$('.tabs').tabs();
+	}); 
+*/
+  
 </script>
 
+<style>
+.box {
+	border:none;
+	margin:0;
+}
+.tabs {
+  height: 100%;
+}
 
+</style>
 
 <!-- 페이지 이름 -->
 <nav class="teal">
@@ -95,7 +69,7 @@ var fn_cate_equipList = function(url, id, params) {
 							var="resultSubCate" varStatus="loop2">
 							<c:if
 								test="${resultCate.CATEGORY_SEQ == resultSubCate.CATEGORY_SEQ}">
-								<a href="" onclick="equipList()" class="collection-item">${resultSubCate.SUB_CATEGORY_NAME}</a>
+								<a href="#equip${loop2.index}" class="collection-item">${resultSubCate.SUB_CATEGORY_NAME}</a>
 							</c:if>
 						</c:forEach>
 					</div>
