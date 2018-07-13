@@ -34,7 +34,7 @@
   <li><a href="<c:url value='/common/mypage'/>">마이페이지</a></li>	
 </ul> --%>
 <c:choose>
-	<c:when test="${resultMap.ID!=null}">
+	<c:when test="${resultMap.ID!=null}"> <!-- //로그인 성공 -->
 
 		<ul id="dropdown_member" class="dropdown-content">
 			<%--  <li><a href="<c:url value='/common/login'/>">로그인</a></li> --%>
@@ -95,7 +95,7 @@
 	</c:when>
 
 
-	<c:otherwise>
+	<c:otherwise>  <!-- //로그인 되지 않음 -->
 		<!-- 로그인되지 않은경우 -->
 		<ul id="dropdown_member" class="dropdown-content">
 			<li><a href="<c:url value='/common/login'/>">로그인</a></li>

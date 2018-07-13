@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ideaall.infinite.dao.ShareDao;
+import com.ideaall.infinite.utill.CommonUtil;
 
 @Service
 public class AdminMemberService {
@@ -16,21 +17,26 @@ public class AdminMemberService {
 	@Autowired
 	private ShareDao dao;
 
+	@Autowired
+	CommonUtil common;
+
 	public Object getList(Object dataMap) {
 		String sqlMapId = "member.list";
 		List resultList = (List) dao.getList(sqlMapId, dataMap);
 
 		for (int i = 0; i < resultList.size(); i++) {
-			String member_seq = (String) ((Map<Object,Object>) resultList.get(i)).get("MEMBER_SEQ");
+			String member_seq = (String) ((Map<Object, Object>) resultList.get(i)).get("MEMBER_SEQ");
 			((Map<Object, Object>) dataMap).put("MEMBER_SEQ", member_seq);
 
 			sqlMapId = "member.abilitylist";
 			List abilitylist = (List) dao.getList(sqlMapId, dataMap);
-			
-			((Map<Object, Object>)resultList.get(i)).put("ABILITY_NAMES", abilitylist);
-			/*for (int j = 0; j < abilitylist.size(); j++) {
-			((Map<Object, Object>) resultList.get(i)).put("ABILITY_NAMES", ((Map<Object,Object>)abilitylist.get(j)).get("ABILITY_NAME"));
-			}*/
+
+			((Map<Object, Object>) resultList.get(i)).put("ABILITY_NAMES", abilitylist);
+			/*
+			 * for (int j = 0; j < abilitylist.size(); j++) { ((Map<Object, Object>)
+			 * resultList.get(i)).put("ABILITY_NAMES",
+			 * ((Map<Object,Object>)abilitylist.get(j)).get("ABILITY_NAME")); }
+			 */
 		}
 
 		/*
@@ -44,6 +50,24 @@ public class AdminMemberService {
 		// result.put("ability_list", result2);
 
 		return resultList;
+	}
+
+	public Object idcheck(Object dataMap) {
+		String sqlMapId = "member.check";
+
+		Object resultObject = dao.getObject(sqlMapId, dataMap);
+
+		return resultObject;
+	}
+
+	public Object insert(Object dataMap) {
+		String sqlMapId = "member.insert";
+
+		String uuid = common.getUniqueSequence();
+		((Map<Object, Object>) dataMap).put("MEMBER_SEQ", uuid);
+		Object resultObject = dao.getObject(sqlMapId, dataMap);
+
+		return resultObject;
 	}
 
 	public Object getObject(Object dataMap) {

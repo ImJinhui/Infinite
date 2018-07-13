@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ideaall.infinite.service.AdminMemberService;
+import com.ideaall.infinite.service.CommonService;
 
 @Controller
 public class AdminMemberController {
@@ -23,6 +24,9 @@ public class AdminMemberController {
 	@Autowired
 	AdminMemberService memberservice;
     
+	@Autowired
+	CommonService commonservice;
+	
 	// Receive Parameters from Html Using @RequestParam Map with @PathVariable
 	@RequestMapping(value = MAPPING+"{action}", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView actionMethod(@RequestParam MultiValueMap<Object, Object> paramMultiMap, @RequestParam Map<String, Object> paramMap, 
@@ -41,7 +45,11 @@ public class AdminMemberController {
 			
 		} else if ("member_read".equalsIgnoreCase(action)) {
 			
-		} 
+		} else if("insert".equalsIgnoreCase(action)) {
+			resultMap = (Map<String, Object>) memberservice.insert(paramMap);
+			resultMap = (Map<String, Object>) commonservice.getInfo(paramMap);
+			viewName="/common/mypage";
+		}
 		
 
 		if(forwardView != null){

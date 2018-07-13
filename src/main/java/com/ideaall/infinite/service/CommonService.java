@@ -21,7 +21,7 @@ public class CommonService {
 	
 	public Object getInfo(Object dataMap) {
 		String sqlMapId = "member.info";
-		Object resultObject = dao.getList(sqlMapId, dataMap);
+		Object resultObject = dao.getObject(sqlMapId, dataMap);
 
 		return resultObject;
 	}

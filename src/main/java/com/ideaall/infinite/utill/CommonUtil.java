@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class CommonUtil {
 	/**
 	 * Unique sequence Key 생성 

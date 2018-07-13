@@ -35,31 +35,31 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">face</i> <input id="name"
-						type="text" class="validate"> <label for="name">${resultMap.NAME}</label>
+						type="text" class="validate" readonly> <label for="name">${resultMap.NAME}</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">account_circle</i> <input id="id"
-						type="text" class="validate"> <label for="id">${resultMap.ID}</label>
+						type="text" readonly > <label for="id" >${resultMap.ID}</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">lock</i> <input id="password"
-						type="password" class="validate"> <label for="password">${resultMap.PASSWORD}</label>
+						type="password" class="validate" readonly> <label for="password">${resultMap.PASSWORD}</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">phone</i> <input id="tel"
-						type="tel" class="validate"> <label for="tel">${resultMap.TEL}</label>
+						type="tel" class="validate" readonly> <label for="tel">${resultMap.TEL}</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">email</i> <input id="email"
-						type="email" class="validate"> <label for="email">${resultMap.EMAIL}</label>
+						type="email" class="validate" readonly> <label for="email">${resultMap.EMAIL}</label>
 				</div>
 			</div>
 			<div class="row">

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ideaall.infinite.service.AdminMemberService;
 import com.ideaall.infinite.service.CommonService;
 
 @Controller
@@ -20,6 +21,9 @@ public class WSmemberController {
 
 	@Autowired
 	CommonService commonservice;
+	
+	@Autowired
+	AdminMemberService memberservice;
 	
 	@RequestMapping(value = "/ws/{action}", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json")
@@ -52,6 +56,19 @@ public class WSmemberController {
 		resultMap.put("addrList", resultList);
 		return resultMap;
 	}
+	
+	
+	@RequestMapping(value = "/idcheck", method = { RequestMethod.GET, RequestMethod.POST }, produces = "application/json")	
+	public @ResponseBody Map<String, Object> idcheck(@RequestParam Map<String, Object> paramMap){
+		
+		List<Map> resultList = new ArrayList<>();
+		Map<String, Object> resultMap = new HashMap<>();
+		
+		resultMap = (Map<String, Object>) memberservice.idcheck(paramMap);
+		
+		return resultMap;
+	}
+	
 	
 
 	
