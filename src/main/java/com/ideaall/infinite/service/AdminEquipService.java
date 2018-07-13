@@ -1,5 +1,6 @@
 package com.ideaall.infinite.service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,20 @@ public class AdminEquipService {
 	private ShareDao dao;
 	
 	public Object getList(Object dataMap) {
+		Map<String, Object> resultObject = new HashMap<String, Object>();
+		
 		String sqlMapId = "equip.list";
-
-		Object resultObject = dao.getList(sqlMapId, dataMap);
+		Object resultEquipObject = dao.getList(sqlMapId, dataMap);
+		resultObject.put("resultEquipObject", resultEquipObject);
+		
+		sqlMapId = "equip.catelist";
+		Object resultCateObject = dao.getList(sqlMapId, dataMap);
+		resultObject.put("resultCateObject", resultCateObject);
+		
+		sqlMapId = "equip.subcatelist";
+		Object resultSubCateObject = dao.getList(sqlMapId, dataMap);
+		resultObject.put("resultSubCateObject", resultSubCateObject);
+		
 		
 		return resultObject;
 	}

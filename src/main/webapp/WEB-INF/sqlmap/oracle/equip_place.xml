@@ -7,29 +7,35 @@
 <mapper namespace="equip">
 	<select id="list" resultType="Map" parameterType="Map" timeout="10">
 		select 
-			EQUIP_PLACE_SEQ	
-			,EQUIP_PLACE_NAME	
-			,SUB_CATEGORY_SEQ	
-			,DESCRIPTION	
-			,EQUIP_PLACE_NAME	
-			,EQUIP_PLACE_NAME	
-		from EQUIP_PLACE
+			ep.EQUIP_PLACE_SEQ	
+			,ep.SUB_CATEGORY_SEQ	
+			,ep.MANUFACTURER
+			,ep.DESCRIPTION	
+			,ep.MANAGER	
+			,ep.EQUIP_PLACE_NAME
+			,sc.SUB_CATEGORY_NAME
+		from EQUIP_PLACE ep, SUB_CATEGORY sc
+		where ep.SUB_CATEGORY_SEQ = sc.SUB_CATEGORY_SEQ
+		order by ep.SUB_CATEGORY_SEQ
 	</select>
 	
-	<!-- <insert id="insert" parameterType="Map">
-		insert into ABILITIES
-			(ABILITY_NAME)
-		values (
-			#{ABILITY_NAME}
-			)
-	</insert>
-
-	<update id="update">
-		update ABILITIES
-		set ABILITY_NAME = #{ABILITY_NAME}
-		where ABILITY_SEQ = #{ABILITY_SEQ}
-	</update> -->
+	<select id="catelist" resultType="Map" parameterType="Map" timeout="10">
+		select 
+			CATEGORY_SEQ
+			,CATEGORY_NAME
+		from CATEGORY 
+		
+	</select> 
 	
+	<select id="subcatelist" resultType="Map" parameterType="Map" timeout="10">
+		select 
+			SUB_CATEGORY_SEQ
+			,SUB_CATEGORY_NAME
+			,CATEGORY_SEQ
+		from SUB_CATEGORY
+	<!-- 	where #{CATEGORY_SEQ} -->
+	</select> 
+
 	<insert id="merge">
 	INSERT INTO ABILITIES (
 		ABILITY_NAME 
