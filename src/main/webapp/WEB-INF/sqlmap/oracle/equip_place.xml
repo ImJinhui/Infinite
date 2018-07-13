@@ -19,7 +19,21 @@
 		order by ep.SUB_CATEGORY_SEQ
 	</select>
 	
-	<select id="catelist" resultType="Map" parameterType="Map" timeout="10">
+	<select id="listByCate" resultType="Map" parameterType="Map" timeout="10">
+		select 
+			EQUIP_PLACE_SEQ	
+			,SUB_CATEGORY_SEQ	
+			,MANUFACTURER
+			,DESCRIPTION	
+			,MANAGER	
+			,EQUIP_PLACE_NAME
+			
+		from EQUIP_PLACE 
+		where SUB_CATEGORY_SEQ = #{SUB_CATEGORY_SEQ}
+		order by EQUIP_PLACE_SEQ
+	</select>
+	
+	<select id="cateList" resultType="Map" parameterType="Map" timeout="10">
 		select 
 			CATEGORY_SEQ
 			,CATEGORY_NAME
@@ -27,13 +41,13 @@
 		
 	</select> 
 	
-	<select id="subcatelist" resultType="Map" parameterType="Map" timeout="10">
+	<select id="subCateList" resultType="Map" parameterType="Map" timeout="10">
 		select 
 			SUB_CATEGORY_SEQ
 			,SUB_CATEGORY_NAME
 			,CATEGORY_SEQ
 		from SUB_CATEGORY
-	<!-- 	where #{CATEGORY_SEQ} -->
+		where CATEGORY_SEQ = #{CATEGORY_SEQ}
 	</select> 
 
 	<insert id="merge">

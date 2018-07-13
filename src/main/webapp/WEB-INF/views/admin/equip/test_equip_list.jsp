@@ -3,8 +3,18 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
-<script type="text/javascript">
-$('.collapsible').click(function(){
+
+
+
+<style>
+.box {
+	border:none;
+	margin:0;
+}
+</style>
+
+<script>
+$(document).ready(function(){
     $('.collapsible').collapsible();
   });
 	$(document).ready(function() {
@@ -18,60 +28,9 @@ $('.collapsible').click(function(){
 
 </script>
 
-
-<!-- 장비추가 modal selectbox ajax -->
-<script type="text/javascript">
-var fn_cate_select = function(url, params) {
-	$.ajax({
-		type : "POST", 
-		url : url, 
-		data : {"CATEGORY_SEQ" : params}, 
-		dataType:'json',
-		cache: false,
-		success: function(data){
-				alert(data);
-			  var sub_cate = "<option value='' disabled selected>Choose your option</option>";
-				        
-			  /* $("#subCate").find("option").remove().end().append("<option value='' disabled selected>Choose your option</option>"); */
-			  
-			
-			   $.each(data, function(i){
-				   sub_cate += "<option value='"+(data[i])['SUB_CATEGORY_SEQ']+"'>"+(data[i])['SUB_CATEGORY_NAME']+"</option>";
-			   /*  $("#subCate").append("<option value='"+data[i].SUB_CATEGORY_SEQ+"'>"+data[i].SUB_CATEGORY_NAME+"</option>") */
-			   });    
-			   $("#subCate").html(sub_cate);
-			   
-			   /* document.addEventListener('DOMContentLoaded', function() {
-							var elems = document.querySelectorAll('select');
-							var instances = M.FormSelect.init(elems, options);
-						}); */
-				$('select').formSelect();
-			  },
-
-
-		error : function(xhr, status, exception){
-			alert("Failure \n ("+status+")");
-			return false; 
-		}
-		});
-	}
-
-	function cateSelect(param) {
-		alert(param);
-		fn_cate_select("<c:url value='/wsEquip/subCateList'/>", param);
-		
-	};
-</script>
-
-<style>
-.box {
-	border:none;
-	margin:0;
-}
-</style>
 <!-- 카테고리별 장비 목록 불러오는 ajax -->
 <script>
- /* var fn_cate_equipList = function(url, id, params) {
+ var fn_cate_equipList = function(url, id, params) {
 	$.ajax({
 		type : "POST", 
 		url : url, 
@@ -80,22 +39,24 @@ var fn_cate_select = function(url, params) {
 		cache: false,
 		success : function(data) {
 			alert(data);
-			var formTag = ""; */
+			var formTag = ""; 
 			/* formTag += "<div id='equip0' class='col s10'><div class='row'>"; */
-			/* $.each(data, function(i, item) {
+			 $.each(data, function(i) {
 				formTag += '<div class="col s12 m4"><div class="card">';
 				formTag += '<div class="card-image waves-effect waves-block waves-light">';
 				formTag += '<img class="activator" src="<c:url value="/resources/images/lasercutter.PNG"/></div>">';
 				formTag += '<div class="card-content">';
-				formTag += '<span class="card-title activator grey-text text-darken-4">'+item.EQUIP_PLACE_NAME;
+				formTag += '<span class="card-title activator grey-text text-darken-4">'+(data[i])['EQUIP_PLACE_NAME'];
 				formTag += '<i class="material-icons right">more_vert</i></span></div>';
-				formTag += '<div class="card-reveal"><span class="card-title grey-text text-darken-4">'+item.EQUIP_PLACE_NAME;
+				formTag += '<div class="card-reveal"><span class="card-title grey-text text-darken-4">'+(data[i])['EQUIP_PLACE_NAME'];
 				formTag += '<i class="material-icons right">close</i></span>';
-				formTag += '<p>'+item.DESCRIPTION+'</p>';
+				formTag += '<p>'+(data[i])['DESCRIPTION']+'</p>';
 				formTag += '</div></div></div>';
-			}); */
+			}); 
 				/* formTag += '</div></div>'; */
-			/* $('#'+id).html(formTag);
+			 $('#'+id).html(formTag);
+				
+				
 		},
 		error : function(xhr, status, exception){
 			alert("Failure \n ("+status+")");
@@ -107,7 +68,7 @@ var fn_cate_select = function(url, params) {
 	function equipList(param) {
 		fn_cate_equipList("<c:url value='/wsEquip/equipList'/>", "setEquipList", param);
 		
-	};  */
+	};  
 </script>
 
 
@@ -253,3 +214,46 @@ var fn_cate_select = function(url, params) {
 
 <!-- /main -->
 
+<script type="text/javascript">
+
+var fn_cate_select = function(url, params) {
+	$.ajax({
+		type : "POST", 
+		url : url, 
+		data : {"CATEGORY_SEQ" : params}, 
+		dataType:'json',
+		cache: false,
+		success: function(data){
+				alert(data);
+			  var sub_cate = "<option value='' disabled selected>Choose your option</option>";
+				        
+			  /* $("#subCate").find("option").remove().end().append("<option value='' disabled selected>Choose your option</option>"); */
+			  
+			
+			   $.each(data, function(i){
+				   sub_cate += "<option value='"+(data[i])['SUB_CATEGORY_SEQ']+"'>"+(data[i])['SUB_CATEGORY_NAME']+"</option>";
+			   /*  $("#subCate").append("<option value='"+data[i].SUB_CATEGORY_SEQ+"'>"+data[i].SUB_CATEGORY_NAME+"</option>") */
+			   });    
+			   $("#subCate").html(sub_cate);
+			   
+			   document.addEventListener('DOMContentLoaded', function() {
+							var elems = document.querySelectorAll('select');
+							var instances = M.FormSelect.init(elems, options);
+						});
+				$('select').formSelect();
+			  },
+
+
+		error : function(xhr, status, exception){
+			alert("Failure \n ("+status+")");
+			return false; 
+		}
+		});
+	}
+
+	function cateSelect(param) {
+		alert(param);
+		fn_cate_select("<c:url value='/wsEquip/subCateList'/>", param);
+		
+	};
+</script>

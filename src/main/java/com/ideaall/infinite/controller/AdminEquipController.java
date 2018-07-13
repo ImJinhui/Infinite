@@ -31,16 +31,16 @@ public class AdminEquipController {
 		String viewName = MAPPING + action ;
 		String forwardView = (String) paramMap.get("forwardView") ;
 
-		Map<String, Object> resultMap = new HashMap<String, Object>() ;
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		List<Object> resultList = new ArrayList<Object>();
 
 		// divided depending on action value
 		if ("equip_list".equalsIgnoreCase(action)) {
 			resultMap =  (Map<String, Object>) service.getList(paramMap);
-			
-		} else if ("equip_edit".equalsIgnoreCase(action)) {
-			
-		} else if ("equip_read".equalsIgnoreCase(action)) {
+		} else if ("equip_listByCate".equalsIgnoreCase(action)) {
+			resultMap =  (Map<String, Object>) service.getList(paramMap);
+			resultMap.put("resultListByCate", (List<Object>) service.getListByCategory(paramMap));
+		} else if ("equip_insert".equalsIgnoreCase(action)) {
 			
 		} 
 		

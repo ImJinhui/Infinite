@@ -21,14 +21,29 @@ public class AdminEquipService {
 		Object resultEquipObject = dao.getList(sqlMapId, dataMap);
 		resultObject.put("resultEquipObject", resultEquipObject);
 		
-		sqlMapId = "equip.catelist";
+		sqlMapId = "equip.cateList";
 		Object resultCateObject = dao.getList(sqlMapId, dataMap);
 		resultObject.put("resultCateObject", resultCateObject);
 		
-		sqlMapId = "equip.subcatelist";
+		sqlMapId = "equip.subCateList";
 		Object resultSubCateObject = dao.getList(sqlMapId, dataMap);
 		resultObject.put("resultSubCateObject", resultSubCateObject);
 		
+		
+		return resultObject;
+	}
+	
+	public Object getListByCategory(Object dataMap) {
+		String sqlMapId = "equip.listByCate";
+		
+		Object resultObject = dao.getList(sqlMapId, dataMap);
+		
+		return resultObject;
+	}
+	public Object getSubCateList(Object dataMap) {
+		String sqlMapId = "equip.subCateList";
+		
+		Object resultObject = dao.getList(sqlMapId, dataMap);
 		
 		return resultObject;
 	}

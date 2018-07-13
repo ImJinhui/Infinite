@@ -69,7 +69,7 @@ $(document).ready(function(){
 							var="resultSubCate" varStatus="loop2">
 							<c:if
 								test="${resultCate.CATEGORY_SEQ == resultSubCate.CATEGORY_SEQ}">
-								<a href="#equip${loop2.index}" class="collection-item">${resultSubCate.SUB_CATEGORY_NAME}</a>
+								<a href="<c:url value='/admin/equip/equip_listByCate?SUB_CATEGORY_SEQ=${resultSubCate.SUB_CATEGORY_SEQ}'/>" <%-- onclick="equipList(${resultSubCate.SUB_CATEGORY_SEQ})" --%> class="collection-item">${resultSubCate.SUB_CATEGORY_NAME}</a>
 							</c:if>
 						</c:forEach>
 					</div>
@@ -82,7 +82,7 @@ $(document).ready(function(){
 
 		<div id="equip0" class="col s10">
 			<div class="row">
-				<c:forEach items="${resultMap.resultEquipObject}" var="resultData" varStatus="loop">
+				<c:forEach items="${resultMap.resultListByCate}" var="resultData" varStatus="loop">
 						<div class="col s12 m4">
 							<div class="card">
 								<div class="card-image waves-effect waves-block waves-light">
@@ -109,7 +109,7 @@ $(document).ready(function(){
 				</c:forEach>
 			</div>
 		</div>
-		<div id="equip1">equip1</div>
+		
 	</div>
 	
 	<!--/ 장비관리list -->

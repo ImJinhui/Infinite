@@ -22,20 +22,19 @@ public class WSEquipController {
 	private AdminEquipService service;
 	
 
-	@RequestMapping(value = "/ws/{action}", method = { RequestMethod.GET, RequestMethod.POST }, produces = "application/json")
+	@RequestMapping(value = "/wsEquip/{action}", method = { RequestMethod.GET, RequestMethod.POST }, produces = "application/json")
 	public  Object actionMethod(@RequestParam Map<String, Object> paramMap, @PathVariable String action) {
 		
 		
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		List<Object> resultList = new ArrayList<Object>();
 		
-		if ("content".equalsIgnoreCase(action)) {
-			String sqlMapId = "board.read2";
-//			resultMap = service.getObject(sqlMapId, paramMap);
-			
-		} else if("firstCateList".equalsIgnoreCase(action)) {
-			String sqlMapId = "board.read3"; 
-//			resultMap = service.getObject(sqlMapId, paramMap);
+		if ("equipList".equalsIgnoreCase(action)) {
+			resultList = (List<Object>) service.getListByCategory(paramMap);
+			return resultList;
+		} else if("subCateList".equalsIgnoreCase(action)) {
+			resultList = (List<Object>) service.getSubCateList(paramMap);
+			return resultList;
 		
 		}else if ("firstList".equalsIgnoreCase(action)) {
 //			resultList = service.getList("board.list2", paramMap);
