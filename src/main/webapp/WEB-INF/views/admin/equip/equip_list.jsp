@@ -3,22 +3,19 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
-<script type="text/javascript">
-$('.collapsible').click(function(){
-    $('.collapsible').collapsible();
+<script>
+
+$(document).ready(function(){
+     $('.collapsible').collapsible();  
+    
+    $('.modal').modal({
+		endingTop : '5%'
+	});
+    $('select').formSelect();
   });
-	$(document).ready(function() {
-		$('.modal').modal({
-			endingTop : '5%'
-		});
-	});
-	$(document).ready(function() {
-		$('select').formSelect();
-	});
+	
 
 </script>
-
-
 <!-- 장비추가 modal selectbox ajax -->
 <script type="text/javascript">
 var fn_cate_select = function(url, params) {
@@ -29,22 +26,14 @@ var fn_cate_select = function(url, params) {
 		dataType:'json',
 		cache: false,
 		success: function(data){
-				alert(data);
 			  var sub_cate = "<option value='' disabled selected>Choose your option</option>";
-				        
 			  /* $("#subCate").find("option").remove().end().append("<option value='' disabled selected>Choose your option</option>"); */
-			  
-			
 			   $.each(data, function(i){
 				   sub_cate += "<option value='"+(data[i])['SUB_CATEGORY_SEQ']+"'>"+(data[i])['SUB_CATEGORY_NAME']+"</option>";
 			   /*  $("#subCate").append("<option value='"+data[i].SUB_CATEGORY_SEQ+"'>"+data[i].SUB_CATEGORY_NAME+"</option>") */
 			   });    
 			   $("#subCate").html(sub_cate);
 			   
-			   /* document.addEventListener('DOMContentLoaded', function() {
-							var elems = document.querySelectorAll('select');
-							var instances = M.FormSelect.init(elems, options);
-						}); */
 				$('select').formSelect();
 			  },
 
@@ -57,7 +46,6 @@ var fn_cate_select = function(url, params) {
 	}
 
 	function cateSelect(param) {
-		alert(param);
 		fn_cate_select("<c:url value='/wsEquip/subCateList'/>", param);
 		
 	};

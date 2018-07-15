@@ -47,7 +47,11 @@
 			,SUB_CATEGORY_NAME
 			,CATEGORY_SEQ
 		from SUB_CATEGORY
-		where CATEGORY_SEQ = #{CATEGORY_SEQ}
+		<where>
+		    <if test="CATEGORY_SEQ != null">
+		        and CATEGORY_SEQ = #{CATEGORY_SEQ}
+		    </if>
+		</where>
 	</select> 
 
 	<insert id="merge">

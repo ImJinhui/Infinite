@@ -20,10 +20,7 @@ $(document).ready(function(){
 	$(document).ready(function() {
 		$('select').formSelect();
 	});
-/* 	$(document).click(function() {
-		$('.tabs').tabs();
-	}); 
-*/
+
   
 </script>
 
