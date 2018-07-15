@@ -18,28 +18,39 @@ public class AdminEquipService {
 		Map<String, Object> resultObject = new HashMap<String, Object>();
 		
 		String sqlMapId = "equip.list";
-		Object resultEquipObject = dao.getList(sqlMapId, dataMap);
-		resultObject.put("resultEquipObject", resultEquipObject);
+		Object resultEquipList = dao.getList(sqlMapId, dataMap);
+		resultObject.put("resultEquipList", resultEquipList);
 		
 		sqlMapId = "equip.cateList";
-		Object resultCateObject = dao.getList(sqlMapId, dataMap);
-		resultObject.put("resultCateObject", resultCateObject);
+		Object resultCateList = dao.getList(sqlMapId, dataMap);
+		resultObject.put("resultCateList", resultCateList);
 		
 		sqlMapId = "equip.subCateList";
-		Object resultSubCateObject = dao.getList(sqlMapId, dataMap);
-		resultObject.put("resultSubCateObject", resultSubCateObject);
+		Object resultSubCateList = dao.getList(sqlMapId, dataMap);
+		resultObject.put("resultSubCateList", resultSubCateList);
 		
 		
 		return resultObject;
 	}
 	
 	public Object getListByCategory(Object dataMap) {
-		String sqlMapId = "equip.listByCate";
+		Map<String, Object> resultObject = new HashMap<String, Object>();
 		
-		Object resultObject = dao.getList(sqlMapId, dataMap);
+		String sqlMapId = "equip.listByCate";
+		Object resultEquipListByCate = dao.getList(sqlMapId, dataMap);
+		resultObject.put("resultEquipListByCate", resultEquipListByCate);
+		
+		sqlMapId = "equip.cateList";
+		Object resultCateList = dao.getList(sqlMapId, dataMap);
+		resultObject.put("resultCateList", resultCateList);
+		
+		sqlMapId = "equip.subCateList";
+		Object resultSubCateList = dao.getList(sqlMapId, dataMap);
+		resultObject.put("resultSubCateList", resultSubCateList);
 		
 		return resultObject;
 	}
+	
 	public Object getSubCateList(Object dataMap) {
 		String sqlMapId = "equip.subCateList";
 		
@@ -57,31 +68,15 @@ public class AdminEquipService {
 		return 0;
 	}
 	
-	public Object saveObject(Map<Object, Object> dataMap) {
-//		String uniqueSequence = (String) dataMap.get("MEMBER_SEQ");
-//		
-//		if("".equals(uniqueSequence)){
-//			uniqueSequence = commonUtil.getUniqueSequence();
-//		}
-//		dataMap.put("MEMBER_SEQ", uniqueSequence);
-//		dataMap.put("REGISTER_SEQ", "UUID-1111-1111111");
-//		dataMap.put("MODIFIER_SEQ", "UUID-1111-1111111");
-//
-//		
-//		String sqlMapId = "member.merge";
-//	     Object resultKey = dao.saveObject(sqlMapId, dataMap);
-//		
-//	     sqlMapId="oracle_authorityRmember.insert";
-//	      resultKey = dao.saveObject(sqlMapId, dataMap);
-//	      
-//	      sqlMapId="attachfile.insert";
-//	      resultKey = dao.saveObject(sqlMapId, dataMap);
-//		
-//	      sqlMapId = "member.read";
-//	      Object resultObject = dao.getObject(sqlMapId, dataMap);
-//
-//		return resultObject;
-		return 0;
+	public Object saveObject(Object dataMap) {
+		
+		String sqlMapId = "equip.merge";
+		Integer result = (Integer) dao.saveObject(sqlMapId, dataMap);
+
+		sqlMapId = "equip.list";
+		Object resultObject = dao.getList(sqlMapId, dataMap);
+	     
+		return resultObject;
 	}
 	public Object deleteObject(Object dataMap) {
 //		// delete child record authority

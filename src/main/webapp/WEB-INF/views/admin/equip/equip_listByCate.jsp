@@ -4,24 +4,49 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
 <script>
-$(document).ready(function(){
-    $('.collapsible').collapsible();
-  });
-	$( function() {
-	    $( ".tabs" ).tabs({
-	      collapsible: true
-	    });
-	  } );
-	$(document).ready(function() {
-		$('.modal').modal({
-			endingTop : '5%'
-		});
-	});
-	$(document).ready(function() {
-		$('select').formSelect();
-	});
 
-  
+$(document).ready(function(){
+     $('.collapsible').collapsible();  
+    
+    $('.modal').modal({
+		endingTop : '5%'
+	});
+    $('select').formSelect();
+  });
+	
+
+</script>
+<!-- 장비추가 modal selectbox ajax -->
+<script type="text/javascript">
+var fn_cate_select = function(url, params) {
+	$.ajax({
+		type : "POST", 
+		url : url, 
+		data : {"CATEGORY_SEQ" : params}, 
+		dataType:'json',
+		cache: false,
+		success: function(data){
+			  var sub_cate = "<option value='' disabled selected>Choose your option</option>";
+			  /* $("#subCate").find("option").remove().end().append("<option value='' disabled selected>Choose your option</option>"); */
+			   $.each(data, function(i){
+				   sub_cate += "<option value='"+(data[i])['SUB_CATEGORY_SEQ']+"'>"+(data[i])['SUB_CATEGORY_NAME']+"</option>";
+			   /*  $("#subCate").append("<option value='"+data[i].SUB_CATEGORY_SEQ+"'>"+data[i].SUB_CATEGORY_NAME+"</option>") */
+			   });    
+			   $("#subCate").html(sub_cate);
+			   
+				$('select').formSelect();
+			  },
+		error : function(xhr, status, exception){
+			alert("Failure \n ("+status+")");
+			return false; 
+		}
+		});
+	}
+	
+	function cateSelect(param) {
+		fn_cate_select("<c:url value='/wsEquip/subCateList'/>", param);
+		
+	};
 </script>
 
 <style>
@@ -29,11 +54,49 @@ $(document).ready(function(){
 	border:none;
 	margin:0;
 }
-.tabs {
-  height: 100%;
-}
-
 </style>
+<!-- 카테고리별 장비 목록 불러오는 ajax -->
+<script>
+ /* var fn_cate_equipList = function(url, id, params) {
+	$.ajax({
+		type : "POST", 
+		url : url, 
+		data : {"SUB_CATEGORY_SEQ" : params}, 
+		dataType:'json',
+		cache: false,
+		success : function(data) {
+			alert(data);
+			var formTag = ""; */
+			/* formTag += "<div id='equip0' class='col s10'><div class='row'>"; */
+			/* $.each(data, function(i, item) {
+				formTag += '<div class="col s12 m4"><div class="card">';
+				formTag += '<div class="card-image waves-effect waves-block waves-light">';
+				formTag += '<img class="activator" src="<c:url value="/resources/images/lasercutter.PNG"/></div>">';
+				formTag += '<div class="card-content">';
+				formTag += '<span class="card-title activator grey-text text-darken-4">'+item.EQUIP_PLACE_NAME;
+				formTag += '<i class="material-icons right">more_vert</i></span></div>';
+				formTag += '<div class="card-reveal"><span class="card-title grey-text text-darken-4">'+item.EQUIP_PLACE_NAME;
+				formTag += '<i class="material-icons right">close</i></span>';
+				formTag += '<p>'+item.DESCRIPTION+'</p>';
+				formTag += '</div></div></div>';
+			}); */
+				/* formTag += '</div></div>'; */
+			/* $('#'+id).html(formTag);
+		},
+		error : function(xhr, status, exception){
+			alert("Failure \n ("+status+")");
+			return false; 
+		}
+		});
+	}
+
+	function equipList(param) {
+		fn_cate_equipList("<c:url value='/wsEquip/equipList'/>", "setEquipList", param);
+		
+	};  */
+</script>
+
+
 
 <!-- 페이지 이름 -->
 <nav class="teal">
@@ -54,16 +117,13 @@ $(document).ready(function(){
 	
 
 <!-- 좌측카테고리 -->
-
 	<div class="box col s2">
 		<ul class="collapsible">
-			<c:forEach items="${resultMap.resultCateObject}" var="resultCate"
-				varStatus="loop">
+			<c:forEach items="${resultMap.resultCateList}" var="resultCate"	varStatus="loop">
 				<li>
 					<div class="collapsible-header">${resultCate.CATEGORY_NAME}</div>
 					<div class="collapsible-body collection">
-						<c:forEach items="${resultMap.resultSubCateObject}"
-							var="resultSubCate" varStatus="loop2">
+						<c:forEach items="${resultMap.resultSubCateList}" var="resultSubCate" varStatus="loop2">
 							<c:if
 								test="${resultCate.CATEGORY_SEQ == resultSubCate.CATEGORY_SEQ}">
 								<a href="<c:url value='/admin/equip/equip_listByCate?SUB_CATEGORY_SEQ=${resultSubCate.SUB_CATEGORY_SEQ}'/>" <%-- onclick="equipList(${resultSubCate.SUB_CATEGORY_SEQ})" --%> class="collection-item">${resultSubCate.SUB_CATEGORY_NAME}</a>
@@ -74,12 +134,12 @@ $(document).ready(function(){
 			</c:forEach>
 		</ul>
 	</div>
-	<!-- /좌측카테고리 -->
+<!-- /좌측카테고리 -->
 
-
+<!-- 장비목록 -->
 		<div id="equip0" class="col s10">
 			<div class="row">
-				<c:forEach items="${resultMap.resultListByCate}" var="resultData" varStatus="loop">
+				<c:forEach items="${resultMap.resultEquipListByCate}" var="resultData" varStatus="loop">
 						<div class="col s12 m4">
 							<div class="card">
 								<div class="card-image waves-effect waves-block waves-light">
@@ -105,14 +165,11 @@ $(document).ready(function(){
 				
 				</c:forEach>
 			</div>
-		</div>
-		
+		</div> 
 	</div>
-	
-	<!--/ 장비관리list -->
+<!-- /장비목록 -->
 
-
-<!-- modal -->
+<!-- 장비추가 modal -->
 <div id="modal1" class="modal modal-fixed-footer">
 	<div class="modal-content">
 		<div class="row">
@@ -124,22 +181,18 @@ $(document).ready(function(){
 			<form class="col s12">
 				<div class="row">
 					<div class="input-field col s6">
-						<select>
+						<select onchange="cateSelect(this.value);">
 							<option value="" disabled selected>Choose your option</option>
-							<c:forEach items="${resultMap.resultCateObject}" var="resultCate" varStatus="loop">
+							<c:forEach items="${resultMap.resultCateList}" var="resultCate" varStatus="loop">
 							<option value="${resultCate.CATEGORY_SEQ}">${resultCate.CATEGORY_NAME}</option>
-							
 							</c:forEach>
 						</select> <label>장비위치</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s6">
-						<select>
-							<option value="" disabled selected>Choose your option</option>
-							<option value="1">Option 1</option>
-							<option value="2">Option 2</option>
-							<option value="3">Option 3</option>
+						<select id="subCate">
+							<!-- <option value="" disabled selected>Choose your option</option> -->
 						</select> <label>장비종류</label>
 					</div>
 				</div>
@@ -162,17 +215,17 @@ $(document).ready(function(){
 		<a href="#!" class="modal-close waves-effect waves-teal btn">장비추가</a>
 	</div>
 </div>
-<!-- modal -->
-<!-- 추가버튼 -->
+<!-- /장비추가 modal -->
+
+<!-- 장비추가버튼 -->
 <div class="fixed-action-btn">
 	<a class="btn-floating btn-large red modal-trigger" href="#modal1">
 		<i class="large material-icons">add</i>
 	</a>
 </div>
-<!-- /추가버튼 -->
-
-
+<!-- /장비추가버튼 -->
 
 <!-- /수정부분 -->
 
 <!-- /main -->
+

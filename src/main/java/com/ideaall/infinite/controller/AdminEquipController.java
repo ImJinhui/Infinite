@@ -38,8 +38,9 @@ public class AdminEquipController {
 		if ("equip_list".equalsIgnoreCase(action)) {
 			resultMap =  (Map<String, Object>) service.getList(paramMap);
 		} else if ("equip_listByCate".equalsIgnoreCase(action)) {
-			
+			resultMap = (Map<String, Object>) service.getListByCategory(paramMap);
 		} else if ("equip_insert".equalsIgnoreCase(action)) {
+			resultList = (List<Object>) service.saveObject(paramMap);
 			
 		} 
 		

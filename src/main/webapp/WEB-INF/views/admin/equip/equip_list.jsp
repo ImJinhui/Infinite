@@ -3,8 +3,8 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
-<script>
 
+<script>
 $(document).ready(function(){
      $('.collapsible').collapsible();  
     
@@ -13,9 +13,8 @@ $(document).ready(function(){
 	});
     $('select').formSelect();
   });
-	
-
 </script>
+
 <!-- 장비추가 modal selectbox ajax -->
 <script type="text/javascript">
 var fn_cate_select = function(url, params) {
@@ -36,18 +35,15 @@ var fn_cate_select = function(url, params) {
 			   
 				$('select').formSelect();
 			  },
-
-
 		error : function(xhr, status, exception){
 			alert("Failure \n ("+status+")");
 			return false; 
 		}
 		});
 	}
-
+	
 	function cateSelect(param) {
 		fn_cate_select("<c:url value='/wsEquip/subCateList'/>", param);
-		
 	};
 </script>
 
@@ -119,16 +115,13 @@ var fn_cate_select = function(url, params) {
 	
 
 <!-- 좌측카테고리 -->
-
 	<div class="box col s2">
 		<ul class="collapsible">
-			<c:forEach items="${resultMap.resultCateObject}" var="resultCate"
-				varStatus="loop">
+			<c:forEach items="${resultMap.resultCateList}" var="resultCate"	varStatus="loop">
 				<li>
 					<div class="collapsible-header">${resultCate.CATEGORY_NAME}</div>
 					<div class="collapsible-body collection">
-						<c:forEach items="${resultMap.resultSubCateObject}"
-							var="resultSubCate" varStatus="loop2">
+						<c:forEach items="${resultMap.resultSubCateList}" var="resultSubCate" varStatus="loop2">
 							<c:if
 								test="${resultCate.CATEGORY_SEQ == resultSubCate.CATEGORY_SEQ}">
 								<a href="<c:url value='/admin/equip/equip_listByCate?SUB_CATEGORY_SEQ=${resultSubCate.SUB_CATEGORY_SEQ}'/>" <%-- onclick="equipList(${resultSubCate.SUB_CATEGORY_SEQ})" --%> class="collection-item">${resultSubCate.SUB_CATEGORY_NAME}</a>
@@ -139,12 +132,12 @@ var fn_cate_select = function(url, params) {
 			</c:forEach>
 		</ul>
 	</div>
-	<!-- /좌측카테고리 -->
+<!-- /좌측카테고리 -->
 
 <!-- 장비목록 -->
 		<div id="equip0" class="col s10">
 			<div class="row">
-				<c:forEach items="${resultMap.resultEquipObject}" var="resultData" varStatus="loop">
+				<c:forEach items="${resultMap.resultEquipList}" var="resultData" varStatus="loop">
 						<div class="col s12 m4">
 							<div class="card">
 								<div class="card-image waves-effect waves-block waves-light">
@@ -171,18 +164,10 @@ var fn_cate_select = function(url, params) {
 				</c:forEach>
 			</div>
 		</div> 
-		
-		 <!-- <div id='equip0' class='col s10'><div class='row'>
-		<div id="setEquipList"></div>
-		</div></div>  -->
-		<!-- /장비목록 -->
-		
 	</div>
-	
-	<!--/ 장비관리list -->
+<!-- /장비목록 -->
 
-
-<!-- modal -->
+<!-- 장비추가 modal -->
 <div id="modal1" class="modal modal-fixed-footer">
 	<div class="modal-content">
 		<div class="row">
@@ -191,12 +176,12 @@ var fn_cate_select = function(url, params) {
 					<h4>장비추가</h4>
 				</div>
 			</div>
-			<form class="col s12">
+			<form class="col s12" method="POST"	action="<c:url value='/admin/equip/equip_insert'/>">
 				<div class="row">
 					<div class="input-field col s6">
 						<select onchange="cateSelect(this.value);">
 							<option value="" disabled selected>Choose your option</option>
-							<c:forEach items="${resultMap.resultCateObject}" var="resultCate" varStatus="loop">
+							<c:forEach items="${resultMap.resultCateList}" var="resultCate" varStatus="loop">
 							<option value="${resultCate.CATEGORY_SEQ}">${resultCate.CATEGORY_NAME}</option>
 							</c:forEach>
 						</select> <label>장비위치</label>
@@ -205,37 +190,58 @@ var fn_cate_select = function(url, params) {
 				<div class="row">
 					<div class="input-field col s6">
 						<select id="subCate">
-							<!-- <option value="" disabled selected>Choose your option</option> -->
 						</select> <label>장비종류</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<input id="name" type="text" class="validate"> <label
+						<input name="EQUIP_PLACE_SEQ" id="id" type="text" class="validate"> <label
+							for="id">장비아이디</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input name="EQUIP_PLACE_NAME" id="name" type="text" class="validate"> <label
 							for="name">장비명</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<input id="manufacturer" type="text" class="validate"> <label
+						<input name="MANUFACTURER" id="manufacturer" type="text" class="validate"> <label
 							for="manufacturer">제조사</label>
 					</div>
 				</div>
-			</form>
+				<div class="row">
+					<div class="input-field col s12">
+						<input name="MANAGER" id="manager" type="text" class="validate"> <label
+							for="manager">관리자</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<textarea name="DESCRIPTION" id="description" class="materialize-textarea"></textarea>
+						<label for="description">장비 설명</label>
+					</div>
+				</div>
+			
 		</div>
 	</div>
 	<div class="modal-footer">
-		<a href="#!" class="modal-close waves-effect waves-teal btn">장비추가</a>
+		<button class="btn waves-effect waves-light" type="submit"	name="action">
+			장비추가 <i class="material-icons right">send</i>
+		</button>
 	</div>
+	</form>
 </div>
-<!-- modal -->
-<!-- 추가버튼 -->
+<!-- /장비추가 modal -->
+
+<!-- 장비추가버튼 -->
 <div class="fixed-action-btn">
 	<a class="btn-floating btn-large red modal-trigger" href="#modal1">
 		<i class="large material-icons">add</i>
 	</a>
 </div>
-<!-- /추가버튼 -->
+<!-- /장비추가버튼 -->
 
 <!-- /수정부분 -->
 
