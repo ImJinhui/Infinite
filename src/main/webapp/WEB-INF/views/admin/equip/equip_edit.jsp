@@ -3,7 +3,50 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
-
+<script>
+$(document).ready(function(){
+    $('select').formSelect();
+  });
+</script>
+<!-- 장비 selectbox ajax -->
+<script type="text/javascript">
+var fn_cate_select = function(url, params) {
+	$.ajax({
+		type : "POST", 
+		url : url, 
+		data : {"CATEGORY_SEQ" : params}, 
+		dataType:'json',
+		cache: false,
+		success: function(data){
+			/* subCate 목록 생성 */
+			  var sub_cate = "<option value='' disabled selected>Choose your option</option>";
+			   $.each(data, function(i){
+				   sub_cate += "<option value='"+(data[i])['SUB_CATEGORY_SEQ']+"'>"+(data[i])['SUB_CATEGORY_NAME']+"</option>";
+			   });    
+			   $("#subCate").html(sub_cate);
+				$('select').formSelect();
+				
+				/* subCate 목록 선택 시 선택된 value값 얻어옴  */
+				$("#subCate").on('change', function(){
+					if(this.value !== ""){
+						var selOption = $(this).find(":selected").val();
+						$("#equipInsertForm").attr("action", "<c:url value='/admin/equip/equip_merge?SUB_CATEGORY_SEQ="+selOption+"'/>");
+					}
+				});
+				
+			  },
+		error : function(xhr, status, exception){
+			alert("Failure \n ("+status+")");
+			return false; 
+		}
+		});
+	}
+	
+	function cateSelect(param) {
+		fn_cate_select("<c:url value='/wsEquip/subCateList'/>", param);
+	};
+</script>
+<!-- 장비 selectbox ajax -->
 <!-- 페이지 이름 -->
 <nav class="teal">
      <div class="nav-wrapper">
@@ -20,48 +63,60 @@
   <div class="main_body" style="width:70%">
   <!-- 수정부분 -->
   <div class="row box" >
-		<form class="col s12" method="POST"
-			action="<c:url value='/admin/equip/equip_list'/>">
-
-			<div class="row">
-				<div class="input-field col s12">
-				<i class="material-icons prefix">play_arrow</i>
-					<input id="member_seq" type="text" class="validate"> <label
-						for="ability_seq">장비 번호</label>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="input-field col s12">
-				<i class="material-icons prefix">play_arrow</i>
-					<input id="member_name" type="text" class="validate"> <label
-						for="member_name">장비명</label>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="input-field col s12">
-				<i class="material-icons prefix">play_arrow</i>
-					<input id="member_pass" type="text" class="validate"> <label
-						for="member_address">제조사</label>
-				</div>
-			</div>
-
-			<div class="row">
-					<div class="input-field col s12">
-					<i class="material-icons prefix">play_arrow</i>
-						<textarea id="textarea1" class="materialize-textarea"></textarea>
-						<label for="textarea1">장비 설명</label>
+		<form id="equipInsertForm" class="col s12" method="POST" action="<c:url value='/admin/equip/equip_merge'/>">
+			<input type="hidden" name="forwardView" value="/admin/equip/equip_list" />
+				<div class="row">
+					<div class="input-field col s6">
+						<select onchange="cateSelect(this.value);">
+							<option value="" disabled selected>Choose your option</option>
+							<c:forEach items="${resultMap.resultCateList}" var="resultCate" varStatus="loop">
+							<option value="${resultCate.CATEGORY_SEQ}">${resultCate.CATEGORY_NAME}</option>
+							</c:forEach>
+						</select> <label>장비위치</label>
 					</div>
-			</div>
-
-			<button class="right btn-large waves-effect waves-light" type="submit" name="action">
-				수정 <i class="material-icons right">edit</i>
-			</button>
-		</form>
+			
+					<div class="input-field col s6">
+						<select id="subCate">
+						</select> <label>장비종류</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input name="EQUIP_SEQ" id="id" type="text" class="validate" value="${resultMap.resultObject.EQUIP_SEQ }" readOnly> <label
+							for="id">장비아이디</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input name="EQUIP_NAME" id="name" type="text" class="validate" value="${resultMap.resultObject.EQUIP_NAME}"> <label
+							for="name">장비명</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input name="MANUFACTURER" id="manufacturer" type="text" class="validate" value="${resultMap.resultObject.MANUFACTURER}"> <label
+							for="manufacturer">제조사</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input name="MANAGER" id="manager" type="text" class="validate" value="${resultMap.resultObject.MANAGER}"> <label
+							for="manager">관리자</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<textarea name="DESCRIPTION" id="description" class="materialize-textarea">${resultMap.resultObject.DESCRIPTION}</textarea>
+						<label for="description">장비 설명</label>
+					</div>
+				</div>
+		<button class="btn waves-effect waves-light right" type="submit" name="action">
+			장비수정 <i class="material-icons right">send</i>
+		</button>
+	</form>
+	</div>
 	</div>
   <!-- /수정부분 -->
-  </div>
   <!-- /main -->
   
   

@@ -4,12 +4,15 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-<mapper namespace="ability">
+<mapper namespace="category">
 	<select id="list" resultType="Map" parameterType="Map" timeout="10">
 		select 
-			ABILITY_SEQ	
-			,ABILITY_NAME	
-		from ABILITIES
+			c.CATEGORY_SEQ
+			, c.CATEGORY_NAME
+			, sc.SUB_CATEGORY_SEQ
+			, sc.SUB_CATEGORY_NAME
+		FROM category c, sub_category sc
+		where c.CATEGORY_SEQ = sc.CATEGORY_SEQ;
 	</select>
 	
 	<!-- <insert id="insert" parameterType="Map">

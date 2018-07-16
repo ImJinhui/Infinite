@@ -42,6 +42,8 @@ public class AdminAbilityController {
 			resultList = (List<Object>) service.getList(paramMap);
 		} else if ("ability_delete".equalsIgnoreCase(action)) {
 			
+		} else if("ability_edit".equalsIgnoreCase(action)) {
+			resultMap = (Map<String, Object>) service.getObject(paramMap);
 		}
 		
 

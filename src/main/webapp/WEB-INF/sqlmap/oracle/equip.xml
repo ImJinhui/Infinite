@@ -7,30 +7,30 @@
 <mapper namespace="equip">
 	<select id="list" resultType="Map" parameterType="Map" timeout="10">
 		select 
-			ep.EQUIP_PLACE_SEQ	
-			,ep.SUB_CATEGORY_SEQ	
-			,ep.MANUFACTURER
-			,ep.DESCRIPTION	
-			,ep.MANAGER	
-			,ep.EQUIP_PLACE_NAME
+			e.EQUIP_SEQ	
+			,e.SUB_CATEGORY_SEQ	
+			,e.MANUFACTURER
+			,e.DESCRIPTION	
+			,e.MANAGER	
+			,e.EQUIP_NAME
 			,sc.SUB_CATEGORY_NAME
-		from EQUIP_PLACE ep, SUB_CATEGORY sc
-		where ep.SUB_CATEGORY_SEQ = sc.SUB_CATEGORY_SEQ
-		order by ep.SUB_CATEGORY_SEQ
+		from EQUIP e, SUB_CATEGORY sc
+		where e.SUB_CATEGORY_SEQ = sc.SUB_CATEGORY_SEQ
+		order by e.SUB_CATEGORY_SEQ
 	</select>
 	
 	<select id="listByCate" resultType="Map" parameterType="Map" timeout="10">
 		select 
-			EQUIP_PLACE_SEQ	
+			EQUIP_SEQ	
 			,SUB_CATEGORY_SEQ	
 			,MANUFACTURER
 			,DESCRIPTION	
 			,MANAGER	
-			,EQUIP_PLACE_NAME
+			,EQUIP_NAME
 			
-		from EQUIP_PLACE 
+		from EQUIP 
 		where SUB_CATEGORY_SEQ = #{SUB_CATEGORY_SEQ}
-		order by EQUIP_PLACE_SEQ
+		order by EQUIP_SEQ
 	</select>
 	
 	<select id="cateList" resultType="Map" parameterType="Map" timeout="10">
@@ -55,43 +55,45 @@
 	</select> 
 
 	<insert id="merge">
-	INSERT INTO EQUIP_PLACE (
-		EQUIP_PLACE_SEQ
+	INSERT INTO EQUIP(
+		EQUIP_SEQ
 		,SUB_CATEGORY_SEQ
 		,MANUFACTURER
 		,DESCRIPTION
 		,MANAGER
-		,EQUIP_PLACE_NAME
+		,EQUIP_NAME
 		)
 	values(
-		#{EQUIP_PLACE_SEQ}
+		#{EQUIP_SEQ}
 		,#{SUB_CATEGORY_SEQ}
 		,#{MANUFACTURER}
 		,#{DESCRIPTION}
 		,#{MANAGER}
-		,#{EQUIP_PLACE_NAME}
+		,#{EQUIP_NAME}
 		)
 	ON DUPLICATE KEY UPDATE
-	EQUIP_PLACE_SEQ = #{EQUIP_PLACE_SEQ}
+	EQUIP_SEQ = #{EQUIP_SEQ}
 	,SUB_CATEGORY_SEQ = #{SUB_CATEGORY_SEQ}
 	,MANUFACTURER = #{MANUFACTURER}
 	,DESCRIPTION = #{DESCRIPTION}
 	,MANAGER = #{MANAGER}
-	,EQUIP_PLACE_NAME = #{EQUIP_PLACE_NAME}
+	,EQUIP_NAME = #{EQUIP_NAME}
 	</insert>
-	<!-- <select id="read" resultType="Map" parameterType="Map">
+	
+	<select id="read" resultType="Map" parameterType="Map">
 		select 
-			ORGANIZATION_SEQ	조직 일련번호
-			, NAME	명칭
-			, TELEPHONE	대표 전화번호
-			, ORDER_NUMBER	정렬순서
-			, PARENT_ORGANIZATION_SEQ	상위 조직 일련번호
-		from CIP_ORGANIZATION
-		where ORGANIZATION_SEQ = #{ORGANIZATION_SEQ}
+			EQUIP_SEQ
+			, SUB_CATEGORY_SEQ
+			, MANUFACTURER
+			, DESCRIPTION
+			, MANAGER
+			, EQUIP_NAME
+		FROM equip
+		where EQUIP_SEQ = #{EQUIP_SEQ}
 	</select>
 	
-	<delete id="delete" parameterType="Map">
+	<!-- <delete id="delete" parameterType="Map">
 		delete from CIP_ORGANIZATION
 		where ORGANIZATION_SEQ = #{ORGANIZATION_SEQ}
-	</delete>  -->
+	</delete>   -->
 </mapper>

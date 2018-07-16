@@ -50,7 +50,7 @@ $(document).ready(function() {
 							<td>${resultData.ABILITY_SEQ}</td>
 							 <td>${resultData.ABILITY_NAME}</td> 
 							<td><a class="waves-effect waves-light btn-small"
-								href="<c:url value='/admin/ability/ability_read?ABILITY_SEQ=${resultData.ABILITY_SEQ}'/>">수정</a></td>
+								href="<c:url value='/admin/ability/ability_edit?ABILITY_SEQ=${resultData.ABILITY_SEQ}'/>">수정</a></td>
 							<td><a class="waves-effect waves-light btn-small"
 								href="<c:url value='/admin/ability/ability_read?ABILITY_SEQ=${resultData.ABILITY_SEQ}'/>">삭제</a></td>
 						</tr>

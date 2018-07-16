@@ -60,23 +60,19 @@ public class AdminEquipService {
 	}
 	
 	public Object getObject(Object dataMap) {
-//		String sqlMapId = "member.read";
-//
-//		Object resultObject = dao.getObject(sqlMapId, dataMap);
-//		
-//		return resultObject;
-		return 0;
+		String sqlMapId = "equip.read";
+
+		Object resultObject = dao.getObject(sqlMapId, dataMap);
+		
+		return resultObject;
 	}
 	
 	public Object saveObject(Object dataMap) {
 		
 		String sqlMapId = "equip.merge";
 		Integer result = (Integer) dao.saveObject(sqlMapId, dataMap);
-
-		sqlMapId = "equip.list";
-		Object resultObject = dao.getList(sqlMapId, dataMap);
 	     
-		return resultObject;
+		return result;
 	}
 	public Object deleteObject(Object dataMap) {
 //		// delete child record authority

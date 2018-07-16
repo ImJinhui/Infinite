@@ -22,12 +22,11 @@ public class AdminAbilityService {
 	}
 	
 	public Object getObject(Object dataMap) {
-//		String sqlMapId = "member.read";
-//
-//		Object resultObject = dao.getObject(sqlMapId, dataMap);
-//		
-//		return resultObject;
-		return 0;
+		String sqlMapId = "ability.read";
+
+		Object resultObject = dao.getObject(sqlMapId, dataMap);
+		
+		return resultObject;
 	}
 	
 	public Object saveObject(/*Map<Object, Object>*/Object dataMap) {
@@ -57,11 +56,7 @@ public class AdminAbilityService {
 		String sqlMapId= "ability.merge";
 		Integer result = (Integer) dao.saveObject(sqlMapId, dataMap);
 		
-		sqlMapId = "ability.list";
-		Object resultObject = dao.getList(sqlMapId, dataMap);
-
-		return resultObject;
-
+		return result;
 	}
 	
 	public Object updateObject(Object dataMap) {
