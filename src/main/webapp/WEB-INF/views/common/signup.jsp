@@ -169,7 +169,7 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">phone</i> <input id="tel"
-						type="tel" class="validate" name="TEL" value="${paramMap.TEL}"> <label for="tel">전화번호</label>
+						type="tel" class="validate" name="TEL" value="${paramMap.TEL}"> <label for="tel">전화번호  : ex)01012345678</label>
 				</div>
 			</div>
 			<div class="row">

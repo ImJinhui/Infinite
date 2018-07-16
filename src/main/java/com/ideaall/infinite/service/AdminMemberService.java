@@ -69,7 +69,7 @@ public class AdminMemberService {
 
 		return resultObject;
 	}
-	
+
 	public Object update(Object dataMap) {
 		String sqlMapId = "member.update";
 
@@ -78,13 +78,18 @@ public class AdminMemberService {
 		return resultObject;
 	}
 
-	public Object getObject(Object dataMap) {
-		// String sqlMapId = "member.read";
-		//
-		// Object resultObject = dao.getObject(sqlMapId, dataMap);
-		//
-		// return resultObject;
-		return 0;
+	public Object getObject1(Object dataMap) {
+		String sqlMapId = "member.read1";
+		Object resultObject = dao.getObject(sqlMapId, dataMap);
+
+		return resultObject;
+	}
+
+	public Object getObject2(Object dataMap) {
+		String sqlMapId = "member.read2";
+		Object resultObject = dao.getList(sqlMapId, dataMap);
+
+		return resultObject;
 	}
 
 	public Object saveObject(Map<Object, Object> dataMap) {

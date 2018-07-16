@@ -74,6 +74,35 @@ where m.SUB_ADDR_SEQ = sub.SUB_ADDR_SEQ
 and sub.ADDR_SEQ = addr.ADDR_SEQ
 and m.ID=#{id}
 </select>
+
+<!-- <select id="read1" resultType="Map" parameterType="Map">
+select m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, sub.SUB_ADDR_NAME, addr.ADDR_NAME, abi.ABILITY_NAME, rel.MANAGER, rel.OBTAIN_DATE
+from MEMBER m, address addr, sub_address sub, member_ability_rel rel, abilities abi
+where m.SUB_ADDR_SEQ = sub.SUB_ADDR_SEQ  
+and rel.ABILITY_SEQ = abi.ABILITY_SEQ
+and rel.MEMBER_SEQ = m.MEMBER_SEQ
+and sub.ADDR_SEQ = addr.ADDR_SEQ
+and m.ID=#{MEMBER_ID}
+</select> -->
+
+<select id="read1" resultType="Map" parameterType="Map">
+select m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, sub.SUB_ADDR_NAME, addr.ADDR_NAME
+from MEMBER m, address addr, sub_address sub
+where m.SUB_ADDR_SEQ = sub.SUB_ADDR_SEQ  
+and sub.ADDR_SEQ = addr.ADDR_SEQ
+and m.ID=#{MEMBER_ID}
+</select>
+
+<select id="read2" resultType="Map" parameterType="Map">
+select m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, abi.ABILITY_NAME, rel.MANAGER, rel.OBTAIN_DATE
+from member_ability_rel rel, abilities abi, member m
+where m.MEMBER_SEQ = rel.MEMBER_SEQ
+and rel.ABILITY_SEQ = abi.ABILITY_SEQ
+and rel.MEMBER_SEQ = m.MEMBER_SEQ
+and m.ID=#{MEMBER_ID}
+</select>
+
+
 	<!-- <insert id="insert1" parameterType="Map">
 		insert into MEMBER_INFO (
 		SEQ_ID,ID,PASSWORD, NAME, TEL, EMAIL

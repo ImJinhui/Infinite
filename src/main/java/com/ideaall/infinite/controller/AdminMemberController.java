@@ -44,6 +44,9 @@ public class AdminMemberController {
 		} else if ("member_edit".equalsIgnoreCase(action)) {
 			
 		} else if ("member_read".equalsIgnoreCase(action)) {
+			resultMap = (Map<String, Object>) memberservice.getObject1(paramMap);
+			resultList =  (List<Object>) memberservice.getObject2(paramMap);
+			
 			
 		} else if("insert".equalsIgnoreCase(action)) {
 			

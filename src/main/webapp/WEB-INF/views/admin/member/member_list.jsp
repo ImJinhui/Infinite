@@ -70,11 +70,11 @@
 			<table class="highlight centered">
 				<thead>
 					<tr>
-						<th>회원번호</th>
-						<th>이름</th>
+						<!-- <th>회원번호</th> -->
 						<th>아이디</th>
-						<th>비밀번호</th>
-						<th>주소</th>
+						<th>이름</th>
+						<!-- <th>비밀번호</th> -->
+						<!-- 	<th>주소</th> -->
 						<th>전화번호</th>
 						<th>보유능력</th>
 					</tr>
@@ -83,16 +83,18 @@
 					<c:forEach items="${resultList}" var="resultData" varStatus="loop">
 						<tr
 							class="${(loop.index+1)%2 == 2 ? 'odd gradeX' : 'even gradeC'}">
-							<td>${resultData.MEMBER_SEQ}</td>
+							
+								<%-- <td>${resultData.MEMBER_SEQ}</td> --%>
+							<td><a href="<c:url value="/admin/member/member_read?MEMBER_ID=${resultData.ID}" />">${resultData.ID}</td>
 							<td>${resultData.NAME}</td>
-							<td>${resultData.ID}</td>
-							<td>${resultData.PASSWORD}</td>
-							<td>${resultData.SUB_ADDR_SEQ}</td>
+							<%-- <td>${resultData.PASSWORD}</td> --%>
+							<%-- <td>${resultData.SUB_ADDR_SEQ}</td> --%>
 							<td>${resultData.TEL}</td>
-							<td><c:forEach items="${resultData.ABILITY_NAMES}" var="NAMES" varStatus="loop2">
-							${NAMES.ABILITY_NAME},
+							<td><c:forEach items="${resultData.ABILITY_NAMES}"
+									var="NAMES" varStatus="loop2">
+							${NAMES.ABILITY_NAME}
 							</c:forEach></td>
-
+						
 						</tr>
 
 						<%-- <tbody>
