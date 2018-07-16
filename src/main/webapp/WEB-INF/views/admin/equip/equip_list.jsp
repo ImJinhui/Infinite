@@ -25,15 +25,22 @@ var fn_cate_select = function(url, params) {
 		dataType:'json',
 		cache: false,
 		success: function(data){
+			/* subCate 목록 생성 */
 			  var sub_cate = "<option value='' disabled selected>Choose your option</option>";
-			  /* $("#subCate").find("option").remove().end().append("<option value='' disabled selected>Choose your option</option>"); */
 			   $.each(data, function(i){
 				   sub_cate += "<option value='"+(data[i])['SUB_CATEGORY_SEQ']+"'>"+(data[i])['SUB_CATEGORY_NAME']+"</option>";
-			   /*  $("#subCate").append("<option value='"+data[i].SUB_CATEGORY_SEQ+"'>"+data[i].SUB_CATEGORY_NAME+"</option>") */
 			   });    
 			   $("#subCate").html(sub_cate);
-			   
 				$('select').formSelect();
+				
+				/* subCate 목록 선택 시 선택된 value값 얻어옴  */
+				$("#subCate").on('change', function(){
+					if(this.value !== ""){
+						var selOption = $(this).find(":selected").val();
+						$("#equipInsertForm").attr("action", "<c:url value='/admin/equip/equip_merge?SUB_CATEGORY_SEQ="+selOption+"'/>");
+					}
+				});
+				
 			  },
 		error : function(xhr, status, exception){
 			alert("Failure \n ("+status+")");
@@ -71,9 +78,9 @@ var fn_cate_select = function(url, params) {
 				formTag += '<div class="card-image waves-effect waves-block waves-light">';
 				formTag += '<img class="activator" src="<c:url value="/resources/images/lasercutter.PNG"/></div>">';
 				formTag += '<div class="card-content">';
-				formTag += '<span class="card-title activator grey-text text-darken-4">'+item.EQUIP_PLACE_NAME;
+				formTag += '<span class="card-title activator grey-text text-darken-4">'+item.EQUIP_NAME;
 				formTag += '<i class="material-icons right">more_vert</i></span></div>';
-				formTag += '<div class="card-reveal"><span class="card-title grey-text text-darken-4">'+item.EQUIP_PLACE_NAME;
+				formTag += '<div class="card-reveal"><span class="card-title grey-text text-darken-4">'+item.EQUIP_NAME;
 				formTag += '<i class="material-icons right">close</i></span>';
 				formTag += '<p>'+item.DESCRIPTION+'</p>';
 				formTag += '</div></div></div>';
@@ -100,8 +107,9 @@ var fn_cate_select = function(url, params) {
 <nav class="teal">
 	<div class="nav-wrapper">
 		<div class="bread_div">
-			<a href="#!" class="breadcrumb">장비·장소관리</a> <a href="#!"
-				class="breadcrumb">장비관리</a> <a href="#!" class="breadcrumb">장비목록</a>
+			<a href="#!" class="breadcrumb">장비관리</a> 
+			<a href="#!" class="breadcrumb">장비관리</a> 
+			<a href="#!" class="breadcrumb">장비목록</a>
 		</div>
 	</div>
 	
@@ -135,27 +143,28 @@ var fn_cate_select = function(url, params) {
 <!-- /좌측카테고리 -->
 
 <!-- 장비목록 -->
-		<div id="equip0" class="col s10">
+		<div class="col s10">
 			<div class="row">
 				<c:forEach items="${resultMap.resultEquipList}" var="resultData" varStatus="loop">
 						<div class="col s12 m4">
 							<div class="card">
-								<div class="card-image waves-effect waves-block waves-light">
+							 	<div class="card-image waves-effect waves-block waves-light">
 									<img class="activator"
 										src="<c:url value='/resources/images/lasercutter.PNG'/>">
 								</div>
 								<div class="card-content">
-									<span class="card-title activator grey-text text-darken-4">${resultData.EQUIP_PLACE_NAME}
+									<span class="card-title activator grey-text text-darken-4">${resultData.EQUIP_NAME}
 										<i class="material-icons right">more_vert</i>
 									</span>
-									<p>${resultData.MANUFACTURER}</p>
+									<%-- <p>${resultData.MANUFACTURER}</p> --%>
+									<a href="<c:url value='/admin/equip/equip_edit?EQUIP_SEQ=${resultData.EQUIP_SEQ}'/>">수정</a>
 								</div>
 								<div class="card-reveal">
-									<span class="card-title grey-text text-darken-4">${resultData.EQUIP_PLACE_NAME}<i
+									<span class="card-title grey-text text-darken-4">${resultData.EQUIP_NAME}<i
 										class="material-icons right">close</i></span>
 									<p>${resultData.DESCRIPTION}</p>
 									<p>${resultData.SUB_CATEGORY_SEQ}</p>
-									<p>${resultData.EQIP_PLACE_SEQ}</p>
+									<p>${resultData.EQIP_SEQ}</p>
 									<p>${resultData.MANAGER}</p>
 								</div>
 							</div>
@@ -176,7 +185,8 @@ var fn_cate_select = function(url, params) {
 					<h4>장비추가</h4>
 				</div>
 			</div>
-			<form class="col s12" method="POST"	action="<c:url value='/admin/equip/equip_insert'/>">
+			<form id="equipInsertForm" class="col s12" method="POST" action="<c:url value='/admin/equip/equip_merge'/>">
+			<input type="hidden" name="forwardView" value="/admin/equip/equip_list" />
 				<div class="row">
 					<div class="input-field col s6">
 						<select onchange="cateSelect(this.value);">
@@ -195,13 +205,13 @@ var fn_cate_select = function(url, params) {
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<input name="EQUIP_PLACE_SEQ" id="id" type="text" class="validate"> <label
+						<input name="EQUIP_SEQ" id="id" type="text" class="validate"> <label
 							for="id">장비아이디</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<input name="EQUIP_PLACE_NAME" id="name" type="text" class="validate"> <label
+						<input name="EQUIP_NAME" id="name" type="text" class="validate"> <label
 							for="name">장비명</label>
 					</div>
 				</div>

@@ -23,17 +23,19 @@ import com.ideaall.infinite.service.CommonService;
 
 @Controller
 public class CommonController {
-	private final static String MAPPING = "/common/";
+	private final static String MAPPING = "/common";
 
 	@Autowired
 	CommonService commonservice;
 
 	// Receive Parameters from Html Using @RequestParam Map with @PathVariable
-	@RequestMapping(value = MAPPING + "{action}", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = MAPPING, method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView actionMethod(@RequestParam MultiValueMap<Object, Object> paramMultiMap,
-			@RequestParam Map<String, Object> paramMap, @PathVariable String action, ModelAndView modelandView) {
+			@RequestParam Map<String, Object> paramMap, ModelAndView modelandView) {
 
-		String viewName = MAPPING + action;
+		String action = (String) paramMap.get("action");
+		String viewName = MAPPING +"/"+ action;
+		System.out.println(viewName);
 		String forwardView = (String) paramMap.get("forwardView");
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -41,11 +43,12 @@ public class CommonController {
 
 		// divided depending on action value
 		if ("login".equalsIgnoreCase(action)) {
-
+			
 		} else if ("signup".equalsIgnoreCase(action)) {
  			resultList = (List<Object>) commonservice.getADDList(paramMap);
 
 		} else if ("mypage".equalsIgnoreCase(action)) {
+			resultMap.put("id", (String) paramMap.get("id"));
 			resultMap = (Map<String, Object>) commonservice.getInfo(paramMap);
 
 		} else if ("check".equalsIgnoreCase(action)) {

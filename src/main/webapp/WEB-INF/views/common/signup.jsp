@@ -6,6 +6,8 @@
 <%@ page isELIgnored="false"%>
 
 <script>
+	var doubleCheck = false;
+	var passCheck = false;
 	document.addEventListener('DOMContentLoaded', function() {
 		var elems = document.querySelectorAll('select');
 		var instances = M.FormSelect.init(elems, options);
@@ -15,6 +17,10 @@
 
 	$(document).ready(function() {
 		$('select').formSelect();
+
+		$('#submitBtn').click(function() {
+			checkform();
+		});
 	});
 </script>
 
@@ -39,27 +45,48 @@
 
 
 	<script>
-		function checkform() {
-			if (document.myForm.password.value=="") { // 자바스크립트 : 빈문자열 -> false 반환
+		console.log(passCheck);
+		console.log(doubleCheck);
+
+		var checkform = function() {
+			if (document.myForm.password.value == "") { // 자바스크립트 : 빈문자열 -> false 반환
 				alert("비밀번호를 입력해주세요.");
 				document.myForm.focus();
 				return false;
-			} else if(document.myForm.idcheck.value==""){
-				alert("비밀번호가 일치하지 않습니다.");
+			} else if (document.myForm.name == "") {
+				alert("이름을 입력해주세요.");
 				document.myForm.focus();
 				return false;
-			} else if(document.myForm.ID.value==""){
-				alert("아이디를 입력해주세요.");
+
+			}
+
+			if (passCheck && doubleCheck) {
+				$('form').attr("action","<c:url value='/admin/member/insert'/>");
+				alert("회원가입이 완료되었습니다.");
+			} else if (!passCheck && doubleCheck) {
+				alert("비밀번호를 확인해주세요.");
 				document.myForm.focus();
 				return false;
-			} 
+
+				console.log("비밀번호확인");
+			} else if (passCheck == 1 && !doubleCheck) {
+				alert("아이디를 중복 확인해주세요.");
+				document.myForm.focus();
+				return false;
+				console.log("중복확인");
+			} else if (!passCheck && !doubleCheck) {
+				alert("비밀번호 또는 아이디를 다시 확인해주세요.");
+				document.myForm.focus();
+				return false;
+				console.log("비밀번호확인 중복확인");
+			}
+
 		}
 	</script>
 
 	<div class="row box">
 		<form class="col s12" role="form" name="myForm" method="POST"
-			action="<c:url value='/admin/member/insert'/>"
-			onsubmit="return checkform()">
+			action="">
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">face</i> <input id="name"
@@ -94,11 +121,12 @@
 						success : function(result) { //서버에서 반환받은 데이터를 result에 담는다.
 							console.log(result.ID);
 							$("#idcheck").text("사용 불가능한 아이디입니다.");
-
+							doubleCheck = false;
 						},
 
 						error : function(jqXHR, textStatus, errorThrown) {
 							$("#idcheck").text("사용가능한 아이디입니다.");
+							doubleCheck = true;
 						}
 					});
 
@@ -131,13 +159,11 @@
 					if (firstpass != secondpass) {
 						$("#passcheck").text("비밀번호가 일치하지 않습니다");
 						/*  $("#passcheck").attr("data-error","비밀번호가 일치하지 않습니다.");  */
+						passCheck = false;
+					} else {
+						$("#passcheck").text("비밀번호 일치");
+						passCheck = true;
 					}
-				});
-
-				$('#password_c').onfocus(function() {
-					/* if($('#password_c').val!=null){ */
-					$("#passcheck").text("");
-					/* } */
 				});
 			</script>
 			<div class="row">
@@ -231,7 +257,7 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<button class="waves-effect waves-light btn-large"
-						style="width: 100%; margin: 0 auto;" type="submit;">회원가입</button>
+						style="width: 100%; margin: 0 auto;" type="submit;" id="submitBtn">회원가입</button>
 				</div>
 			</div>
 		</form>

@@ -69,6 +69,14 @@ public class AdminMemberService {
 
 		return resultObject;
 	}
+	
+	public Object update(Object dataMap) {
+		String sqlMapId = "member.update";
+
+		Object resultObject = dao.getObject(sqlMapId, dataMap);
+
+		return resultObject;
+	}
 
 	public Object getObject(Object dataMap) {
 		// String sqlMapId = "member.read";

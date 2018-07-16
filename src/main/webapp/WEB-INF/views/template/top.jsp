@@ -23,7 +23,7 @@
 <!-- Dropdown 내부리스트 -->
 <ul id="dropdown_equip" class="dropdown-content">
 	<li><a href="<c:url value='/admin/equip/equip_list'/>">장비관리</a></li>
-	<li><a href="<c:url value='/admin/place/place_list'/>">장소관리</a></li>
+	<li><a href="<c:url value='/admin/category/category_list'/>">카테고리관리</a></li>
 </ul>
 
 
@@ -63,7 +63,7 @@
 					<li><a href="<c:url value='/admin/result/result_list'/>">결과물관리</a></li>
 					<li><a href="<c:url value='/admin/ability/ability_list'/>">능력관리</a></li>
 					<li><a class="dropdown-trigger" href="#!"
-						data-target="dropdown_equip">장비·장소 관리<i
+						data-target="dropdown_equip">장비관리<i
 							class="material-icons right">arrow_drop_down</i></a></li>
 					<li><a class="dropdown-trigger" href="#!"
 						data-target="dropdown_member">${resultMap.ID}님 환영합니다!<i
@@ -79,7 +79,7 @@
 					<li><a href="<c:url value='/admin/result/result_list'/>">결과물관리</a></li>
 					<li><a href="<c:url value='/admin/ability/ability_list'/>">능력관리</a></li>
 					<li><a href="<c:url value='/admin/equip/equip_list'/>">장비관리</a></li>
-					<li><a href="<c:url value='/admin/place/place_list'/>">장소관리</a></li>
+					<li><a href="<c:url value='/admin/category/category_list'/>">카테고리관리</a></li>
 					<li class="divider"></li>
 					<li><a href="<c:url value='/common/login'/>">로그인</a></li>
 					<li><a href="<c:url value='/common/signup'/>">회원가입</a></li>
@@ -139,7 +139,7 @@
 					<li><a href="<c:url value='/admin/result/result_list'/>">결과물관리</a></li>
 					<li><a href="<c:url value='/admin/ability/ability_list'/>">능력관리</a></li>
 					<li><a href="<c:url value='/admin/equip/equip_list'/>">장비관리</a></li>
-					<li><a href="<c:url value='/admin/place/place_list'/>">장소관리</a></li>
+					<li><a href="<c:url value='/admin/category/category_list'/>">장소관리</a></li>
 					<li class="divider"></li>
 					<li><a href="<c:url value='/common/login'/>">로그인</a></li>
 					<li><a href="<c:url value='/common/signup'/>">회원가입</a></li>

@@ -46,11 +46,16 @@ public class AdminMemberController {
 		} else if ("member_read".equalsIgnoreCase(action)) {
 			
 		} else if("insert".equalsIgnoreCase(action)) {
+			
 			resultMap = (Map<String, Object>) memberservice.insert(paramMap);
 			resultMap = (Map<String, Object>) commonservice.getInfo(paramMap);
 			viewName="/common/mypage";
-		}
 		
+		} else if("update".equalsIgnoreCase(action)){
+			resultMap = (Map<String, Object>) memberservice.update(paramMap);
+			viewName="/main/index";
+			
+				}
 
 		if(forwardView != null){
 			viewName = forwardView;

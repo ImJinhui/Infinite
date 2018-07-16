@@ -50,10 +50,14 @@ order by ADDR_SEQ
 
 <insert id="insert">
 insert into member(
-MEMBER_SEQ, ID, PASSWORD, TEL, NAME, SUB_ADDR_SEQ, AUTHORITY_SEQ
-)value(#{MEMBER_SEQ},#{ID},#{PASSWORD},#{TEL},#{NAME},#{cate2},'1' )
+MEMBER_SEQ, ID, PASSWORD, TEL, NAME, SUB_ADDR_SEQ, AUTHORITY_SEQ, SIGNUP_DATE
+)value(#{MEMBER_SEQ},#{ID},#{PASSWORD},#{TEL},#{NAME},#{cate2},'1',CURRENT_DATE( ))
 
 </insert>
+
+<update id="update">
+update member set ID=#{ID}, PASSWORD=#{PASSWORD}, NAME=#{NAME} where ID = #{ID}
+</update>
 
 <select id="info" resultType="Map" parameterType="Map">
 select m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, sub.SUB_ADDR_NAME, addr.ADDR_NAME
@@ -63,6 +67,13 @@ and sub.ADDR_SEQ = addr.ADDR_SEQ
 and m.MEMBER_SEQ=#{MEMBER_SEQ}
 </select>
 
+<select id="myinfo" resultType="Map" parameterType="Map">
+select m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, sub.SUB_ADDR_NAME, addr.ADDR_NAME
+from MEMBER m, address addr, sub_address sub
+where m.SUB_ADDR_SEQ = sub.SUB_ADDR_SEQ  
+and sub.ADDR_SEQ = addr.ADDR_SEQ
+and m.ID=#{id}
+</select>
 	<!-- <insert id="insert1" parameterType="Map">
 		insert into MEMBER_INFO (
 		SEQ_ID,ID,PASSWORD, NAME, TEL, EMAIL

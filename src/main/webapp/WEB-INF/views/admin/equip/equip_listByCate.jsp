@@ -73,9 +73,9 @@ var fn_cate_select = function(url, params) {
 				formTag += '<div class="card-image waves-effect waves-block waves-light">';
 				formTag += '<img class="activator" src="<c:url value="/resources/images/lasercutter.PNG"/></div>">';
 				formTag += '<div class="card-content">';
-				formTag += '<span class="card-title activator grey-text text-darken-4">'+item.EQUIP_PLACE_NAME;
+				formTag += '<span class="card-title activator grey-text text-darken-4">'+item.EQUIP_NAME;
 				formTag += '<i class="material-icons right">more_vert</i></span></div>';
-				formTag += '<div class="card-reveal"><span class="card-title grey-text text-darken-4">'+item.EQUIP_PLACE_NAME;
+				formTag += '<div class="card-reveal"><span class="card-title grey-text text-darken-4">'+item.EQUIP_NAME;
 				formTag += '<i class="material-icons right">close</i></span>';
 				formTag += '<p>'+item.DESCRIPTION+'</p>';
 				formTag += '</div></div></div>';
@@ -147,17 +147,18 @@ var fn_cate_select = function(url, params) {
 										src="<c:url value='/resources/images/lasercutter.PNG'/>">
 								</div>
 								<div class="card-content">
-									<span class="card-title activator grey-text text-darken-4">${resultData.EQUIP_PLACE_NAME}
+									<span class="card-title activator grey-text text-darken-4">${resultData.EQUIP_NAME}
 										<i class="material-icons right">more_vert</i>
 									</span>
-									<p>${resultData.MANUFACTURER}</p>
+									<%-- <p>${resultData.MANUFACTURER}</p> --%>
+									<a href="<c:url value='/admin/equip/equip_edit?EQUIP_SEQ=${resultData.EQUIP_SEQ}'/>">수정</a>
 								</div>
 								<div class="card-reveal">
-									<span class="card-title grey-text text-darken-4">${resultData.EQUIP_PLACE_NAME}<i
+									<span class="card-title grey-text text-darken-4">${resultData.EQUIP_NAME}<i
 										class="material-icons right">close</i></span>
 									<p>${resultData.DESCRIPTION}</p>
 									<p>${resultData.SUB_CATEGORY_SEQ}</p>
-									<p>${resultData.EQIP_PLACE_SEQ}</p>
+									<p>${resultData.EQIP_SEQ}</p>
 									<p>${resultData.MANAGER}</p>
 								</div>
 							</div>

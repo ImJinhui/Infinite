@@ -5,6 +5,13 @@
 
 <%@ page isELIgnored="false"%>
 
+<style>
+.fomr_input {
+	margin-left: 7px;
+	margin-top: -7px;
+}
+</style>
+
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
 		var elems = document.querySelectorAll('select');
@@ -31,39 +38,48 @@
 	<!-- 수정부분 -->
 
 	<div class="row box">
-		<form class="col s12">
+		<form class="col s12" role="form" name="myForm" method="POST"
+			action="<c:url value='/admin/member/update'/>">
+
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">face</i> <input id="name"
-						type="text" class="validate" readonly> <label for="name">${resultMap.NAME}</label>
+						type="text" class="validate" name="NAME" value="${resultMap.NAME}">
+					<!-- <div class="fomr_input">NAME</div> -->
+					<label for="name">이름</label>
+					<%-- <input type="hidden" name="MEMBER_SEQ" style="display:none">${resultMap.MEMBER_SEQ}</input>  --%>
 				</div>
 			</div>
+
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">account_circle</i> <input id="id"
-						type="text" readonly > <label for="id" >${resultMap.ID}</label>
+						type="text" name="ID" value="${resultMap.ID}">
+					<!-- <div class="fomr_input">ID</div> -->
+					<label for="id">아이디</label>
 				</div>
 			</div>
+
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">lock</i> <input id="password"
-						type="password" class="validate" readonly> <label for="password">${resultMap.PASSWORD}</label>
+						type="password" class="validate" name="PASSWORD" value="${resultMap.PASSWORD}">
+					<!-- <div class="fomr_input">PASSWORD</div> -->
+					<label for="password">비밀번호</label>
 				</div>
 			</div>
+
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">phone</i> <input id="tel"
-						type="tel" class="validate" readonly> <label for="tel">${resultMap.TEL}</label>
+						type="tel" class="validate" name="TEL" value="${resultMap.TEL}">
+					<!-- <div class="fomr_input">PHONE</div> -->
+					<label for="tel">전화번호</label>
 				</div>
 			</div>
-			<div class="row">
-				<div class="input-field col s12">
-					<i class="material-icons prefix">email</i> <input id="email"
-						type="email" class="validate" readonly> <label for="email">${resultMap.EMAIL}</label>
-				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s5">
+
+			<%-- <div class="row">
+				<div class="input-field col s5">	
 					<i class="material-icons prefix">home</i>
 					<!-- <select>
 					<option value="" disabled selected>Choose your option</option>
@@ -71,7 +87,7 @@
 					<option value="2">Option 2</option>
 					<option value="3">Option 3</option>
 				</select> <label>주소</label> -->
-					<input id="add" type="text" class="validate"> <label
+					<input id="add" type="text" class="validate"> <div class="fomr_input">HOME</div><label
 						for="add">${resultMap.ADDR_NAME}</label>
 				</div>
 				<div class="input-field col s4">
@@ -85,27 +101,20 @@
 					<input id="sub_add" type="text" class="validate"> <label
 						for="sub_add">${resultMap.SUB_ADDR_NAME}</label>
 				</div>
-			</div>
+			</div> --%>
+
 			<div class="row">
-				<!--         <div class="col s12"> -->
-				<!--           This is an inline input field: -->
-				<!--           <div class="input-field inline"> -->
-				<!--             <input id="email_inline" type="email" class="validate"> -->
-				<!--             <label for="email_inline">Email</label> -->
-				<!--             <span class="helper-text" data-error="wrong" data-success="right">Helper text</span> -->
-				<!--           </div> -->
-				<!--         </div> -->
-				<div class="row">
-					<div class="input-field col s12">
-						<a class="waves-effect waves-light btn-large"
-							style="width: 100%; margin: 0 auto;">내 정보 수정</a>
-					</div>
+				<div class="input-field col s12">
+					<button class="waves-effect waves-light btn-large"
+						style="width: 100%; margin: 0 auto;" type="submit">내 정보
+						수정</button>
 				</div>
 			</div>
+
 		</form>
 	</div>
-	<!-- /수정부분 -->
 </div>
+<!-- /수정부분 -->
 <!-- /main -->
 
 

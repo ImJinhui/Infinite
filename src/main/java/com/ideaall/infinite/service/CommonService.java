@@ -20,7 +20,7 @@ public class CommonService {
 	
 	
 	public Object getInfo(Object dataMap) {
-		String sqlMapId = "member.info";
+		String sqlMapId = "member.myinfo";
 		Object resultObject = dao.getObject(sqlMapId, dataMap);
 
 		return resultObject;
