@@ -90,14 +90,14 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">face</i> <input id="name"
-						type="text" class="validate" name="NAME"> <label
+						type="text" class="validate" name="NAME" value="${paramMap.NAME}"> <label
 						for="name">이름</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">account_circle</i> <input id="id"
-						type="text" class="validate" name="ID"> <label for="id">아이디</label>
+						type="text" class="validate" name="ID" value="${paramMap.ID}"> <label for="id">아이디</label>
 
 					<a class="waves-effect waves-light btn-small" type="button"
 						style="border-left: 30px" onclick="idcheck()">중복체크</a>
@@ -135,7 +135,7 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">lock</i> <input id="password"
-						type="password" class="validate" name="PASSWORD"> <label
+						type="password" class="validate" name="PASSWORD" value="${paramMap.PASSWORD}"> <label
 						for="password">비밀번호</label>
 				</div>
 			</div>
@@ -169,13 +169,13 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">phone</i> <input id="tel"
-						type="tel" class="validate" name="TEL"> <label for="tel">전화번호</label>
+						type="tel" class="validate" name="TEL" value="${paramMap.TEL}"> <label for="tel">전화번호</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">email</i> <input id="email"
-						type="email" class="validate"> <label for="email">이메일</label>
+						type="email" class="validate" value="${paramMap.EMAIL}"> <label for="email">이메일</label>
 					<span class="helper-text" data-error="이메일 형식이 아닙니다."
 						data-success="이메일 형식이 맞습니다."></span>
 				</div>
