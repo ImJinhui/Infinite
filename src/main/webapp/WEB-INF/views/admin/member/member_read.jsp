@@ -78,10 +78,11 @@
 				</div>
 			</div>
 
-			<div class="row">
+			<%-- 	<div class="row">
 				<div class="input-field col s12">
+
 					<c:forEach items="${resultList}" var="resultData" varStatus="loop">
-					
+
 						<input id="member_ability_name" type="text" class="validate"
 							value="${resultData.ABILITY_NAME}">
 						<input id="member_ability_manager" type="text" class="validate"
@@ -91,10 +92,36 @@
 						<label for="member_ability">보유 능력</label>
 					</c:forEach>
 				</div>
+			</div> --%>
+
+			<!-- 능력테이블 -->
+			<div class="row">
+				<div class="input-field col s12">
+					<label for="member_ability">보유 능력</label> </br></br>
+					<table class="highlight centered" >
+						<thead>
+							<tr>
+								<th>보유 능력 이름</th>
+								<th>담당자</th>
+								<th>얻은 날짜</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${resultList}" var="resultData"
+								varStatus="loop">
+								<tr
+									class="${(loop.index+1)%2 == 2 ? 'odd gradeX' : 'even gradeC'}">
+
+									<td>${resultData.ABILITY_NAME}</td>
+									<td>${resultData.MANAGER}</td>
+									<td>${resultData.OBTAIN_DATE}</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
 			</div>
-
-
-
+			<!-- /능력테이블 -->
 
 			<button class="btn waves-effect waves-light right" type="submit"
 				name="action">
