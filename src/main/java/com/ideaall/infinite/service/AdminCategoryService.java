@@ -2,16 +2,23 @@ package com.ideaall.infinite.service;
 
 import java.util.Map;
 
-public class AdminPlaceService {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ideaall.infinite.dao.ShareDao;
+
+@Service
+public class AdminCategoryService {
 	
+	@Autowired
+	private ShareDao dao;
 	
 	public Object getList(Object dataMap) {
-//		String sqlMapId = "member.list";
-//
-//		Object resultObject = dao.getList(sqlMapId, dataMap);
-//		
-//		return resultObject;
-		return 0;
+		String sqlMapId = "category.list";
+
+		Object resultObject = dao.getList(sqlMapId, dataMap);
+		
+		return resultObject;
 	}
 	
 	public Object getObject(Object dataMap) {

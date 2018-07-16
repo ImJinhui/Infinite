@@ -1,4 +1,3 @@
-
 package com.ideaall.infinite.controller;
 
 import java.util.ArrayList;
@@ -15,15 +14,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ideaall.infinite.service.AdminEquipService;
+import com.ideaall.infinite.service.AdminAbilityService;
+import com.ideaall.infinite.service.AdminCategoryService;
 
 @Controller
-public class AdminEquipController {
-	private final static String MAPPING = "/admin/equip/";
+public class AdminCategoryController {
+	private final static String MAPPING = "/admin/category/";
 
 	@Autowired
-	private AdminEquipService service;
-    
+	private AdminCategoryService service;
+
 	// Receive Parameters from Html Using @RequestParam Map with @PathVariable
 	@RequestMapping(value = MAPPING+"{action}", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView actionMethod(@RequestParam MultiValueMap<Object, Object> paramMultiMap, @RequestParam Map<String, Object> paramMap, 
@@ -32,21 +32,14 @@ public class AdminEquipController {
 		String viewName = MAPPING + action ;
 		String forwardView = (String) paramMap.get("forwardView") ;
 
-		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>() ;
 		List<Object> resultList = new ArrayList<Object>();
 
 		// divided depending on action value
-		if ("equip_list".equalsIgnoreCase(action)) {
-			resultMap =  (Map<String, Object>) service.getList(paramMap);
-		} else if ("equip_listByCate".equalsIgnoreCase(action)) {
-			resultMap = (Map<String, Object>) service.getListByCategory(paramMap);
-		} else if ("equip_merge".equalsIgnoreCase(action)) {
-			service.saveObject(paramMap);
-			resultMap =  (Map<String, Object>) service.getList(paramMap);
-		} else if("equip_edit".equalsIgnoreCase(action)) {
-			//장비 카테고리 세팅 위함 
-			resultMap =  (Map<String, Object>) service.getList(paramMap);
-			resultMap.put("resultObject", service.getObject(paramMap));
+		if ("category_list".equalsIgnoreCase(action)) {
+			resultList = (List<Object>) service.getList(paramMap);
+		} else if ("place_edit".equalsIgnoreCase(action)) {
+			
 		}
 		
 

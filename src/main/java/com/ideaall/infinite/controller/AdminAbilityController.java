@@ -1,3 +1,4 @@
+
 package com.ideaall.infinite.controller;
 
 import java.util.ArrayList;
@@ -60,3 +61,4 @@ public class AdminAbilityController {
 	}
 
 }
+
