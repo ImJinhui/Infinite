@@ -38,8 +38,9 @@ public class AdminCategoryController {
 		// divided depending on action value
 		if ("category_list".equalsIgnoreCase(action)) {
 			resultList = (List<Object>) service.getList(paramMap);
-		} else if ("place_edit".equalsIgnoreCase(action)) {
-			
+		} else if ("category_merge".equalsIgnoreCase(action)) {
+			service.saveObject(paramMap);
+			resultList = (List<Object>) service.getList(paramMap);
 		}
 		
 

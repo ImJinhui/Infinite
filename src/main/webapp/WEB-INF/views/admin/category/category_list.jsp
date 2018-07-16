@@ -10,19 +10,17 @@
 	});
 	$(document).ready(function() {
 		$('select').formSelect();
-
-	});
-
-	$(document).ready(function() {
-		$('.tabs').tabs();
 	});
 </script>
-
-<style>
-.card {
+<script>
+function checkNull(){
+	if($("#category_seq").val().length<1 || $("#category_name").val().length<1 || $("#sub_category_seq").val().length<1 || $("#sub_category_name").val().length<1){
+		alert("대분류번호 값을 입력해주세요");
+		$("#category_seq").focus();
+	}
 	
 }
-</style>
+</script>
 
 <!-- 페이지 이름 -->
 <nav class="teal">
@@ -36,9 +34,7 @@
 <!-- /페이지 이름 -->
 <!-- main -->
 <div class="main_body" style="width: 70%">
-
 	<!-- 수정부분 -->
-
 	<div class="row box">
 		<table class="highlight centered">
 			<thead>
@@ -47,6 +43,7 @@
 					<th>대분류 이름</th>
 					<th>중분류 번호</th>
 					<th>중분류 이름</th>
+					<th>수정 / 삭제</th>
 				</tr>
 			</thead>
 
@@ -57,18 +54,75 @@
 						<td>${resultData.CATEGORY_NAME}</td>
 						<td>${resultData.SUB_CATEGORY_SEQ}</td>
 						<td>${resultData.SUB_CATEGORY_NAME}</td>
+						
+						<td><a class="waves-effect waves-light btn-small"
+								href="<c:url value='/admin/category/category_edit?SUB_CATEGORY_SEQ=${resultData.SUB_CATEGORY_SEQ}'/>">수정</a>
+							<a class="waves-effect waves-light btn-small"
+								href="<c:url value='/admin/ability/ability_read?ABILITY_SEQ=${resultData.ABILITY_SEQ}'/>">삭제</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
 </div>
+
+<!-- CATEGORY추가 modal -->
+
+<div id="modal1" class="modal modal-fixed-footer">
+	<div class="modal-content">
+		<div class="row">
+			<div class="row">
+				<div class="input-field col s12">
+					<h4>카테고리추가</h4>
+				</div>
+			</div>
+			
+			<form class="col s12" method="POST" onsubmit="checkNull();" action="<c:url value='/admin/category/category_merge'/>">
+			<input type="hidden" name="forwardView" value="/admin/category/category_list" />
+				
+				<div class="row">
+					<div class="input-field col s12">
+						<input name="CATEGORY_SEQ" id="category_seq" type="text" class="validate"> <label
+							for="category_seq">대분류번호</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input name="CATEGORY_NAME" id="category_name" type="text" class="validate"> <label
+							for="category_name">대분류이름</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input name="SUB_CATEGORY_SEQ" id="sub_category_seq" type="text" class="validate"> <label
+							for="sub_category_seq">중분류번호</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input name="SUB_CATEGORY_NAME" id="sub_category_name" type="text" class="validate"> <label
+							for="sub_category_name">중분류이름</label>
+					</div>
+				</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn waves-effect waves-light" type="submit" name="action">
+			추가 <i class="material-icons right">send</i>
+		</button>
+	</div>
+	</form>
+</div>
+<!-- /CATEGORY추가 modal -->
+
 <!-- 카테고리추가버튼 -->
-<div class="fixed-action-btn">
+ <div class="fixed-action-btn">
 	<a class="btn-floating btn-large red modal-trigger" href="#modal1">
 		<i class="large material-icons">add</i>
 	</a>
-</div>
+</div> 
+
 <!-- /카테고리추가버튼 -->
 <!-- /수정부분 -->
 

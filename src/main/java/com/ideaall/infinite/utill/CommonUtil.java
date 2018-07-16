@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Component
 public class CommonUtil {
@@ -36,5 +37,20 @@ public class CommonUtil {
 		
 		return result ;
 	}
+	
+//FileUtil
+	public String workingPhysicalDirectory(MultipartHttpServletRequest multipartRequest) {
+//		System.getProperty( "catalina.base" ) 	//C:\sts-bundle\pivotal-tc-server-developer-3.2.9.RELEASE\base-instance
 
+    	//    	String fullPath = this.getClass().getClassLoader().getResource("").getPath();
+//		String fullPath = URLDecoder.decode(path, "UTF-8");
+//		String pathArr[] = fullPath.split("/WEB-INF/classes/");
+//    	String physicalDirectory = pathArr[0] + "";
+
+    	String addRealPath = "/src/main/webapp/resources/uploads/";
+    	String physicalDirectory = multipartRequest.getSession().getServletContext().getRealPath(addRealPath);
+		
+//    	String physicalDirectory = "C:\\Users\\student\\git\\Lecture_SpringFramework\\src\\main\\webapp\\resources\\uploads\\";
+		return physicalDirectory;
+    }
 }

@@ -9,9 +9,9 @@
 <nav class="teal">
      <div class="nav-wrapper">
       <div class="bread_div">
-        <a href="#!" class="breadcrumb">장비·장소관리</a>
-        <a href="#!" class="breadcrumb">장소관리</a>
-        <a href="#!" class="breadcrumb">장소수정</a>
+        <a href="#!" class="breadcrumb">장비관리</a>
+        <a href="#!" class="breadcrumb">카테고리관리</a>
+        <a href="#!" class="breadcrumb">카테고리수정</a>
       </div>
     </div>
   </nav>

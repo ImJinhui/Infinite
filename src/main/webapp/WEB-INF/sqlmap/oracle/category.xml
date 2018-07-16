@@ -15,20 +15,57 @@
 		where c.CATEGORY_SEQ = sc.CATEGORY_SEQ;
 	</select>
 	
-	<!-- <insert id="insert" parameterType="Map">
-		insert into ABILITIES
-			(ABILITY_NAME)
-		values (
-			#{ABILITY_NAME}
+	 <insert id="mergeCate" parameterType="Map">
+	<!-- 	insert into CATEGORY
+			(
+			CATEGORY_SEQ
+			,CATEGORY_NAME
 			)
+		values (
+			#{CATEGORY_SEQ}
+			,#{CATEGORY_NAME}
+			) -->
+		<if test="CATEGORY_SEQ != null">	
+		INSERT INTO CATEGORY (
+		CATEGORY_SEQ
+		,CATEGORY_NAME
+		)
+		values(
+			#{CATEGORY_SEQ}
+			,#{CATEGORY_NAME}
+		)
+		ON DUPLICATE KEY UPDATE 
+		CATEGORY_SEQ = #{CATEGORY_SEQ}
+		,CATEGORY_NAME = #{CATEGORY_NAME}
+		</if>
+	</insert>
+	
+	<insert id="mergeSubCate" parameterType="Map">
+		<if test="SUB_CATEGORY_SEQ != null">
+			insert into SUB_CATEGORY
+				(
+				SUB_CATEGORY_SEQ
+				,SUB_CATEGORY_NAME
+				,CATEGORY_SEQ
+				)
+			values (
+				#{SUB_CATEGORY_SEQ}
+				,#{SUB_CATEGORY_NAME}
+				,#{CATEGORY_SEQ}
+				)
+				ON DUPLICATE KEY UPDATE 
+			SUB_CATEGORY_SEQ = #{CATEGORY_SEQ}
+			,SUB_CATEGORY_NAME = #{CATEGORY_NAME}
+			,CATEGORY_SEQ = #{CATEGORY_SEQ}
+		</if>
 	</insert>
 
 	<update id="update">
 		update ABILITIES
 		set ABILITY_NAME = #{ABILITY_NAME}
 		where ABILITY_SEQ = #{ABILITY_SEQ}
-	</update> -->
-	
+	</update>
+<!-- 	
 	<insert id="merge">
 	INSERT INTO ABILITIES (
 		ABILITY_NAME 
@@ -43,13 +80,14 @@
 		,ABILITY_SEQ = #{ABILITY_SEQ}
 			
 	</insert>
+	
 	<select id="read" resultType="Map" parameterType="Map">
 		select
 			ABILITY_SEQ
 			,ABILITY_NAME
 		from ABILITIES
 		where ABILITY_SEQ = #{ABILITY_SEQ}
-	</select>
+	</select> -->
 	
 	<!-- <delete id="delete" parameterType="Map">
 		delete from CIP_ORGANIZATION
