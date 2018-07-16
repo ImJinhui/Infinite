@@ -38,9 +38,9 @@
 
 		<ul id="dropdown_member" class="dropdown-content">
 			<%--  <li><a href="<c:url value='/common/login'/>">로그인</a></li> --%>
-			<li><a href="<c:url value='/common/signup'/>">회원가입</a></li>
+			<li><a href="<c:url value='/common?action=signup'/>">회원가입</a></li>
 			<li class="divider"></li>
-			<li><a href="<c:url value='/common/mypage'/>">마이페이지</a></li>
+			<li><a href="<c:url value='/common?action=mypage&id=${resultMap.ID}'/>">마이페이지</a></li>
 		</ul>
 
 		<ul id="dropdown_reserve" class="dropdown-content">
@@ -81,9 +81,9 @@
 					<li><a href="<c:url value='/admin/equip/equip_list'/>">장비관리</a></li>
 					<li><a href="<c:url value='/admin/category/category_list'/>">카테고리관리</a></li>
 					<li class="divider"></li>
-					<li><a href="<c:url value='/common/login'/>">로그인</a></li>
-					<li><a href="<c:url value='/common/signup'/>">회원가입</a></li>
-					<li><a href="<c:url value='/common/mypage'/>">마이페이지</a></li>
+					<li><a href="<c:url value='/common?action=login'/>">로그인</a></li>
+					<li><a href="<c:url value='/common?action=signup'/>">회원가입</a></li>
+					<li><a href="<c:url value='/common?action=mypage'/>">마이페이지</a></li>
 				</ul>
 				<a href="#" data-target="nav-mobile" class="sidenav-trigger"><i
 					class="material-icons">menu</i></a>
@@ -98,8 +98,8 @@
 	<c:otherwise>  <!-- //로그인 되지 않음 -->
 		<!-- 로그인되지 않은경우 -->
 		<ul id="dropdown_member" class="dropdown-content">
-			<li><a href="<c:url value='/common/login'/>">로그인</a></li>
-			<li><a href="<c:url value='/common/signup'/>">회원가입</a></li>
+			<li><a href="<c:url value='/common?action=login'/>">로그인</a></li>
+			<li><a href="<c:url value='/common?action=signup'/>">회원가입</a></li>
 			<li class="divider"></li>
 		</ul>
 
@@ -141,9 +141,9 @@
 					<li><a href="<c:url value='/admin/equip/equip_list'/>">장비관리</a></li>
 					<li><a href="<c:url value='/admin/category/category_list'/>">장소관리</a></li>
 					<li class="divider"></li>
-					<li><a href="<c:url value='/common/login'/>">로그인</a></li>
-					<li><a href="<c:url value='/common/signup'/>">회원가입</a></li>
-					<li><a href="<c:url value='/common/mypage'/>">마이페이지</a></li>
+					<li><a href="<c:url value='/common?action=login'/>">로그인</a></li>
+					<li><a href="<c:url value='/common?action=signup'/>">회원가입</a></li>
+					<li><a href="<c:url value='/common?action=mypage'/>">마이페이지</a></li>
 				</ul>
 				<a href="#" data-target="nav-mobile" class="sidenav-trigger"><i
 					class="material-icons">menu</i></a>

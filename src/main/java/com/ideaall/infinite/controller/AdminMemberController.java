@@ -52,7 +52,7 @@ public class AdminMemberController {
 			viewName="/common/mypage";
 		
 		} else if("update".equalsIgnoreCase(action)){
-			resultMap = (Map<String, Object>) memberservice.update(paramMap);
+			 resultMap = (Map<String, Object>)memberservice.update(paramMap);
 			viewName="/main/index";
 			
 				}
