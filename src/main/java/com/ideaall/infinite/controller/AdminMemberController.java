@@ -23,47 +23,58 @@ public class AdminMemberController {
 
 	@Autowired
 	AdminMemberService memberservice;
-    
+
 	@Autowired
 	CommonService commonservice;
-	
+
 	// Receive Parameters from Html Using @RequestParam Map with @PathVariable
-	@RequestMapping(value = MAPPING+"{action}", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView actionMethod(@RequestParam MultiValueMap<Object, Object> paramMultiMap, @RequestParam Map<String, Object> paramMap, 
-			@PathVariable String action, ModelAndView modelandView) {
+	@RequestMapping(value = MAPPING + "{action}", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView actionMethod(@RequestParam MultiValueMap<Object, Object> paramMultiMap,
+			@RequestParam Map<String, Object> paramMap, @PathVariable String action, ModelAndView modelandView) {
 
-		String viewName = MAPPING + action ;
-		String forwardView = (String) paramMap.get("forwardView") ;
+		String viewName = MAPPING + action;
+		String forwardView = (String) paramMap.get("forwardView");
 
-		Map<String, Object> resultMap = new HashMap<String, Object>() ;
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		List<Object> resultList = new ArrayList<Object>();
 
 		// divided depending on action value
 		if ("member_list".equalsIgnoreCase(action)) {
-			resultList = (List<Object>) memberservice.getList(paramMap);
-		} else if ("member_edit".equalsIgnoreCase(action)) {
-			
+			// resultList = (List<Object>) memberservice.getList(paramMap);
+			resultMap = (Map) memberservice.getListPagination(paramMap);
+
+		}
+		/*
+		 * else if ("list_pagination".equalsIgnoreCase(action)) {
+		 * 
+		 * resultMap.put("curPage", paramMap.get("curPage")); resultMap=
+		 * (Map)memberservice.getListPagination(paramMap);
+		 * 
+		 * 
+		 * }
+		 */
+		else if ("member_edit".equalsIgnoreCase(action)) {
+
 		} else if ("member_read".equalsIgnoreCase(action)) {
 			resultMap = (Map<String, Object>) memberservice.getObject1(paramMap);
-			resultList =  (List<Object>) memberservice.getObject2(paramMap);
-			
-			
-		} else if("insert".equalsIgnoreCase(action)) {
-			
+			resultList = (List<Object>) memberservice.getObject2(paramMap);
+
+		} else if ("insert".equalsIgnoreCase(action)) {
+
 			resultMap = (Map<String, Object>) memberservice.insert(paramMap);
 			resultMap = (Map<String, Object>) commonservice.getInfo(paramMap);
-			viewName="/common/mypage";
-		
-		} else if("update".equalsIgnoreCase(action)){
-			 resultMap = (Map<String, Object>)memberservice.update(paramMap);
-			viewName="/main/index";
-			
-				}
+			viewName = "/common/mypage";
 
-		if(forwardView != null){
+		} else if ("update".equalsIgnoreCase(action)) {
+			resultMap = (Map<String, Object>) memberservice.update(paramMap);
+			viewName = "/main/index";
+
+		}
+
+		if (forwardView != null) {
 			viewName = forwardView;
 		}
-		
+
 		modelandView.setViewName(viewName);
 
 		modelandView.addObject("paramMap", paramMap);

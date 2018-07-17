@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.ideaall.infinite.dao.ShareDao;
 import com.ideaall.infinite.utill.CommonUtil;
+import com.ideaall.infinite.utill.Pagination;
 
 @Service
 public class AdminMemberService {
@@ -90,6 +91,27 @@ public class AdminMemberService {
 		Object resultObject = dao.getList(sqlMapId, dataMap);
 
 		return resultObject;
+	}
+
+	public Object getListPagination(Object dataMap) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		String sqlMapId = "member.totalcount";
+		int totalCount = (int) dao.getObject(sqlMapId, dataMap);
+		int currentPage;
+
+		if ((((Map<String,Object>) dataMap).get("curPage"))== null) {
+			currentPage = 1;
+		} else {
+			currentPage = Integer.valueOf((String) ((Map<String,Object>) dataMap).get("curPage"));
+		}
+
+		Pagination pagination = new Pagination(totalCount, currentPage);
+		resultMap.put("pagination", pagination);
+		sqlMapId = "member.listpagination";
+		((Map<String, Object>) dataMap).put("pagination", pagination);
+		Object resultList = dao.getList(sqlMapId, dataMap);
+		resultMap.put("resultList", resultList);
+		return resultMap;
 	}
 
 	public Object saveObject(Map<Object, Object> dataMap) {

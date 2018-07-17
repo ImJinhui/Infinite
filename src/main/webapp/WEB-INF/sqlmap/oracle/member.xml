@@ -6,169 +6,162 @@
 
 <mapper namespace="member">
 
-<select id="list" resultType="Map" parameterType="Map">
-<!-- select m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, m.SUB_ADDR_SEQ, ma.ABILITY_NAME
-from MEMBER m, MEMBER_ABILITY_REL mr, ABILITIES ma
-where mr.ABILITY_SEQ = ma.ABILITY_SEQ 
-and mr.MEMBER_SEQ = m.MEMBER_SEQ
-order by m.MEMBER_SEQ -->
+	<select id="list" resultType="Map" parameterType="Map">
+		<!-- select m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, m.SUB_ADDR_SEQ, 
+			ma.ABILITY_NAME from MEMBER m, MEMBER_ABILITY_REL mr, ABILITIES ma where 
+			mr.ABILITY_SEQ = ma.ABILITY_SEQ and mr.MEMBER_SEQ = m.MEMBER_SEQ order by 
+			m.MEMBER_SEQ -->
 
-select m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, m.SUB_ADDR_SEQ
-from MEMBER m
-order by m.MEMBER_SEQ
-</select>
-
-<select id="abilitylist" resultType="Map" parameterType="Map">
-select ma.ABILITY_NAME
-from MEMBER m, MEMBER_ABILITY_REL mr, ABILITIES ma
-where mr.ABILITY_SEQ = ma.ABILITY_SEQ 
-and mr.MEMBER_SEQ = m.MEMBER_SEQ
-and m.MEMBER_SEQ = #{MEMBER_SEQ}
-</select>
-
-
-<select id="check" resultType="Map" parameterType="Map">
-select ID, PASSWORD
-from MEMBER 
-where ID = #{id}
-</select>
-
-
-
- <select id="subaddlist" resultType="Map" parameterType="Map">
-select sub.SUB_ADDR_NAME, sub.SUB_ADDR_SEQ
-from sub_address sub, address addr
-where sub.ADDR_SEQ = addr.ADDR_SEQ
-and addr.ADDR_SEQ=#{ADDR_SEQ}
-</select> 
-
-<select id="addlist" resultType="Map" parameterType="Map">
-select *
-from address
-order by ADDR_SEQ
-</select>
-
-<insert id="insert">
-insert into member(
-MEMBER_SEQ, ID, PASSWORD, TEL, NAME, SUB_ADDR_SEQ, AUTHORITY_SEQ, SIGNUP_DATE
-)value(#{MEMBER_SEQ},#{ID},#{PASSWORD},#{TEL},#{NAME},#{cate2},'1',CURRENT_DATE( ))
-
-</insert>
-
-<update id="update">
-update member set ID=#{ID}, PASSWORD=#{PASSWORD}, NAME=#{NAME} where ID = #{ID}
-</update>
-
-<select id="info" resultType="Map" parameterType="Map">
-select m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, sub.SUB_ADDR_NAME, addr.ADDR_NAME
-from MEMBER m, address addr, sub_address sub
-where m.SUB_ADDR_SEQ = sub.SUB_ADDR_SEQ  
-and sub.ADDR_SEQ = addr.ADDR_SEQ
-and m.MEMBER_SEQ=#{MEMBER_SEQ}
-</select>
-
-<select id="myinfo" resultType="Map" parameterType="Map">
-select m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, sub.SUB_ADDR_NAME, addr.ADDR_NAME
-from MEMBER m, address addr, sub_address sub
-where m.SUB_ADDR_SEQ = sub.SUB_ADDR_SEQ  
-and sub.ADDR_SEQ = addr.ADDR_SEQ
-and m.ID=#{id}
-</select>
-
-<!-- <select id="read1" resultType="Map" parameterType="Map">
-select m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, sub.SUB_ADDR_NAME, addr.ADDR_NAME, abi.ABILITY_NAME, rel.MANAGER, rel.OBTAIN_DATE
-from MEMBER m, address addr, sub_address sub, member_ability_rel rel, abilities abi
-where m.SUB_ADDR_SEQ = sub.SUB_ADDR_SEQ  
-and rel.ABILITY_SEQ = abi.ABILITY_SEQ
-and rel.MEMBER_SEQ = m.MEMBER_SEQ
-and sub.ADDR_SEQ = addr.ADDR_SEQ
-and m.ID=#{MEMBER_ID}
-</select> -->
-
-<select id="read1" resultType="Map" parameterType="Map">
-select m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, sub.SUB_ADDR_NAME, addr.ADDR_NAME
-from MEMBER m, address addr, sub_address sub
-where m.SUB_ADDR_SEQ = sub.SUB_ADDR_SEQ  
-and sub.ADDR_SEQ = addr.ADDR_SEQ
-and m.ID=#{MEMBER_ID}
-</select>
-
-<select id="read2" resultType="Map" parameterType="Map">
-select m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, abi.ABILITY_NAME, rel.MANAGER, rel.OBTAIN_DATE
-from member_ability_rel rel, abilities abi, member m
-where m.MEMBER_SEQ = rel.MEMBER_SEQ
-and rel.ABILITY_SEQ = abi.ABILITY_SEQ
-and rel.MEMBER_SEQ = m.MEMBER_SEQ
-and m.ID=#{MEMBER_ID}
-</select>
-
-
-	<!-- <insert id="insert1" parameterType="Map">
-		insert into MEMBER_INFO (
-		SEQ_ID,ID,PASSWORD, NAME, TEL, EMAIL
-		)
-		values(
-		#{SEQ_ID},
-		#{MEMBER_ID},
-		#{PASSWORD},
-		#{NAME},
-		#{TEL},
-		#{EMAIL}
-		)
-
-
-	</insert>
-
-
-	<select id="insert2">
-		select SEQ_ID
-		from MEMBER_INFO
-		where SEQ_ID=#{SEQ_ID}
+		select m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, m.SUB_ADDR_SEQ
+		from MEMBER m
+		order by m.MEMBER_SEQ
 	</select>
 
-
-	<insert id="insert3"> insert into AUTHORITY_REL(
-		SEQ_ID, AUTHORITY_NUM)
-		values(
-		#{SEQ_ID},
-		100
-		)
-	</insert>
-
-
-	<select id="check" parameterType="Map" resultType="Map">
-
+	<select id="abilitylist" resultType="Map" parameterType="Map">
 		select
-		PASSWORD,ID,권한 from MEMBER_INFO where ID=#{MEMBER_ID}
-
+		ma.ABILITY_NAME
+		from MEMBER m, MEMBER_ABILITY_REL mr, ABILITIES ma
+		where mr.ABILITY_SEQ = ma.ABILITY_SEQ
+		and mr.MEMBER_SEQ = m.MEMBER_SEQ
+		and m.MEMBER_SEQ = #{MEMBER_SEQ}
 	</select>
 
-	<select id="getid" parameterType="Map" resultType="Map">
 
-		select ID
-		from MEMBER_INFO
-		where SEQ_ID=#{SEQ_ID}
-
+	<select id="check" resultType="Map" parameterType="Map">
+		select ID,
+		PASSWORD
+		from MEMBER
+		where ID = #{id}
 	</select>
 
-	INSERT INTO CIP_ORGANIZATION ( ORGANIZATION_SEQ 조직 일련번호 , NAME 명칭 , 
-		TELEPHONE 대표 전화번호 , ORDER_NUMBER 정렬순서 , PARENT_ORGANIZATION_SEQ 상위 조직 일련번호 
-		) values( #{ORGANIZATION_SEQ} 조직 일련번호 , #{NAME} 명칭 , #{TELEPHONE} 대표 전화번호 
-		, #{ORDER_NUMBER} 정렬순서 , #{PARENT_ORGANIZATION_SEQ} 상위 조직 일련번호 )
 
-	<select id="idDoubleCheck" parameterType="Map" resultType="Map">
 
-		select ID from MEMBER_INFO where ID=#{MEMBER_ID}
-
+	<select id="subaddlist" resultType="Map" parameterType="Map">
+		select
+		sub.SUB_ADDR_NAME, sub.SUB_ADDR_SEQ
+		from sub_address sub, address addr
+		where sub.ADDR_SEQ = addr.ADDR_SEQ
+		and addr.ADDR_SEQ=#{ADDR_SEQ}
 	</select>
 
-	<delete id="delete" parameterType="Map">
-		delete from CIP_MEMBER
+	<select id="addlist" resultType="Map" parameterType="Map">
+		select *
+		from address
+		order by ADDR_SEQ
+	</select>
+
+	<insert id="insert">
+		insert into member(
+		MEMBER_SEQ, ID, PASSWORD, TEL,
+		NAME, SUB_ADDR_SEQ, AUTHORITY_SEQ, SIGNUP_DATE
+		)value(#{MEMBER_SEQ},#{ID},#{PASSWORD},#{TEL},#{NAME},#{cate2},'1',CURRENT_DATE(
+		))
+
+	</insert>
+
+	<update id="update">
+		update member set ID=#{ID}, PASSWORD=#{PASSWORD},
+		NAME=#{NAME} where ID =
+		#{ID}
+	</update>
+
+	<select id="info" resultType="Map" parameterType="Map">
+		select
+		m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, sub.SUB_ADDR_NAME,
+		addr.ADDR_NAME
+		from MEMBER m, address addr, sub_address sub
 		where
-		MEMBER_SEQ = #{MEMBER_SEQ}
-	</delete>
+		m.SUB_ADDR_SEQ = sub.SUB_ADDR_SEQ
+		and sub.ADDR_SEQ = addr.ADDR_SEQ
+		and
+		m.MEMBER_SEQ=#{MEMBER_SEQ}
+	</select>
+
+	<select id="myinfo" resultType="Map" parameterType="Map">
+		select
+		m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, sub.SUB_ADDR_NAME,
+		addr.ADDR_NAME
+		from MEMBER m, address addr, sub_address sub
+		where
+		m.SUB_ADDR_SEQ = sub.SUB_ADDR_SEQ
+		and sub.ADDR_SEQ = addr.ADDR_SEQ
+		and
+		m.ID=#{id}
+	</select>
+
+	<!-- <select id="read1" resultType="Map" parameterType="Map"> select m.MEMBER_SEQ, 
+		m.NAME, m.ID, m.PASSWORD, m.TEL, sub.SUB_ADDR_NAME, addr.ADDR_NAME, abi.ABILITY_NAME, 
+		rel.MANAGER, rel.OBTAIN_DATE from MEMBER m, address addr, sub_address sub, 
+		member_ability_rel rel, abilities abi where m.SUB_ADDR_SEQ = sub.SUB_ADDR_SEQ 
+		and rel.ABILITY_SEQ = abi.ABILITY_SEQ and rel.MEMBER_SEQ = m.MEMBER_SEQ and 
+		sub.ADDR_SEQ = addr.ADDR_SEQ and m.ID=#{MEMBER_ID} </select> -->
+
+	<select id="read1" resultType="Map" parameterType="Map">
+		select
+		m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, sub.SUB_ADDR_NAME,
+		addr.ADDR_NAME
+		from MEMBER m, address addr, sub_address sub
+		where
+		m.SUB_ADDR_SEQ = sub.SUB_ADDR_SEQ
+		and sub.ADDR_SEQ = addr.ADDR_SEQ
+		and
+		m.ID=#{MEMBER_ID}
+	</select>
+
+	<select id="read2" resultType="Map" parameterType="Map">
+		select
+		m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, abi.ABILITY_NAME,
+		rel.MANAGER, rel.OBTAIN_DATE
+		from member_ability_rel rel, abilities
+		abi, member m
+		where m.MEMBER_SEQ = rel.MEMBER_SEQ
+		and rel.ABILITY_SEQ =
+		abi.ABILITY_SEQ
+		and rel.MEMBER_SEQ = m.MEMBER_SEQ
+		and m.ID=#{MEMBER_ID}
+	</select>
+
+	<!-- <select id="listpagination" resultType="Map" parameterType="Map"> select 
+		result.* from ( select rownum as num, member.* from ( select * from member 
+		order by NAME ) member ) result where result.num between #{pagination.pageBegin} 
+		and #{pagination.pageEnd} </select> <select id="totalcount" resultType="integer" 
+		parameterType="Map"> select count(ID) from member </select> -->
+
+	<!-- <select id="writeGetCount" resultType="int"> select count(*) from member 
+		</select> <select id="writeList" resultType="Map" parameterType="Map"> select*from 
+		member ORDER BY NAME DESC LIMIT #{offset}, #{noOfRecords} </select> <select 
+		id="writeInfoList" resultType="Map" parameterType="Map"> select*from member 
+		where info = 1 ORDER BY NAME DESC </select> -->
 
 
- -->
+	<!-- pagination -->
+
+	<select id="listpagination" resultType="Map" parameterType="Map">
+		select* from member order by NAME ASC
+		Limit #{pagination.pageBegin},#{pagination.pageEnd};
+	</select>
+
+	<select id="totalcount" resultType="integer" parameterType="Map">
+		select count(MEMBER_SEQ)
+		from member
+		where VISIBLE='TRUE';
+	</select>
+
+
+	<!-- <insert id="insert1" parameterType="Map"> insert into MEMBER_INFO ( 
+		SEQ_ID,ID,PASSWORD, NAME, TEL, EMAIL ) values( #{SEQ_ID}, #{MEMBER_ID}, #{PASSWORD}, 
+		#{NAME}, #{TEL}, #{EMAIL} ) </insert> <select id="insert2"> select SEQ_ID 
+		from MEMBER_INFO where SEQ_ID=#{SEQ_ID} </select> <insert id="insert3"> insert 
+		into AUTHORITY_REL( SEQ_ID, AUTHORITY_NUM) values( #{SEQ_ID}, 100 ) </insert> 
+		<select id="check" parameterType="Map" resultType="Map"> select PASSWORD,ID,권한 
+		from MEMBER_INFO where ID=#{MEMBER_ID} </select> <select id="getid" parameterType="Map" 
+		resultType="Map"> select ID from MEMBER_INFO where SEQ_ID=#{SEQ_ID} </select> 
+		INSERT INTO CIP_ORGANIZATION ( ORGANIZATION_SEQ 조직 일련번호 , NAME 명칭 , TELEPHONE 
+		대표 전화번호 , ORDER_NUMBER 정렬순서 , PARENT_ORGANIZATION_SEQ 상위 조직 일련번호 ) values( 
+		#{ORGANIZATION_SEQ} 조직 일련번호 , #{NAME} 명칭 , #{TELEPHONE} 대표 전화번호 , #{ORDER_NUMBER} 
+		정렬순서 , #{PARENT_ORGANIZATION_SEQ} 상위 조직 일련번호 ) <select id="idDoubleCheck" 
+		parameterType="Map" resultType="Map"> select ID from MEMBER_INFO where ID=#{MEMBER_ID} 
+		</select> <delete id="delete" parameterType="Map"> delete from CIP_MEMBER 
+		where MEMBER_SEQ = #{MEMBER_SEQ} </delete> -->
 
 </mapper>
