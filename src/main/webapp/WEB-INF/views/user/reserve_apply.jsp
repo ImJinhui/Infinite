@@ -47,7 +47,6 @@ function printDate() {
 /* 			document.write(year+""+month+""+day+dow); */
 			var text = "<label class='date_label'>"+"<span class='date_span'>"+dow+"</span>"+"<span class='date_em' value="+selectdate+">"+day+"</span>"+"</label>"; 
 			document.write(text);
-			
 		}
 /*         document.write(year + "년 "+ month + "월 " + day + "일 "+ dow +"요일"); 
         document.write(date.toLocaleString());
@@ -66,7 +65,6 @@ $(document).on("click",".date_em",function(){
 	$(this).css("color","#ffffff")
 	.css("border-radius","80%")
     .css("background","#6C6C6C");
-
 	alert(ss);
 });
 </script>

@@ -2,16 +2,37 @@ package com.ideaall.infinite.service;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
+
+import com.ideaall.infinite.dao.ShareDao;
+
+@Service
 public class UserService {
-	
+	@Autowired
+	ShareDao dao;
 	
 	public Object getList(Object dataMap) {
-//		String sqlMapId = "member.list";
+		String sqlMapId = "reservation_cate.list";
 //
-//		Object resultObject = dao.getList(sqlMapId, dataMap);
+		Object resultObject = dao.getList(sqlMapId, dataMap);
 //		
-//		return resultObject;
-		return 0;
+		return resultObject;
+	}
+	public Object getEquipList(Object dataMap) {
+		String sqlMapId = "reservation_cate.equiplist";
+//
+		Object resultObject = dao.getList(sqlMapId, dataMap);
+//		
+		return resultObject;
+	}
+	public Object getReserveList(Object dataMap) {
+		String sqlMapId = "reservation_cate.reservelist";
+//
+		Object resultObject = dao.getList(sqlMapId, dataMap);
+//		
+		return resultObject;
 	}
 	
 	public Object getObject(Object dataMap) {
