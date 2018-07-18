@@ -68,11 +68,22 @@ public class AdminEquipService {
 	}
 	
 	public Object saveObject(Object dataMap) {
+		Map<String, Object> paramMap = (Map<String, Object>) dataMap;
 		
 		String sqlMapId = "equip.merge";
 		Integer result = (Integer) dao.saveObject(sqlMapId, dataMap);
-	     
-		return result;
+	    
+		/*if(paramMap.get("attachFileList") != null) {
+			String uniqueSequence = (String) paramMap.get("EQUIP_SEQ");
+			// insert Attach Files By Member_seq
+			paramMap.put("SOURCE_UNIQUE_SEQ", uniqueSequence);
+			sqlMapId = "file.insertEquip";
+			dao.saveObject(sqlMapId, paramMap);
+		}*/
+		sqlMapId = "file.insertEquip";
+		result = (Integer) dao.saveObject(sqlMapId, paramMap);
+		Object resultObject = (Object) this.getObject(paramMap);
+		return resultObject;
 	}
 	public Object deleteObject(Object dataMap) {
 //		// delete child record authority
@@ -91,6 +102,8 @@ public class AdminEquipService {
 //		Object resultObject = dao.getList(sqlMapId, dataMap);
 //		
 //		return resultObject;
-		return 0;
+		String sqlMapId = "equip.delete";
+		Integer resultKey = (Integer) dao.deleteObject(sqlMapId, dataMap);
+		return resultKey;
 	}
 }

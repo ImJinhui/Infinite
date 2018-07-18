@@ -13,7 +13,6 @@
 <body>
 
 		<tiles:insertAttribute name="layout.top"/>
-		<%-- <tiles:insertAttribute name="layout.top2"/> --%>
 		<tiles:insertAttribute name="layout.body"/>
 		<tiles:insertAttribute name="layout.footer"/>
 	

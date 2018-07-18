@@ -22,20 +22,19 @@ public class AdminCategoryService {
 	}
 	
 	public Object getObject(Object dataMap) {
-//		String sqlMapId = "member.read";
-//
-//		Object resultObject = dao.getObject(sqlMapId, dataMap);
-//		
-//		return resultObject;
-		return 0;
+		String sqlMapId = "category.read";
+
+		Object resultObject = dao.getObject(sqlMapId, dataMap);
+		
+		return resultObject;
 	}
 	
 	public Object saveObject(Object dataMap) {
 		String sqlMapId= "category.mergeCate";
 		Integer result = (Integer) dao.saveObject(sqlMapId, dataMap);
 		
-		/*sqlMapId= "category.mergeSubCate";
-		result = (Integer) dao.saveObject(sqlMapId, dataMap);*/
+		sqlMapId= "category.mergeSubCate";
+		result = (Integer) dao.saveObject(sqlMapId, dataMap);
 		
 		return result;
 	}
@@ -56,6 +55,8 @@ public class AdminCategoryService {
 //		Object resultObject = dao.getList(sqlMapId, dataMap);
 //		
 //		return resultObject;
-		return 0;
+		String sqlMapId = "category.delete";
+		Integer resultKey = (Integer) dao.deleteObject(sqlMapId, dataMap);
+		return resultKey;
 	}
 }

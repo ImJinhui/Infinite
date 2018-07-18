@@ -8,6 +8,31 @@ $(document).ready(function(){
     $('select').formSelect();
   });
 </script>
+<!-- 장비추가 널 체크  -->
+<script>
+function checkNull(){
+	if ($("#subCate").find(":selected").val()==null || $("#subCate").find(":selected").val()=="Choose your option") {
+			alert("장비종류값을 입력해주세요");
+			$("#subCate").focus();
+			return $('#equipInsertForm').submit(false);
+		} else if ($("#equip_seq").val().length < 1) {
+			alert("장비아이디값을 입력해주세요");
+			$("#equip_seq").focus();
+			return $('#equipInsertForm').submit(false);
+		} else if ($("#description").val().length < 1) {
+			alert("장비설명값을 입력해주세요");
+			$("#description").focus();
+			return $('#equipInsertForm').submit(false);
+		} else if ($("#equip_name").val().length < 1) {
+			alert("장비이름값을 입력해주세요");
+			$("#equip_name").focus();
+			return $('#equipInsertForm').submit(false);
+		}
+		return $('#equipInsertForm').submit();
+	}
+	
+</script>
+<!-- /장비추가 널 체크  -->
 <!-- 장비 selectbox ajax -->
 <script type="text/javascript">
 var fn_cate_select = function(url, params) {
@@ -63,7 +88,7 @@ var fn_cate_select = function(url, params) {
   <div class="main_body" style="width:70%">
   <!-- 수정부분 -->
   <div class="row box" >
-		<form id="equipInsertForm" class="col s12" method="POST" action="<c:url value='/admin/equip/equip_merge'/>">
+		<form id="equipInsertForm" class="col s12" method="POST" action="<c:url value='/admin/equip/equip_merge'/>" enctype="multipart/form-data">
 			<input type="hidden" name="forwardView" value="/admin/equip/equip_list" />
 				<div class="row">
 					<div class="input-field col s6">
@@ -82,24 +107,24 @@ var fn_cate_select = function(url, params) {
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<input name="EQUIP_SEQ" id="id" type="text" class="validate" value="${resultMap.resultObject.EQUIP_SEQ }" readOnly> <label
-							for="id">장비아이디</label>
+						<input name="EQUIP_SEQ" id="equip_seq" type="text" class="validate" value="${resultMap.resultObject.EQUIP_SEQ }" readOnly> <label
+							for="equip_seq">장비아이디</label>
 					</div>
 				</div>
-				<div class="row">
+			
+
+			<div class="row">
 					<div class="input-field col s12">
-						<input name="EQUIP_NAME" id="name" type="text" class="validate" value="${resultMap.resultObject.EQUIP_NAME}"> <label
+						<input name="EQUIP_NAME" id="equip_name" type="text" class="validate" value="${resultMap.resultObject.EQUIP_NAME}"> <label
 							for="name">장비명</label>
 					</div>
 				</div>
 				<div class="row">
-					<div class="input-field col s12">
+					<div class="input-field col s6">
 						<input name="MANUFACTURER" id="manufacturer" type="text" class="validate" value="${resultMap.resultObject.MANUFACTURER}"> <label
 							for="manufacturer">제조사</label>
 					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s12">
+					<div class="input-field col s6">
 						<input name="MANAGER" id="manager" type="text" class="validate" value="${resultMap.resultObject.MANAGER}"> <label
 							for="manager">관리자</label>
 					</div>
@@ -110,7 +135,28 @@ var fn_cate_select = function(url, params) {
 						<label for="description">장비 설명</label>
 					</div>
 				</div>
-		<button class="btn waves-effect waves-light right" type="submit" name="action">
+				<div class="row">
+					<label for="available">사용가능여부</label>
+				<div class="input-field inline col s12">
+					<p id="available">
+						<label> <input name="AVAILABLE" value="사용가능" type="radio" /> <span>사용가능</span>
+						</label>
+					
+						<label> <input name="AVAILABLE" value="사용불가" type="radio" /> <span>사용불가</span>
+						</label>
+					</p>
+				</div>
+			</div>
+				<div class="file-field input-field">
+					<div class="btn">
+						<span>File</span> <input type="file" name="ATTACHEDFILES">
+					</div>
+					<div class="file-path-wrapper">
+						<input id="image" name="IMAGE" class="file-path validate" type="text"
+							placeholder="장비이미지">
+					</div>
+				</div>
+		<button class="btn waves-effect waves-light right" onclick="checkNull();" name="action">
 			장비수정 <i class="material-icons right">send</i>
 		</button>
 	</form>

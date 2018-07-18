@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="result">
+	<select id="list" resultType="Map" parameterType="Map" timeout="10">
+		select 
+			ABILITY_SEQ	
+			,ABILITY_NAME	
+		from ABILITIES
+	</select>
+	
+	<!-- <insert id="insert" parameterType="Map">
+		insert into ABILITIES
+			(ABILITY_NAME)
+		values (
+			#{ABILITY_NAME}
+			)
+	</insert>
+
+	<update id="update">
+		update ABILITIES
+		set ABILITY_NAME = #{ABILITY_NAME}
+		where ABILITY_SEQ = #{ABILITY_SEQ}
+	</update> -->
+	
+	<insert id="merge">
+	INSERT INTO ABILITIES (
+		ABILITY_NAME 
+		,ABILITY_SEQ
+		)
+		values(
+		#{ABILITY_NAME}
+		,#{ABILITY_SEQ}
+		)
+		ON DUPLICATE KEY UPDATE 
+		ABILITY_NAME = #{ABILITY_NAME}
+		,ABILITY_SEQ = #{ABILITY_SEQ}
+			
+	</insert>
+	<select id="read" resultType="Map" parameterType="Map">
+		select
+			r.RESERVATION_SEQ
+			,r.MEMBER_SEQ
+			,r.EQUIP_SEQ
+			,r.RESERVE_DATE
+			,r.RESERVE_S_TIME
+			,r.RESERVE_E_TIME
+			,r.NUM_OF_PROTOTYPE
+			,r.RETURN_CHECK
+			,m.NAME
+			,e.EQUIP_NAME
+		from RESERVATION r, MEMBER m, EQUIP e
+		where r.MEMBER_SEQ = m.MEMBER_SEQ
+		and r.EQUIP_SEQ = e.EQUIP_SEQ
+		and r.RESERVATION_SEQ = 1
+	</select>
+	
+	<!-- <delete id="delete" parameterType="Map">
+		delete from CIP_ORGANIZATION
+		where ORGANIZATION_SEQ = #{ORGANIZATION_SEQ}
+	</delete> --> 
+</mapper>

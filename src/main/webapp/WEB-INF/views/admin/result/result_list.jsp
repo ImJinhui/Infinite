@@ -28,37 +28,41 @@ $(document).ready(function(){
     <form class="col s12">
       <div class="row">
         <div class="input-field col s6">
-          <input id="reserve_seq" type="text" class="validate">
-          <label for="reserve_seq">대여번호</label>
+          <input id="reservation_seq" type="text" class="validate" value="${resultMap.RESERVATION_SEQ}">
+          <label for="reservation_seq">대여번호</label>
         </div>
         <div class="input-field col s6">
-          <input id="reserve_mem" type="text" class="validate">
-          <label for="reserve_mem">대여자</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="reserve_item" type="text" class="validate">
-          <label for="reserve_item">대여장비 및 장소</label>
+          <input id="member_seq" type="text" class="validate" value="${resultMap.NAME}">
+          <label for="member_seq">대여자</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s6">
-          <input id="reserve_date" type="text" class="validate">
+          <input id="reserve_date" type="text" class="validate" value="${resultMap.RESERVE_DATE}">
           <label for="reserve_date">예약일</label>
         </div>
         <div class="input-field col s6">
-          <input id="reserve_time" type="text" class="validate">
+          <input id="reserve_time" type="text" class="validate" value="${resultMap.RESERVE_S_TIME} ~ ${resultMap.RESERVE_E_TIME}">
           <label for="reserve_time">예약시간</label>
         </div>
       </div>
-      <div class="row">
+       <div class="row">
         <div class="input-field col s12">
-          <input id="reserve_item" type="text" class="validate">
-          <label for="reserve_item">대여장비 및 장소</label>
+          <input id="equip_seq" type="text" class="validate" value="${resultMap.EQUIP_NAME}">
+          <label for="equip_seq">대여장비</label>
         </div>
       </div>
-      	<label for="result_img">결과물</label>
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="return_check" type="text" class="validate" value="${resultMap.RETURN_CHECK}">
+          <label for="return_check">반납여부</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="num_of_prototype" type="text" class="validate" value="${resultMap.NUM_OF_PROTOTYPE}">
+          <label for="num_of_prototype">시제품개수</label>
+        </div>
+      </div>
+      	<label for="result_img">결과물 사진</label>
       <div id="result_img" class="row box">
       	<img class="materialboxed" width="100%" src="<c:url value='/resources/images/cat2.jpg'/>">
       </div>

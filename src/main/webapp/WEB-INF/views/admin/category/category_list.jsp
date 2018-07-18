@@ -6,19 +6,44 @@
 <%@ page isELIgnored="false"%>
 <script>
 	$(document).ready(function() {
-		$('.modal').modal();
+		$('.modal').modal({
+			dismissible : false
+		});
 	});
 	$(document).ready(function() {
 		$('select').formSelect();
 	});
 </script>
+<!-- 삭제 확인창 -->
+<script>
+function deleteAlert(name,seq){
+	alert("'"+name+"' 을 삭제하시겠습니까?");
+	/* $("#deleteLink").attr("href","<c:url value='/admin/equip/equip_delete?EQUIP_SEQ="+seq+"'/>");
+	var deleteLink = "<c:url value='/admin/equip/equip_delete?EQUIP_SEQ="+seq+"'/>";
+	location.href=deleteLink;  */
+}
+</script>
+<!-- /삭제 확인창 -->
 <script>
 function checkNull(){
-	if($("#category_seq").val().length<1 || $("#category_name").val().length<1 || $("#sub_category_seq").val().length<1 || $("#sub_category_name").val().length<1){
-		alert("대분류번호 값을 입력해주세요");
-		$("#category_seq").focus();
-	}
-	
+		if($("#category_seq").val().length<1){
+			alert("대분류번호값을 입력해주세요");
+			$("#category_seq").focus();
+			return $('#cateInsert').submit(false);
+		} else if($("#category_name").val().length<1){
+			alert("대분류이름값을 입력해주세요");
+			$("#category_name").focus();
+			return $('#cateInsert').submit(false);
+		} else if($("#sub_category_seq").val().length<1){
+			alert("중분류번호값을 입력해주세요");
+			$("#sub_category_seq").focus();
+			return $('#cateInsert').submit(false);
+		} else if($("#sub_category_name").val().length<1){
+			alert("중분류이름값을 입력해주세요");
+			$("#sub_category_name").focus();
+			return $('#cateInsert').submit(false);
+		}
+		return $('#cateInsert').submit();
 }
 </script>
 
@@ -58,7 +83,7 @@ function checkNull(){
 						<td><a class="waves-effect waves-light btn-small"
 								href="<c:url value='/admin/category/category_edit?SUB_CATEGORY_SEQ=${resultData.SUB_CATEGORY_SEQ}'/>">수정</a>
 							<a class="waves-effect waves-light btn-small"
-								href="<c:url value='/admin/ability/ability_read?ABILITY_SEQ=${resultData.ABILITY_SEQ}'/>">삭제</a>
+								href="<c:url value='/admin/category/category_delete?SUB_CATEGORY_SEQ=${resultData.SUB_CATEGORY_SEQ}'/>">삭제</a>
 						</td>
 					</tr>
 				</c:forEach>
@@ -74,11 +99,12 @@ function checkNull(){
 		<div class="row">
 			<div class="row">
 				<div class="input-field col s12">
+					<span><i class="modal-close material-icons right">close</i></span>
 					<h4>카테고리추가</h4>
 				</div>
 			</div>
 			
-			<form class="col s12" method="POST" onsubmit="checkNull();" action="<c:url value='/admin/category/category_merge'/>">
+			<form id="cateInsert" class="col s12" method="POST" action="<c:url value='/admin/category/category_merge'/>">
 			<input type="hidden" name="forwardView" value="/admin/category/category_list" />
 				
 				<div class="row">
@@ -108,7 +134,7 @@ function checkNull(){
 		</div>
 	</div>
 	<div class="modal-footer">
-		<button class="btn waves-effect waves-light" type="submit" name="action">
+		<button class="btn waves-effect waves-light" onclick="checkNull();" name="action">
 			추가 <i class="material-icons right">send</i>
 		</button>
 	</div>

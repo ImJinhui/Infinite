@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="file">
+	<select id="list" resultType="Map" parameterType="Map" timeout="10">
+		select 
+			ABILITY_SEQ	
+			,ABILITY_NAME	
+		from ABILITIES
+	</select>
+	
+	 <insert id="insertEquip" parameterType="Map">
+		insert into IMAGE (
+			ATTACHFILE_SEQ
+			,ATTACHFILE_TYPE
+			,ORGINALFILE_NAME
+			,PHYSICALFILE_NAME
+			,ATTACHFILE_PATH
+			,ATTACHFILE_SIZE
+			,SOURCE_UNIQUE_SEQ	
+			)
+		values (
+			#{ATTACHFILE_SEQ}
+			,#{ATTACHFILE_TYPE}
+			,#{ORGINALFILE_NAME}
+			,#{PHYSICALFILE_NAME}
+			,#{ATTACHFILE_PATH}
+			,#{ATTACHFILE_SIZE}
+			,#{EQUIP_SEQ}
+			)
+	</insert>
+
+<!-- 	<update id="update">
+		update ABILITIES
+		set ABILITY_NAME = #{ABILITY_NAME}
+		where ABILITY_SEQ = #{ABILITY_SEQ}
+	</update> -->
+	
+	<insert id="merge">
+	INSERT INTO ABILITIES (
+		ABILITY_NAME 
+		,ABILITY_SEQ
+		)
+		values(
+		#{ABILITY_NAME}
+		,#{ABILITY_SEQ}
+		)
+		ON DUPLICATE KEY UPDATE 
+		ABILITY_NAME = #{ABILITY_NAME}
+		,ABILITY_SEQ = #{ABILITY_SEQ}
+			
+	</insert>
+	<select id="read" resultType="Map" parameterType="Map">
+		select
+			ABILITY_SEQ
+			,ABILITY_NAME
+		from ABILITIES
+		where ABILITY_SEQ = #{ABILITY_SEQ}
+	</select>
+	
+	<!-- <delete id="delete" parameterType="Map">
+		delete from CIP_ORGANIZATION
+		where ORGANIZATION_SEQ = #{ORGANIZATION_SEQ}
+	</delete> --> 
+</mapper>

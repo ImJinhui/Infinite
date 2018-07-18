@@ -2,8 +2,16 @@ package com.ideaall.infinite.service;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ideaall.infinite.dao.ShareDao;
+
+@Service
 public class AdminResultService {
 	
+	@Autowired
+	private ShareDao dao;
 	
 	public Object getList(Object dataMap) {
 //		String sqlMapId = "member.list";
@@ -15,12 +23,11 @@ public class AdminResultService {
 	}
 	
 	public Object getObject(Object dataMap) {
-//		String sqlMapId = "member.read";
-//
-//		Object resultObject = dao.getObject(sqlMapId, dataMap);
-//		
-//		return resultObject;
-		return 0;
+		String sqlMapId = "result.read";
+
+		Object resultObject = dao.getObject(sqlMapId, dataMap);
+		
+		return resultObject;
 	}
 	
 	public Object saveObject(Map<Object, Object> dataMap) {

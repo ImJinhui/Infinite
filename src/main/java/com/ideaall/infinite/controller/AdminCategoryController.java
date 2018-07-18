@@ -41,6 +41,12 @@ public class AdminCategoryController {
 		} else if ("category_merge".equalsIgnoreCase(action)) {
 			service.saveObject(paramMap);
 			resultList = (List<Object>) service.getList(paramMap);
+		} else if("category_edit".equalsIgnoreCase(action)) {
+			resultMap = (Map<String, Object>) service.getObject(paramMap);
+		} else if("category_delete".equalsIgnoreCase(action)) {
+			service.deleteObject(paramMap);
+			resultList = (List<Object>) service.getList(paramMap);
+			forwardView = "/admin/category/category_list";
 		}
 		
 

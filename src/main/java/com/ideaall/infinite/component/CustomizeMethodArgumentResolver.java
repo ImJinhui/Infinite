@@ -32,8 +32,7 @@ public class CustomizeMethodArgumentResolver implements HandlerMethodArgumentRes
 	@Override
 	public boolean supportsParameter(MethodParameter methodParameter) {
 		// Auto-generated method stub
-		return MapParamCollector.class.isAssignableFrom(methodParameter
-				.getParameterType());
+		return MapParamCollector.class.isAssignableFrom(methodParameter.getParameterType());
 	}
 
 	@Override
