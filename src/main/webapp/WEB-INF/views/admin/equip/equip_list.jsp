@@ -97,6 +97,7 @@ function deleteAlert(name,seq){
 		fn_cate_select("<c:url value='/wsEquip/subCateList'/>", param);
 	};
 </script>
+<!-- /장비추가 modal selectbox ajax -->
 
 <style>
 .box {
@@ -104,6 +105,7 @@ function deleteAlert(name,seq){
 	margin: 0;
 }
 </style>
+
 <!-- 카테고리별 장비 목록 불러오는 ajax -->
 <script>
 	/* var fn_cate_equipList = function(url, id, params) {
@@ -192,16 +194,15 @@ function deleteAlert(name,seq){
 			<c:forEach items="${resultMap.resultEquipList}" var="resultData"
 				varStatus="loop">
 				<div class="col s12 m4">
-					<div class="card">
+					<div class="card hoverable">
 						<div class="card-image waves-effect waves-block waves-light">
-							<img class="activator"
+							 <img class="activator"
 								src="<c:url value='/resources/images/lasercutter.PNG'/>">
 						</div>
 						<div class="card-content">
 							<span class="activator grey-text text-darken-4">${resultData.EQUIP_NAME}
 								<i class="material-icons right">more_vert</i>
 							</span>
-							<%-- <p>${resultData.MANUFACTURER}</p> --%>
 						</div>
 						<div class="card-reveal">
 							<span class="card-title grey-text text-darken-4">${resultData.EQUIP_NAME}<i

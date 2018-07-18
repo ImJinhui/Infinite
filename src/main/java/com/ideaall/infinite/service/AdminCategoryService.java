@@ -1,5 +1,6 @@
 package com.ideaall.infinite.service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,16 @@ public class AdminCategoryService {
 	private ShareDao dao;
 	
 	public Object getList(Object dataMap) {
+		Map<String, Object> resultObject = new HashMap<String, Object>();
+		
 		String sqlMapId = "category.list";
-
-		Object resultObject = dao.getList(sqlMapId, dataMap);
+		resultObject.put("allCateList", dao.getList(sqlMapId, dataMap));
+		
+		sqlMapId = "category.cateList";
+		resultObject.put("cateList", dao.getList(sqlMapId, dataMap));
+		
+		sqlMapId = "category.subCateList";
+		resultObject.put("subCateList", dao.getList(sqlMapId, dataMap));
 		
 		return resultObject;
 	}
@@ -29,12 +37,16 @@ public class AdminCategoryService {
 		return resultObject;
 	}
 	
-	public Object saveObject(Object dataMap) {
-		String sqlMapId= "category.mergeCate";
+	public Object saveCateObject(Object dataMap) {
+		String sqlMapId= "category.merge";
 		Integer result = (Integer) dao.saveObject(sqlMapId, dataMap);
 		
-		sqlMapId= "category.mergeSubCate";
-		result = (Integer) dao.saveObject(sqlMapId, dataMap);
+		return result;
+	}
+	
+	public Object saveSubCateObject(Object dataMap) {
+		String sqlMapId= "category.merge";
+		Integer result = (Integer) dao.saveObject(sqlMapId, dataMap);
 		
 		return result;
 	}

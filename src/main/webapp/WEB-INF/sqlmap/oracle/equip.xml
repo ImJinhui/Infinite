@@ -15,9 +15,11 @@
 			,e.EQUIP_NAME
 			,e.AVAILABLE
 			,sc.SUB_CATEGORY_NAME
-		from EQUIP e, SUB_CATEGORY sc
+      		<!-- ,img.ATTACHFILE_PATH -->
+		from EQUIP e, SUB_CATEGORY sc<!-- , IMAGE img -->
 		where 
 		e.SUB_CATEGORY_SEQ = sc.SUB_CATEGORY_SEQ
+    	<!-- and e.EQUIP_SEQ = img.SOURCE_UNIQUE_SEQ -->
 		and e.VISIBLE = 'T'
 		order by e.SUB_CATEGORY_SEQ, e.EQUIP_SEQ
 	</select>

@@ -3,54 +3,70 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-    
+
 <mapper namespace="category">
 	<select id="list" resultType="Map" parameterType="Map" timeout="10">
-		select 
-			c.CATEGORY_SEQ
-			, c.CATEGORY_NAME
-			, sc.SUB_CATEGORY_SEQ
-			, sc.SUB_CATEGORY_NAME
+		select
+		c.CATEGORY_SEQ
+		, c.CATEGORY_NAME
+		, sc.SUB_CATEGORY_SEQ
+		, sc.SUB_CATEGORY_NAME
 		FROM category c, sub_category sc
-		where c.CATEGORY_SEQ = sc.CATEGORY_SEQ
+		where
+		c.CATEGORY_SEQ = sc.CATEGORY_SEQ
 		and sc.VISIBLE = 'T'
 	</select>
-	
-	 <insert id="mergeCate" parameterType="Map">
-		<if test="CATEGORY_SEQ != null">	
-		INSERT INTO CATEGORY (
+
+	<select id="cateList" resultType="Map" parameterType="Map" timeout="10">
+		select
 		CATEGORY_SEQ
-		,CATEGORY_NAME
-		,VISIBLE
-		)
-		values(
+		, CATEGORY_NAME
+		FROM category
+		where VISIBLE = 'T'
+	</select>
+
+	<select id="subCateList" resultType="Map" parameterType="Map" timeout="10">
+		select
+		CATEGORY_SEQ
+		, SUB_CATEGORY_SEQ
+		, SUB_CATEGORY_NAME
+		FROM sub_category
+		where CATEGORY_SEQ
+		and VISIBLE = 'T'
+	</select>
+
+	<insert id="merge" parameterType="Map">
+		<if test="SUB_CATEGORY_SEQ == null">
+			INSERT INTO CATEGORY (
+			CATEGORY_SEQ
+			,CATEGORY_NAME
+			,VISIBLE
+			)
+			values(
 			#{CATEGORY_SEQ}
 			,#{CATEGORY_NAME}
 			,'T'
-		)
-		ON DUPLICATE KEY UPDATE 
-		CATEGORY_SEQ = #{CATEGORY_SEQ}
-		,CATEGORY_NAME = #{CATEGORY_NAME}
-		,VISIBLE = 'T'
+			)
+			ON DUPLICATE KEY UPDATE
+			CATEGORY_SEQ = #{CATEGORY_SEQ}
+			,CATEGORY_NAME = #{CATEGORY_NAME}
+			,VISIBLE = 'T'
 		</if>
-	</insert>
-	
-	<insert id="mergeSubCate" parameterType="Map">
 		<if test="SUB_CATEGORY_SEQ != null">
 			insert into SUB_CATEGORY
-				(
-				SUB_CATEGORY_SEQ
-				,SUB_CATEGORY_NAME
-				,CATEGORY_SEQ
-				,VISIBLE
-				)
+			(
+			SUB_CATEGORY_SEQ
+			,SUB_CATEGORY_NAME
+			,CATEGORY_SEQ
+			,VISIBLE
+			)
 			values (
-				#{SUB_CATEGORY_SEQ}
-				,#{SUB_CATEGORY_NAME}
-				,#{CATEGORY_SEQ}
-				,'T'
-				)
-				ON DUPLICATE KEY UPDATE 
+			#{SUB_CATEGORY_SEQ}
+			,#{SUB_CATEGORY_NAME}
+			,#{CATEGORY_SEQ}
+			,'T'
+			)
+			ON DUPLICATE KEY UPDATE
 			SUB_CATEGORY_SEQ = #{SUB_CATEGORY_SEQ}
 			,SUB_CATEGORY_NAME = #{SUB_CATEGORY_NAME}
 			,CATEGORY_SEQ = #{CATEGORY_SEQ}
@@ -59,19 +75,39 @@
 	</insert>
 
 	<select id="read" resultType="Map" parameterType="Map">
-		select
+		<if test="SUB_CATEGORY_SEQ == null">
+			select
+			CATEGORY_SEQ
+			,CATEGORY_NAME
+			from CATEGORY
+			where VISIBLE='T'
+			and CATEGORY_SEQ = #{CATEGORY_SEQ}
+		</if>
+		<if test="SUB_CATEGORY_SEQ != null">
+			select
 			c.CATEGORY_SEQ
 			,c.CATEGORY_NAME
 			,sc.SUB_CATEGORY_SEQ
 			,sc.SUB_CATEGORY_NAME
-		from CATEGORY c, SUB_CATEGORY sc
-		where c.CATEGORY_SEQ = sc.CATEGORY_SEQ
-		and sc.SUB_CATEGORY_SEQ = #{SUB_CATEGORY_SEQ}
+			from CATEGORY c, SUB_CATEGORY sc
+			where c.CATEGORY_SEQ = sc.CATEGORY_SEQ
+			and sc.SUB_CATEGORY_SEQ = #{SUB_CATEGORY_SEQ}
+		</if>
 	</select>
-	
-	 <update id="delete" parameterType="Map">
-		update SUB_CATEGORY
-		set VISIBLE = 'F'
-		where SUB_CATEGORY_SEQ = #{SUB_CATEGORY_SEQ}
-	</update> 
+
+	<update id="delete" parameterType="Map">
+		<if test="SUB_CATEGORY_SEQ == null">
+			update CATEGORY
+			set VISIBLE = 'F'
+			where CATEGORY_SEQ =
+			#{CATEGORY_SEQ}
+		</if>
+		<if test="SUB_CATEGORY_SEQ != null">
+			update SUB_CATEGORY
+			set VISIBLE = 'F'
+			where SUB_CATEGORY_SEQ
+			= #{SUB_CATEGORY_SEQ}
+		</if>
+	</update>
+
 </mapper>

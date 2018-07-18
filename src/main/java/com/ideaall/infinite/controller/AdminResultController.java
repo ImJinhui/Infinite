@@ -35,9 +35,11 @@ public class AdminResultController {
 		List<Object> resultList = new ArrayList<Object>();
 
 		// divided depending on action value
-		if ("result_list".equalsIgnoreCase(action)) {
+		if ("result_read".equalsIgnoreCase(action)) {
 			resultMap = (Map<String, Object>) service.getObject(paramMap);
-		} 
+		} else if("result_list".equalsIgnoreCase(action)) {
+			resultList = (List<Object>) service.getList(paramMap);
+		}
 		
 
 		if(forwardView != null){

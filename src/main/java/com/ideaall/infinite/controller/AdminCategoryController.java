@@ -37,15 +37,18 @@ public class AdminCategoryController {
 
 		// divided depending on action value
 		if ("category_list".equalsIgnoreCase(action)) {
-			resultList = (List<Object>) service.getList(paramMap);
+			resultMap = (Map<String, Object>) service.getList(paramMap);
 		} else if ("category_merge".equalsIgnoreCase(action)) {
-			service.saveObject(paramMap);
-			resultList = (List<Object>) service.getList(paramMap);
+			service.saveCateObject(paramMap);
+			resultMap = (Map<String, Object>) service.getList(paramMap);
+		} else if ("subCategory_merge".equalsIgnoreCase(action)) {
+			service.saveSubCateObject(paramMap);
+			resultMap = (Map<String, Object>) service.getList(paramMap);
 		} else if("category_edit".equalsIgnoreCase(action)) {
 			resultMap = (Map<String, Object>) service.getObject(paramMap);
 		} else if("category_delete".equalsIgnoreCase(action)) {
 			service.deleteObject(paramMap);
-			resultList = (List<Object>) service.getList(paramMap);
+			resultMap = (Map<String, Object>) service.getList(paramMap);
 			forwardView = "/admin/category/category_list";
 		}
 		

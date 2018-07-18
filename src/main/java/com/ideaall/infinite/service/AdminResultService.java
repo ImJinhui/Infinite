@@ -14,12 +14,11 @@ public class AdminResultService {
 	private ShareDao dao;
 	
 	public Object getList(Object dataMap) {
-//		String sqlMapId = "member.list";
-//
-//		Object resultObject = dao.getList(sqlMapId, dataMap);
-//		
-//		return resultObject;
-		return 0;
+		String sqlMapId = "result.list";
+
+		Object resultObject = dao.getList(sqlMapId, dataMap);
+		
+		return resultObject;
 	}
 	
 	public Object getObject(Object dataMap) {

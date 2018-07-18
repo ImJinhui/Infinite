@@ -7,6 +7,8 @@
 $(document).ready(function(){
     $('select').formSelect();
   });
+
+
 </script>
 <!-- 장비추가 널 체크  -->
 <script>
@@ -95,7 +97,10 @@ var fn_cate_select = function(url, params) {
 						<select onchange="cateSelect(this.value);">
 							<option value="" disabled selected>Choose your option</option>
 							<c:forEach items="${resultMap.resultCateList}" var="resultCate" varStatus="loop">
-							<option value="${resultCate.CATEGORY_SEQ}">${resultCate.CATEGORY_NAME}</option>
+								<option value="${resultCate.CATEGORY_SEQ}">${resultCate.CATEGORY_NAME}</option>
+								 <%-- <c:if test="${(resultCate.CATEGORY_SEQ) == (resultMap.resultObject.CATEGORY_SEQ)}">
+									<option value="${resultCate.CATEGORY_SEQ}" selected="selected">${resultCate.CATEGORY_NAME}</option>
+								</c:if>  --%>
 							</c:forEach>
 						</select> <label>장비위치</label>
 					</div>

@@ -29,7 +29,6 @@ public class AdminEquipService {
 		Object resultSubCateList = dao.getList(sqlMapId, dataMap);
 		resultObject.put("resultSubCateList", resultSubCateList);
 		
-		
 		return resultObject;
 	}
 	
@@ -73,14 +72,7 @@ public class AdminEquipService {
 		String sqlMapId = "equip.merge";
 		Integer result = (Integer) dao.saveObject(sqlMapId, dataMap);
 	    
-		/*if(paramMap.get("attachFileList") != null) {
-			String uniqueSequence = (String) paramMap.get("EQUIP_SEQ");
-			// insert Attach Files By Member_seq
-			paramMap.put("SOURCE_UNIQUE_SEQ", uniqueSequence);
-			sqlMapId = "file.insertEquip";
-			dao.saveObject(sqlMapId, paramMap);
-		}*/
-		sqlMapId = "file.insertEquip";
+		sqlMapId = "file.equipInsert";
 		result = (Integer) dao.saveObject(sqlMapId, paramMap);
 		Object resultObject = (Object) this.getObject(paramMap);
 		return resultObject;

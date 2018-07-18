@@ -12,8 +12,8 @@
 		from ABILITIES
 	</select>
 	
-	 <insert id="insertEquip" parameterType="Map">
-		insert into IMAGE (
+	 <insert id="equipInsert" parameterType="Map">
+		 insert into image (
 			ATTACHFILE_SEQ
 			,ATTACHFILE_TYPE
 			,ORGINALFILE_NAME
@@ -22,16 +22,63 @@
 			,ATTACHFILE_SIZE
 			,SOURCE_UNIQUE_SEQ	
 			)
-		values (
-			#{ATTACHFILE_SEQ}
-			,#{ATTACHFILE_TYPE}
-			,#{ORGINALFILE_NAME}
-			,#{PHYSICALFILE_NAME}
-			,#{ATTACHFILE_PATH}
-			,#{ATTACHFILE_SIZE}
+		values 
+		 <foreach collection="attachFileList" item="item" index="index" separator=",">
+			(
+			 #{item.ATTACHFILE_SEQ}
+			,#{item.ATTACHFILE_TYPE}
+			,#{item.ORGINALFILE_NAME}
+			,#{item.PHYSICALFILE_NAME}
+			,#{item.ATTACHFILE_PATH}
+			,#{item.ATTACHFILE_SIZE}
 			,#{EQUIP_SEQ}
 			)
+		</foreach>
 	</insert>
+	
+	<!-- <insert id="ciupload"  parameterType="Map" >
+      INSERT INTO
+      SS_ATTACHFILE(
+      ATTACHFILE_SEQ,
+      SOURCE_UNIQUE_SEQ,
+      ATTACHFILE_TYPE,
+      ORGINALFILE_NAME,
+      PHYSICALFILE_NAME,
+      ATTACHFILE_PATH,
+      ATTACHFILE_SIZE,
+      REGISTER_SEQ,
+      REGISTRY_DATE,
+      MODIFIER_SEQ,
+      MODIFY_DATE
+      )
+      VALUES
+      <foreach collection="attachFileList" item="item" index="index" separator=",">
+      (
+      
+      #{item.ATTACHFILE_SEQ}
+      , #{CITY_SEQ}
+      , #{item.ATTACHFILE_TYPE}
+      , #{item.ORGINALFILE_NAME}
+      , #{item.PHYSICALFILE_NAME}
+      , #{item.ATTACHFILE_PATH}
+      , #{item.ATTACHFILE_SIZE}
+      , #{REGISTER_SEQ}
+      , now()
+      , #{MODIFIER_SEQ}
+      , now() 
+      )
+      </foreach>
+      ON DUPLICATE KEY
+      UPDATE
+       ATTACHFILE_TYPE = VALUES(ATTACHFILE_TYPE)
+      , ORGINALFILE_NAME = VALUES(ORGINALFILE_NAME)
+      , PHYSICALFILE_NAME = VALUES(PHYSICALFILE_NAME)
+      , ATTACHFILE_PATH = VALUES(ATTACHFILE_PATH)
+      , ATTACHFILE_SIZE = VALUES(ATTACHFILE_SIZE)
+      , MODIFIER_SEQ = #{MODIFIER_SEQ}
+      , MODIFY_DATE = now()
+   </insert> -->
+	
 
 <!-- 	<update id="update">
 		update ABILITIES

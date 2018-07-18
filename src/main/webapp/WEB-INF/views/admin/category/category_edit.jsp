@@ -58,18 +58,20 @@ function checkNull(){
 							for="category_name">대분류이름</label>
 					</div>
 				</div>
-				<div class="row">
-					<div class="input-field col s12">
-						<input name="SUB_CATEGORY_SEQ" id="sub_category_seq" type="text" class="validate" value="${resultMap.SUB_CATEGORY_SEQ}"> <label
-							for="sub_category_seq">중분류번호</label>
+				<c:if test="${!(resultMap.SUB_CATEGORY_SEQ eq null)}">
+					<div class="row">
+						<div class="input-field col s12">
+							<input name="SUB_CATEGORY_SEQ" id="sub_category_seq" type="text" class="validate" value="${resultMap.SUB_CATEGORY_SEQ}"> <label
+								for="sub_category_seq">중분류번호</label>
+						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s12">
-						<input name="SUB_CATEGORY_NAME" id="sub_category_name" type="text" class="validate" value="${resultMap.SUB_CATEGORY_NAME}"> <label
-							for="sub_category_name">중분류이름</label>
+					<div class="row">
+						<div class="input-field col s12">
+							<input name="SUB_CATEGORY_NAME" id="sub_category_name" type="text" class="validate" value="${resultMap.SUB_CATEGORY_NAME}"> <label
+								for="sub_category_name">중분류이름</label>
+						</div>
 					</div>
-				</div>
+				</c:if>
 		<button class="btn waves-effect waves-light right" onclick="checkNull();" name="action">
 			수정 <i class="material-icons right">send</i>
 		</button>
