@@ -102,7 +102,14 @@ public class AdminMemberService {
 
 		return resultObject;
 	}
+	
+	public Object getmemberADDR(Object dataMap) {
+		String sqlMapId = "member.getmemberADDR";
+		Object resultObject = dao.getObject(sqlMapId, dataMap);
 
+		return resultObject;
+	}
+	
 	public Object getListPagination(Object dataMap) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		String sqlMapId = "member.totalcount";

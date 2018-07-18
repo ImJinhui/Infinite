@@ -65,11 +65,10 @@
 		NAME=#{NAME} where ID =
 		#{ID}
 	</update>
-	
+
 	<update id="adminupdate">
 		update member set ID=#{ID}, PASSWORD=#{PASSWORD},
-		NAME=#{NAME} where ID =
-		#{ID}
+		NAME=#{NAME}, TEL=#{TEL}, SUB_ADDR_SEQ=#{cate2} where MEMBER_SEQ = #{MEMBER_SEQ}
 	</update>
 
 	<select id="info" resultType="Map" parameterType="Map">
@@ -130,6 +129,18 @@
 		ORDER BY rel.OBTAIN_DATE ASC
 	</select>
 
+	<select id="getmemberADDR" resultType="Map" parameterType="Map">
+		select sub.SUB_ADDR_NAME,sub.SUB_ADDR_SEQ, addr.ADDR_NAME, addr.ADDR_SEQ
+		from member m, sub_address sub,
+		address addr
+		where m.SUB_ADDR_SEQ=sub.SUB_ADDR_SEQ
+		and sub.ADDR_SEQ =
+		addr.ADDR_SEQ
+		and sub.SUB_ADDR_SEQ=#{SUB_ADDR_SEQ}
+	</select>
+
+
+
 	<select id="ability_list" resultType="Map" parameterType="Map">
 		select
 		*from abilities
@@ -172,10 +183,12 @@
 	</select>
 
 	<select id="hasAbility" resultType="Map" parameterType="Map">
-		select ABILITY_SEQ
+		select
+		ABILITY_SEQ
 		from member_ability_rel
 		where MEMBER_SEQ=#{member_seq}
-		and ABILITY_SEQ=#{ability_seq}
+		and
+		ABILITY_SEQ=#{ability_seq}
 
 	</select>
 

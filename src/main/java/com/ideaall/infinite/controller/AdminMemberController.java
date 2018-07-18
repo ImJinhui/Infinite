@@ -38,7 +38,9 @@ public class AdminMemberController {
 		String forwardView = (String) paramMap.get("forwardView");
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap2 = new HashMap<String, Object>();
 		List<Object> resultList = new ArrayList<Object>();
+		List<Object> resultList2 = new ArrayList<Object>();
 
 		// divided depending on action value
 		if ("member_list".equalsIgnoreCase(action)) {
@@ -65,8 +67,12 @@ public class AdminMemberController {
 		} else if ("member_edit".equalsIgnoreCase(action)) {
 
 		} else if ("member_read".equalsIgnoreCase(action)) {
-			resultMap = (Map<String, Object>) memberservice.getObject1(paramMap);
-			resultList = (List<Object>) memberservice.getObject2(paramMap);
+			resultList = (List<Object>) commonservice.getADDList(paramMap);//상위주소+하위주소
+			resultMap2 = (Map<String, Object>) memberservice.getmemberADDR(paramMap);//default 회원주소값
+			
+			resultMap = (Map<String, Object>) memberservice.getObject1(paramMap); //회원정보(이름~전화번호)
+			resultList2 = (List<Object>) memberservice.getObject2(paramMap);//회원정보(능력)
+			
 
 		} else if ("insert".equalsIgnoreCase(action)) {
 
@@ -87,7 +93,8 @@ public class AdminMemberController {
 		}else if ("member_admin_update".equalsIgnoreCase(action)) {
 
 			memberservice.adminupdate(paramMap);
-			viewName = "/admin/member/member_read";
+			resultMap = (Map) memberservice.getListPagination(paramMap);
+			viewName = "/admin/member/member_list";
 		}
 
 		if (forwardView != null) {
@@ -98,7 +105,9 @@ public class AdminMemberController {
 
 		modelandView.addObject("paramMap", paramMap);
 		modelandView.addObject("resultMap", resultMap);
+		modelandView.addObject("resultMap2", resultMap);
 		modelandView.addObject("resultList", resultList);
+		modelandView.addObject("resultList2", resultList2);
 		return modelandView;
 	}
 
