@@ -13,10 +13,13 @@
 			,e.DESCRIPTION	
 			,e.MANAGER	
 			,e.EQUIP_NAME
+			,e.AVAILABLE
 			,sc.SUB_CATEGORY_NAME
 		from EQUIP e, SUB_CATEGORY sc
-		where e.SUB_CATEGORY_SEQ = sc.SUB_CATEGORY_SEQ
-		order by e.SUB_CATEGORY_SEQ
+		where 
+		e.SUB_CATEGORY_SEQ = sc.SUB_CATEGORY_SEQ
+		and e.VISIBLE = 'T'
+		order by e.SUB_CATEGORY_SEQ, e.EQUIP_SEQ
 	</select>
 	
 	<select id="listByCate" resultType="Map" parameterType="Map" timeout="10">
@@ -27,9 +30,11 @@
 			,DESCRIPTION	
 			,MANAGER	
 			,EQUIP_NAME
-			
+			,AVAILABLE
 		from EQUIP 
-		where SUB_CATEGORY_SEQ = #{SUB_CATEGORY_SEQ}
+		where 
+		SUB_CATEGORY_SEQ = #{SUB_CATEGORY_SEQ}
+		and VISIBLE = 'T'
 		order by EQUIP_SEQ
 	</select>
 	
@@ -38,6 +43,7 @@
 			CATEGORY_SEQ
 			,CATEGORY_NAME
 		from CATEGORY 
+		where VISIBLE = 'T'
 		
 	</select> 
 	
@@ -51,6 +57,7 @@
 		    <if test="CATEGORY_SEQ != null">
 		        and CATEGORY_SEQ = #{CATEGORY_SEQ}
 		    </if>
+		    and VISIBLE = 'T'
 		</where>
 	</select> 
 
@@ -62,6 +69,8 @@
 		,DESCRIPTION
 		,MANAGER
 		,EQUIP_NAME
+		,VISIBLE
+		,AVAILABLE
 		)
 	values(
 		#{EQUIP_SEQ}
@@ -70,6 +79,8 @@
 		,#{DESCRIPTION}
 		,#{MANAGER}
 		,#{EQUIP_NAME}
+		,'T'
+		,#{AVAILABLE}
 		)
 	ON DUPLICATE KEY UPDATE
 	EQUIP_SEQ = #{EQUIP_SEQ}
@@ -78,6 +89,8 @@
 	,DESCRIPTION = #{DESCRIPTION}
 	,MANAGER = #{MANAGER}
 	,EQUIP_NAME = #{EQUIP_NAME}
+	,VISIBLE = 'T'
+	,AVAILABLE = #{AVAILABLE}
 	</insert>
 	
 	<select id="read" resultType="Map" parameterType="Map">
@@ -88,12 +101,14 @@
 			, DESCRIPTION
 			, MANAGER
 			, EQUIP_NAME
-		FROM equip
+			, AVAILABLE
+		from EQUIP
 		where EQUIP_SEQ = #{EQUIP_SEQ}
 	</select>
 	
-	<!-- <delete id="delete" parameterType="Map">
-		delete from CIP_ORGANIZATION
-		where ORGANIZATION_SEQ = #{ORGANIZATION_SEQ}
-	</delete>   -->
+	 <update id="delete" parameterType="Map">
+		update EQUIP
+		set VISIBLE = 'F'
+		where EQUIP_SEQ = #{EQUIP_SEQ}
+	</update> 
 </mapper>

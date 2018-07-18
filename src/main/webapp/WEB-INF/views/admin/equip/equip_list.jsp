@@ -7,19 +7,51 @@
 <script>
 	$(document).ready(function() {
 		$('.collapsible').collapsible();
-
 		$('.modal').modal({
-			endingTop : '5%'
+			endingTop : '5%',
+			dismissible : false
 		});
 		$('select').formSelect();
 	});
 </script>
+<!-- 장비추가 널 체크  -->
+<script>
+function checkNull(){
+	if ($("#subCate").find(":selected").val()==null || $("#subCate").find(":selected").val()=="Choose your option") {
+			alert("장비종류값을 입력해주세요");
+			$("#subCate").focus();
+			return $('#equipInsert').submit(false);
+		} else if ($("#equip_seq").val().length < 1) {
+			alert("장비아이디값을 입력해주세요");
+			$("#equip_seq").focus();
+			return $('#equipInsert').submit(false);
+		} else if ($("#description").val().length < 1) {
+			alert("장비설명값을 입력해주세요");
+			$("#description").focus();
+			return $('#equipInsert').submit(false);
+		} else if ($("#equip_name").val().length < 1) {
+			alert("장비이름값을 입력해주세요");
+			$("#equip_name").focus();
+			return $('#equipInsert').submit(false);
+		}
+		return $('#equipInsert').submit();
+	}
+	
+</script>
+<!-- /장비추가 널 체크  -->
+
+<!-- 삭제 확인창 -->
+<script>
+function deleteAlert(name,seq){
+	alert("'"+name+"' 을 삭제하시겠습니까?");
+}
+</script>
+<!-- /삭제 확인창 -->
 
 <!-- 장비추가 modal selectbox ajax -->
 <script type="text/javascript">
 	var fn_cate_select = function(url, params) {
-		$
-				.ajax({
+		$.ajax({
 					type : "POST",
 					url : url,
 					data : {
@@ -29,7 +61,7 @@
 					cache : false,
 					success : function(data) {
 						/* subCate 목록 생성 */
-						var sub_cate = "<option value='' disabled selected>Choose your option</option>";
+						var sub_cate = "<option disabled selected>Choose your option</option>";
 						$.each(data, function(i) {
 							sub_cate += "<option value='"
 									+ (data[i])['SUB_CATEGORY_SEQ'] + "'>"
@@ -46,7 +78,7 @@
 									if (this.value !== "") {
 										var selOption = $(this).find(
 												":selected").val();
-										$("#equipInsertForm").attr(
+										$("#equipInsert").attr(
 												"action",
 												"<c:url value='/admin/equip/equip_merge?SUB_CATEGORY_SEQ="
 														+ selOption + "'/>");
@@ -130,9 +162,6 @@
 <div class="main_body row" style="width: 70%">
 
 	<!-- 수정부분 -->
-	<!-- 장비관리list -->
-
-
 	<!-- 좌측카테고리 -->
 	<div class="box col s2">
 		<ul class="collapsible">
@@ -169,20 +198,23 @@
 								src="<c:url value='/resources/images/lasercutter.PNG'/>">
 						</div>
 						<div class="card-content">
-							<span class="card-title activator grey-text text-darken-4">${resultData.EQUIP_NAME}
+							<span class="activator grey-text text-darken-4">${resultData.EQUIP_NAME}
 								<i class="material-icons right">more_vert</i>
 							</span>
 							<%-- <p>${resultData.MANUFACTURER}</p> --%>
-							<a
-								href="<c:url value='/admin/equip/equip_edit?EQUIP_SEQ=${resultData.EQUIP_SEQ}'/>">수정</a>
 						</div>
 						<div class="card-reveal">
 							<span class="card-title grey-text text-darken-4">${resultData.EQUIP_NAME}<i
 								class="material-icons right">close</i></span>
 							<p>${resultData.DESCRIPTION}</p>
 							<p>${resultData.SUB_CATEGORY_SEQ}</p>
-							<p>${resultData.EQIP_SEQ}</p>
+							<p>${resultData.EQUIP_SEQ}</p>
 							<p>${resultData.MANAGER}</p>
+						</div>
+						<div class="card-action">
+							<a href="<c:url value='/admin/equip/equip_edit?EQUIP_SEQ=${resultData.EQUIP_SEQ}'/>">수정</a>
+							<a onclick="deleteAlert('${resultData.EQUIP_NAME}');" href="<c:url value='/admin/equip/equip_delete?EQUIP_SEQ=${resultData.EQUIP_SEQ}'/>">삭제</a>
+							<span class="right">${resultData.AVAILABLE}</span>
 						</div>
 					</div>
 				</div>
@@ -199,11 +231,11 @@
 		<div class="row">
 			<div class="row">
 				<div class="input-field col s12">
+				<span><i class="modal-close material-icons right">close</i></span>
 					<h4>장비추가</h4>
 				</div>
 			</div>
-			<form id="equipInsertForm" class="col s12" method="POST"
-				action="<c:url value='/admin/equip/equip_merge'/>" enctype="multipart/form-data">
+			<form id="equipInsert" class="col s12" method="POST" action="<c:url value='/admin/equip/equip_merge'/>" enctype="multipart/form-data">
 				<input type="hidden" name="forwardView"
 					value="/admin/equip/equip_list" />
 				<div class="row">
@@ -225,14 +257,14 @@
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<input name="EQUIP_SEQ" id="id" type="text" class="validate">
-						<label for="id">장비아이디</label>
+						<input name="EQUIP_SEQ" id="equip_seq" type="text" class="validate">
+						<label for="equip_seq">장비아이디</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<input name="EQUIP_NAME" id="name" type="text" class="validate">
-						<label for="name">장비명</label>
+						<input name="EQUIP_NAME" id="equip_name" type="text" class="validate">
+						<label for="equip_name">장비명</label>
 					</div>
 				</div>
 				<div class="row">
@@ -267,7 +299,7 @@
 		</div>
 	</div>
 	<div class="modal-footer">
-		<button class="btn waves-effect waves-light" type="submit"
+		<button class="btn waves-effect waves-light" onclick="checkNull();"
 			name="action">
 			장비추가 <i class="material-icons right">send</i>
 		</button>

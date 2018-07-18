@@ -1,4 +1,3 @@
-
 package com.ideaall.infinite.controller;
 
 import java.util.ArrayList;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ideaall.infinite.component.MapParamCollector;
 import com.ideaall.infinite.service.AdminEquipService;
 
 @Controller
@@ -26,9 +26,9 @@ public class AdminEquipController {
     
 	// Receive Parameters from Html Using @RequestParam Map with @PathVariable
 	@RequestMapping(value = MAPPING+"{action}", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView actionMethod(@RequestParam MultiValueMap<Object, Object> paramMultiMap, @RequestParam Map<String, Object> paramMap, 
-			@PathVariable String action, ModelAndView modelandView) {
-
+	public ModelAndView actionMethod(MapParamCollector paramMethodMap, @PathVariable String action, ModelAndView modelandView) {
+		
+		Map<Object,Object> paramMap = paramMethodMap.getMap();
 		String viewName = MAPPING + action ;
 		String forwardView = (String) paramMap.get("forwardView") ;
 
@@ -47,6 +47,10 @@ public class AdminEquipController {
 			//장비 카테고리 세팅 위함 
 			resultMap =  (Map<String, Object>) service.getList(paramMap);
 			resultMap.put("resultObject", service.getObject(paramMap));
+		} else if("equip_delete".equalsIgnoreCase(action)) {
+			service.deleteObject(paramMap);
+			resultMap =  (Map<String, Object>) service.getList(paramMap);
+			forwardView = "/admin/equip/equip_list";
 		}
 		
 
