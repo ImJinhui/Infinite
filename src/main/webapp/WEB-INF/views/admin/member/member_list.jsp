@@ -87,7 +87,7 @@
 
 							<%-- <td>${resultData.MEMBER_SEQ}</td> --%>
 							<td><a
-								href="<c:url value="/admin/member/member_read?MEMBER_ID=${resultData.ID}" />">${resultData.ID}</td>
+								href="<c:url value="/admin/member/member_read?MEMBER_SEQ=${resultData.MEMBER_SEQ}" />">${resultData.ID}</td>
 							<td>${resultData.NAME}</td>
 							<%-- <td>${resultData.PASSWORD}</td> --%>
 							<%-- <td>${resultData.SUB_ADDR_SEQ}</td> --%>

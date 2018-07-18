@@ -1,7 +1,9 @@
 package com.ideaall.infinite.service;
 
+import java.lang.reflect.Member;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -99,19 +101,37 @@ public class AdminMemberService {
 		int totalCount = (int) dao.getObject(sqlMapId, dataMap);
 		int currentPage;
 
-		if ((((Map<String,Object>) dataMap).get("curPage"))== null) {
+		if ((((Map<String, Object>) dataMap).get("curPage")) == null) {
 			currentPage = 1;
 		} else {
-			currentPage = Integer.valueOf((String) ((Map<String,Object>) dataMap).get("curPage"));
+			currentPage = Integer.valueOf((String) ((Map<String, Object>) dataMap).get("curPage"));
 		}
 
 		Pagination pagination = new Pagination(totalCount, currentPage);
 		resultMap.put("pagination", pagination);
 		sqlMapId = "member.listpagination";
 		((Map<String, Object>) dataMap).put("pagination", pagination);
+		System.out.println(((Map<String, Object>) dataMap).get("pagination"));
 		Object resultList = dao.getList(sqlMapId, dataMap);
+
 		resultMap.put("resultList", resultList);
 		return resultMap;
+	}
+
+	public Object getAbilityList(Object dataMap) {
+		String sqlMapId = "member.ability_list";
+		
+		List resultList = (List) dao.getList(sqlMapId, dataMap);
+	/*	Map map1 = new HashMap();
+		map1.put("MEMBER_SEQ", ((Map<String, Object>) dataMap).get("MEMBER_SEQ"));
+		resultList.add(map1);*/
+		return resultList;
+	}
+
+	public void insertAbility(Object dataMap) {
+
+		String sqlMapId = "member.ability_insert";
+		dao.saveObject(sqlMapId, dataMap);
 	}
 
 	public Object saveObject(Map<Object, Object> dataMap) {

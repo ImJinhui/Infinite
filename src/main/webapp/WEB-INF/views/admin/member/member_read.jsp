@@ -97,13 +97,16 @@
 			<!-- 능력테이블 -->
 			<div class="row">
 				<div class="input-field col s12">
-					<label for="member_ability">보유 능력</label> </br></br>
-					<table class="highlight centered" >
+					<label for="member_ability">보유 능력</label> <a
+						class="btn-floating btn-large waves-effect waves-light red right"
+						href="<c:url value="/admin/member/member_ability?MEMBER_SEQ=${resultMap.MEMBER_SEQ}"/>"><i
+						class="material-icons">add</i></a></br> </br> </br>
+					<table class="highlight centered">
 						<thead>
 							<tr>
 								<th>보유 능력 이름</th>
 								<th>담당자</th>
-								<th>얻은 날짜</th>
+								<th>발급 날짜</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -113,10 +116,10 @@
 									class="${(loop.index+1)%2 == 2 ? 'odd gradeX' : 'even gradeC'}">
 
 									<td>${resultData.ABILITY_NAME}</td>
-									<td>${resultData.MANAGER}</td>
-									<td>${resultData.OBTAIN_DATE}</td>
-								</tr>
+							<td>${resultData.MANAGER}</td>
+							<td>${resultData.OBTAIN_DATE}</td>
 							</c:forEach>
+							</tr>
 						</tbody>
 					</table>
 				</div>

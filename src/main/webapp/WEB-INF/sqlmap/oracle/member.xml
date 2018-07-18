@@ -104,8 +104,7 @@
 		where
 		m.SUB_ADDR_SEQ = sub.SUB_ADDR_SEQ
 		and sub.ADDR_SEQ = addr.ADDR_SEQ
-		and
-		m.ID=#{MEMBER_ID}
+		and m.MEMBER_SEQ=#{MEMBER_SEQ}
 	</select>
 
 	<select id="read2" resultType="Map" parameterType="Map">
@@ -118,8 +117,28 @@
 		and rel.ABILITY_SEQ =
 		abi.ABILITY_SEQ
 		and rel.MEMBER_SEQ = m.MEMBER_SEQ
-		and m.ID=#{MEMBER_ID}
+		and m.MEMBER_SEQ=#{MEMBER_SEQ}
+		ORDER BY rel.OBTAIN_DATE ASC
 	</select>
+
+	<select id="ability_list" resultType="Map" parameterType="Map">
+		select
+		*from abilities
+	</select>
+
+<!-- 	<select id="find_ability_seq">
+		select ABILITY_SEQ
+		from abilities
+		where
+		ABILITY_NAME=#{ability}
+	</select> -->
+
+	<insert id="ability_insert">
+		insert into member_ability_rel (MEMBER_SEQ,
+		ABILITY_SEQ, MANAGER, OBTAIN_DATE)
+		value(#{MEMBER_SEQ},#{ability},#{MANAGER},#{OBTAIN_DATE})
+		
+	</insert>
 
 	<!-- <select id="listpagination" resultType="Map" parameterType="Map"> select 
 		result.* from ( select rownum as num, member.* from ( select * from member 
@@ -138,7 +157,8 @@
 
 	<select id="listpagination" resultType="Map" parameterType="Map">
 		select* from member order by NAME ASC
-		Limit #{pagination.pageBegin},#{pagination.pageEnd};
+		Limit
+		#{pagination.pageBegin},#{pagination.pageEnd};
 	</select>
 
 	<select id="totalcount" resultType="integer" parameterType="Map">
@@ -146,6 +166,7 @@
 		from member
 		where VISIBLE='TRUE';
 	</select>
+
 
 
 	<!-- <insert id="insert1" parameterType="Map"> insert into MEMBER_INFO ( 

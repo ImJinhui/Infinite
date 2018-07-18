@@ -7,7 +7,7 @@ public class Pagination {
 	private int curPage; // 현재 페이지 번호
 	private int prevPage; // 이전 페이지
 	private int nextPage; // 다음 페이지
-	private int totPage; // 전체 페이지 갯수
+	private int totPage; // 전체 데이터 갯수
 	private int curBlock; // 현재 페이지 블록 번호
 	private int totBlock; // 전체 페이지 블록 갯수
 	private int pageBegin; // 페이지 내에서의 레코드 시작 번호
@@ -109,7 +109,7 @@ public class Pagination {
 		this.totalCount = count;
 		curBlock = 1; // 현재 페이지 블록을 1로 설정
 		this.curPage = curPage; // 현재 페이지 번호 설정
-		setTotPage(count); // 전체 페이저 갯수 설정
+		setTotPage(count); // 전체 데이터 갯수 설정
 		setPageRange(); // 편재 페이지 시작번호, 끝번호 계산
 		setTotBlock(); // 전체 페이지 블록 갯수 계산
 		setBlockRange(); // 현재 페이지 블록의 시작 페이지 끝페이지 번호 계산
@@ -139,7 +139,14 @@ public class Pagination {
 
 	// 전체 페이지 블록 갯수 계산
 	public void setTotBlock() {
-		totBlock = (int) Math.ceil(totPage / BLOCK_SCALE);
+		/* totBlock = (int) Math.ceil(totPage / BLOCK_SCALE); */
+
+		int pagecount = (int) Math.ceil(totPage % BLOCK_SCALE);
+		if (pagecount != 0) {
+			totBlock = ((int) Math.ceil(totPage / BLOCK_SCALE)) + 1;
+		} else {
+			totBlock = (int) Math.ceil(totPage / BLOCK_SCALE);
+		}
 	}
 
 	// 현제페이지의 시작번호, 끝번호 계산

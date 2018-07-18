@@ -31,7 +31,7 @@ public class WSmemberController {
 
 	@Autowired
 	AdminMemberService memberservice;
-	
+
 	@Autowired
 	WriteService writeService;
 
@@ -79,36 +79,32 @@ public class WSmemberController {
 		return resultMap;
 	}
 
-	/*@RequestMapping(value = "/list", method = RequestMethod.GET) 
-	public String list(Model model, HttpServletRequest req) throws Exception {
 
-		int currentPageNo = 1;
-		int maxPost=10;
-		
-		if(req.getParameter("pages")!=null)
-			currentPageNo = Integer.parseInt(req.getParameter("pages"));
-		
-		Paging paging = new Paging(currentPageNo, maxPost);
-		
-		int offset = (paging.getCurrentPageNo()-1)*paging.getMaxPost();
-		
-		List<WriteInfo> page = new ArrayList<WriteInfo>();
-		page = (ArrayList<WriteInfo>) writeService.writeList(offset, paging.getMaxPost());
-		paging.setNumberOfRecords(writeService.writeGetCount());
-		
-		paging.makePaging();
-		
-		model.addAttribute("page", page);
-		model.addAttribute("paging", paging);
-		
-		return "/admin/member_list";
-		
-
-	}*/
-
-	
-	
-
-	
+	/*
+	 * @RequestMapping(value = "/list", method = RequestMethod.GET) public String
+	 * list(Model model, HttpServletRequest req) throws Exception {
+	 * 
+	 * int currentPageNo = 1; int maxPost=10;
+	 * 
+	 * if(req.getParameter("pages")!=null) currentPageNo =
+	 * Integer.parseInt(req.getParameter("pages"));
+	 * 
+	 * Paging paging = new Paging(currentPageNo, maxPost);
+	 * 
+	 * int offset = (paging.getCurrentPageNo()-1)*paging.getMaxPost();
+	 * 
+	 * List<WriteInfo> page = new ArrayList<WriteInfo>(); page =
+	 * (ArrayList<WriteInfo>) writeService.writeList(offset, paging.getMaxPost());
+	 * paging.setNumberOfRecords(writeService.writeGetCount());
+	 * 
+	 * paging.makePaging();
+	 * 
+	 * model.addAttribute("page", page); model.addAttribute("paging", paging);
+	 * 
+	 * return "/admin/member_list";
+	 * 
+	 * 
+	 * }
+	 */
 
 }

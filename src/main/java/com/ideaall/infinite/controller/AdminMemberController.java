@@ -1,6 +1,8 @@
 package com.ideaall.infinite.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,18 +44,24 @@ public class AdminMemberController {
 		if ("member_list".equalsIgnoreCase(action)) {
 			// resultList = (List<Object>) memberservice.getList(paramMap);
 			resultMap = (Map) memberservice.getListPagination(paramMap);
-
 		}
-		/*
-		 * else if ("list_pagination".equalsIgnoreCase(action)) {
-		 * 
-		 * resultMap.put("curPage", paramMap.get("curPage")); resultMap=
-		 * (Map)memberservice.getListPagination(paramMap);
-		 * 
-		 * 
-		 * }
-		 */
-		else if ("member_edit".equalsIgnoreCase(action)) {
+
+		else if ("member_ability".equalsIgnoreCase(action)) {
+			resultList = (List<Object>) memberservice.getAbilityList(paramMap);
+
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			Calendar c1 = Calendar.getInstance();
+			String obtain_date = sdf.format(c1.getTime());
+			resultMap.put("OBTAIN_DATE", obtain_date);
+
+		} else if ("ability_insert".equalsIgnoreCase(action)) {
+			memberservice.insertAbility(paramMap);
+			resultMap = (Map<String, Object>) memberservice.getObject1(paramMap);
+			resultList = (List<Object>) memberservice.getObject2(paramMap);
+			
+			viewName = "/admin/member/member_read";
+
+		} else if ("member_edit".equalsIgnoreCase(action)) {
 
 		} else if ("member_read".equalsIgnoreCase(action)) {
 			resultMap = (Map<String, Object>) memberservice.getObject1(paramMap);
