@@ -55,11 +55,12 @@ public class AdminMemberController {
 			resultMap.put("OBTAIN_DATE", obtain_date);
 
 		} else if ("ability_insert".equalsIgnoreCase(action)) {
-			memberservice.insertAbility(paramMap);
-			resultMap = (Map<String, Object>) memberservice.getObject1(paramMap);
-			resultList = (List<Object>) memberservice.getObject2(paramMap);
+			memberservice.insertAbility(paramMap); //능력추가 수행
 			
-			viewName = "/admin/member/member_read";
+			viewName = "/admin/member/member_read"; //다시 리스트화면 띄우기
+			resultMap = (Map<String, Object>) memberservice.getObject1(paramMap); 
+			resultList = (List<Object>) memberservice.getObject2(paramMap);
+
 
 		} else if ("member_edit".equalsIgnoreCase(action)) {
 
@@ -77,6 +78,16 @@ public class AdminMemberController {
 			resultMap = (Map<String, Object>) memberservice.update(paramMap);
 			viewName = "/main/index";
 
+		} else if ("member_delete".equalsIgnoreCase(action)) {
+
+			memberservice.memberdelete(paramMap);
+			resultMap = (Map) memberservice.getListPagination(paramMap);
+			viewName = "/admin/member/member_list";
+			
+		}else if ("member_admin_update".equalsIgnoreCase(action)) {
+
+			memberservice.adminupdate(paramMap);
+			viewName = "/admin/member/member_read";
 		}
 
 		if (forwardView != null) {

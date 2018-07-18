@@ -80,6 +80,14 @@ public class AdminMemberService {
 
 		return resultObject;
 	}
+	
+	public Object adminupdate(Object dataMap) {
+		String sqlMapId = "member.adminupdate";
+
+		Object resultObject = dao.getObject(sqlMapId, dataMap);
+
+		return resultObject;
+	}
 
 	public Object getObject1(Object dataMap) {
 		String sqlMapId = "member.read1";
@@ -133,6 +141,8 @@ public class AdminMemberService {
 		String sqlMapId = "member.ability_insert";
 		dao.saveObject(sqlMapId, dataMap);
 	}
+	
+	
 
 	public Object saveObject(Map<Object, Object> dataMap) {
 		// String uniqueSequence = (String) dataMap.get("MEMBER_SEQ");
@@ -161,23 +171,16 @@ public class AdminMemberService {
 		return 0;
 	}
 
-	public Object deleteObject(Object dataMap) {
-		// // delete child record authority
-		// String sqlMapId = "authorityRmember.delete";
-		//
-		// Integer resultKey = (Integer) dao.deleteObject(sqlMapId, dataMap);
-		//
-		// // delete Mother record authority
-		// sqlMapId = "member.delete";
-		//
-		// resultKey = (Integer) dao.deleteObject(sqlMapId, dataMap);
-		//
-		// // get Member List
-		// sqlMapId = "member.list";
-		//
-		// Object resultObject = dao.getList(sqlMapId, dataMap);
-		//
-		// return resultObject;
-		return 0;
+	public void memberdelete(Object dataMap) {
+		String sqlMapId="member.delete";
+		dao.deleteObject(sqlMapId, dataMap);
+		
+	}
+
+	public Object abilitycheck(Map<String, Object> paramMap) {
+
+		String sqlMapId="member.hasAbility";
+		Object resultObject = dao.getList(sqlMapId, paramMap);
+		return resultObject;
 	}
 }

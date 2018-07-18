@@ -78,33 +78,20 @@ public class WSmemberController {
 
 		return resultMap;
 	}
+	
 
+	@RequestMapping(value = "/abilitycheck", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Object> abilitycheck(@RequestParam Map<String, Object> paramMap) {
 
-	/*
-	 * @RequestMapping(value = "/list", method = RequestMethod.GET) public String
-	 * list(Model model, HttpServletRequest req) throws Exception {
-	 * 
-	 * int currentPageNo = 1; int maxPost=10;
-	 * 
-	 * if(req.getParameter("pages")!=null) currentPageNo =
-	 * Integer.parseInt(req.getParameter("pages"));
-	 * 
-	 * Paging paging = new Paging(currentPageNo, maxPost);
-	 * 
-	 * int offset = (paging.getCurrentPageNo()-1)*paging.getMaxPost();
-	 * 
-	 * List<WriteInfo> page = new ArrayList<WriteInfo>(); page =
-	 * (ArrayList<WriteInfo>) writeService.writeList(offset, paging.getMaxPost());
-	 * paging.setNumberOfRecords(writeService.writeGetCount());
-	 * 
-	 * paging.makePaging();
-	 * 
-	 * model.addAttribute("page", page); model.addAttribute("paging", paging);
-	 * 
-	 * return "/admin/member_list";
-	 * 
-	 * 
-	 * }
-	 */
+		List<Map> resultList = new ArrayList<>();
+		Map<String, Object> resultMap = new HashMap<>();
+		
+		resultList =  (List)memberservice.abilitycheck(paramMap);
+		System.out.println("반환 데이터 : " + resultList);
+		
+		resultMap.put("resultData", resultList);
+		return resultMap;
+
+	}
 
 }

@@ -85,8 +85,7 @@
 	</script>
 
 	<div class="row box">
-		<form class="col s12" role="form" name="myForm" method="POST"
-			action="">
+		<form class="col s12" role="form" name="myForm" method="POST" action="">
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">face</i> <input id="name"

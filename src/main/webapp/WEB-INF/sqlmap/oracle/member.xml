@@ -15,6 +15,7 @@
 		select m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, m.SUB_ADDR_SEQ
 		from MEMBER m
 		order by m.MEMBER_SEQ
+
 	</select>
 
 	<select id="abilitylist" resultType="Map" parameterType="Map">
@@ -64,6 +65,12 @@
 		NAME=#{NAME} where ID =
 		#{ID}
 	</update>
+	
+	<update id="adminupdate">
+		update member set ID=#{ID}, PASSWORD=#{PASSWORD},
+		NAME=#{NAME} where ID =
+		#{ID}
+	</update>
 
 	<select id="info" resultType="Map" parameterType="Map">
 		select
@@ -104,7 +111,8 @@
 		where
 		m.SUB_ADDR_SEQ = sub.SUB_ADDR_SEQ
 		and sub.ADDR_SEQ = addr.ADDR_SEQ
-		and m.MEMBER_SEQ=#{MEMBER_SEQ}
+		and
+		m.MEMBER_SEQ=#{MEMBER_SEQ}
 	</select>
 
 	<select id="read2" resultType="Map" parameterType="Map">
@@ -117,7 +125,8 @@
 		and rel.ABILITY_SEQ =
 		abi.ABILITY_SEQ
 		and rel.MEMBER_SEQ = m.MEMBER_SEQ
-		and m.MEMBER_SEQ=#{MEMBER_SEQ}
+		and
+		m.MEMBER_SEQ=#{MEMBER_SEQ}
 		ORDER BY rel.OBTAIN_DATE ASC
 	</select>
 
@@ -126,18 +135,14 @@
 		*from abilities
 	</select>
 
-<!-- 	<select id="find_ability_seq">
-		select ABILITY_SEQ
-		from abilities
-		where
-		ABILITY_NAME=#{ability}
-	</select> -->
+	<!-- <select id="find_ability_seq"> select ABILITY_SEQ from abilities where 
+		ABILITY_NAME=#{ability} </select> -->
 
 	<insert id="ability_insert">
 		insert into member_ability_rel (MEMBER_SEQ,
 		ABILITY_SEQ, MANAGER, OBTAIN_DATE)
 		value(#{MEMBER_SEQ},#{ability},#{MANAGER},#{OBTAIN_DATE})
-		
+
 	</insert>
 
 	<!-- <select id="listpagination" resultType="Map" parameterType="Map"> select 
@@ -152,11 +157,10 @@
 		id="writeInfoList" resultType="Map" parameterType="Map"> select*from member 
 		where info = 1 ORDER BY NAME DESC </select> -->
 
-
 	<!-- pagination -->
 
 	<select id="listpagination" resultType="Map" parameterType="Map">
-		select* from member order by NAME ASC
+		select* from member where VISIBLE='TRUE' order by NAME ASC
 		Limit
 		#{pagination.pageBegin},#{pagination.pageEnd};
 	</select>
@@ -164,10 +168,20 @@
 	<select id="totalcount" resultType="integer" parameterType="Map">
 		select count(MEMBER_SEQ)
 		from member
-		where VISIBLE='TRUE';
+		where VISIBLE='TRUE'
 	</select>
 
+	<select id="hasAbility" resultType="Map" parameterType="Map">
+		select ABILITY_SEQ
+		from member_ability_rel
+		where MEMBER_SEQ=#{member_seq}
+		and ABILITY_SEQ=#{ability_seq}
 
+	</select>
+
+	<update id="delete">
+		update member set VISIBLE='FLASE' where ID=#{id}
+	</update>
 
 	<!-- <insert id="insert1" parameterType="Map"> insert into MEMBER_INFO ( 
 		SEQ_ID,ID,PASSWORD, NAME, TEL, EMAIL ) values( #{SEQ_ID}, #{MEMBER_ID}, #{PASSWORD}, 

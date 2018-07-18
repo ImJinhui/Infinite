@@ -23,12 +23,12 @@
 	<!-- 수정부분 -->
 	<div class="row box">
 		<form class="col s12" method="POST"
-			action="<c:url value='/admin/member/member_list'/>">
+			action="<c:url value='/admin/member/member_admin_update'/>">
 
 			<div class="row">
 				<div class="input-field col s12">
 					<input id="member_seq" type="text" class="validate"
-						value="${resultMap.MEMBER_SEQ}"> <label for="ability_seq">회원
+						value="${resultMap.MEMBER_SEQ}" readonly> <label for="ability_seq">회원
 						번호</label>
 				</div>
 			</div>
@@ -116,8 +116,8 @@
 									class="${(loop.index+1)%2 == 2 ? 'odd gradeX' : 'even gradeC'}">
 
 									<td>${resultData.ABILITY_NAME}</td>
-							<td>${resultData.MANAGER}</td>
-							<td>${resultData.OBTAIN_DATE}</td>
+									<td>${resultData.MANAGER}</td>
+									<td>${resultData.OBTAIN_DATE}</td>
 							</c:forEach>
 							</tr>
 						</tbody>
@@ -128,8 +128,40 @@
 
 			<button class="btn waves-effect waves-light right" type="submit"
 				name="action">
-				삭제 <i class="material-icons right">delete</i>
+				수정 <i class="material-icons right">edit</i>
 			</button>
+			<button class="btn waves-effect waves-light right" type="button"
+				name="action" onclick="member_delete()"><a href="<c:url value='/admin/member/member_delete?'/>"></a>
+				삭제 <i class="material-icons right">delete</i>
+				
+			</button>
+			
+		 	<script type="text/javascript">
+				var member_delete = function() {
+					var id = $('#member_id').val();
+
+					$.ajax({
+						type : "GET", //서버에 보낼 request 방식
+						url : "<c:url value='/admin/member/member_delete'/>", //서버에서 받을 url
+						dataType : "json",
+						data : {
+							"id" : id
+							
+						}, //Controller에 보낼 데이터(value = ADDR_SEQ 보내짐)
+						////////
+						success : function(result) { //서버에서 반환받은 데이터를 result에 담는다.
+							console.log(result);
+							alert("회원 삭제가 완료되었습니다.")
+						},
+
+						error : function(jqXHR, textStatus, errorThrown) {
+							alert("오류발생");
+						}
+					});
+
+				}
+			</script>
+ 
 		</form>
 	</div>
 	<!-- /수정부분 -->
