@@ -175,7 +175,7 @@ var fn_timeList = function(url,param1, param2, param3) {
 	        var year = date.getYear();
 	        var dow = date.getDay();
 	        year = (year < 1000) ? year + 1900 : year;
-	        if(dow==0||dow==6) continue;
+	        if(dow==0||dow==1) continue;
 	        else datecount++;
 	        switch(dow){
 			case 0:dow="일";break;
@@ -249,6 +249,9 @@ $(document).ready(function(){
 .am_pm{
 	display:block;  text-align: center;
 }
+.insertvalue{
+	display:none;
+}
 </style>
 
 <!-- main -->
@@ -303,11 +306,12 @@ $(document).ready(function(){
 	 }
 }, 1000); </script>
 	<!-- /수정부분 -->
+ <a class="waves-effect waves-light btn modal-trigger" onclick="reservecheck()" href="#modal1">예약목록보기</a>
 </div>
- <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
 <!-- /main -->
 <!-- 예약확인 modal -->
 <div id="modal1" class="modal">
+  <form role="form" method="POST"	action="<c:url value='/reserve/reserve_complete'/>">
     <div class="modal-content">
       <table>
       	
@@ -320,17 +324,21 @@ $(document).ready(function(){
               <th>목록삭제</th>
           </tr>
         </thead>
-        <form>
-		<tbody class="modal-tbody">
+		<tbody class="modal-tbody" >
 			
 		</tbody>
-		</form>
+		<input name="EQUIP_SEQ" type="hidden" value="W-DR01" class="insertvalue">
+		<input name="RESERVE_DATE" type="hidden" value="1900-1-1" class="insertvalue">
+		<input name="RESERVE_S_TIME" type="hidden" value="09:00" class="insertvalue">
+		<input name="RESERVE_E_TIME" type="hidden" value="13:00" class="insertvalue">
+
 	  	</table>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-green btn-flat">닫기</a>
-      <button class="waves-effect waves-light btn-large" type="submit" name="action">예약하기</button>
+      <button class="waves-effect waves-light btn-large" id="btn_reserve"type="submit">예약하기</button>
     </div>
+    </form>
   </div>
 <!-- 예약확인 modal -->
 <script>
@@ -343,6 +351,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   $(document).ready(function(){
     $('.modal').modal();
+
   });
 
 var acc = document.getElementsByClassName("accordion");
@@ -364,11 +373,23 @@ $(document).on("click",".btn_delete",function(){
 	var deleteparam = $(this).attr('value');
 	$('tr').remove('#'+deleteparam);
  	$('#'+deleteparam).css("background-color","#26a69a");
+ 	reservecheck();
 });
-
+function reservecheck(){
+	var reservelistcheck =$(".modal-tbody").children().length;
+	if(reservelistcheck > 0){
+		$('#btn_reserve').attr("disabled",false);
+	}else{
+		$('#btn_reserve').attr("disabled","disabled");
+	}
+}
 function addreserve(string){
-	M.toast({html: 'I am a toast!'})
 	 var arr = string.split('/');
+	if('rgb(255, 183, 77)' == $('#'+arr[0]+arr[1]+arr[2]).css("background-color")){
+		alert("이미 선택되어 있습니다");
+		return;
+	}
+	M.toast({html: string+'   예약목록에 추가됨'})
 	 if(arr[2] =='am'){
 		var reserve_s_time = '09:00';
 		var reserve_e_time = '13:00';
@@ -378,7 +399,9 @@ function addreserve(string){
 	 }
 	 $('#'+arr[0]+arr[1]+arr[2]).css("background-color","#ffb74d");
 	 var addDiv = '<tr id='+arr[0]+arr[1]+arr[2]+'><td NAME="EQUIP_SEQ">'+arr[0]+'</td><td NAME="RESERVE_DATE">'+arr[1]+'</td><td NAME="RESERVE_S_TIME">'+reserve_s_time+'</td>'
-	 +'<td NAME="RESERVE_E_TIME">'+reserve_e_time+'</td><td><button value='+arr[0]+arr[1]+arr[2]+' class="btn_delete">X</button></td></tr>';
+	 +'<td NAME="RESERVE_E_TIME">'+reserve_e_time+'</td><td><button value='+arr[0]+arr[1]+arr[2]+' class="btn_delete">X</button></td><input name="EQUIP_SEQ" type="hidden" value='+arr[0]+' class="insertvalue">'
+	 +'<input name="RESERVE_DATE" type="hidden" value='+arr[1]+' class="insertvalue"><input name="RESERVE_S_TIME" type="hidden" value='+reserve_s_time+' class="insertvalue"><input name="RESERVE_E_TIME" type="hidden" value='+reserve_e_time+' class="insertvalue">';
+	 +'</tr>';
 	 $('.modal-tbody').append(addDiv);
 }
 

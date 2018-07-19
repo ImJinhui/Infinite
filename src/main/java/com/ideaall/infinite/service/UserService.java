@@ -1,5 +1,8 @@
 package com.ideaall.infinite.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,28 @@ public class UserService {
 //
 		Object resultObject = dao.getList(sqlMapId, dataMap);
 //		
+		return resultObject;
+	}
+	public Object insertReserveList(Object dataMap) {
+		String sqlMapId = "reservation_cate.insertreserve";
+		
+		List<Object> reservationSettingList = new ArrayList<>();
+        
+        for(int i = 0; i < ((String[])((Map)dataMap).get("EQUIP_SEQ")).length; i++){
+        	if(((String[])((Map)dataMap).get("RESERVE_DATE"))[i].equals("1900-1-1"))
+        		continue;
+           Map<String, Object> reservationSettingMap = new  HashMap<>();
+           reservationSettingMap.put("EQUIP_SEQ", ((String[])((Map)dataMap).get("EQUIP_SEQ"))[i]);
+           reservationSettingMap.put("RESERVE_DATE",((String[])((Map)dataMap).get("RESERVE_DATE"))[i]);
+           reservationSettingMap.put("RESERVE_S_TIME",((String[])((Map)dataMap).get("RESERVE_S_TIME"))[i]);
+           reservationSettingMap.put("RESERVE_E_TIME",((String[])((Map)dataMap).get("RESERVE_E_TIME"))[i]);
+           reservationSettingList.add(reservationSettingMap);
+        }
+        ((Map)(dataMap)).put("reservationList", reservationSettingList);
+
+		
+		Object resultObject = dao.getList(sqlMapId, dataMap);
+		
 		return resultObject;
 	}
 	

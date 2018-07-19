@@ -26,6 +26,36 @@
 		from RESERVATION
 		where RESERVE_DATE between #{RESERVE_S_DATE} and #{RESERVE_E_DATE} and EQUIP_SEQ=#{EQUIP_SEQ}
 	</select>
+	
+ 	<insert id="insertreserve" parameterType="Map">
+		INSERT
+			INTO RESERVATION(
+				MEMBER_SEQ,
+				EQUIP_SEQ,
+				NUM_OF_USER,
+				RESERVE_DATE,
+				RESERVE_S_TIME,
+				NUM_OF_PROTOTYPE,
+				RETURN_CHECK,
+				RESERVE_E_TIME
+				)
+				values
+		<foreach collection="reservationList" item="item" index="index" separator=",">
+			(
+				'dummyid01',
+				#{item.EQUIP_SEQ},
+				'1',
+				#{item.RESERVE_DATE},
+				#{item.RESERVE_S_TIME},
+				'1',
+				'x',
+				#{item.RESERVE_E_TIME}
+			)
+		</foreach>
+	</insert>
+	
+	
+	
 	<select id="read" resultType="Map" parameterType="Map">
 		select 
 			ORGANIZATION_SEQ	<!-- 조직 일련번호 -->
