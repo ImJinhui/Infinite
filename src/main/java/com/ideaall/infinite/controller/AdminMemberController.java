@@ -60,9 +60,11 @@ public class AdminMemberController {
 			memberservice.insertAbility(paramMap); //능력추가 수행
 			
 			viewName = "/admin/member/member_read"; //다시 리스트화면 띄우기
-			resultMap = (Map<String, Object>) memberservice.getObject1(paramMap); 
-			resultList = (List<Object>) memberservice.getObject2(paramMap);
-
+			resultList = (List<Object>) commonservice.getADDList(paramMap);//상위주소+하위주소
+			resultMap2 = (Map<String, Object>) memberservice.getmemberADDR(paramMap);//default 회원주소값
+			
+			resultMap = (Map<String, Object>) memberservice.getObject1(paramMap); //회원정보(이름~전화번호)
+			resultList2 = (List<Object>) memberservice.getObject2(paramMap);//회원정보(능력)
 
 		} else if ("member_edit".equalsIgnoreCase(action)) {
 
@@ -95,6 +97,13 @@ public class AdminMemberController {
 			memberservice.adminupdate(paramMap);
 			resultMap = (Map) memberservice.getListPagination(paramMap);
 			viewName = "/admin/member/member_list";
+			
+		}else if("member_search".equalsIgnoreCase(action)) {
+			resultList = (List<Object>) memberservice.searchResult(paramMap);
+			
+			viewName="/admin/member/member_list";
+			resultMap = (Map) memberservice.getListPagination(paramMap);
+			
 		}
 
 		if (forwardView != null) {

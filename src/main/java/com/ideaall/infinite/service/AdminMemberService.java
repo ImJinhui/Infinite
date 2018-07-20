@@ -80,7 +80,7 @@ public class AdminMemberService {
 
 		return resultObject;
 	}
-	
+
 	public Object adminupdate(Object dataMap) {
 		String sqlMapId = "member.adminupdate";
 
@@ -102,14 +102,14 @@ public class AdminMemberService {
 
 		return resultObject;
 	}
-	
+
 	public Object getmemberADDR(Object dataMap) {
 		String sqlMapId = "member.getmemberADDR";
 		Object resultObject = dao.getObject(sqlMapId, dataMap);
 
 		return resultObject;
 	}
-	
+
 	public Object getListPagination(Object dataMap) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		String sqlMapId = "member.totalcount";
@@ -135,59 +135,56 @@ public class AdminMemberService {
 
 	public Object getAbilityList(Object dataMap) {
 		String sqlMapId = "member.ability_list";
-		
+
 		List resultList = (List) dao.getList(sqlMapId, dataMap);
-	/*	Map map1 = new HashMap();
-		map1.put("MEMBER_SEQ", ((Map<String, Object>) dataMap).get("MEMBER_SEQ"));
-		resultList.add(map1);*/
+		/*
+		 * Map map1 = new HashMap(); map1.put("MEMBER_SEQ", ((Map<String, Object>)
+		 * dataMap).get("MEMBER_SEQ")); resultList.add(map1);
+		 */
 		return resultList;
 	}
 
+	// 능력추가
 	public void insertAbility(Object dataMap) {
 
 		String sqlMapId = "member.ability_insert";
 		dao.saveObject(sqlMapId, dataMap);
 	}
-	
-	
 
-	public Object saveObject(Map<Object, Object> dataMap) {
-		// String uniqueSequence = (String) dataMap.get("MEMBER_SEQ");
-		//
-		// if("".equals(uniqueSequence)){
-		// uniqueSequence = commonUtil.getUniqueSequence();
-		// }
-		// dataMap.put("MEMBER_SEQ", uniqueSequence);
-		// dataMap.put("REGISTER_SEQ", "UUID-1111-1111111");
-		// dataMap.put("MODIFIER_SEQ", "UUID-1111-1111111");
-		//
-		//
-		// String sqlMapId = "member.merge";
-		// Object resultKey = dao.saveObject(sqlMapId, dataMap);
-		//
-		// sqlMapId="oracle_authorityRmember.insert";
-		// resultKey = dao.saveObject(sqlMapId, dataMap);
-		//
-		// sqlMapId="attachfile.insert";
-		// resultKey = dao.saveObject(sqlMapId, dataMap);
-		//
-		// sqlMapId = "member.read";
-		// Object resultObject = dao.getObject(sqlMapId, dataMap);
-		//
-		// return resultObject;
-		return 0;
+	// 회원 검색
+	public Object searchResult(Map<String, Object> paramMap) {
+
+		String searchitem = (String) paramMap.get("searchitem");
+		Object resultObject="";
+
+		if (searchitem.equals("name")) {
+			String sqlMapId = "member.find_name";
+			resultObject = dao.getList(sqlMapId, paramMap);
+
+		} else if (searchitem.equals("id")) {
+			String sqlMapId = "member.find_id";
+			resultObject = dao.getList(sqlMapId, paramMap);
+
+		} else if (searchitem.equals("tel")) {
+			String sqlMapId = "member.find_tel";
+			resultObject = dao.getList(sqlMapId, paramMap);
+
+		}
+
+		return resultObject;
 	}
 
 	public void memberdelete(Object dataMap) {
-		String sqlMapId="member.delete";
+		String sqlMapId = "member.delete";
 		dao.deleteObject(sqlMapId, dataMap);
-		
+
 	}
 
 	public Object abilitycheck(Map<String, Object> paramMap) {
 
-		String sqlMapId="member.hasAbility";
+		String sqlMapId = "member.hasAbility";
 		Object resultObject = dao.getList(sqlMapId, paramMap);
 		return resultObject;
 	}
+
 }
