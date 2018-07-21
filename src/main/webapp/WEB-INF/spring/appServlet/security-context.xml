@@ -18,8 +18,8 @@
 
 	<http security="none" pattern="/resources/**" />
 	<http security="none" pattern="/ws/**" />
-	<http security="none" pattern="/admin/common/login.jsp*" />
-	<http security="none" pattern="/admin/common/loginfail.jsp*" />
+	<http security="none" pattern="/admin/common?action=login.jsp*" />
+
 
 
 
@@ -30,7 +30,6 @@
 		<intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')" /> <!-- -->
 		<intercept-url pattern="/user/*" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/reserve/*" access="hasRole('ROLE_USER')" />
-
 		<intercept-url pattern="/common/*" access="isAnonymous()" />
 		<intercept-url pattern="/main/*" access="permitAll()" /><!-- -->
 
@@ -38,7 +37,7 @@
 		<form-login login-page="/common/login"
 			default-target-url="/"
 			login-processing-url="/j_spring_security_check"
-			authentication-failure-url="/common/loginfail?fail=ture"
+			authentication-failure-url="/common?action=login&amp;fail=true"
 			username-parameter="id" password-parameter="password" />
 
 		<!-- access denied url -->

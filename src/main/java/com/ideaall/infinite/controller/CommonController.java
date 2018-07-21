@@ -42,7 +42,7 @@ public class CommonController {
 		List<Object> resultList = new ArrayList<Object>();
 
 		// divided depending on action value
-		if ("login".equalsIgnoreCase(action)) {
+		if ("".equalsIgnoreCase(action)) {
 			
 		} else if ("signup".equalsIgnoreCase(action)) {
  			resultList = (List<Object>) commonservice.getADDList(paramMap);
@@ -51,26 +51,7 @@ public class CommonController {
 			resultMap.put("id", (String) paramMap.get("id"));
 			resultMap = (Map<String, Object>) commonservice.getInfo(paramMap);
 
-		} else if ("check".equalsIgnoreCase(action)) {
-			resultMap = (Map) commonservice.membercheck(paramMap);
-
-			if (resultMap != null) {// 검색된 아이디가 있으면,
-
-				String dbPass = (String) resultMap.get("PASSWORD");
-				String jspPass = (String) paramMap.get("password");
-				if (dbPass.equals(jspPass)) {// 비밀번호가 일치하면, 로그인성공
-					viewName = "/main/index";
-					resultMap.put("id", (String) resultMap.get("id"));
-
-				} else {// 비밀번호가 실패하면, 로그인 실패
-					viewName = "/common/loginfail";
-				}
-
-			} else {// 검색된 아이디가 없으면
-				viewName = "/common/loginfail";
-			}
-
-		}else if ("loginfail".equalsIgnoreCase(action)) {
+		} else if ("loginfail".equalsIgnoreCase(action)) {
 			viewName = "/common/loginfail";
 		}
 
