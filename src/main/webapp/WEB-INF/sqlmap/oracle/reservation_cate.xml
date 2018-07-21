@@ -10,7 +10,31 @@
 			SUB_CATEGORY_SEQ, SUB_CATEGORY_NAME
 		from SUB_CATEGORY
 	</select>
-
+	
+	<select id="abilitylist" resultType="Map" parameterType="Map" timeout="10">
+		select ABILITY_SEQ
+		from member_ability_rel
+		where MEMBER_SEQ = #{MEMBER_SEQ};
+	</select>
+	
+	<select id="subcatelist" resultType="Map" parameterType="Map" timeout="10">
+		select SUB_CATEGORY_SEQ
+		from abilities
+		where 
+		<foreach collection="abilitiesList" item="item" index="index" separator="or">
+			ABILITY_SEQ = #{item.ABILITY_SEQ}
+		</foreach>
+	</select>
+	
+	<select id="equipplacelist" resultType="Map" parameterType="Map" timeout="10">
+		select SUB_CATEGORY_SEQ, SUB_CATEGORY_NAME
+		from SUB_CATEGORY
+		where 
+		<foreach collection="abilitiesList" item="item" index="index" separator="or">
+			SUB_CATEGORY_SEQ = #{item.SUB_CATEGORY_SEQ}
+		</foreach>
+	</select>
+	
 	<select id="equiplist" resultType="Map" parameterType="Map" timeout="10">
 		select 
 			EQUIP_SEQ

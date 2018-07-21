@@ -6,10 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 import com.ideaall.infinite.dao.ShareDao;
+import com.ideaall.infinite.security.MemberInfo;
 
 @Service
 public class UserService {
@@ -19,7 +23,34 @@ public class UserService {
 	public Object getList(Object dataMap) {
 		String sqlMapId = "reservation_cate.list";
 //
-		Object resultObject = dao.getList(sqlMapId, dataMap);
+		List<Object> abilitiesList = new ArrayList<>();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		MemberInfo username = (MemberInfo)authentication.getPrincipal();
+		((Map)dataMap).put("MEMBER_SEQ",username.getMemberSeq());
+		sqlMapId = "reservation_cate.abilitylist";
+//		Object resultObject = dao.getList(sqlMapId, dataMap);
+		abilitiesList = (List<Object>) dao.getList(sqlMapId, dataMap);
+		System.out.println(((Map)(abilitiesList.get(1))).get("ABILITY_SEQ"));
+		int a = abilitiesList.size();
+		System.out.println(a);
+		for(int i = 0; i < a; i++) {
+			Map<String, Object> reservationSettingMap = new  HashMap<>();
+			reservationSettingMap.put("ABILITY_SEQ", ((Map)(abilitiesList.get(i))).get("ABILITY_SEQ"));
+			abilitiesList.add(reservationSettingMap);
+		}
+		((Map)(dataMap)).put("abilitiesList", abilitiesList);
+		sqlMapId = "reservation_cate.subcatelist";
+		abilitiesList = (List<Object>) dao.getList(sqlMapId, dataMap);
+		a=abilitiesList.size();
+		for(int i = 0; i < a; i++) {
+			Map<String, Object> reservationSettingMap = new  HashMap<>();
+			reservationSettingMap.put("ABILITY_SEQ", ((Map)(abilitiesList.get(i))).get("ABILITY_SEQ"));
+			abilitiesList.add(reservationSettingMap);
+		}
+		((Map)(dataMap)).put("abilitiesList", abilitiesList);
+		sqlMapId = "reservation_cate.equipplacelist";
+		Object resultObject = (List<Object>) dao.getList(sqlMapId, dataMap);
+//		resultObject = dao.getList(sqlMapId, dataMap);
 //		
 		return resultObject;
 	}

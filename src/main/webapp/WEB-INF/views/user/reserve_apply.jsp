@@ -3,27 +3,120 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
-<script src="<c:url value='/resources/js/reservation.js'/> "></script>
-<!-- left collapse -->
+
+<%-- <link href="<c:url value='/resources/css/customize_fullcalendar.css'/>" type="text/css"	rel="stylesheet"/>
+<link href="<c:url value='/resources/css/infinite.css'/>" type="text/css"	rel="stylesheet"/>
+<script src="<c:url value='/resources/js/ko.js'/> "></script> --%>
 <script>
-(function($) {
-	$(function() {
 
-$('.collapsible').collapsible({
-  
+var timeid = null;
+var dateary = new Array();
+var jbary = new Array();
+var listcount = 0;
+var fn_setfirstList = function(url, id, params) {
+    $.ajax({
+        type : "GET", 
+        url : url, 
+        dateType : "JSON",
+        data : {'SUB_CATEGORY_SEQ': params},
+        async: true
+        , success : function(data) {
+            var formTag = "<div>";
+            $.each(data, function(i,item){
+                formTag += '<div class="row"><div class ="col s2" style="display:block; text-align: center; vertical-align: middle" id='+item.EQUIP_SEQ+'>'+ item.EQUIP_SEQ+'</div>'
+                +'<div class="col s2" id='+dateary[0]+'><button class="waves-effect waves-light btn" type="button" onclick="addreserve(this.value)" value='+item.EQUIP_SEQ+'/'+dateary[0]+'/am'+' id='+item.EQUIP_SEQ+dateary[0]+'am'+'>오전</button><button class="waves-effect waves-light btn" type="button" onclick="addreserve(this.value)" value='+item.EQUIP_SEQ+'/'+dateary[0]+'/'+'pm'+' id='+item.EQUIP_SEQ+dateary[0]+'pm'+'>오후</button>	</div>'
+                +'<div class="col s2" id='+dateary[1]+'><button class="waves-effect waves-light btn" type="button" onclick="addreserve(this.value)" value='+item.EQUIP_SEQ+'/'+dateary[1]+'/am'+' id='+item.EQUIP_SEQ+dateary[1]+'am'+'>오전</button><button class="waves-effect waves-light btn" type="button" onclick="addreserve(this.value)" value='+item.EQUIP_SEQ+'/'+dateary[1]+'/'+'pm'+' id='+item.EQUIP_SEQ+dateary[1]+'pm'+'>오후</button>	</div>'
+                +'<div class="col s2" id='+dateary[2]+'><button class="waves-effect waves-light btn" type="button" onclick="addreserve(this.value)" value='+item.EQUIP_SEQ+'/'+dateary[2]+'/am'+' id='+item.EQUIP_SEQ+dateary[2]+'am'+'>오전</button><button class="waves-effect waves-light btn" type="button" onclick="addreserve(this.value)" value='+item.EQUIP_SEQ+'/'+dateary[2]+'/'+'pm'+' id='+item.EQUIP_SEQ+dateary[2]+'pm'+'>오후</button>	</div>'
+                +'<div class="col s2" id='+dateary[3]+'><button class="waves-effect waves-light btn" type="button" onclick="addreserve(this.value)" value='+item.EQUIP_SEQ+'/'+dateary[3]+'/am'+' id='+item.EQUIP_SEQ+dateary[3]+'am'+'>오전</button><button class="waves-effect waves-light btn" type="button" onclick="addreserve(this.value)" value='+item.EQUIP_SEQ+'/'+dateary[3]+'/'+'pm'+' id='+item.EQUIP_SEQ+dateary[3]+'pm'+'>오후</button>	</div>'
+                +'<div class="col s2" id='+dateary[4]+'><button class="waves-effect waves-light btn" type="button" onclick="addreserve(this.value)" value='+item.EQUIP_SEQ+'/'+dateary[4]+'/am'+' id='+item.EQUIP_SEQ+dateary[4]+'am'+'>오전</button><button class="waves-effect waves-light btn" type="button" onclick="addreserve(this.value)" value='+item.EQUIP_SEQ+'/'+dateary[4]+'/'+'pm'+' id='+item.EQUIP_SEQ+dateary[4]+'pm'+'>오후</button>	</div>'
+                +'</div>';
+                jbary[listcount]=item.EQUIP_SEQ;
+				listcount++;
+                /*                 fn_timeList("<c:url value='/wss/equip_List' />", id,item.EQUIP_SEQ); */
+            });
+            formTag += '</div>';
+           	$('#'+id).html(formTag);
+        }
+        , error : function(request,status,error) {
+        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            alert("Failure \n ("+status+")");
+            return false;
+        }
+    });
+};
+var fn_setsecondList = function(url, id, params) {
+    $.ajax({
+        type : "GET", 
+        url : url, 
+        dateType : "JSON",
+        data : {'SUB_CATEGORY_SEQ': params},
+        async: true
+        , success : function(data) {
+            var formTag = "<div>";
+            $.each(data, function(i,item){
+                formTag += '<div class="row"><div class ="col s2" style="display:block; text-align: center; vertical-align: middle" id='+item.EQUIP_SEQ+'>'+ item.EQUIP_SEQ+'</div>'
+                +'<div class="col s2" id='+dateary[5]+'><button class="waves-effect waves-light btn" type="button" onclick="addreserve(this.value)" value='+item.EQUIP_SEQ+'/'+dateary[5]+'/am'+' id='+item.EQUIP_SEQ+dateary[5]+'am'+'>오전</button><button class="waves-effect waves-light btn" type="button" onclick="addreserve(this.value)" value='+item.EQUIP_SEQ+'/'+dateary[5]+'/'+'pm'+' id='+item.EQUIP_SEQ+dateary[5]+'pm'+'>오후</button>	</div>'
+                +'<div class="col s2" id='+dateary[6]+'><button class="waves-effect waves-light btn" type="button" onclick="addreserve(this.value)" value='+item.EQUIP_SEQ+'/'+dateary[6]+'/am'+' id='+item.EQUIP_SEQ+dateary[6]+'am'+'>오전</button><button class="waves-effect waves-light btn" type="button" onclick="addreserve(this.value)" value='+item.EQUIP_SEQ+'/'+dateary[6]+'/'+'pm'+' id='+item.EQUIP_SEQ+dateary[6]+'pm'+'>오후</button>	</div>'
+                +'<div class="col s2" id='+dateary[7]+'><button class="waves-effect waves-light btn" type="button" onclick="addreserve(this.value)" value='+item.EQUIP_SEQ+'/'+dateary[7]+'/am'+' id='+item.EQUIP_SEQ+dateary[7]+'am'+'>오전</button><button class="waves-effect waves-light btn" type="button" onclick="addreserve(this.value)" value='+item.EQUIP_SEQ+'/'+dateary[7]+'/'+'pm'+' id='+item.EQUIP_SEQ+dateary[7]+'pm'+'>오후</button>	</div>'
+                +'<div class="col s2" id='+dateary[8]+'><button class="waves-effect waves-light btn" type="button" onclick="addreserve(this.value)" value='+item.EQUIP_SEQ+'/'+dateary[8]+'/am'+' id='+item.EQUIP_SEQ+dateary[8]+'am'+'>오전</button><button class="waves-effect waves-light btn" type="button" onclick="addreserve(this.value)" value='+item.EQUIP_SEQ+'/'+dateary[8]+'/'+'pm'+' id='+item.EQUIP_SEQ+dateary[8]+'pm'+'>오후</button>	</div>'
+                +'<div class="col s2" id='+dateary[9]+'><button class="waves-effect waves-light btn" type="button" onclick="addreserve(this.value)" value='+item.EQUIP_SEQ+'/'+dateary[9]+'/am'+' id='+item.EQUIP_SEQ+dateary[9]+'am'+'>오전</button><button class="waves-effect waves-light btn" type="button" onclick="addreserve(this.value)" value='+item.EQUIP_SEQ+'/'+dateary[9]+'/'+'pm'+' id='+item.EQUIP_SEQ+dateary[9]+'pm'+'>오후</button>	</div>'
+                +'</div>';
+                jbary[listcount]=item.EQUIP_SEQ;
+				listcount++;
+                /*                 fn_timeList("<c:url value='/wss/equip_List' />", id,item.EQUIP_SEQ); */
+            });
+            formTag += '</div>';
+           	$('#'+id).html(formTag);
+        }
+        , error : function(request,status,error) {
+        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            alert("Failure \n ("+status+")");
+            return false;
+        }
+    });
+};
+
+var fn_timeList = function(url,param1, param2, param3) {
+    $.ajax({
+        type : "GET", 
+        url : url, 
+        dateType : "JSON",
+        data : {'RESERVE_S_DATE': param1,'RESERVE_E_DATE': param2,'EQUIP_SEQ': param3},
+        async: true
+        , success : function(data) {
+        	if(data ==("")){
+        		
+        	}
+            $.each(data, function(i,item){
+            	var stime = item.RESERVE_S_TIME;
+            	var etime = item.RESERVE_E_TIME;
+            	if(stime == ("09:00")){
+            		
+	            		timeid=item.EQUIP_SEQ+item.RESERVE_DATE+'am';
+	            		$('#'+timeid).attr("disabled","disabled");      		
+            		
+            	}else{
+            		timeid=item.EQUIP_SEQ+item.RESERVE_DATE+'pm';
+            		$('#'+timeid).attr("disabled","disabled"); 	
+            	}
+            });
+        }
+        , error : function(request,status,error) {
+        	
+        	/* alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            alert("Failure \n ("+status+")"); */
+            return false;
+        }
+    });
 }
-);
 
-	}); // End Document Ready
-})(jQuery); // End of jQuery name space
-
-</script>
-<!-- /left collapse -->
-<script language="javascript">
-
-function printDate() {
-        var date = new Date();
-		for(var i = 0; i<=13; i++){
+ function printDate(val) {
+     var date = new Date();
+     	var datetext1 = "<div class='row'><div class='col s2' style='text-align: center;'></div>"
+     	var datetext2 = "<div class='row'><div class='col s2' style='text-align: center;'></div>"
+		var datecount=0;
+     	var count=0;
+		for(var i = 0; datecount<10; i++){
 			if(i!=0){
 				date.setTime(date.getTime()+(24*60*60*1000));
 			}
@@ -32,6 +125,8 @@ function printDate() {
 	        var year = date.getYear();
 	        var dow = date.getDay();
 	        year = (year < 1000) ? year + 1900 : year;
+	        if(dow==0||dow==1) continue;
+	        else datecount++;
 	        switch(dow){
 			case 0:dow="일";break;
 			case 1:dow="월";break;
@@ -42,202 +137,289 @@ function printDate() {
 			case 6:dow="토";break;
 			default:break;
 			}
-	        var selectdate = year+"-"+month+"-"+day;
-
-/* 			document.write(year+""+month+""+day+dow); */
-			var text = "<label class='date_label'>"+"<span class='date_span'>"+dow+"</span>"+"<span class='date_em' value="+selectdate+">"+day+"</span>"+"</label>"; 
-			document.write(text);
-		}
-/*         document.write(year + "년 "+ month + "월 " + day + "일 "+ dow +"요일"); 
-        document.write(date.toLocaleString());
-        document.write("---------");
-        var newtimems=date.getTime()+(30*24*60*60*1000);
-        document.write(newtimems);
-		date.setTime(newtimems);
-        document.write("---------");
-        document.write(date.getDate()); */
+	        datevalue = year+"-"+month+"-"+day;
+	        dateary[count] = datevalue;
+	        count++;
+	        if(datecount<=5){
+	        datetext1 += "<div class='col s2' id='date"+i+"' value="+datevalue+">"+month+"/"+day+"</div>";
+	        }else{
+	        datetext2 += "<div class='col s2' id='date"+i+"' value="+datevalue+">"+month+"/"+day+"</div>";	
+	        }
+	   }
+     		datetext1 += "</div>";
+     		datetext2 += "</div>";
+     		if(val==1){
+				document.write(datetext1);
+     		}else{
+				document.write(datetext2);     			
+     		}
 }
-</script>
-<script>
-var ss="";
-$(document).on("click",".date_em",function(){
-	var ss = $(this).attr('value');
-	$(this).css("color","#ffffff")
-	.css("border-radius","80%")
-    .css("background","#6C6C6C");
-	alert(ss);
-});
 </script>
 <style>
-.date_card{
-	height: 60px;
-	margin-right:0.5rem;
+.collapsible {
+   -webkit-box-shadow: none; 
+   box-shadow: none; 
 }
 
-.row .col{
-	padding: 0 1.5rem;
+.collapsible-body{
+	padding : 1.5rem;
 }
-
-.row .col .s2{
-	width:18.7%;
-}
-
-.date_card p {
-	margin-top: 15px;
-	font-size: large;
-}
-#dates{
-	/* padding-left: 0.7rem; */
-}
-.date_label{
-	display:inline-block;
-	font-size:3vw;
-	width:5%;
-	margin-left:1.5vw;
-}
-.date_span{
-	display:block;
-	font-size:1.5vw;
-}
-.date_em{
-    display: block;
-	cursor:pointer;
-    text-align: center;
-    width: 4vw;
-    height: 4vw;
-}
-/* .date_em:before {
-    content: "";
-    padding-top: 100%; /* 1:1 비율 */
-} */
 </style>
- <!-- 페이지 이름 -->
-<nav class="teal">
-    <div class="nav-wrapper">
-      <div class="bread_div">
-        <a href="#!" class="breadcrumb">예약</a>
-        <a href="#!" class="breadcrumb">예약신청</a>
-      </div>
-    </div>
-  </nav>
-<!-- /페이지 이름 -->
- 
 
-  <!-- main -->
-  <div class="main_body row">
-	<div class="col s12" style="display:center;text-align:center;">
+
+
+<script>
+$(document).ready(function(){
+    $('.collapsible').collapsible();
+  }); 
+</script>
+
+<style>
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+.active, .accordion:hover {
+    background-color: #ccc; 
+}
+
+.panel {
+    padding: 0 18px;
+    display: none;
+    background-color: white;
+    overflow: hidden;
+}
+.row{
+	border: 1px solid black;
+}
+.col.s2{
+	text-align: center;
+	width: 100%;
+}
+.am_pm{
+	display:block;  text-align: center;
+}
+.insertvalue{
+	display:none;
+}
+#firstpage{
+	align:right;
+}
+#secondpage{
+	display:none;
+	align:left;
+}
+</style>
+
+<!-- main -->
+<!-- 페이지 이름 -->
+<nav class="teal">
+	<div class="nav-wrapper">
+		<div class="bread_div">
+			<a href="#!" class="breadcrumb">예약</a> <a href="#!"
+				class="breadcrumb">예약현황</a>
+		</div>
+	</div>
+</nav>
+<!-- /페이지 이름 -->
+
+<div class="main_body" style="width: 70%">
+	<!-- 수정부분 -->
+	<!-- <div id='calendar'></div> -->
+<div id="firstpage">
+<a class="waves-effect waves-light btn" onclick="nextpage()" ><i class="material-icons left">navigate_next</i>1주뒤 예약보기</a>
+<div style="padding: 0 1rem 0 1rem;">
+	<script>
+		printDate(1);
+	</script>
+</div>
+
+	<c:forEach items="${resultList}" var="resultData" varStatus="loop">
+	<div id="selectable" class="accordion row">
+		<div class="col s12">${resultData.SUB_CATEGORY_NAME}</div>
+		
+		
+	</div>
+	
+	<div class="panel">
+		<div id="${resultData.SUB_CATEGORY_SEQ}first"></div>
 		<script>
-		printDate();
+			var id=${resultData.SUB_CATEGORY_SEQ}+"first";
+			var params=${resultData.SUB_CATEGORY_SEQ};
+			fn_setfirstList("<c:url value='/wss/equip_List' />", id,params);
 		</script>
 	</div>
-  <!-- 수정부분 -->
-  <!-- left -->
-<div class="col s3">
-	  <ul class="collapsible">
-	    <li class="active">
-	      <div class="collapsible-header"><i class="material-icons">print</i>3D Printer</div>
-	      
-	      <div class="collapsible-body collection">
-	        <a href="#!" class="collection-item">Printer 1</a>
-	        <a href="#!" class="collection-item">Printer 2</a>
-	        <a href="#!" class="collection-item">Printer 3</a>
-	        <a href="#!" class="collection-item">Printer 4</a>
-	      </div>
-	      
-	    </li>
-	    <li>
-	      <div class="collapsible-header"><i class="material-icons">content_cut</i>Laser Cutter</div>
-	      <div class="collapsible-body collection">
-	        <a href="#!" class="collection-item">Cutter 1</a>
-	        <a href="#!" class="collection-item">Cutter 2</a>
-	        <a href="#!" class="collection-item">Cutter 3</a>
-	        <a href="#!" class="collection-item">Cutter 4</a>
-	      </div>
-	    </li>
-	    <li>
-	      <div class="collapsible-header"><i class="material-icons">computer</i>Computer</div>
-	      <div class="collapsible-body collection">
-	        <a href="#!" class="collection-item">Computer 1</a>
-	        <a href="#!" class="collection-item">Computer 2</a>
-	        <a href="#!" class="collection-item">Computer 3</a>
-	        <a href="#!" class="collection-item">Computer 4</a>
-	      </div>
-	    </li>
-	  </ul>
-  </div>
-  <!-- /left -->
-  
-  <!-- center -->
- <div class="col s6">
- 
- 	<!-- <div class="row" style="text-align: center;">
-		<div id="dates">	 
-	
-	      <div class="col s2 card date_card btn"><p>07/02</p></div>
-	      <div class="col s2 card date_card btn"><p>07/03</p></div>
-	      <div class="col s2 card date_card btn"><p>07/04</p></div>
-	      <div class="col s2 card date_card btn"><p>07/05</p></div>
-	      <div class="col s2 card date_card btn"><p>07/06</p></div>
-	      
-	      <div class="col s2 card date_card btn"><p>07/09</p></div>
-	      <div class="col s2 card date_card btn"><p>07/10</p></div>
-	      <div class="col s2 card date_card btn"><p>07/11</p></div>
-	      <div class="col s2 card date_card btn"><p>07/12</p></div>
-	      <div class="col s2 card date_card btn"><p>07/13</p></div>
-     
-     	</div>  
-  	</div> -->
-  	
-  	<div class="row">
-  	<div class="card ">
-  	 <div class="collection">
-        <a href="#!" class="collection-item">09:00 ~ 10:00</a>
-        <a href="#!" class="collection-item">10:00 ~ 11:00</a>
-        <a href="#!" class="collection-item">11:00 ~ 12:00</a>
-        <a href="#!" class="collection-item">12:00 ~ 13:00</a>
-        <a href="#!" class="collection-item">13:00 ~ 14:00</a>
-        <a href="#!" class="collection-item">14:00 ~ 15:00</a>
-        <a href="#!" class="collection-item">15:00 ~ 16:00</a>
-        <a href="#!" class="collection-item">16:00 ~ 17:00</a>
-        <a href="#!" class="collection-item">17:00 ~ 18:00</a>
-      </div>
-  	</div>
-  	</div>
-  </div>
-  <!-- /center -->
-  
-  <!-- right -->
-<div class="col s3">
-      <div class="card">
-        <div class="card-content">
-        <i class="close material-icons right">close</i>
-          <div class="card-title">3D Printer</div>
-          <p>2018년 7월 4일</p>
-          <p>12:00 ~ 13:00</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-content">
-        <i class="close material-icons right">close</i>
-          <span class="card-title">3D Printer</span>
-          <p>2018년 7월 4일</p>
-          <p>13:00 ~ 14:00</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-content">
-        <i class="close material-icons right">close</i>
-          <span class="card-title">Laser Cutter</span>
-          <p>2018년 7월 4일</p>
-          <p>12:00 ~ 13:00</p>
-        </div>
-      </div>
-  </div>
-  <!-- /right -->
-  
-  <!-- /수정부분 -->
-  </div>
-  <!-- /main -->
-  
-  
+	</c:forEach>
+<script> setTimeout(function(){
+ 	for(var data1=0; data1<jbary.length; data1++)
+	 {
+	  console.log("jbary["+data1+"]:  "+jbary[data1]);
+ 	  fn_timeList("<c:url value='/wss/reserve_time' />",dateary[0],dateary[4],jbary[data1]);
+	 }
+}, 1000);
+</script>
+</div>
 
+
+
+
+<div id="secondpage">
+<a class="waves-effect waves-light btn" onclick="beforepage()"><i class="material-icons right">navigate_before</i>1주전 예약보기</a>
+<div style="padding: 0 1rem 0 1rem;">
+	<script>
+		printDate(2);
+	</script>
+</div>
+
+	<c:forEach items="${resultList}" var="resultData" varStatus="loop">
+	<div id="selectable" class="accordion row">
+		<div class="col s12">${resultData.SUB_CATEGORY_NAME}</div>
+		
+		
+	</div>
+	
+	<div class="panel">
+		<div id="${resultData.SUB_CATEGORY_SEQ}second"></div>
+		<script>
+			var id=${resultData.SUB_CATEGORY_SEQ}+"second";
+			var params=${resultData.SUB_CATEGORY_SEQ};
+			fn_setsecondList("<c:url value='/wss/equip_List' />", id,params);
+		</script>
+	</div>
+	</c:forEach>
+	<!-- fn_setFormTagList 종료 -->
+
+<script>
+	setTimeout(function(){
+	 	for(var data1=0; data1<jbary.length; data1++)
+		 {
+		  console.log("jbary["+data1+"]:  "+jbary[data1]);
+	 	  fn_timeList("<c:url value='/wss/reserve_time' />",dateary[5],dateary[9],jbary[data1]);
+		 }
+	}, 1000);
+</script>
+</div>
+	<!-- /수정부분 -->
+ <a class="waves-effect waves-light btn modal-trigger" onclick="reservecheck()" href="#modal1">예약목록보기</a>
+</div>
+<!-- /main -->
+<!-- 예약확인 modal -->
+<div id="modal1" class="modal">
+  <form role="form" method="POST"	action="<c:url value='/reserve/reserve_complete'/>">
+    <div class="modal-content">
+      <table>
+      	
+        <thead>
+          <tr>
+              <th>장비명</th>
+              <th>예약일</th>
+              <th>사용시작시간</th>
+              <th>사용종료시간</th>
+              <th>목록삭제</th>
+          </tr>
+        </thead>
+		<tbody class="modal-tbody" >
+			
+		</tbody>
+		<input name="EQUIP_SEQ" type="hidden" value="W-DR01" class="insertvalue">
+		<input name="RESERVE_DATE" type="hidden" value="1900-1-1" class="insertvalue">
+		<input name="RESERVE_S_TIME" type="hidden" value="09:00" class="insertvalue">
+		<input name="RESERVE_E_TIME" type="hidden" value="13:00" class="insertvalue">
+
+	  	</table>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">닫기</a>
+      <button class="waves-effect waves-light btn-large" id="btn_reserve"type="submit">예약하기</button>
+    </div>
+    </form>
+  </div>
+<!-- 예약확인 modal -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.modal').modal();
+
+  });
+
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+            panel.style.display = "none";
+        } else {
+            panel.style.display = "block";
+        }
+    });
+}
+
+$(document).on("click",".btn_delete",function(){
+	var deleteparam = $(this).attr('value');
+	$('tr').remove('#'+deleteparam);
+ 	$('#'+deleteparam).css("background-color","#26a69a");
+ 	reservecheck();
+});
+function reservecheck(){
+	var reservelistcheck =$(".modal-tbody").children().length;
+	if(reservelistcheck > 0){
+		$('#btn_reserve').attr("disabled",false);
+	}else{
+		$('#btn_reserve').attr("disabled","disabled");
+	}
+}
+function addreserve(string){
+	 var arr = string.split('/');
+	if('rgb(255, 183, 77)' == $('#'+arr[0]+arr[1]+arr[2]).css("background-color")){
+		alert("이미 선택되어 있습니다");
+		return;
+	}
+	M.toast({html: string+'   예약목록에 추가됨'})
+	 if(arr[2] =='am'){
+		var reserve_s_time = '09:00';
+		var reserve_e_time = '13:00';
+	 }else{
+		var reserve_s_time = '13:00';
+		var reserve_e_time = '18:00'; 
+	 }
+	 $('#'+arr[0]+arr[1]+arr[2]).css("background-color","#ffb74d");
+	 var addDiv = '<tr id='+arr[0]+arr[1]+arr[2]+'><td NAME="EQUIP_SEQ">'+arr[0]+'</td><td NAME="RESERVE_DATE">'+arr[1]+'</td><td NAME="RESERVE_S_TIME">'+reserve_s_time+'</td>'
+	 +'<td NAME="RESERVE_E_TIME">'+reserve_e_time+'</td><td><button value='+arr[0]+arr[1]+arr[2]+' class="btn_delete">X</button></td><input name="EQUIP_SEQ" type="hidden" value='+arr[0]+' class="insertvalue">'
+	 +'<input name="RESERVE_DATE" type="hidden" value='+arr[1]+' class="insertvalue"><input name="RESERVE_S_TIME" type="hidden" value='+reserve_s_time+' class="insertvalue"><input name="RESERVE_E_TIME" type="hidden" value='+reserve_e_time+' class="insertvalue">';
+	 +'</tr>';
+	 $('.modal-tbody').append(addDiv);
+}
+function nextpage(){
+	$('#secondpage').css("display","block");
+	$('#firstpage').css("display","none");
+}
+function beforepage(){
+	$('#secondpage').css("display","none");
+	$('#firstpage').css("display","block");
+}
+</script>
+	<script>
+
+		/* $(function() {
+			console.log(jbary);
+			test();
+		}); */
+	</script>

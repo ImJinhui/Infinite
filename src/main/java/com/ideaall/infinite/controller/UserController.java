@@ -1,5 +1,6 @@
 package com.ideaall.infinite.controller;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +37,7 @@ public class UserController {
 
 		// divided depending on action value
 		if ("reserve_apply".equalsIgnoreCase(action)) {
-			
+			resultList = (List<Object>) service.getList(paramMap);
 		} else if ("reserve_view".equalsIgnoreCase(action)) {
 			resultList = (List<Object>) service.getList(paramMap);
 		} 
