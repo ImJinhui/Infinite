@@ -3,7 +3,11 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
-
+<style>
+.card .card-image img {
+  height: 230px;
+}
+</style>
 <script>
 	$(document).ready(function() {
 		$('.collapsible').collapsible();
@@ -12,6 +16,16 @@
 			dismissible : false
 		});
 		$('select').formSelect();
+		
+		/* 삭제확인팝업 */
+		$(".btn_delete").click( function() {
+	    	var flag = confirm("삭제 하시겠습니까?");
+	        if(flag==true) {
+	            $(this).parent().click();
+	        } else if(flag==false){
+	            return false;
+	        }
+	    });
 	});
 </script>
 <!-- 장비추가 널 체크  -->
@@ -37,22 +51,15 @@ function checkNull(){
 		return $('#equipInsert').submit();
 	}
 	
-	
-function deleteAlert(name,seq){
-	alert("'"+name+"' 을 삭제하시겠습니까?");
-	/* $("#deleteLink").attr("href","<c:url value='/admin/equip/equip_delete?EQUIP_SEQ="+seq+"'/>");
-	var deleteLink = "<c:url value='/admin/equip/equip_delete?EQUIP_SEQ="+seq+"'/>";
-	location.href=deleteLink;  */
-	
-}
 </script>
 <!-- /장비추가 널 체크  -->
+
+
 
 <!-- 장비추가 modal selectbox ajax -->
 <script type="text/javascript">
 	var fn_cate_select = function(url, params) {
-		$
-				.ajax({
+		$.ajax({
 					type : "POST",
 					url : url,
 					data : {
@@ -60,20 +67,23 @@ function deleteAlert(name,seq){
 					},
 					dataType : 'json',
 					cache : false,
-					success : function(data) {
+					success : function(data) { 
+						
 						/* subCate 목록 생성 */
 						var sub_cate = "<option disabled selected>Choose your option</option>";
+						
 						$.each(data, function(i) {
 							sub_cate += "<option value='"
 									+ (data[i])['SUB_CATEGORY_SEQ'] + "'>"
 									+ (data[i])['SUB_CATEGORY_NAME']
 									+ "</option>";
 						});
+						
 						$("#subCate").html(sub_cate);
 						$('select').formSelect();
-
+ 
 						/* subCate 목록 선택 시 선택된 value값 얻어옴  */
-						$("#subCate").on(
+						 $("#subCate").on(
 								'change',
 								function() {
 									if (this.value !== "") {
@@ -85,8 +95,9 @@ function deleteAlert(name,seq){
 														+ selOption + "'/>");
 									}
 								});
+						/* subCate 목록 선택 시 선택된 value값 얻어옴  */
 
-					},
+					 },
 					error : function(xhr, status, exception) {
 						alert("Failure \n (" + status + ")");
 						return false;
@@ -96,8 +107,11 @@ function deleteAlert(name,seq){
 
 	function cateSelect(param) {
 		fn_cate_select("<c:url value='/wsEquip/subCateList'/>", param);
-	};
+	};  
 </script>
+<!-- /장비추가 modal selectbox ajax -->
+
+
 
 <style>
 .box {
@@ -105,6 +119,7 @@ function deleteAlert(name,seq){
 	margin: 0;
 }
 </style>
+
 <!-- 카테고리별 장비 목록 불러오는 ajax -->
 <script>
 	/* var fn_cate_equipList = function(url, id, params) {
@@ -193,28 +208,28 @@ function deleteAlert(name,seq){
 			<c:forEach items="${resultMap.resultEquipListByCate}" var="resultData"
 				varStatus="loop">
 				<div class="col s12 m4">
-					<div class="card">
+					<div class="card hoverable">
 						<div class="card-image waves-effect waves-block waves-light">
-							<img class="activator"
-								src="<c:url value='/resources/images/lasercutter.PNG'/>">
+							 <%-- <img class="activator" src="<c:url value='/resources/images/lasercutter.PNG'/>"> --%>
+							 <img class="activator"	src="<c:url value='/resources/uploads/${resultData.PHYSICALFILE_NAME}'/>">
 						</div>
 						<div class="card-content">
 							<span class="activator grey-text text-darken-4">${resultData.EQUIP_NAME}
 								<i class="material-icons right">more_vert</i>
 							</span>
-							<%-- <p>${resultData.MANUFACTURER}</p> --%>
 						</div>
 						<div class="card-reveal">
 							<span class="card-title grey-text text-darken-4">${resultData.EQUIP_NAME}<i
 								class="material-icons right">close</i></span>
 							<p>${resultData.DESCRIPTION}</p>
 							<p>${resultData.SUB_CATEGORY_SEQ}</p>
-							<p>${resultData.EQIP_SEQ}</p>
+							<p>${resultData.EQUIP_SEQ}</p>
 							<p>${resultData.MANAGER}</p>
 						</div>
 						<div class="card-action">
 							<a href="<c:url value='/admin/equip/equip_edit?EQUIP_SEQ=${resultData.EQUIP_SEQ}'/>">수정</a>
-							<a id="deleteLink" onclick="deleteAlert('${resultData.EQUIP_NAME}','${resultData.EQUIP_SEQ}');" href="<c:url value='/admin/equip/equip_delete?EQUIP_SEQ=${resultData.EQUIP_SEQ}'/>">삭제</a>
+							<a class="btn_delete" href="<c:url value='/admin/equip/equip_delete?EQUIP_SEQ=${resultData.EQUIP_SEQ}'/>">삭제</a>
+							<span class="right">${resultData.AVAILABLE}</span>
 						</div>
 					</div>
 				</div>
@@ -235,10 +250,8 @@ function deleteAlert(name,seq){
 					<h4>장비추가</h4>
 				</div>
 			</div>
-			<form id="equipInsert" class="col s12" method="POST"
-				action="<c:url value='/admin/equip/equip_merge'/>" enctype="multipart/form-data">
-				<input type="hidden" name="forwardView"
-					value="/admin/equip/equip_list" />
+			<form id="equipInsert" class="col s12" method="POST" action="<c:url value='/admin/equip/equip_merge'/>" enctype="multipart/form-data">
+				<input type="hidden" name="forwardView"	value="/admin/equip/equip_list" />
 				<div class="row">
 					<div class="input-field col s6">
 						<select onchange="cateSelect(this.value);">
@@ -290,7 +303,7 @@ function deleteAlert(name,seq){
 
 				<div class="file-field input-field">
 					<div class="btn">
-						<span>File</span> <input type="file">
+						<span>File</span> <input type="file" name="ATTACHEDFILES">
 					</div>
 					<div class="file-path-wrapper">
 						<input id="image" name="IMAGE" class="file-path validate" type="text"

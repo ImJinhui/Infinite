@@ -13,7 +13,7 @@
 	</select>
 	
 	 <insert id="equipInsert" parameterType="Map">
-		 insert into image (
+		 insert into equip_image (
 			ATTACHFILE_SEQ
 			,ATTACHFILE_TYPE
 			,ORGINALFILE_NAME
@@ -21,20 +21,45 @@
 			,ATTACHFILE_PATH
 			,ATTACHFILE_SIZE
 			,SOURCE_UNIQUE_SEQ	
+			,VISIBLE
 			)
 		values 
 		 <foreach collection="attachFileList" item="item" index="index" separator=",">
 			(
-			 #{item.ATTACHFILE_SEQ}
+			#{item.ATTACHFILE_SEQ}
 			,#{item.ATTACHFILE_TYPE}
 			,#{item.ORGINALFILE_NAME}
 			,#{item.PHYSICALFILE_NAME}
 			,#{item.ATTACHFILE_PATH}
 			,#{item.ATTACHFILE_SIZE}
 			,#{EQUIP_SEQ}
+			,'T'
 			)
 		</foreach>
+			<!-- ON DUPLICATE KEY UPDATE
+	       ATTACHFILE_SEQ = #{ATTACHFILE_SEQ}
+	       ,ATTACHFILE_TYPE = #{ATTACHFILE_TYPE}
+	       ,ORGINALFILE_NAME = #{ORGINALFILE_NAME}
+	       ,PHYSICALFILE_NAME = #{PHYSICALFILE_NAME}
+	       ,ATTACHFILE_PATH = #{ATTACHFILE_PATH}
+	       ,ATTACHFILE_SIZE = #{ATTACHFILE_SIZE}
+	       ,SOURCE_UNIQUE_SEQ = #{EQUIP_SEQ} -->
 	</insert>
+	
+	<update id="equipUpdate">
+	update EQUIP_IMAGE
+	set 
+	<foreach collection="attachFileList" item="item" index="index" separator=",">
+		ATTACHFILE_SEQ = #{item.ATTACHFILE_SEQ}
+		,ATTACHFILE_TYPE = #{item.ATTACHFILE_TYPE}
+		,ORGINALFILE_NAME = #{item.ORGINALFILE_NAME}
+		,PHYSICALFILE_NAME = #{item.PHYSICALFILE_NAME}
+		,ATTACHFILE_PATH = #{item.ATTACHFILE_PATH}
+		,ATTACHFILE_SIZE = #{item.ATTACHFILE_SIZE}
+	
+	where SOURCE_UNIQUE_SEQ = #{EQUIP_SEQ}
+	</foreach>
+	</update>
 	
 	<!-- <insert id="ciupload"  parameterType="Map" >
       INSERT INTO
@@ -86,30 +111,22 @@
 		where ABILITY_SEQ = #{ABILITY_SEQ}
 	</update> -->
 	
-	<insert id="merge">
-	INSERT INTO ABILITIES (
-		ABILITY_NAME 
-		,ABILITY_SEQ
-		)
-		values(
-		#{ABILITY_NAME}
-		,#{ABILITY_SEQ}
-		)
-		ON DUPLICATE KEY UPDATE 
-		ABILITY_NAME = #{ABILITY_NAME}
-		,ABILITY_SEQ = #{ABILITY_SEQ}
-			
-	</insert>
+	
 	<select id="read" resultType="Map" parameterType="Map">
 		select
-			ABILITY_SEQ
-			,ABILITY_NAME
+			ATTACHFILE_SEQ
+			,ATTACHFILE_TYPE
+			,ORGINALFILE_NAME
+			,PHYSICALFILE_NAME
+			,ATTACHFILE_PATH
+			,ATTACHFILE_SIZE
+			,SOURCE_UNIQUE_SEQ	
 		from ABILITIES
 		where ABILITY_SEQ = #{ABILITY_SEQ}
 	</select>
 	
-	<!-- <delete id="delete" parameterType="Map">
-		delete from CIP_ORGANIZATION
-		where ORGANIZATION_SEQ = #{ORGANIZATION_SEQ}
-	</delete> --> 
+	 <update id="delete" parameterType="Map">
+		update from EQUIP_IMAGE 
+		where EQUIP_SEQ = #{EQUIP_SEQ}
+	</update>  
 </mapper>

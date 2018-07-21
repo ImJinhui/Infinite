@@ -11,10 +11,18 @@ $(document).ready(function() {
 		endingTop : '5%'
 	}
 	);
-});
-$(document).ready(function() {
+	
 	$('select').formSelect();
-
+	
+	/* 삭제확인팝업 */
+	$(".btn_delete").click( function() {
+    	var flag = confirm("삭제 하시겠습니까?");
+        if(flag==true) {
+            $(this).parent().click();
+        } else if(flag==false){
+            return false;
+        }
+    });
 });
 </script>
 
@@ -52,8 +60,8 @@ $(document).ready(function() {
 							 <td>${resultData.ABILITY_NAME}</td> 
 							<td><a class="waves-effect waves-light btn-small"
 								href="<c:url value='/admin/ability/ability_edit?ABILITY_SEQ=${resultData.ABILITY_SEQ}'/>">수정</a></td>
-							<td><a class="waves-effect waves-light btn-small"
-								href="<c:url value='/admin/ability/ability_read?ABILITY_SEQ=${resultData.ABILITY_SEQ}'/>">삭제</a></td>
+							<td><a class="btn_delete waves-effect waves-light btn-small"
+								href="<c:url value='/admin/ability/ability_delete?ABILITY_SEQ=${resultData.ABILITY_SEQ}'/>">삭제</a></td>
 						</tr>
 						</c:forEach>
 						</tbody>

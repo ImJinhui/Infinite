@@ -1,6 +1,7 @@
 package com.ideaall.infinite.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class AdminEquipService {
 		sqlMapId = "equip.subCateList";
 		Object resultSubCateList = dao.getList(sqlMapId, dataMap);
 		resultObject.put("resultSubCateList", resultSubCateList);
+		
 		
 		return resultObject;
 	}
@@ -68,32 +70,24 @@ public class AdminEquipService {
 	
 	public Object saveObject(Object dataMap) {
 		Map<String, Object> paramMap = (Map<String, Object>) dataMap;
-		
+
 		String sqlMapId = "equip.merge";
 		Integer result = (Integer) dao.saveObject(sqlMapId, dataMap);
-	    
-		sqlMapId = "file.equipInsert";
-		result = (Integer) dao.saveObject(sqlMapId, paramMap);
+//		
+		if ("".equals(paramMap.get("FILE_SEQ"))) {
+			sqlMapId = "file.equipInsert";
+			result = (Integer) dao.saveObject(sqlMapId, paramMap);
+ 		} else if(((List)paramMap.get("attachFileList")).isEmpty()){
+			
+		} else {
+ 			sqlMapId = "file.equipUpdate";
+			result = (Integer) dao.saveObject(sqlMapId, paramMap);
+		}
 		Object resultObject = (Object) this.getObject(paramMap);
 		return resultObject;
 	}
 	public Object deleteObject(Object dataMap) {
-//		// delete child record authority
-//		String sqlMapId = "authorityRmember.delete";
-//
-//		Integer resultKey = (Integer) dao.deleteObject(sqlMapId, dataMap);
-//
-//		// delete Mother record authority
-//		sqlMapId = "member.delete";
-//
-//		resultKey = (Integer) dao.deleteObject(sqlMapId, dataMap);
-//
-//		// get Member List
-//		sqlMapId = "member.list";
-//		
-//		Object resultObject = dao.getList(sqlMapId, dataMap);
-//		
-//		return resultObject;
+
 		String sqlMapId = "equip.delete";
 		Integer resultKey = (Integer) dao.deleteObject(sqlMapId, dataMap);
 		return resultKey;

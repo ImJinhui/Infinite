@@ -70,22 +70,11 @@ public class AdminAbilityService {
 	}
 	
 	public Object deleteObject(Object dataMap) {
-//		// delete child record authority
-//		String sqlMapId = "authorityRmember.delete";
-//
-//		Integer resultKey = (Integer) dao.deleteObject(sqlMapId, dataMap);
-//
-//		// delete Mother record authority
-//		sqlMapId = "member.delete";
-//
-//		resultKey = (Integer) dao.deleteObject(sqlMapId, dataMap);
-//
-//		// get Member List
-//		sqlMapId = "member.list";
-//		
-//		Object resultObject = dao.getList(sqlMapId, dataMap);
-//		
-//		return resultObject;
+		String sqlMapId = "ability.delete";
+		Integer result = (Integer) dao.saveObject(sqlMapId, dataMap);
+		
+		sqlMapId = "ability.list";
+		Object resultObject = dao.getList(sqlMapId, dataMap);
 		return 0;
 	}
 }

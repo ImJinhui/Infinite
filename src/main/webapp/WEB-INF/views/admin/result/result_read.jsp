@@ -64,7 +64,7 @@ $(document).ready(function(){
       </div>
       	<label for="result_img">결과물 사진</label>
       <div id="result_img" class="row box">
-      	<img class="materialboxed" width="100%" src="<c:url value='/resources/images/cat2.jpg'/>">
+      	<img class="materialboxed" width="100%" src="<c:url value='/resources/uploads/${resultMap.PHYSICALFILE_NAME}'/>">
       </div>
     </form>
   </div>

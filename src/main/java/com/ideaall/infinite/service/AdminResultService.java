@@ -1,11 +1,13 @@
 package com.ideaall.infinite.service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ideaall.infinite.dao.ShareDao;
+import com.ideaall.infinite.utill.Pagination;
 
 @Service
 public class AdminResultService {
@@ -28,6 +30,24 @@ public class AdminResultService {
 		
 		return resultObject;
 	}
+	
+	public Object getListPagination(Object dataMap) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		String sqlMapId = "result.totalcount";
+		int totalCount = (int) dao.getObject(sqlMapId, dataMap);
+		int currentPage = 1;
+		if (((Map<String, Object>) dataMap).get("curPage") != null) {
+			currentPage = Integer.valueOf(((Map<String, String>) dataMap).get("curPage"));
+		}
+		Pagination pagination = new Pagination(totalCount, currentPage);
+		resultMap.put("pagination", pagination);
+		sqlMapId = "result.listpagination";
+		((Map<String, Object>) dataMap).put("pagination", pagination);
+		Object resultList = dao.getList(sqlMapId, dataMap);
+		resultMap.put("resultList", resultList);
+		return resultMap;
+	}
+
 	
 	public Object saveObject(Map<Object, Object> dataMap) {
 //		String uniqueSequence = (String) dataMap.get("MEMBER_SEQ");
