@@ -8,7 +8,8 @@
 <script>
 $(document).ready(function() {
 	$('.modal').modal({
-		endingTop : '5%'
+		endingTop : '5%',
+		dismissible : false
 	}
 	);
 	
@@ -26,6 +27,44 @@ $(document).ready(function() {
 });
 </script>
 
+<!-- 장비 selectbox ajax -->
+<script type="text/javascript">
+ var fn_cate_select = function(url, params) {
+	$.ajax({
+		type : "POST", 
+		url : url, 
+		data : {"CATEGORY_SEQ" : params}, 
+		dataType:'json',
+		cache: false,
+		success: function(data){ 
+			/* subCate 목록 생성 */
+			   var sub_cate = "<option value='' disabled selected>Choose your option</option>";
+			   $.each(data, function(i){
+				   sub_cate += "<option value='"+(data[i])['SUB_CATEGORY_SEQ']+"'>"+(data[i])['SUB_CATEGORY_NAME']+"</option>";
+			   });    
+			   $("#subCate").html(sub_cate);
+				$('select').formSelect(); 
+				
+				/* subCate 목록 선택 시 선택된 value값 얻어옴  */
+				$("#subCate").on('change', function(){
+					if(this.value !== ""){
+						var selOption = $(this).find(":selected").val();
+						$("#abilityInsertForm").attr("action", "<c:url value='/admin/ability/ability_merge?SUB_CATEGORY_SEQ="+selOption+"'/>");
+					}
+				});
+				
+			  },
+		error : function(xhr, status, exception){
+			alert("Failure \n ("+status+")");
+			return false; 
+		}
+		});
+	}
+	
+	function cateSelect(param) {
+		fn_cate_select("<c:url value='/wsEquip/subCateList'/>", param);
+	}; 
+</script>
 <!-- 페이지 이름 -->
 <nav class="teal">
 	<div class="nav-wrapper">
@@ -53,7 +92,7 @@ $(document).ready(function() {
 			</thead>
 
 			<tbody>
-					<c:forEach items="${resultList}" var="resultData" varStatus="loop" >
+					<c:forEach items="${resultMap.resultAbilityList}" var="resultData" varStatus="loop" >
 						<tr
 							class="${(loop.index+1)%2 == 2 ? 'odd gradeX' : 'even gradeC'}">
 							<td>${resultData.ABILITY_SEQ}</td>
@@ -73,12 +112,31 @@ $(document).ready(function() {
 			<div class="row">
 				<div class="row">
 					<div class="input-field col s12">
+					<span><i class="modal-close material-icons right">close</i></span>
 						<h4>능력추가</h4>
 					</div>
 				</div>
 				<div class="col s12">
-				<form action="<c:url value='/admin/ability/ability_merge'/>" role="form" method="POST">
+				<form id="abilityInsertForm" action="<c:url value='/admin/ability/ability_merge'/>" role="form" method="POST">
 				<input type="hidden" name="forwardView" value="/admin/ability/ability_list" />
+					<div class="row">
+					<div class="input-field col s6">
+						<select onchange="cateSelect(this.value);">
+							<option value="" disabled selected>Choose your option</option>
+							<c:forEach items="${resultMap.resultCateList}" var="resultCate" varStatus="loop">
+								<option value="${resultCate.CATEGORY_SEQ}">${resultCate.CATEGORY_NAME}</option>
+								  <%-- <c:if test="${(resultCate.CATEGORY_SEQ) eq (paramMap.CATEGORY_SEQ)}">
+									<option value="${resultCate.CATEGORY_SEQ}" selected="selected">${resultCate.CATEGORY_NAME}</option>
+								</c:if>  --%> 
+							</c:forEach>
+						</select> <label>장비위치</label>
+					</div>
+			
+					<div class="input-field col s6">
+						<select id="subCate">
+						</select> <label>장비종류</label>
+					</div>
+				</div>
 					<div class="row">
 						<div class="input-field col s12">
 							<input name ="ABILITY_NAME" id="name" type="text" class="validate"> <label

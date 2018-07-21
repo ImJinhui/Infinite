@@ -5,6 +5,17 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="equip">
+
+	<select id="modeList" resultType="Map" parameterType="Map" timeout="10">
+	select r.EQUIP_SEQ, e. EQUIP_NAME, count(r.EQUIP_SEQ), img.PHYSICALFILE_NAME
+	from RESERVATION r, equip_image img, equip e
+  where r.EQUIP_SEQ = img.SOURCE_UNIQUE_SEQ
+  and e.EQUIP_SEQ = r.EQUIP_SEQ
+	group by r.EQUIP_SEQ
+	ORDER BY COUNT( r.EQUIP_SEQ ) DESC
+	LIMIT 3
+	</select>
+
 	<select id="list" resultType="Map" parameterType="Map" timeout="10">
 		select 
 			e.EQUIP_SEQ	

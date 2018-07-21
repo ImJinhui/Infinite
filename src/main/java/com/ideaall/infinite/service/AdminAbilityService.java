@@ -1,5 +1,6 @@
 package com.ideaall.infinite.service;
 
+import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,18 +14,39 @@ public class AdminAbilityService {
 	private ShareDao dao;
 	
 	public Object getList(Object dataMap) {
+		
+		Map<String, Object> resultObject = new HashMap<String, Object>();
+		
 		String sqlMapId = "ability.list";
-
-		Object resultObject = dao.getList(sqlMapId, dataMap);
-
+		Object resultAbilityList = dao.getList(sqlMapId, dataMap);
+		resultObject.put("resultAbilityList", resultAbilityList);
+		
+		sqlMapId = "equip.cateList";
+		Object resultCateList = dao.getList(sqlMapId, dataMap);
+		resultObject.put("resultCateList", resultCateList);
+		
+		sqlMapId = "equip.subCateList";
+		Object resultSubCateList = dao.getList(sqlMapId, dataMap);
+		resultObject.put("resultSubCateList", resultSubCateList);
+		
 		return resultObject;
 
 	}
 	
 	public Object getObject(Object dataMap) {
-		String sqlMapId = "ability.read";
+		Map<String, Object> resultObject = new HashMap<String, Object>();
 
-		Object resultObject = dao.getObject(sqlMapId, dataMap);
+		String sqlMapId = "ability.read";
+		Object resultAbility = dao.getObject(sqlMapId, dataMap);
+		resultObject.put("resultAbility", resultAbility);
+		
+		sqlMapId = "equip.cateList";
+		Object resultCateList = dao.getList(sqlMapId, dataMap);
+		resultObject.put("resultCateList", resultCateList);
+		
+		sqlMapId = "equip.subCateList";
+		Object resultSubCateList = dao.getList(sqlMapId, dataMap);
+		resultObject.put("resultSubCateList", resultSubCateList);
 		
 		return resultObject;
 	}

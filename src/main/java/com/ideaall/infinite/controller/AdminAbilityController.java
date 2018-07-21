@@ -37,13 +37,13 @@ public class AdminAbilityController {
 
 		// divided depending on action value
 		if ("ability_list".equalsIgnoreCase(action)) {
-			resultList = (List<Object>) service.getList(paramMap);
+			resultMap = (Map<String, Object>) service.getList(paramMap);
 		} else if ("ability_merge".equalsIgnoreCase(action)) {
 			service.saveObject(paramMap);
-			resultList = (List<Object>) service.getList(paramMap);
+			resultMap = (Map<String, Object>) service.getList(paramMap);
 		} else if ("ability_delete".equalsIgnoreCase(action)) {
 			service.deleteObject(paramMap);
-			resultList = (List<Object>) service.getList(paramMap);
+			resultMap = (Map<String, Object>) service.getList(paramMap);
 			forwardView = "/admin/ability/ability_list";
 		} else if("ability_edit".equalsIgnoreCase(action)) {
 			resultMap = (Map<String, Object>) service.getObject(paramMap);
