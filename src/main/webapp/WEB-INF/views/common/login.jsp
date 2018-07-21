@@ -46,12 +46,7 @@
 			name="loginform" action="">
 			<div class="row">
 
-				<c:if test="${not empty param.fail}">
-					<font color="red"> <p>아이디와 비밀번호가 일치하지 않습니다. </p>
-									<p>Reason:${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p>
-					</font>
-					<c:remove scope="session" var="SPRING_SECURITY_LAST_EXCEPTION"/>
-				</c:if>
+
 
 
 
@@ -65,6 +60,19 @@
 				<div class="input-field col s12">
 					<input name="password" id="password" type="password"
 						class="validate"> <label for="password">비밀번호</label>
+
+
+					<c:if test="${not empty param.fail}">
+						<font color="red">
+							<p>아이디와 비밀번호가 일치하지 않습니다.</p>
+							<p>Reason:${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p>
+						</font>
+						<c:remove scope="session" var="SPRING_SECURITY_LAST_EXCEPTION" />
+					</c:if>
+
+
+
+
 				</div>
 			</div>
 			<div class="row">

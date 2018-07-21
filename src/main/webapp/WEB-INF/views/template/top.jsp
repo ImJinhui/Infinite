@@ -42,8 +42,10 @@
 			<%--  <li><a href="<c:url value='/common/login'/>">로그인</a></li> --%>
 			<li><a href="<c:url value='/common?action=signup'/>">회원가입</a></li>
 			<li class="divider"></li>
-			<li><a href="<c:url value='/common?action=mypage&id=${principalName}'/>">마이페이지</a></li>
-			<li><a href=${principalName==null?'login':'j_spring_security_logout'}>로그아웃</a></li>
+			<li><a href="<c:url value='/common/mypage&id=${principalName}'/>">마이페이지</a></li>
+			
+			<li><a href="<c:url value='/j_spring_security_logout'/> "> 로그아웃</a></li>
+			
 		</ul>
 
 		<ul id="dropdown_reserve" class="dropdown-content">
@@ -87,7 +89,7 @@
 					<li><a href="<c:url value='/common?action=login'/>">로그인</a></li>
 					<li><a href="<c:url value='/common?action=signup'/>">회원가입</a></li>
 					<li><a href="<c:url value='/common?action=mypage'/>">마이페이지</a></li>
-					<li><a href="<c:url value='/common?action=mypage'/>">로그아웃</a></li>
+					<li><a href="<c:url value='/j_spring_security_logout'/> ">로그아웃</a></li>
 				</ul>
 				<a href="#" data-target="nav-mobile" class="sidenav-trigger"><i
 					class="material-icons">menu</i></a>
@@ -127,11 +129,9 @@
 					<li><a href="<c:url value='/admin/member/member_list'/>">회원관리</a></li>
 					<li><a href="<c:url value='/admin/result/result_list'/>">결과물관리</a></li>
 					<li><a href="<c:url value='/admin/ability/ability_list'/>">능력관리</a></li>
-					<li><a class="dropdown-trigger" href="#!"
-						data-target="dropdown_equip">장비관리<i
+					<li><a class="dropdown-trigger" href="#!"					data-target="dropdown_equip">장비관리<i
 							class="material-icons right">arrow_drop_down</i></a></li>
-					<li><a class="dropdown-trigger" href="#!"
-						data-target="dropdown_member">로그인<i
+					<li><a class="dropdown-trigger" href="#!"					data-target="dropdown_member">로그인<i
 							class="material-icons right">arrow_drop_down</i></a></li>
 
 				</ul>
