@@ -14,27 +14,62 @@
 </nav>
 <!-- /페이지 이름 -->
 
+<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+						$("#loginbtn")
+								.click(
+										function() {
+											if ($("#id").val() == "") {
+												alert("아이디를 입력해주세요");
+												$("#id").focus();
+											} else if ($("#password").val() == "") {
+												alert("비밀번호를 입력해주세요");
+												$("#password").focus();
+											} else {
+												$("#loginform")
+														.attr("action",
+																"<c:url value='/j_spring_security_check'/>");
+												$("#loginform").submit();
+
+											}
+										})
+					});
+</script>
+
 <!-- main -->
 <div class="main_body" style="width: 50%;">
 	<!-- 수정부분 -->
 	<div class="row box">
-		<form class="col s12" role="form" method="POST"
-			action="<c:url value='/j_spring_security_check'/>">
+		<form class="col s12" role="form" method="POST" id="loginform"
+			name="loginform" action="">
 			<div class="row">
+
+				<c:if test="${not empty param.fail}">
+					<font color="red"> <p>아이디와 비밀번호가 일치하지 않습니다. </p>
+									<p>Reason:${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p>
+					</font>
+					<c:remove scope="session" var="SPRING_SECURITY_LAST_EXCEPTION"/>
+				</c:if>
+
+
+
+
 				<div class="input-field col s12">
-					<input name="id" type="text" class="validate"> <label
+					<input name="id" id="id" type="text" class="validate"> <label
 						for="id">아이디</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
-					<input name="password" type="password" class="validate"> <label
-						for="password">비밀번호</label>
+					<input name="password" id="password" type="password"
+						class="validate"> <label for="password">비밀번호</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
-					<button class="waves-effect waves-light btn-large"
+					<button class="waves-effect waves-light btn-large" id="loginbtn"
 						style="width: 100%; margin: 0 auto;" type="submit" name="action">로그인
 					</button>
 				</div>

@@ -11,30 +11,32 @@
 	<!-- <http auto-config="true" use-expressions="true"> return boolean </http> -->
 	<context:component-scan
 		base-package="com.ideaall.infinite" />
-	<beans:bean id="customizeUserDetailsService"
-		class="com.ideaall.infinite.security.CustomizeUserDetailsService" />
+	<beans:bean id="customizeUserDetailsService" 		class="com.ideaall.infinite.security.CustomizeUserDetailsService" />
+	<beans:bean id="customAuthenticationFailHandler"    class="com.ideaall.infinite.handler.CustomAuthenticationFailHandler" />
 
 	<http security="none" pattern="/resources/**" />
 	<http security="none" pattern="/ws/**" />
+	<http security="none" pattern="/admin/common/login.jsp*" />
+	<http security="none" pattern="/admin/common/loginfail.jsp*" />
+	
 
 
 
 	<http auto-config="true" use-expressions="true">
 		<!-- EL(expression language) 표현식 -->
 		<!-- return boolean -->
-		<intercept-url pattern="/admin/result/*"			access="hasRole('USER')" /> <!-- -->
-		<intercept-url pattern="/admin/*"			access="hasRole('ADMIN')" /> <!-- -->
+		<intercept-url pattern="/admin/*"			access="ADMIN" /> <!-- -->
+		<intercept-url pattern="/user/*"			access="USER" />
 
+					
 		<intercept-url pattern="/common/*"			access="isAnonymous()" />
-		
 		<intercept-url pattern="/main/*" 			access="isAnonymous()" /><!-- -->
-		
-		<intercept-url pattern="/user/*"			access="hasRole('USER')" />
-			
 
-		<form-login login-page="/common/login" default-target-url="/"
+
+		<form-login login-page="/common/login"
+			default-target-url="/"
 			login-processing-url="/j_spring_security_check"
-			authentication-failure-url="/common/loginfail"
+			authentication-failure-url="/common/login?fail=ture"
 			username-parameter="id" password-parameter="password" />
 
 		<!-- access denied url -->
@@ -43,7 +45,7 @@
 
 		<!-- 로그아웃 관련 설정 -->
 		<logout logout-success-url="/"
-			logout-url="/j_spring_security_logout" invalidate-session="true" 
+			logout-url="/j_spring_security_logout" invalidate-session="true"
 			delete-cookies="JSESSIONID" />
 
 		<!-- 세션 관련 설정 -->
@@ -67,8 +69,9 @@
 	</http>
 
 	<authentication-manager>
-		<authentication-provider user-service-ref="customizeUserDetailsService">
-<!-- 		    <password-encoder hash="bcrypt" /> -->
+		<authentication-provider
+			user-service-ref="customizeUserDetailsService">
+			<!-- <password-encoder hash="bcrypt" /> -->
 		</authentication-provider>
 	</authentication-manager>
 

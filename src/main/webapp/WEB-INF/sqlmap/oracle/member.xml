@@ -97,7 +97,8 @@
 	</select>
 
 	<select id="read" resultType="Map" parameterType="Map">
-		select* from member
+		select* from
+		member
 		where ID=#{id}
 
 	</select>
@@ -175,7 +176,33 @@
 		from member
 		where VISIBLE='TRUE'
 	</select>
-	
+
+<!-- 	<select id="totalcount_id" resultType="Integer"
+		parameterType="Map">
+		select count(MEMBER_SEQ)
+		from member
+		where ID=#{input} and
+		VISIBLE='TRUE'
+	</select>
+
+	<select id="totalcount_name" resultType="Integer"
+		parameterType="Map">
+		select count(MEMBER_SEQ)
+		from member
+		where NAME=#{input}
+		andVISIBLE='TRUE'
+	</select>
+
+
+	<select id="totalcount_tel" resultType="Integer"
+		parameterType="Map">
+		select count(MEMBER_SEQ)
+		from member
+		where TEL=#{input}
+		and VISIBLE='TRUE'
+	</select>
+
+ -->
 	<!-- /pagination+ memberList -->
 
 	<select id="hasAbility" resultType="Map" parameterType="Map">
@@ -193,16 +220,20 @@
 	</update>
 
 	<select id="find_name" resultType="Map" parameterType="Map">
-	select *from member where NAME=#{input} where VISIBLE='TRUE'
+		select *from member where NAME=#{input} and VISIBLE='TRUE'
 	</select>
-	
-		<select id="find_id" resultType="Map" parameterType="Map">
-		select *from member where ID=#{input} where VISIBLE='TRUE'
+
+	<select id="find_id" resultType="Map" parameterType="Map">
+		select *from
+		member where ID=#{input} and VISIBLE='TRUE'
 	</select>
-	
-		<select id="find_tel" resultType="Map" parameterType="Map">
-		select *from member where TEL=#{input} where VISIBLE='TRUE'
+
+	<select id="find_tel" resultType="Map" parameterType="Map">
+		select
+		*from member where TEL=#{input} and VISIBLE='TRUE'
 	</select>
-	
+
+
+
 
 </mapper>

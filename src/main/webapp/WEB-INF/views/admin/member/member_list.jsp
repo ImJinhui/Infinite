@@ -124,44 +124,44 @@
 
 			<ul class="pagination">
 
-
 				<c:set var="page" value="${resultMap.pagination}" />
-				<div id="dataTabes_paginate paging_simple_numbers"
-					id="dataTables-example_paginate">
-					<ul class="pagination center-align">
-						<li class="pagination_button previous disabled"
-							aria-controls="dataTables-example" tabindex="0"
-							id="dataTables-example_previous"><a
-							href="<c:url value="/admin/member/member_list?curPage=${page.prevPage}"/>"><i
-								class="material-icons">chevron_left</i></a></li>
-						<c:forEach var="pageNum" begin="${page.blockStart}"
-							end="${page.blockEnd}">
-							<c:choose>
-								<c:when test="${pageNum == page.curPage}">
-									<li class="paginate_button waves-effect active"
-										aria-controls="dataTables-example" tabindex="0"><a
-										href="#!">${pageNum}</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="paginate_button waves-effect"
-										aria-controls="dataTables-example" tabindex="0"><a
-										href="<c:url value="/admin/member/member_list?curPage=${pageNum}" />">${pageNum}</a></li>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-						<li class="paginate_button next waves-effect"
-							aria-controls="dataTables-example" tabindex="0"
-							id="dataTables-example_next"><a
-							href="<c:url value="/admin/member/member_list?curPage=${page.nextPage}" />"><i
-								class="material-icons">chevron_right</i></a></li>
-					</ul>
-				</div>
+				<c:if test="${resultMap.pagination!=null}">
+					<div id="dataTabes_paginate paging_simple_numbers"
+						id="dataTables-example_paginate">
+						<ul class="pagination center-align">
+							<li class="pagination_button previous disabled"
+								aria-controls="dataTables-example" tabindex="0"
+								id="dataTables-example_previous"><a
+								href="<c:url value="/admin/member/member_list?curPage=${page.prevPage}"/>"><i
+									class="material-icons">chevron_left</i></a></li>
+							<c:forEach var="pageNum" begin="${page.blockStart}"
+								end="${page.blockEnd}">
+								<c:choose>
+									<c:when test="${pageNum == page.curPage}">
+										<li class="paginate_button waves-effect active"
+											aria-controls="dataTables-example" tabindex="0"><a
+											href="#!">${pageNum}</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="paginate_button waves-effect"
+											aria-controls="dataTables-example" tabindex="0"><a
+											href="<c:url value="/admin/member/member_list?curPage=${pageNum}" />">${pageNum}</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+							<li class="paginate_button next waves-effect"
+								aria-controls="dataTables-example" tabindex="0"
+								id="dataTables-example_next"><a
+								href="<c:url value="/admin/member/member_list?curPage=${page.nextPage}" />"><i
+									class="material-icons">chevron_right</i></a></li>
+						</ul>
+					</div>
 
 
+				</c:if>
 
 
-
-<%-- 
+				<%-- 
 				<c:set var="page" value="${resultMap.pagination}" />
 				<div id="dataTabes_paginate paging_simple_numbers"
 					id="dataTables-example_paginate">
