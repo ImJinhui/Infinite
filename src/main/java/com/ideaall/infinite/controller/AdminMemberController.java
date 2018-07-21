@@ -99,10 +99,13 @@ public class AdminMemberController {
 			viewName = "/admin/member/member_list";
 			
 		}else if("member_search".equalsIgnoreCase(action)) {
-			resultList = (List<Object>) memberservice.searchResult(paramMap);
-			
+		/*	resultList = (List<Object>) memberservice.searchResult(paramMap);*/
+	
+			resultMap =   (Map<String, Object>) memberservice.getListPagination(paramMap);
 			viewName="/admin/member/member_list";
-			resultMap = (Map) memberservice.getListPagination(paramMap);
+			
+		/*	resultMap.put("resultList", resultList);
+			resultMap = (Map) memberservice.getListPagination(resultMap);*/
 			
 		}
 

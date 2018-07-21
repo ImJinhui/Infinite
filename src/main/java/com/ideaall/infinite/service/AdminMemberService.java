@@ -2,6 +2,7 @@ package com.ideaall.infinite.service;
 
 import java.lang.reflect.Member;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -111,23 +112,46 @@ public class AdminMemberService {
 	}
 
 	public Object getListPagination(Object dataMap) {
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		String sqlMapId = "member.totalcount";
-		int totalCount = (int) dao.getObject(sqlMapId, dataMap);
-		int currentPage;
+ 		Map<String, Object> resultMap = new HashMap<String, Object>();
+ 		String sqlMapId ="";
+		
+		String searchitem = (String) ((Map<String, Object>) dataMap).get("searchitem");
+		List<Object> resultList = new ArrayList<Object>();
+		if ("name".equals(searchitem)) {
+			sqlMapId = "member.find_name";
+			resultList = (List<Object>) dao.getList(sqlMapId, dataMap);
 
-		if ((((Map<String, Object>) dataMap).get("curPage")) == null) {
-			currentPage = 1;
+		} else if ("id".equals(searchitem)) {
+			sqlMapId = "member.find_id";
+			 resultList = (List<Object>) dao.getList(sqlMapId, dataMap);
+
+		} else if ("tel".equals(searchitem)) {
+			sqlMapId = "member.find_tel";
+			 resultList = (List<Object>) dao.getList(sqlMapId, dataMap);
+
 		} else {
-			currentPage = Integer.valueOf((String) ((Map<String, Object>) dataMap).get("curPage"));
-		}
+			
+			 sqlMapId = "member.totalcount";
+			int totalCount = (int) dao.getObject(sqlMapId, dataMap);
+			int currentPage;
 
-		Pagination pagination = new Pagination(totalCount, currentPage);
-		resultMap.put("pagination", pagination);
-		sqlMapId = "member.listpagination";
-		((Map<String, Object>) dataMap).put("pagination", pagination);
-		System.out.println(((Map<String, Object>) dataMap).get("pagination"));
-		Object resultList = dao.getList(sqlMapId, dataMap);
+			if ((((Map<String, Object>) dataMap).get("curPage")) == null) {
+				currentPage = 1;
+			} else {
+				currentPage = Integer.valueOf((String) ((Map<String, Object>) dataMap).get("curPage"));
+			}
+			
+			Pagination pagination = new Pagination(totalCount, currentPage);
+			
+			resultMap.put("pagination", pagination);
+			sqlMapId = "member.listpagination";
+			
+			
+			
+			((Map<String, Object>) dataMap).put("pagination", pagination);
+			/*System.out.println(((Map<String, Object>) dataMap).get("pagination"));*/
+			resultList = (List<Object>) dao.getList(sqlMapId, dataMap);
+		}
 
 		resultMap.put("resultList", resultList);
 		return resultMap;
@@ -151,11 +175,11 @@ public class AdminMemberService {
 		dao.saveObject(sqlMapId, dataMap);
 	}
 
-	// 회원 검색
+/*	// 회원 검색
 	public Object searchResult(Map<String, Object> paramMap) {
 
 		String searchitem = (String) paramMap.get("searchitem");
-		Object resultObject="";
+		Object resultObject = "";
 
 		if (searchitem.equals("name")) {
 			String sqlMapId = "member.find_name";
@@ -172,7 +196,7 @@ public class AdminMemberService {
 		}
 
 		return resultObject;
-	}
+	}*/
 
 	public void memberdelete(Object dataMap) {
 		String sqlMapId = "member.delete";

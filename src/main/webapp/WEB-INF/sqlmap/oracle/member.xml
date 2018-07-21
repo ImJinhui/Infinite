@@ -193,15 +193,15 @@
 	</update>
 
 	<select id="find_name" resultType="Map" parameterType="Map">
-	select *from member where NAME=#{input}
+	select *from member where NAME=#{input} where VISIBLE='TRUE'
 	</select>
 	
 		<select id="find_id" resultType="Map" parameterType="Map">
-		select *from member where ID=#{input}
+		select *from member where ID=#{input} where VISIBLE='TRUE'
 	</select>
 	
 		<select id="find_tel" resultType="Map" parameterType="Map">
-		select *from member where TEL=#{input}
+		select *from member where TEL=#{input} where VISIBLE='TRUE'
 	</select>
 	
 
