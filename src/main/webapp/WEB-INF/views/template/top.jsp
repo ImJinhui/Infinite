@@ -33,14 +33,17 @@
   <li class="divider"></li>
   <li><a href="<c:url value='/common/mypage'/>">마이페이지</a></li>	
 </ul> --%>
+	<c:set var="principalName" value="${pageContext.request.userPrincipal.name }"/>
+	
 <c:choose>
-	<c:when test="${resultMap.ID!=null}"> <!-- //로그인 성공 -->
+	<c:when test="${principalName!=null}"> <!-- //로그인 성공 -->
 
 		<ul id="dropdown_member" class="dropdown-content">
 			<%--  <li><a href="<c:url value='/common/login'/>">로그인</a></li> --%>
 			<li><a href="<c:url value='/common?action=signup'/>">회원가입</a></li>
 			<li class="divider"></li>
-			<li><a href="<c:url value='/common?action=mypage&id=${resultMap.ID}'/>">마이페이지</a></li>
+			<li><a href="<c:url value='/common?action=mypage&id=${principalName}'/>">마이페이지</a></li>
+			<li><a href=${principalName==null?'login':'j_spring_security_logout'}>로그아웃</a></li>
 		</ul>
 
 		<ul id="dropdown_reserve" class="dropdown-content">
@@ -66,7 +69,7 @@
 						data-target="dropdown_equip">장비관리<i
 							class="material-icons right">arrow_drop_down</i></a></li>
 					<li><a class="dropdown-trigger" href="#!"
-						data-target="dropdown_member">${resultMap.ID}님 환영합니다!<i
+						data-target="dropdown_member">${principalName}님 환영합니다!<i
 							class="material-icons right">arrow_drop_down</i></a></li>
 
 				</ul>
@@ -84,6 +87,7 @@
 					<li><a href="<c:url value='/common?action=login'/>">로그인</a></li>
 					<li><a href="<c:url value='/common?action=signup'/>">회원가입</a></li>
 					<li><a href="<c:url value='/common?action=mypage'/>">마이페이지</a></li>
+					<li><a href="<c:url value='/common?action=mypage'/>">로그아웃</a></li>
 				</ul>
 				<a href="#" data-target="nav-mobile" class="sidenav-trigger"><i
 					class="material-icons">menu</i></a>
@@ -100,6 +104,7 @@
 		<ul id="dropdown_member" class="dropdown-content">
 			<li><a href="<c:url value='/common?action=login'/>">로그인</a></li>
 			<li><a href="<c:url value='/common?action=signup'/>">회원가입</a></li>
+			<%-- <li><a href=${principalName==null?'login':'j_spring_security_logout'}>로그아웃</a></li> --%>
 			<li class="divider"></li>
 		</ul>
 

@@ -19,7 +19,7 @@
 	<!-- 수정부분 -->
 	<div class="row box">
 		<form class="col s12" role="form" method="POST"
-			action="<c:url value='/common?action=check'/>">
+			action="<c:url value='/j_spring_security_check'/>">
 			<div class="row">
 				<div class="input-field col s12">
 					<input name="id" type="text" class="validate"> <label
