@@ -7,9 +7,8 @@
 $(document).ready(function(){
     $('select').formSelect();
   });
-
-
 </script>
+
 <!-- 장비추가 널 체크  -->
 <script>
 function checkNull(){
@@ -37,21 +36,21 @@ function checkNull(){
 <!-- /장비추가 널 체크  -->
 <!-- 장비 selectbox ajax -->
 <script type="text/javascript">
-var fn_cate_select = function(url, params) {
+ var fn_cate_select = function(url, params) {
 	$.ajax({
 		type : "POST", 
 		url : url, 
 		data : {"CATEGORY_SEQ" : params}, 
 		dataType:'json',
 		cache: false,
-		success: function(data){
+		success: function(data){ 
 			/* subCate 목록 생성 */
-			  var sub_cate = "<option value='' disabled selected>Choose your option</option>";
+			   var sub_cate = "<option value='' disabled selected>Choose your option</option>";
 			   $.each(data, function(i){
 				   sub_cate += "<option value='"+(data[i])['SUB_CATEGORY_SEQ']+"'>"+(data[i])['SUB_CATEGORY_NAME']+"</option>";
 			   });    
 			   $("#subCate").html(sub_cate);
-				$('select').formSelect();
+				$('select').formSelect(); 
 				
 				/* subCate 목록 선택 시 선택된 value값 얻어옴  */
 				$("#subCate").on('change', function(){
@@ -71,7 +70,7 @@ var fn_cate_select = function(url, params) {
 	
 	function cateSelect(param) {
 		fn_cate_select("<c:url value='/wsEquip/subCateList'/>", param);
-	};
+	}; 
 </script>
 <!-- 장비 selectbox ajax -->
 <!-- 페이지 이름 -->
@@ -98,9 +97,9 @@ var fn_cate_select = function(url, params) {
 							<option value="" disabled selected>Choose your option</option>
 							<c:forEach items="${resultMap.resultCateList}" var="resultCate" varStatus="loop">
 								<option value="${resultCate.CATEGORY_SEQ}">${resultCate.CATEGORY_NAME}</option>
-								 <%-- <c:if test="${(resultCate.CATEGORY_SEQ) == (resultMap.resultObject.CATEGORY_SEQ)}">
+								  <%-- <c:if test="${(resultCate.CATEGORY_SEQ) eq (paramMap.CATEGORY_SEQ)}">
 									<option value="${resultCate.CATEGORY_SEQ}" selected="selected">${resultCate.CATEGORY_NAME}</option>
-								</c:if>  --%>
+								</c:if>  --%> 
 							</c:forEach>
 						</select> <label>장비위치</label>
 					</div>
@@ -116,9 +115,7 @@ var fn_cate_select = function(url, params) {
 							for="equip_seq">장비아이디</label>
 					</div>
 				</div>
-			
-
-			<div class="row">
+				<div class="row">
 					<div class="input-field col s12">
 						<input name="EQUIP_NAME" id="equip_name" type="text" class="validate" value="${resultMap.resultObject.EQUIP_NAME}"> <label
 							for="name">장비명</label>
@@ -144,7 +141,7 @@ var fn_cate_select = function(url, params) {
 					<label for="available">사용가능여부</label>
 				<div class="input-field inline col s12">
 					<p id="available">
-						<label> <input name="AVAILABLE" value="사용가능" type="radio" /> <span>사용가능</span>
+						<label> <input name="AVAILABLE" value="사용가능" type="radio" checked="checked"/> <span>사용가능</span>
 						</label>
 					
 						<label> <input name="AVAILABLE" value="사용불가" type="radio" /> <span>사용불가</span>
@@ -154,13 +151,17 @@ var fn_cate_select = function(url, params) {
 			</div>
 				<div class="file-field input-field">
 					<div class="btn">
-						<span>File</span> <input type="file" name="ATTACHEDFILES">
+						<span>File</span> 
+						<input type="file" name="ATTACHEDFILES">
 					</div>
 					<div class="file-path-wrapper">
 						<input id="image" name="IMAGE" class="file-path validate" type="text"
-							placeholder="장비이미지">
+							placeholder="${resultMap.resultObject.PHYSICALFILE_NAME}">
 					</div>
 				</div>
+				
+			<input type="hidden" name="FILE_SEQ" value="${resultMap.resultObject.ATTACHFILE_SEQ}" />
+				
 		<button class="btn waves-effect waves-light right" onclick="checkNull();" name="action">
 			장비수정 <i class="material-icons right">send</i>
 		</button>

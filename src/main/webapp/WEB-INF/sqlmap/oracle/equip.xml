@@ -15,29 +15,34 @@
 			,e.EQUIP_NAME
 			,e.AVAILABLE
 			,sc.SUB_CATEGORY_NAME
-      		<!-- ,img.ATTACHFILE_PATH -->
-		from EQUIP e, SUB_CATEGORY sc<!-- , IMAGE img -->
+      		,img.PHYSICALFILE_NAME 
+		from SUB_CATEGORY sc , EQUIP e LEFT OUTER JOIN EQUIP_IMAGE img 
+    	ON e.EQUIP_SEQ = img.SOURCE_UNIQUE_SEQ 
 		where 
 		e.SUB_CATEGORY_SEQ = sc.SUB_CATEGORY_SEQ
-    	<!-- and e.EQUIP_SEQ = img.SOURCE_UNIQUE_SEQ -->
 		and e.VISIBLE = 'T'
 		order by e.SUB_CATEGORY_SEQ, e.EQUIP_SEQ
 	</select>
 	
 	<select id="listByCate" resultType="Map" parameterType="Map" timeout="10">
 		select 
-			EQUIP_SEQ	
-			,SUB_CATEGORY_SEQ	
-			,MANUFACTURER
-			,DESCRIPTION	
-			,MANAGER	
-			,EQUIP_NAME
-			,AVAILABLE
-		from EQUIP 
+			e.EQUIP_SEQ	
+			,e.SUB_CATEGORY_SEQ	
+			,e.MANUFACTURER
+			,e.DESCRIPTION	
+			,e.MANAGER	
+			,e.EQUIP_NAME
+			,e.AVAILABLE
+			,sc.SUB_CATEGORY_NAME
+      		,img.PHYSICALFILE_NAME 
+		from SUB_CATEGORY sc , EQUIP e LEFT OUTER JOIN EQUIP_IMAGE img 
+    	ON e.EQUIP_SEQ = img.SOURCE_UNIQUE_SEQ 
 		where 
-		SUB_CATEGORY_SEQ = #{SUB_CATEGORY_SEQ}
-		and VISIBLE = 'T'
-		order by EQUIP_SEQ
+		e.SUB_CATEGORY_SEQ = sc.SUB_CATEGORY_SEQ
+		and e.VISIBLE = 'T'
+		and e.SUB_CATEGORY_SEQ = #{SUB_CATEGORY_SEQ}
+		order by e.SUB_CATEGORY_SEQ, e.EQUIP_SEQ
+		
 	</select>
 	
 	<select id="cateList" resultType="Map" parameterType="Map" timeout="10">
@@ -97,15 +102,18 @@
 	
 	<select id="read" resultType="Map" parameterType="Map">
 		select 
-			EQUIP_SEQ
-			, SUB_CATEGORY_SEQ
-			, MANUFACTURER
-			, DESCRIPTION
-			, MANAGER
-			, EQUIP_NAME
-			, AVAILABLE
-		from EQUIP
-		where EQUIP_SEQ = #{EQUIP_SEQ}
+			e.EQUIP_SEQ
+			, e.SUB_CATEGORY_SEQ
+			, e.MANUFACTURER
+			, e.DESCRIPTION
+			, e.MANAGER
+			, e.EQUIP_NAME
+			, e.AVAILABLE
+			, img.PHYSICALFILE_NAME
+			, img.ATTACHFILE_SEQ
+		from EQUIP e LEFT OUTER JOIN EQUIP_IMAGE img
+		on e.EQUIP_SEQ = img.SOURCE_UNIQUE_SEQ 
+		where e.EQUIP_SEQ = #{EQUIP_SEQ}
 	</select>
 	
 	 <update id="delete" parameterType="Map">

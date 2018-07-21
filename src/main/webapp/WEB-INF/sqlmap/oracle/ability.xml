@@ -10,6 +10,7 @@
 			ABILITY_SEQ	
 			,ABILITY_NAME	
 		from ABILITIES
+		where VISIBLE = 'T'
 	</select>
 	
 	<!-- <insert id="insert" parameterType="Map">
@@ -30,15 +31,17 @@
 	INSERT INTO ABILITIES (
 		ABILITY_NAME 
 		,ABILITY_SEQ
+		,VISIBLE
 		)
 		values(
 		#{ABILITY_NAME}
 		,#{ABILITY_SEQ}
+		,'T'
 		)
 		ON DUPLICATE KEY UPDATE 
 		ABILITY_NAME = #{ABILITY_NAME}
 		,ABILITY_SEQ = #{ABILITY_SEQ}
-			
+		,VISIBLE = 'T'
 	</insert>
 	<select id="read" resultType="Map" parameterType="Map">
 		select
@@ -48,8 +51,9 @@
 		where ABILITY_SEQ = #{ABILITY_SEQ}
 	</select>
 	
-	<!-- <delete id="delete" parameterType="Map">
-		delete from CIP_ORGANIZATION
-		where ORGANIZATION_SEQ = #{ORGANIZATION_SEQ}
-	</delete> --> 
+	 <update id="delete" parameterType="Map">
+		update ABILITIES
+		set VISIBLE = 'F'
+		where ABILITY_SEQ = #{ABILITY_SEQ}
+	</update> 
 </mapper>

@@ -151,7 +151,7 @@ public class Pagination {
 
 	// 현제페이지의 시작번호, 끝번호 계산
 	public void setPageRange() {
-		pageBegin = (curPage - 1) * PAGE_SCALE + 1;
+		pageBegin = (curPage - 1) * PAGE_SCALE ;
 		pageEnd = pageBegin + PAGE_SCALE - 1;
 	}
 }

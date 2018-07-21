@@ -41,7 +41,7 @@ public class AdminEquipController {
 		} else if ("equip_listByCate".equalsIgnoreCase(action)) {
 			resultMap = (Map<String, Object>) service.getListByCategory(paramMap);
 		} else if ("equip_merge".equalsIgnoreCase(action)) {
-			service.saveObject(paramMap);
+ 			service.saveObject(paramMap);
 			resultMap =  (Map<String, Object>) service.getList(paramMap);
 		} else if("equip_edit".equalsIgnoreCase(action)) {
 			//장비 카테고리 세팅 위함 
