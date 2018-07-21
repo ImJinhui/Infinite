@@ -70,6 +70,8 @@ public class CommonController {
 				viewName = "/common/loginfail";
 			}
 
+		}else if ("loginfail".equalsIgnoreCase(action)) {
+			viewName = "/common/loginfail";
 		}
 
 		if (forwardView != null) {
