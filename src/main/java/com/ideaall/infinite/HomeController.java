@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +32,12 @@ public class HomeController {
 	@RequestMapping(value = "/", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView actionMethod(@RequestParam Map<String, Object> paramMap, ModelAndView modelandView) {
 
-
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(auth);
+		Collection<? extends GrantedAuthority> authority = auth.getAuthorities();
+		System.out.println(authority);
+		paramMap.put("AUTHORITY",authority);
+		
 		String viewName = "/main/index";
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
