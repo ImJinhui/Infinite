@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <%@ page isELIgnored="false"%>
 
@@ -97,11 +98,56 @@
 							onMouseOver="window.status = '<c:url value="/admin/member/member_read?MEMBER_SEQ=${resultData.MEMBER_SEQ}" />'"
 							onMouseOut=" window.status = '' ">
 
-							<%-- <td>${resultData.MEMBER_SEQ}</td> --%>
 							<td>${resultData.ID}</td>
 							<td>${resultData.NAME}</td>
-							<%-- <td>${resultData.PASSWORD}</td> --%>
-							<%-- <td>${resultData.SUB_ADDR_SEQ}</td> --%>
+							<td>${resultData.TEL}</td>
+
+							<c:set value="${resultData.ABILITY_NAMES.size()}"
+								var="abilityCnt">
+							</c:set>
+
+							<c:choose>
+								<c:when test="${abilityCnt>2}">
+									<!-- //보유 능력이 2개 이상일때 -->
+									<td><c:forEach begin="1" end="2"
+											items="${resultData.ABILITY_NAMES}" var="NAMES"
+											varStatus="loop2">
+											<c:choose>
+												<c:when test="${loop2.last}">
+							${NAMES.ABILITY_NAME}</c:when>
+												<c:otherwise>		
+							${NAMES.ABILITY_NAME},
+							</c:otherwise>
+											</c:choose>
+										</c:forEach>....</td>
+
+								</c:when>
+								<c:otherwise>
+									<!-- //보유 능력이 2개 미만일때 -->
+									<td><c:forEach items="${resultData.ABILITY_NAMES}"
+											var="NAMES" varStatus="loop2">
+											<c:choose>
+												<c:when test="${loop2.last}">
+							${NAMES.ABILITY_NAME}</c:when>
+												<c:otherwise>		
+							${NAMES.ABILITY_NAME},
+							</c:otherwise>
+											</c:choose>
+										</c:forEach></td>
+								</c:otherwise>
+							</c:choose>
+						</tr>
+					</c:forEach>
+
+					<%-- <c:forEach items="${resultMap.resultList}" var="resultData"
+						varStatus="loop">
+						<tr style="cursor: pointer;"
+							onclick="location.href='<c:url value="/admin/member/member_read?MEMBER_SEQ=${resultData.MEMBER_SEQ}"/>'"
+							onMouseOver="window.status = '<c:url value="/admin/member/member_read?MEMBER_SEQ=${resultData.MEMBER_SEQ}" />'"
+							onMouseOut=" window.status = '' ">
+
+							<td>${resultData.ID}</td>
+							<td>${resultData.NAME}</td>
 							<td>${resultData.TEL}</td>
 							<td><c:forEach items="${resultData.ABILITY_NAMES}"
 									var="NAMES" varStatus="loop2">
@@ -109,8 +155,12 @@
 							</c:forEach></td>
 
 						</tr>
-					</c:forEach>
+					</c:forEach> --%>
 				</tbody>
+
+				<%-- 				
+ --%>
+
 			</table>
 
 

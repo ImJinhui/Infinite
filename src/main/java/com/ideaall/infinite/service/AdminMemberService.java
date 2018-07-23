@@ -112,9 +112,9 @@ public class AdminMemberService {
 	}
 
 	public Object getListPagination(Object dataMap) {
- 		Map<String, Object> resultMap = new HashMap<String, Object>();
- 		String sqlMapId ="";
-		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		String sqlMapId = "";
+
 		String searchitem = (String) ((Map<String, Object>) dataMap).get("searchitem");
 		List<Object> resultList = new ArrayList<Object>();
 		if ("name".equals(searchitem)) {
@@ -123,15 +123,15 @@ public class AdminMemberService {
 
 		} else if ("id".equals(searchitem)) {
 			sqlMapId = "member.find_id";
-			 resultList = (List<Object>) dao.getList(sqlMapId, dataMap);
+			resultList = (List<Object>) dao.getList(sqlMapId, dataMap);
 
 		} else if ("tel".equals(searchitem)) {
 			sqlMapId = "member.find_tel";
-			 resultList = (List<Object>) dao.getList(sqlMapId, dataMap);
+			resultList = (List<Object>) dao.getList(sqlMapId, dataMap);
 
 		} else {
-			
-			 sqlMapId = "member.totalcount";
+
+			sqlMapId = "member.totalcount";
 			int totalCount = (int) dao.getObject(sqlMapId, dataMap);
 			int currentPage;
 
@@ -140,17 +140,25 @@ public class AdminMemberService {
 			} else {
 				currentPage = Integer.valueOf((String) ((Map<String, Object>) dataMap).get("curPage"));
 			}
-			
+
 			Pagination pagination = new Pagination(totalCount, currentPage);
-			
+
 			resultMap.put("pagination", pagination);
-			sqlMapId = "member.listpagination";
-			
-			
-			
 			((Map<String, Object>) dataMap).put("pagination", pagination);
-			/*System.out.println(((Map<String, Object>) dataMap).get("pagination"));*/
+
+			sqlMapId = "member.listpagination";
 			resultList = (List<Object>) dao.getList(sqlMapId, dataMap);
+
+			for (int i = 0; i < resultList.size(); i++) {
+				String member_seq = (String) ((Map<Object, Object>) resultList.get(i)).get("MEMBER_SEQ");
+				((Map<Object, Object>) dataMap).put("MEMBER_SEQ", member_seq);
+
+				sqlMapId = "member.abilitylist";
+				List abilitylist = (List) dao.getList(sqlMapId, dataMap);
+
+				((Map<Object, Object>) resultList.get(i)).put("ABILITY_NAMES", abilitylist);
+			}
+
 		}
 
 		resultMap.put("resultList", resultList);
@@ -175,28 +183,25 @@ public class AdminMemberService {
 		dao.saveObject(sqlMapId, dataMap);
 	}
 
-/*	// 회원 검색
-	public Object searchResult(Map<String, Object> paramMap) {
-
-		String searchitem = (String) paramMap.get("searchitem");
-		Object resultObject = "";
-
-		if (searchitem.equals("name")) {
-			String sqlMapId = "member.find_name";
-			resultObject = dao.getList(sqlMapId, paramMap);
-
-		} else if (searchitem.equals("id")) {
-			String sqlMapId = "member.find_id";
-			resultObject = dao.getList(sqlMapId, paramMap);
-
-		} else if (searchitem.equals("tel")) {
-			String sqlMapId = "member.find_tel";
-			resultObject = dao.getList(sqlMapId, paramMap);
-
-		}
-
-		return resultObject;
-	}*/
+	/*
+	 * // 회원 검색 public Object searchResult(Map<String, Object> paramMap) {
+	 * 
+	 * String searchitem = (String) paramMap.get("searchitem"); Object resultObject
+	 * = "";
+	 * 
+	 * if (searchitem.equals("name")) { String sqlMapId = "member.find_name";
+	 * resultObject = dao.getList(sqlMapId, paramMap);
+	 * 
+	 * } else if (searchitem.equals("id")) { String sqlMapId = "member.find_id";
+	 * resultObject = dao.getList(sqlMapId, paramMap);
+	 * 
+	 * } else if (searchitem.equals("tel")) { String sqlMapId = "member.find_tel";
+	 * resultObject = dao.getList(sqlMapId, paramMap);
+	 * 
+	 * }
+	 * 
+	 * return resultObject; }
+	 */
 
 	public void memberdelete(Object dataMap) {
 		String sqlMapId = "member.delete";
