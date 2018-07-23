@@ -54,7 +54,7 @@
  	<insert id="insertreserve" parameterType="Map">
 		INSERT
 			INTO RESERVATION(
-				MEMBER_SEQ,
+				ID,
 				EQUIP_SEQ,
 				NUM_OF_USER,
 				RESERVE_DATE,
@@ -66,7 +66,7 @@
 				values
 		<foreach collection="reservationList" item="item" index="index" separator=",">
 			(
-				'dummyid01',
+				#{item.ID},
 				#{item.EQUIP_SEQ},
 				'1',
 				#{item.RESERVE_DATE},

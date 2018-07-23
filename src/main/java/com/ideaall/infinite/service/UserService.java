@@ -81,6 +81,7 @@ public class UserService {
            reservationSettingMap.put("RESERVE_DATE",((String[])((Map)dataMap).get("RESERVE_DATE"))[i]);
            reservationSettingMap.put("RESERVE_S_TIME",((String[])((Map)dataMap).get("RESERVE_S_TIME"))[i]);
            reservationSettingMap.put("RESERVE_E_TIME",((String[])((Map)dataMap).get("RESERVE_E_TIME"))[i]);
+           reservationSettingMap.put("ID",((String[])((Map)dataMap).get("ID"))[i]);
            reservationSettingList.add(reservationSettingMap);
         }
         ((Map)(dataMap)).put("reservationList", reservationSettingList);

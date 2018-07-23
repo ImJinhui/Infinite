@@ -86,11 +86,11 @@
 			,r.RETURN_CHECK
 			,m.NAME
 			,e.EQUIP_NAME
-      		,img.PHYSICALFILE_NAME
-		from RESERVATION r, MEMBER m, EQUIP e, result_image img
+      		<!-- ,img.PHYSICALFILE_NAME -->
+		from RESERVATION r, MEMBER m, EQUIP e<!-- , result_image img -->
 		where r.MEMBER_SEQ = m.MEMBER_SEQ
 		and r.EQUIP_SEQ = e.EQUIP_SEQ
-    	and r.RESERVATION_SEQ = img.SOURCE_UNIQUE_SEQ
+    	<!-- and r.RESERVATION_SEQ = img.SOURCE_UNIQUE_SEQ -->
 		and r.RESERVATION_SEQ = #{RESERVATION_SEQ}
 	</select>
 	

@@ -3,10 +3,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
-
-<%-- <link href="<c:url value='/resources/css/customize_fullcalendar.css'/>" type="text/css"	rel="stylesheet"/>
-<link href="<c:url value='/resources/css/infinite.css'/>" type="text/css"	rel="stylesheet"/>
-<script src="<c:url value='/resources/js/ko.js'/> "></script> --%>
+<c:set var="principalName" value="${pageContext.request.userPrincipal.name }" />
 <script>
 var newpage = "";
 var addIdList = new Array();
@@ -227,9 +224,7 @@ $(document).ready(function(){
     background-color: white;
     overflow: hidden;
 }
-.row{
-	border: 1px solid black;
-}
+
 .col.s2{
 	text-align: center;
 	width: 100%;
@@ -246,6 +241,14 @@ $(document).ready(function(){
 #secondpage{
 	display:none;
 	align:left;
+}
+#newpage{
+	margin: 3rem 0;
+	padding:2rem;
+	border: 1.3px solid #d4d4d4;
+}
+#datediv{
+
 }
 </style>
 
@@ -265,10 +268,13 @@ $(document).ready(function(){
 	<!-- 수정부분 -->
 	<!-- <div id='calendar'></div> -->
 <div id="pagebody">
-<a class="waves-effect waves-light btn" id="beforepage"><i class="material-icons right">navigate_before</i>1주전 예약보기</a>
-<a class="waves-effect waves-light btn" id="nextpage"><i class="material-icons left">navigate_next</i>1주뒤 예약보기</a>
+<div class="row center-align">
+	<a class="waves-effect waves-light btn" id="beforepage"><i class="material-icons left">navigate_before</i>1주 전</a>
+	<a class="waves-effect waves-light btn modal-trigger" onclick="reservecheck()" href="#modal1">예약목록보기</a>
+	<a class="waves-effect waves-light btn" id="nextpage"><i class="material-icons right">navigate_next</i>1주 뒤</a>
+</div>
 <div id="newpage">
-<div id="datediv" style="padding: 0 1rem 0 1rem;">
+<div id="datediv">
 	<script>
 		printDate();
 	</script>
@@ -308,12 +314,12 @@ setTimeout(function(){	/* 아래 정의된 기능을 페이지가 실행되고 1
 <!-- <a class="waves-effect waves-light btn" onclick="beforepage()"><i class="material-icons right">navigate_before</i>1주전 예약보기</a> -->
 
 	<!-- /수정부분 -->
- <a class="waves-effect waves-light btn modal-trigger" onclick="reservecheck()" href="#modal1">예약목록보기</a>
+ <!-- <a class="waves-effect waves-light btn modal-trigger" onclick="reservecheck()" href="#modal1">예약목록보기</a> -->
 </div>
 <!-- /main -->
 <!-- 예약확인 modal -->
 <div id="modal1" class="modal">				<!-- 오전,오후 버튼을 눌렀을때  해당 예약정보를 모달 테이블에 추가함-->
-  <form role="form" method="POST"	action="<c:url value='/reserve/reserve_complete'/>">
+  <form role="form" method="POST" action="<c:url value='/reserve/reserve_complete'/>">
     <div class="modal-content">
       <table>
       	
@@ -333,6 +339,7 @@ setTimeout(function(){	/* 아래 정의된 기능을 페이지가 실행되고 1
 		<input name="RESERVE_DATE" type="hidden" value="1900-1-1" class="insertvalue">
 		<input name="RESERVE_S_TIME" type="hidden" value="09:00" class="insertvalue">
 		<input name="RESERVE_E_TIME" type="hidden" value="13:00" class="insertvalue">
+		<input name="ID" type="hidden" value="AA" class="insertvalue">
 		<!-- 위의 4개의 input정보는 복수개의 입력 정보는 컨트롤러에 넘기기 위한 더미데이터 이므로 신경쓸필요가 없으나 삭제하면 안됨 -->
 	  	</table>
     </div>
@@ -414,14 +421,15 @@ function addreserve(string){
 	 $('#'+arr[0]+arr[1]+arr[2]+'id').css("background-color","#ffb74d");/* 선택한 버튼 색상 변경 */
 	 var addDiv = '<tr id='+arr[0]+arr[1]+arr[2]+'><td NAME="EQUIP_SEQ">'+arr[0]+'</td><td NAME="RESERVE_DATE">'+arr[1]+'</td><td NAME="RESERVE_S_TIME">'+reserve_s_time+'</td>'
 	 +'<td NAME="RESERVE_E_TIME">'+reserve_e_time+'</td><td><button value='+arr[0]+arr[1]+arr[2]+' class="btn_delete">X</button></td><input name="EQUIP_SEQ" type="hidden" value='+arr[0]+' class="insertvalue">'
-	 +'<input name="RESERVE_DATE" type="hidden" value='+arr[1]+' class="insertvalue"><input name="RESERVE_S_TIME" type="hidden" value='+reserve_s_time+' class="insertvalue"><input name="RESERVE_E_TIME" type="hidden" value='+reserve_e_time+' class="insertvalue">';
-	 +'</tr>'; /* 선택한 버튼의 정보를 이용해 모달창에 예약목록 정보에 tr태그로 추가함 */
+	 +'<input name="RESERVE_DATE" type="hidden" value='+arr[1]+' class="insertvalue"><input name="RESERVE_S_TIME" type="hidden" value='+reserve_s_time+' class="insertvalue"><input name="RESERVE_E_TIME" type="hidden" value='+reserve_e_time+' class="insertvalue">'
+ 	 +'<input name="ID" type="hidden" value="${principalName}" class="insertvalue">'  // member_id값 추가
+ 	 +'</tr>'; /* 선택한 버튼의 정보를 이용해 모달창에 예약목록 정보에 tr태그로 추가함 */
 	 $('.modal-tbody').append(addDiv);
 }
 
 $(document).on("click","#nextpage",function(){	/* 현재에서 1주 뒤의 예약정보를 가져오도록 하는 함수. 기존에 있던 페이지(#newpage태그)의 정보를 지우고 새로운 정보를 가져옴 위에서 페이지가 실행할 때 했던 동작을 그대로 한다고 생각하면됨 자세한점은 문의바람*/
 	$('#newpage').remove();
-	newpage = '<div id="newpage"><div id="datediv" style="padding: 0 1rem 0 1rem;"></div>';
+	newpage = '<div id="newpage"><div id="datediv"></div>';
 	newpage +='<c:forEach items="${resultList}" var="resultData" varStatus="loop">'
 		+'<div id="selectable" class="accordion row">'
 		+'<div class="col s12">${resultData.SUB_CATEGORY_NAME}</div></div>'
@@ -462,7 +470,7 @@ $(document).on("click","#nextpage",function(){	/* 현재에서 1주 뒤의 예�
 
 $(document).on("click","#beforepage",function(){/* 현재에서 1주 전의 예약정보를 가져오도록 하는 함수.*/
 	$('#newpage').remove();
-	newpage = '<div id="newpage"><div id="datediv" style="padding: 0 1rem 0 1rem;"></div>';
+	newpage = '<div id="newpage"><div id="datediv"></div>';
 	newpage +='<c:forEach items="${resultList}" var="resultData" varStatus="loop">'
 		+'<div id="selectable" class="accordion row">'
 		+'<div class="col s12">${resultData.SUB_CATEGORY_NAME}</div></div>'

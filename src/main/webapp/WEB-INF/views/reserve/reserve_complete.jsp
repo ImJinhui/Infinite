@@ -120,7 +120,7 @@ $(document).on("click",".date_em",function(){
       </div>
     </div>
   </nav>
-  <h2>예약이 완료되었습니다</h2>
+  <h3 class="">예약이 완료되었습니다</h3>
 <!-- /페이지 이름 -->
  
 

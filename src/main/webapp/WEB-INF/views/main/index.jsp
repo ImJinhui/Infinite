@@ -67,7 +67,7 @@ $(document).ready(function(){
 							<div class="card-content">
 								<span class="activator grey-text text-darken-4">${resultData.EQUIP_SEQ}
 								</span> <a class="right"
-									href="<c:url value='/admin/equip/equip_edit?EQUIP_SEQ=${resultData.EQUIP_SEQ}'/>">예약하기</a>
+									href="<c:url value='/user/reserve_apply'/>">예약하기</a>
 							</div>
 
 						</div>

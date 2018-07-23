@@ -199,7 +199,7 @@ $(document).ready(function(){
     overflow: hidden;
 }
 .row{
-	border: 1px solid black;
+	/* border: 1px solid black; */
 }
 .col.s2{
 	text-align: center;
