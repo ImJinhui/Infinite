@@ -25,8 +25,8 @@ public class UserService {
 //
 		List<Object> abilitiesList = new ArrayList<>();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		MemberInfo username = (MemberInfo)authentication.getPrincipal();
-		((Map)dataMap).put("MEMBER_SEQ",username.getMemberSeq());
+		MemberInfo username = (MemberInfo)authentication.getPrincipal();	// 세션에 있는 정보를 가져와서 memberinfo형 객체로 저장함
+		((Map)dataMap).put("MEMBER_SEQ",username.getMemberSeq()); //member_seq정보를 가져와 mybatis에 넘길 맵에 저장함
 		sqlMapId = "reservation_cate.abilitylist";
 //		Object resultObject = dao.getList(sqlMapId, dataMap);
 		abilitiesList = (List<Object>) dao.getList(sqlMapId, dataMap);
