@@ -61,7 +61,8 @@
 			}
 
 			if (passCheck && doubleCheck) {
-				$('form').attr("action","<c:url value='/admin/member/insert'/>");
+				$('form').attr("action",
+						"<c:url value='/admin/member/insert'/>");
 				alert("회원가입이 완료되었습니다.");
 			} else if (!passCheck && doubleCheck) {
 				alert("비밀번호를 확인해주세요.");
@@ -85,20 +86,21 @@
 	</script>
 
 	<div class="row box">
-		<form class="col s12" role="form" name="myForm" method="POST" action="">
+		<form class="col s12" role="form" name="myForm" method="POST"
+			action="">
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">face</i> <input id="name"
-						type="text" class="validate" name="NAME" value="${paramMap.NAME}"> <label
-						for="name">이름</label>
+						type="text" class="validate" name="NAME" value="${paramMap.NAME}">
+					<label for="name">이름</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">account_circle</i> <input id="id"
-						type="text" class="validate" name="ID" value="${paramMap.ID}"> <label for="id">아이디</label>
-
-					<a class="waves-effect waves-light btn-small" type="button"
+						type="text" class="validate" name="ID" value="${paramMap.ID}">
+					<label for="id">아이디</label> <a
+						class="waves-effect waves-light btn-small" type="button"
 						style="border-left: 30px" onclick="idcheck()">중복체크</a>
 					<div id="idcheck" name="idcheck"></div>
 				</div>
@@ -134,8 +136,8 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">lock</i> <input id="password"
-						type="password" class="validate" name="PASSWORD" value="${paramMap.PASSWORD}"> <label
-						for="password">비밀번호</label>
+						type="password" class="validate" name="PASSWORD"
+						value="${paramMap.PASSWORD}"> <label for="password">비밀번호</label>
 				</div>
 			</div>
 			<div class="row">
@@ -168,15 +170,16 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">phone</i> <input id="tel"
-						type="tel" class="validate" name="TEL" value="${paramMap.TEL}"> <label for="tel">전화번호  : ex)01012345678</label>
+						type="tel" class="validate" name="TEL" value="${paramMap.TEL}">
+					<label for="tel">전화번호 : ex)01012345678</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">email</i> <input id="email"
-						type="email" class="validate" value="${paramMap.EMAIL}"> <label for="email">이메일</label>
-					<span class="helper-text" data-error="이메일 형식이 아닙니다."
-						data-success="이메일 형식이 맞습니다."></span>
+						type="email" class="validate" value="${paramMap.EMAIL}"> <label
+						for="email">이메일</label> <span class="helper-text"
+						data-error="이메일 형식이 아닙니다." data-success="이메일 형식이 맞습니다."></span>
 				</div>
 			</div>
 			<!--   <div class="row">
@@ -204,8 +207,9 @@
 					<!-- 대분류 -->
 					<select name="cate1" id="cate1" class="sel_cate"
 						onchange="comboChange(this.value);">
-						<option value="" disabled selected>시,도</option>
-
+						<option value="${paramMap.cate1}" disabled selected>시,도</option>
+						
+						
 						<c:forEach items="${resultList}" var="resultData" varStatus="loop">
 							<option value="${resultData.ADDR_SEQ}">${resultData.ADDR_NAME}</option>
 						</c:forEach>
@@ -216,7 +220,7 @@
 					<!-- 소분류 -->
 					<!-- onChange="cate2Select();" -->
 					<select name="cate2" id="cate2">
-						<option value="" disabled selected>군,구</option>
+						<option value="${paramMap.cate2}" disabled selected>군,구</option>
 					</select>
 				</div>
 			</div>

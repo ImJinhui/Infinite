@@ -78,9 +78,9 @@ public class AdminMemberController {
 
 		} else if ("insert".equalsIgnoreCase(action)) {
 
-			resultMap = (Map<String, Object>) memberservice.insert(paramMap);
-			resultMap = (Map<String, Object>) commonservice.getInfo(paramMap);
-			viewName = "/common/mypage";
+			resultMap = (Map<String, Object>) memberservice.insert(paramMap); //회원추가
+			resultMap = (Map<String, Object>) commonservice.getInfo(paramMap); //
+			viewName = "/common/login";
 
 		} else if ("update".equalsIgnoreCase(action)) {
 			resultMap = (Map<String, Object>) memberservice.update(paramMap);

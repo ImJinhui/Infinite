@@ -48,7 +48,6 @@ public class CommonController {
  			resultList = (List<Object>) commonservice.getADDList(paramMap);
 
 		} else if ("mypage".equalsIgnoreCase(action)) {
-			resultMap.put("id", (String) paramMap.get("id"));
 			resultMap = (Map<String, Object>) commonservice.getInfo(paramMap);
 
 		} else if ("loginfail".equalsIgnoreCase(action)) {

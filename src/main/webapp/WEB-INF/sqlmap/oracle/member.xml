@@ -85,15 +85,33 @@
 	</select>
 
 	<select id="myinfo" resultType="Map" parameterType="Map">
-		select
-		m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, sub.SUB_ADDR_NAME,
-		addr.ADDR_NAME
-		from MEMBER m, address addr, sub_address sub
-		where
-		m.SUB_ADDR_SEQ = sub.SUB_ADDR_SEQ
-		and sub.ADDR_SEQ = addr.ADDR_SEQ
-		and
-		m.ID=#{id}
+		<choose>
+			<when test="SUB_ADDR_NAME!=null">
+				select
+				m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL,
+				sub.SUB_ADDR_NAME, addr.ADDR_NAME
+				from MEMBER m, address addr,
+				sub_address sub
+				where
+				m.SUB_ADDR_SEQ = sub.SUB_ADDR_SEQ
+				and
+				sub.ADDR_SEQ = addr.ADDR_SEQ
+				and
+				m.ID=#{id}
+			</when>
+			<otherwise>
+				select
+				m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL
+				from MEMBER m
+				where
+				m.ID=#{id}
+			</otherwise>
+		</choose>
+
+
+		<!-- select m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, sub.SUB_ADDR_NAME, 
+			addr.ADDR_NAME from MEMBER m, address addr, sub_address sub where m.SUB_ADDR_SEQ 
+			= sub.SUB_ADDR_SEQ and sub.ADDR_SEQ = addr.ADDR_SEQ and m.ID=#{id} -->
 	</select>
 
 	<select id="read" resultType="Map" parameterType="Map">
@@ -177,32 +195,13 @@
 		where VISIBLE='TRUE'
 	</select>
 
-<!-- 	<select id="totalcount_id" resultType="Integer"
-		parameterType="Map">
-		select count(MEMBER_SEQ)
-		from member
-		where ID=#{input} and
-		VISIBLE='TRUE'
-	</select>
-
-	<select id="totalcount_name" resultType="Integer"
-		parameterType="Map">
-		select count(MEMBER_SEQ)
-		from member
-		where NAME=#{input}
-		andVISIBLE='TRUE'
-	</select>
-
-
-	<select id="totalcount_tel" resultType="Integer"
-		parameterType="Map">
-		select count(MEMBER_SEQ)
-		from member
-		where TEL=#{input}
-		and VISIBLE='TRUE'
-	</select>
-
- -->
+	<!-- <select id="totalcount_id" resultType="Integer" parameterType="Map"> 
+		select count(MEMBER_SEQ) from member where ID=#{input} and VISIBLE='TRUE' 
+		</select> <select id="totalcount_name" resultType="Integer" parameterType="Map"> 
+		select count(MEMBER_SEQ) from member where NAME=#{input} andVISIBLE='TRUE' 
+		</select> <select id="totalcount_tel" resultType="Integer" parameterType="Map"> 
+		select count(MEMBER_SEQ) from member where TEL=#{input} and VISIBLE='TRUE' 
+		</select> -->
 	<!-- /pagination+ memberList -->
 
 	<select id="hasAbility" resultType="Map" parameterType="Map">
@@ -220,7 +219,8 @@
 	</update>
 
 	<select id="find_name" resultType="Map" parameterType="Map">
-		select *from member where NAME=#{input} and VISIBLE='TRUE'
+		select
+		*from member where NAME=#{input} and VISIBLE='TRUE'
 	</select>
 
 	<select id="find_id" resultType="Map" parameterType="Map">
