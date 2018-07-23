@@ -42,7 +42,7 @@ public class CommonController {
 		List<Object> resultList = new ArrayList<Object>();
 
 		// divided depending on action value
-		if ("".equalsIgnoreCase(action)) {
+		if ("login".equalsIgnoreCase(action)) {
 			
 		} else if ("signup".equalsIgnoreCase(action)) {
  			resultList = (List<Object>) commonservice.getADDList(paramMap);

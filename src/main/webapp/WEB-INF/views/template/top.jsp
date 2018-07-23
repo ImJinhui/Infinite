@@ -42,7 +42,7 @@
 			<%--  <li><a href="<c:url value='/common/login'/>">로그인</a></li> --%>
 			<li><a href="<c:url value='/common?action=signup'/>">회원가입</a></li>
 			<li class="divider"></li>
-			<li><a href="<c:url value='/common/mypage&id=${principalName}'/>">마이페이지</a></li>
+			<li><a href="<c:url value='/common?action=mypage&id=${principalName}'/>">마이페이지</a></li>
 			
 			<li><a href="<c:url value='/j_spring_security_logout'/> "> 로그아웃</a></li>
 			

@@ -18,23 +18,23 @@
 
 	<http security="none" pattern="/resources/**" />
 	<http security="none" pattern="/ws/**" />
-	<http security="none" pattern="/admin/common?action=login.jsp*" />
 
 
 
 
 
-	<http auto-config="true" use-expressions="true">
+	<http use-expressions="true">
 		<!-- EL(expression language) 표현식 -->
 		<!-- return boolean -->
-		<intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')" /> <!-- -->
+		<intercept-url pattern="/admin/*/*" access="hasRole('ROLE_ADMIN')" /> <!-- -->
 		<intercept-url pattern="/user/*" access="hasRole('ROLE_USER')" />
-		<intercept-url pattern="/reserve/*" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/reserve/*" access="permitAll()" />
+		<intercept-url pattern="/common/mypage" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/common/*" access="isAnonymous()" />
 		<intercept-url pattern="/main/*" access="permitAll()" /><!-- -->
 
 
-		<form-login login-page="/common/login"
+		<form-login login-page="/common?action=login"
 			default-target-url="/"
 			login-processing-url="/j_spring_security_check"
 			authentication-failure-url="/common?action=login&amp;fail=true"
