@@ -27,11 +27,13 @@
 		<!-- EL(expression language) 표현식 -->
 		<!-- return boolean -->
 		<intercept-url pattern="/admin/*/*" access="hasRole('ROLE_ADMIN')" /> <!-- -->
-		<intercept-url pattern="/user/*" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/user/reserve_view" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/user/reserve_apply" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
 		<intercept-url pattern="/reserve/*" access="permitAll()" />
-		<intercept-url pattern="/common/mypage" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/common/mypage" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
 		<intercept-url pattern="/common/*" access="isAnonymous()" />
 		<intercept-url pattern="/main/*" access="permitAll()" /><!-- -->
+		<intercept-url pattern="/*" access="permitAll()" /><!-- -->
 
 
 		<form-login login-page="/common?action=login"
