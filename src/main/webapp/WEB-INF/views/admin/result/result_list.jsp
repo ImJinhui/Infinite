@@ -1,6 +1,4 @@
-<%@ page language="java"
-	contentType="text/html; charset=UTF-8; application/vnd.ms-excel;"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8;" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
@@ -19,6 +17,19 @@
 		"ordering" : false,
 		"info" : false
 	});
+</script>
+
+<script>
+<script>
+$(function(){
+   $("#btnExport").click(function (e) {
+      alert($('#export').html());
+      
+      var uri = encodeURI('data:application/vnd.ms-excel,' + $('#export').html());
+      window.open(uri);
+       e.preventDefault();
+   });
+});
 </script>
 
 <!-- 페이지이름-->
@@ -105,7 +116,11 @@
 			</ul>
 		</div>
 	</div>
+	<a href="<c:url value='/admin/result/result_print'/>" class="waves-effect waves-light btn">button</a>
 </div>
 <!-- /수정부분-->
+
+   
+  
 
 <!-- /main -->

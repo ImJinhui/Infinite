@@ -6,7 +6,23 @@
 <script>
 $(document).ready(function(){
     $('select').formSelect();
+    
+    
+    var available = '${resultMap.resultObject.AVAILABLE}';
+	if(available=='사용가능'){
+		 $('#avail_t').prop("checked", true); //radio button
+	}else if(available=='사용불가'){
+		 $('#avail_f').prop("checked", true); //radio button
+	}
+	
+	  var ability = '${resultMap.resultObject.ABILITY}';
+		if(ability=='T'){
+			 $('#abil_t').prop("checked", true); //radio button
+		}else if(ability=='F'){
+			 $('#abil_f').prop("checked", true); //radio button
+		}
   });
+  
 </script>
 
 <!-- 장비추가 널 체크  -->
@@ -32,6 +48,10 @@ function checkNull(){
 		} else if (!($('input:radio[name=AVAILABLE]').is(':checked'))) {
 			alert("사용가능여부를 입력해주세요");
 			$("#available").focus();
+			return false;
+		}else if (!($('input:radio[name=ABILITY]').is(':checked'))) {
+			alert("능력카드 필요여부를 입력해주세요");
+			$("#ability").focus();
 			return false;
 		} else if ($("#attachedfiles").val().length < 1) {
 			alert("장비이미지파일 입력해주세요");
@@ -150,14 +170,28 @@ function checkNull(){
 					<label for="available">사용가능여부</label>
 				<div class="input-field inline col s12">
 					<p id="available">
-						<label> <input name="AVAILABLE" value="사용가능" type="radio" checked="checked"/> <span>사용가능</span>
+						<label> <input id="avail_t" name="AVAILABLE" value="사용가능" type="radio" /> <span>사용가능</span>
+						
 						</label>
 					
-						<label> <input name="AVAILABLE" value="사용불가" type="radio" /> <span>사용불가</span>
+						<label> <input id="avail_f"name="AVAILABLE" value="사용불가" type="radio" /> <span>사용불가</span>
 						</label>
 					</p>
 				</div>
 			</div>
+						<div class="row">
+					<label for="available">능력카드 필요여부</label>
+				<div class="input-field inline col s12">
+					<p id="ability">
+						<label> <input id="abil_t" name="ABILITY" value="T" type="radio"/> <span>능력카드 필요</span>
+						</label>
+					
+						<label> <input id="abil_f" name="ABILITY" value="F" type="radio" /> <span>능력카드 불필요</span>
+						</label>
+					</p>
+				</div>
+			</div>
+			
 				<div class="file-field input-field">
 					<div class="btn">
 						<span>File</span> 

@@ -45,6 +45,8 @@ public class AdminResultController {
 		} else if("result_merge".equalsIgnoreCase(action)) {
 			service.saveObject(paramMap);
 			resultMap = (Map<String, Object>) service.getListPagination(paramMap);
+		} else if("result_print".equalsIgnoreCase(action)) {
+			resultMap = (Map<String, Object>) service.getListPagination(paramMap);
 		}
 		
 

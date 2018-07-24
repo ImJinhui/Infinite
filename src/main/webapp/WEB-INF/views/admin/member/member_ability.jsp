@@ -8,8 +8,8 @@
 <nav class="teal">
 	<div class="nav-wrapper">
 		<div class="bread_div">
-			<a href="#!" class="breadcrumb">능력카드관리</a> <a href="#!"
-				class="breadcrumb">능력카드수정</a>
+			<a href="#!" class="breadcrumb">회원관리</a> <a href="#!"
+				class="breadcrumb">능력카드추가</a>
 		</div>
 	</div>
 </nav>
@@ -28,51 +28,29 @@
 		$('select').formSelect();
 	});
 </script>
-<!-- 
 <script>
-	var ability_check = function() {
-
-		var ability_seq = $("#ability").val();
-		/* var member_seq = $("paramMap.MEMBER_SEQ") */
-		$
-				.ajax({
-					type : "GET", //서버에 보낼 request 방식
-					url : "<c:url value='/abilitycheck'/>", //서버에서 받을 url
-					dataType : "json",
-					data : {
-						"ability_seq" : ability_seq
-					}, //Controller에 보낼 데이터(value = ADDR_SEQ 보내짐)
-					////////
-					success : function(result) { //서버에서 반환받은 데이터를 result에 담는다.
-						console.log(result);
-
-						if (result == null) {
-							alert("능력이 추가되었습니다.");
-							$('form')
-									.attr(
-											"action",
-											"<c:url value='/admin/member/ability_insert?MEMBER_SEQ=${paramMap.MEMBER_SEQ}'/>");
-						} else {
-							alert("이미 존재하는 능력입니다.");
-						}
-
-					},
-
-					error : function(jqXHR, textStatus, errorThrown) {
-					}
-				});
-
+function checkNull(){
+	if ($("#ability").find(":selected").val() == null
+				|| $("#ability").find(":selected").val() == "능력이름") {
+			alert("능력이름값을 입력해주세요");
+			$("#subCate").focus();
+			return false;
+		} else if ($("#ability_manager").trim().val().length < 1) {
+			alert("담당자를 입력해주세요");
+			$("#ability_manager").focus();
+			return false;
+		} 
+		$('#memberAbilityInsert').submit();
 	}
-</script> -->
-
+</script>
 
 <!-- main -->
 <div class="main_body" style="width: 70%">
 	<!-- 수정부분 -->
 	<div class="row box">
-		<form class="col s12" method="POST" role="form"
+		<form id="memberAbilityInsert" class="col s12" method="POST" role="form"
 			action="<c:url value='/admin/member/ability_insert?MEMBER_SEQ=${paramMap.MEMBER_SEQ}'/>"
-			name="AbilityInsertForm" id="AbilityInsertForm">
+			name="AbilityInsertForm">
 
 			<!-- 		<input type="hidden" name="forwardView"
 				value="/admin/member/member_ability" /> -->
@@ -134,7 +112,7 @@
 
 			<div class="row">
 				<div class="input-field col s12">
-					<input name="MANAGER" id="ability_name" type="text"
+					<input name="MANAGER" id="ability_manager" type="text"
 						class="validate" value=""> <label for="ability_manager">담당자</label>
 				</div>
 			</div>
@@ -143,7 +121,7 @@
 				<div class="input-field col s12">
 					<input name="OBTAIN_DATE" id="obtain_date" type="text"
 						class="validate" value="${resultMap.OBTAIN_DATE}"> <label
-						for="ability_manager">발급 날짜</label>
+						for="obtain_date">발급 날짜</label>
 				</div>
 			</div>
 
@@ -152,7 +130,7 @@
 				name="action">
 				삭제 <i class="material-icons right">delete</i>
 			</button> -->
-			<button class="btn waves-effect waves-light right" type="submit"
+			<button class="btn waves-effect waves-light right" action="return nullCheck();"
 				id="insertBtn">
 				추가 <i class="material-icons right">edit</i>
 			</button>

@@ -243,21 +243,23 @@
 				</div>
 			</div>
 			<!-- /능력테이블 -->
+	</div>
+			<div class="row right-align">
+			<a href="<c:url value='/admin/member/member_list'/>" class="waves-effect waves-light btn left">목록</a>
+			
+				<button class="btn waves-effect waves-light" type="submit"
+					name="action">
+					수정 <i class="material-icons right">edit</i>
+				</button>
+				<button class="btn waves-effect waves-light" type="button"
+					name="action" onclick="member_delete()">
+					<a href="<c:url value='/admin/member/member_delete?MEMBER_SEQ=${resultMap.MEMBER_SEQ}'/>"></a> 삭제 <i
+						class="material-icons right">delete</i>
 
-			<button class="btn waves-effect waves-light right" type="button"
-				name="action" onclick="member_delete()">
-				<a href="<c:url value='/admin/member/member_delete?'/>"></a> 삭제 <i
-					class="material-icons right">delete</i>
-
-			</button>
-			<button class="btn waves-effect waves-light right" type="submit"
-				name="action">
-				수정 <i class="material-icons right">edit</i>
-			</button>    
-
+				</button>
+			</div>
 
 		</form>
-	</div>
 	<!-- /수정부분 -->
 </div>
 <!-- /main -->
