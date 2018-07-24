@@ -45,7 +45,7 @@
 
 
 	<script>
-		console.log(passCheck);
+	/* 	console.log(passCheck);
 		console.log(doubleCheck);
 
 		var checkform = function() {
@@ -60,16 +60,15 @@
 
 			}
 
-			if (passCheck && doubleCheck) {
-				$('form').attr("action",
-						"<c:url value='/admin/member/insert'/>");
+			 if (passCheck && doubleCheck) {
+				 $('form').attr("action",
+						"<c:url value='/admin/member/insert'/>"); 
 				alert("회원가입이 완료되었습니다.");
-			} else if (!passCheck && doubleCheck) {
+			}  else if (!passCheck && doubleCheck) {
 				alert("비밀번호를 확인해주세요.");
 				document.myForm.focus();
 				return false;
 
-				console.log("비밀번호확인");
 			} else if (passCheck == 1 && !doubleCheck) {
 				alert("아이디를 중복 확인해주세요.");
 				document.myForm.focus();
@@ -80,14 +79,58 @@
 				document.myForm.focus();
 				return false;
 				console.log("비밀번호확인 중복확인");
+			} 
+
+
+		} */
+	</script>
+	<script>
+	function nullCheck(){
+		 
+		 if ($("#cate1").find(":selected").val() == null
+					|| $("#cate1").find(":selected").val() == "시,도") {
+				alert("주소값을 입력해주세요");
+				$("#cate1").focus();
+				return false;
+			} else if ($("#cate2").find(":selected").val() == null
+					|| $("#cate2").find(":selected").val() == "군,구") {
+				alert("하위주소값을 입력해주세요");
+				$("#cate2").focus();
+				return false;
+			} else if ($("#tel").val().length < 1) {
+				alert("전화번호값을 입력해주세요");
+				$("#tel").focus();
+				return false;
+			} else if (!passCheck && doubleCheck) {
+				alert("비밀번호를 확인해주세요.");
+				$("#password_c").focus();
+				return false;
+
+			} else if (passCheck == 1 && !doubleCheck) {
+				alert("아이디를 중복 확인해주세요.");
+				$("#id").focus();
+				return false;
+
+			} else if (!passCheck && !doubleCheck) {
+				alert("비밀번호 또는 아이디를 다시 확인해주세요.");
+				$("#id").focus();
+				return false;
 			}
+
+			if (passCheck && doubleCheck) {
+
+				$('#memberInsert').submit();
+				alert("회원가입이 완료되었습니다.");
+			}
+
+			$('#memberInsert').submit();
 
 		}
 	</script>
 
 	<div class="row box">
-		<form class="col s12" role="form" name="myForm" method="POST"
-			action="">
+		<form id="memberInsert" class="col s12" role="form" name="myForm" method="POST"
+			action="<c:url value='/admin/member/insert'/>">
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">face</i> <input id="name"
@@ -260,7 +303,7 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<button class="waves-effect waves-light btn-large"
-						style="width: 100%; margin: 0 auto;" type="submit;" id="submitBtn">회원가입</button>
+						style="width: 100%; margin: 0 auto;" onclick="return nullCheck();" id="submitBtn">회원가입</button>
 				</div>
 			</div>
 		</form>
