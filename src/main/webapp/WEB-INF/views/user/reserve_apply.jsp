@@ -3,12 +3,9 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
+<c:set var="principalName" value="${pageContext.request.userPrincipal.name }" />
 
-<%-- <link href="<c:url value='/resources/css/customize_fullcalendar.css'/>" type="text/css"	rel="stylesheet"/>
-<link href="<c:url value='/resources/css/infinite.css'/>" type="text/css"	rel="stylesheet"/>
-<script src="<c:url value='/resources/js/ko.js'/> "></script> --%>
 <script>
-
 var timeid = null;
 var dateary = new Array();
 var jbary = new Array();
@@ -218,6 +215,11 @@ $(document).ready(function(){
 	display:none;
 	align:left;
 }
+#main_list{
+	margin: 3rem 0;
+	padding:2rem;
+	border: 1.3px solid #d4d4d4;
+}
 </style>
 
 <!-- main -->
@@ -226,7 +228,7 @@ $(document).ready(function(){
 	<div class="nav-wrapper">
 		<div class="bread_div">
 			<a href="#!" class="breadcrumb">예약</a> <a href="#!"
-				class="breadcrumb">예약현황</a>
+				class="breadcrumb">예약신청</a>
 		</div>
 	</div>
 </nav>
@@ -235,19 +237,22 @@ $(document).ready(function(){
 <div class="main_body" style="width: 70%">
 	<!-- 수정부분 -->
 	<!-- <div id='calendar'></div> -->
+<div class="row center-align">
+	<a class="left waves-effect waves-light btn" onclick="beforepage()"><i class="material-icons left">navigate_before</i>1주 전</a>
+	<a class="waves-effect waves-light btn modal-trigger" onclick="reservecheck()" href="#modal1">예약하기</a>
+	<a class="right waves-effect waves-light btn" onclick="nextpage()" ><i class="material-icons right">navigate_next</i>1주 뒤</a>
+</div>
 <div id="firstpage">
-<a class="waves-effect waves-light btn" onclick="nextpage()" ><i class="material-icons left">navigate_next</i>1주뒤 예약보기</a>
+<div id="main_list">
 <div style="padding: 0 1rem 0 1rem;">
 	<script>
 		printDate(1);
 	</script>
 </div>
-
+	
 	<c:forEach items="${resultList}" var="resultData" varStatus="loop">
 	<div id="selectable" class="accordion row">
 		<div class="col s12">${resultData.SUB_CATEGORY_NAME}</div>
-		
-		
 	</div>
 	
 	<div class="panel">
@@ -259,6 +264,7 @@ $(document).ready(function(){
 		</script>
 	</div>
 	</c:forEach>
+	</div>
 <script> setTimeout(function(){
  	for(var data1=0; data1<jbary.length; data1++)
 	 {
@@ -270,10 +276,8 @@ $(document).ready(function(){
 </div>
 
 
-
-
 <div id="secondpage">
-<a class="waves-effect waves-light btn" onclick="beforepage()"><i class="material-icons right">navigate_before</i>1주전 예약보기</a>
+<div id="main_list">
 <div style="padding: 0 1rem 0 1rem;">
 	<script>
 		printDate(2);
@@ -296,6 +300,7 @@ $(document).ready(function(){
 		</script>
 	</div>
 	</c:forEach>
+	</div>
 	<!-- fn_setFormTagList 종료 -->
 
 <script>
@@ -309,15 +314,20 @@ $(document).ready(function(){
 </script>
 </div>
 	<!-- /수정부분 -->
- <a class="waves-effect waves-light btn modal-trigger" onclick="reservecheck()" href="#modal1">예약목록보기</a>
+ 
 </div>
 <!-- /main -->
 <!-- 예약확인 modal -->
 <div id="modal1" class="modal">
-  <form role="form" method="POST"	action="<c:url value='/reserve/reserve_complete'/>">
+  <form role="form" method="POST" action="<c:url value='/reserve/reserve_complete'/>">
     <div class="modal-content">
-      <table>
-      	
+    <div class="row">
+			<div class="input-field col s12">
+				<span><i class="modal-close material-icons right">close</i></span>
+				<h4>임시저장내역</h4>
+			</div>
+		</div>
+      <table class="highlight centered">
         <thead>
           <tr>
               <th>장비명</th>
@@ -338,12 +348,11 @@ $(document).ready(function(){
 	  	</table>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">닫기</a>
-      <button class="waves-effect waves-light btn-large" id="btn_reserve"type="submit">예약하기</button>
+      <button class="waves-effect waves-light btn" id="btn_reserve"type="submit">예약하기</button>
     </div>
     </form>
   </div>
-<!-- 예약확인 modal -->
+<!-- /예약확인 modal -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.modal');
@@ -402,7 +411,7 @@ function addreserve(string){
 	 }
 	 $('#'+arr[0]+arr[1]+arr[2]).css("background-color","#ffb74d");
 	 var addDiv = '<tr id='+arr[0]+arr[1]+arr[2]+'><td NAME="EQUIP_SEQ">'+arr[0]+'</td><td NAME="RESERVE_DATE">'+arr[1]+'</td><td NAME="RESERVE_S_TIME">'+reserve_s_time+'</td>'
-	 +'<td NAME="RESERVE_E_TIME">'+reserve_e_time+'</td><td><button value='+arr[0]+arr[1]+arr[2]+' class="btn_delete">X</button></td><input name="EQUIP_SEQ" type="hidden" value='+arr[0]+' class="insertvalue">'
+	 +'<td NAME="RESERVE_E_TIME">'+reserve_e_time+'</td><td><button value='+arr[0]+arr[1]+arr[2]+' class="btn-small btn_delete">X</button></td><input name="EQUIP_SEQ" type="hidden" value='+arr[0]+' class="insertvalue">'
 	 +'<input name="RESERVE_DATE" type="hidden" value='+arr[1]+' class="insertvalue"><input name="RESERVE_S_TIME" type="hidden" value='+reserve_s_time+' class="insertvalue"><input name="RESERVE_E_TIME" type="hidden" value='+reserve_e_time+' class="insertvalue">';
 	 +'</tr>';
 	 $('.modal-tbody').append(addDiv);

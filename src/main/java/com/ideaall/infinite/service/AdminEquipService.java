@@ -74,7 +74,7 @@ public class AdminEquipService {
 		String sqlMapId = "equip.merge";
 		Integer result = (Integer) dao.saveObject(sqlMapId, dataMap);
 //		
-		if ("".equals(paramMap.get("FILE_SEQ"))) {
+		if ("".equals(paramMap.get ("FILE_SEQ"))) {
 			sqlMapId = "file.equipInsert";
 			result = (Integer) dao.saveObject(sqlMapId, paramMap);
  		} else if(((List)paramMap.get("attachFileList")).isEmpty()){

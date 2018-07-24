@@ -7,12 +7,17 @@
 <mapper namespace="equip">
 
 	<select id="modeList" resultType="Map" parameterType="Map" timeout="10">
-	select r.EQUIP_SEQ, e. EQUIP_NAME, count(r.EQUIP_SEQ), img.PHYSICALFILE_NAME
+	select 
+	r.EQUIP_SEQ
+	, e. EQUIP_NAME
+	, count(r.EQUIP_SEQ)
+	, img.PHYSICALFILE_NAME
 	from RESERVATION r, equip_image img, equip e
-  where r.EQUIP_SEQ = img.SOURCE_UNIQUE_SEQ
-  and e.EQUIP_SEQ = r.EQUIP_SEQ
+	where 
+	r.EQUIP_SEQ = img.SOURCE_UNIQUE_SEQ
+	and e.EQUIP_SEQ = r.EQUIP_SEQ
 	group by r.EQUIP_SEQ
-	ORDER BY COUNT( r.EQUIP_SEQ ) DESC
+	ORDER BY COUNT(	r.EQUIP_SEQ ) DESC
 	LIMIT 3
 	</select>
 
@@ -25,6 +30,7 @@
 			,e.MANAGER	
 			,e.EQUIP_NAME
 			,e.AVAILABLE
+			,e.ABILITY
 			,sc.SUB_CATEGORY_NAME
       		,img.PHYSICALFILE_NAME 
 		from SUB_CATEGORY sc , EQUIP e LEFT OUTER JOIN EQUIP_IMAGE img 
@@ -44,6 +50,7 @@
 			,e.MANAGER	
 			,e.EQUIP_NAME
 			,e.AVAILABLE
+			,e.ABILITY
 			,sc.SUB_CATEGORY_NAME
       		,img.PHYSICALFILE_NAME 
 		from SUB_CATEGORY sc , EQUIP e LEFT OUTER JOIN EQUIP_IMAGE img 
@@ -89,6 +96,7 @@
 		,EQUIP_NAME
 		,VISIBLE
 		,AVAILABLE
+		,ABILITY
 		)
 	values(
 		#{EQUIP_SEQ}
@@ -99,6 +107,7 @@
 		,#{EQUIP_NAME}
 		,'T'
 		,#{AVAILABLE}
+		,#{ABILITY}
 		)
 	ON DUPLICATE KEY UPDATE
 	EQUIP_SEQ = #{EQUIP_SEQ}
@@ -109,6 +118,7 @@
 	,EQUIP_NAME = #{EQUIP_NAME}
 	,VISIBLE = 'T'
 	,AVAILABLE = #{AVAILABLE}
+	,ABILITY = #{ABILITY}
 	</insert>
 	
 	<select id="read" resultType="Map" parameterType="Map">
@@ -120,6 +130,7 @@
 			, e.MANAGER
 			, e.EQUIP_NAME
 			, e.AVAILABLE
+			, e.ABILITY
 			, img.PHYSICALFILE_NAME
 			, img.ATTACHFILE_SEQ
 		from EQUIP e LEFT OUTER JOIN EQUIP_IMAGE img

@@ -61,6 +61,60 @@
 	</foreach>
 	</update>
 	
+	
+	
+	
+	
+	
+	 <insert id="resultInsert" parameterType="Map">
+		 insert into result_image (
+			ATTACHFILE_SEQ
+			,ATTACHFILE_TYPE
+			,ORGINALFILE_NAME
+			,PHYSICALFILE_NAME
+			,ATTACHFILE_PATH
+			,ATTACHFILE_SIZE
+			,SOURCE_UNIQUE_SEQ	
+			,VISIBLE
+			)
+		values 
+		 <foreach collection="attachFileList" item="item" index="index" separator=",">
+			(
+			#{item.ATTACHFILE_SEQ}
+			,#{item.ATTACHFILE_TYPE}
+			,#{item.ORGINALFILE_NAME}
+			,#{item.PHYSICALFILE_NAME}
+			,#{item.ATTACHFILE_PATH}
+			,#{item.ATTACHFILE_SIZE}
+			,#{RESERVATION_SEQ}
+			,'T'
+			)
+		</foreach>
+			<!-- ON DUPLICATE KEY UPDATE
+	       ATTACHFILE_SEQ = #{ATTACHFILE_SEQ}
+	       ,ATTACHFILE_TYPE = #{ATTACHFILE_TYPE}
+	       ,ORGINALFILE_NAME = #{ORGINALFILE_NAME}
+	       ,PHYSICALFILE_NAME = #{PHYSICALFILE_NAME}
+	       ,ATTACHFILE_PATH = #{ATTACHFILE_PATH}
+	       ,ATTACHFILE_SIZE = #{ATTACHFILE_SIZE}
+	       ,SOURCE_UNIQUE_SEQ = #{EQUIP_SEQ} -->
+	</insert>
+	
+	<update id="resultUpdate">
+	update RESULT_IMAGE
+	set 
+	<foreach collection="attachFileList" item="item" index="index" separator=",">
+		ATTACHFILE_SEQ = #{item.ATTACHFILE_SEQ}
+		,ATTACHFILE_TYPE = #{item.ATTACHFILE_TYPE}
+		,ORGINALFILE_NAME = #{item.ORGINALFILE_NAME}
+		,PHYSICALFILE_NAME = #{item.PHYSICALFILE_NAME}
+		,ATTACHFILE_PATH = #{item.ATTACHFILE_PATH}
+		,ATTACHFILE_SIZE = #{item.ATTACHFILE_SIZE}
+	
+	where SOURCE_UNIQUE_SEQ = #{RESERVATION_SEQ}
+	</foreach>
+	</update>
+	
 	<!-- <insert id="ciupload"  parameterType="Map" >
       INSERT INTO
       SS_ATTACHFILE(

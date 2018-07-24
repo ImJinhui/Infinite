@@ -31,26 +31,38 @@
 <!-- 장비추가 널 체크  -->
 <script>
 function checkNull(){
-	if ($("#subCate").find(":selected").val()==null || $("#subCate").find(":selected").val()=="Choose your option") {
+	if ($("#subCate").find(":selected").val() == null
+				|| $("#subCate").find(":selected").val() == "Choose your option") {
 			alert("장비종류값을 입력해주세요");
 			$("#subCate").focus();
-			return $('#equipInsert').submit(false);
-		} else if ($("#equip_seq").val().length < 1) {
+			return false;
+		} else if ($("#equip_seq").trim().val().length < 1) {
 			alert("장비아이디값을 입력해주세요");
 			$("#equip_seq").focus();
-			return $('#equipInsert').submit(false);
-		} else if ($("#description").val().length < 1) {
-			alert("장비설명값을 입력해주세요");
-			$("#description").focus();
-			return $('#equipInsert').submit(false);
-		} else if ($("#equip_name").val().length < 1) {
+			return false;
+		} else if ($("#equip_name").trim().val().length < 1) {
 			alert("장비이름값을 입력해주세요");
 			$("#equip_name").focus();
-			return $('#equipInsert').submit(false);
+			return false;
+		} else if ($("#description").trim().val().length < 1) {
+			alert("장비설명값을 입력해주세요");
+			$("#description").focus();
+			return false;
+		} else if (!($('input:radio[name=AVAILABLE]').is(':checked'))) {
+			alert("사용가능여부를 입력해주세요");
+			$("#available").focus();
+			return false;
+		}else if (!($('input:radio[name=ABILITY]').is(':checked'))) {
+			alert("능력카드 필요여부를 입력해주세요");
+			$("#ability").focus();
+			return false;
+		} else if ($("#attachedfiles").val().length < 1) {
+			alert("장비이미지파일 입력해주세요");
+			$("#attachedfiles").focus();
+			return false;
 		}
-		return $('#equipInsert').submit();
+		$('#equipInsert').submit();
 	}
-	
 </script>
 <!-- /장비추가 널 체크  -->
 
@@ -250,7 +262,7 @@ function checkNull(){
 					<h4>장비추가</h4>
 				</div>
 			</div>
-			<form id="equipInsert" class="col s12" method="POST" action="<c:url value='/admin/equip/equip_merge'/>" enctype="multipart/form-data">
+			<form name="equipInsert" id="equipInsert" class="col s12" method="POST" action="<c:url value='/admin/equip/equip_merge'/>" enctype="multipart/form-data">
 				<input type="hidden" name="forwardView"	value="/admin/equip/equip_list" />
 				<div class="row">
 					<div class="input-field col s6">
@@ -300,20 +312,45 @@ function checkNull(){
 						<label for="description">장비 설명</label>
 					</div>
 				</div>
+					<div class="row">
+					<label for="available">사용가능여부</label>
+				<div class="input-field inline col s12">
+					<p id="available">
+						<label> <input name="AVAILABLE" value="사용가능" type="radio"/> <span>사용가능</span>
+						</label>
+					
+						<label> <input name="AVAILABLE" value="사용불가" type="radio" /> <span>사용불가</span>
+						</label>
+					</p>
+				</div>
+			</div>
+					<div class="row">
+					<label for="available">능력카드 필요여부</label>
+				<div class="input-field inline col s12">
+					<p id="ability">
+						<label> <input name="ABILITY" value="T" type="radio"/> <span>능력카드 필요</span>
+						</label>
+					
+						<label> <input name="ABILITY" value="F" type="radio" /> <span>능력카드 불필요</span>
+						</label>
+					</p>
+				</div>
+			</div>
 
 				<div class="file-field input-field">
 					<div class="btn">
-						<span>File</span> <input type="file" name="ATTACHEDFILES">
+						<span>File</span> <input type="file" id="attachedfiles" name="ATTACHEDFILES">
 					</div>
 					<div class="file-path-wrapper">
 						<input id="image" name="IMAGE" class="file-path validate" type="text"
 							placeholder="장비이미지">
 					</div>
 				</div>
+				<input type="hidden" name="FILE_SEQ" value="${resultMap.resultObject.ATTACHFILE_SEQ}" />
 		</div>
 	</div>
 	<div class="modal-footer">
-		<button class="btn waves-effect waves-light" onclick="checkNull();"
+		<button class="btn waves-effect waves-light" onclick="return checkNull();"
 			name="action">
 			장비추가 <i class="material-icons right">send</i>
 		</button>

@@ -14,7 +14,7 @@
 	<select id="abilitylist" resultType="Map" parameterType="Map" timeout="10">
 		select ABILITY_SEQ
 		from member_ability_rel
-		where MEMBER_SEQ = #{MEMBER_SEQ};
+		where MEMBER_SEQ = #{MEMBER_SEQ}
 	</select>
 	
 	<select id="subcatelist" resultType="Map" parameterType="Map" timeout="10">

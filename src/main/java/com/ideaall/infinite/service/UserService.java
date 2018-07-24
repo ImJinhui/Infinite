@@ -30,9 +30,9 @@ public class UserService {
 		sqlMapId = "reservation_cate.abilitylist";
 //		Object resultObject = dao.getList(sqlMapId, dataMap);
 		abilitiesList = (List<Object>) dao.getList(sqlMapId, dataMap);
-		System.out.println(((Map)(abilitiesList.get(1))).get("ABILITY_SEQ"));
+//		System.out.println(((Map)(abilitiesList.get(1))).get("ABILITY_SEQ"));
 		int a = abilitiesList.size();
-		System.out.println(a);
+//		System.out.println(a);
 		for(int i = 0; i < a; i++) {
 			Map<String, Object> reservationSettingMap = new  HashMap<>();
 			reservationSettingMap.put("ABILITY_SEQ", ((Map)(abilitiesList.get(i))).get("ABILITY_SEQ"));

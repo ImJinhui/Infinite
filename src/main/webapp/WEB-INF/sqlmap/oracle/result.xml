@@ -8,7 +8,7 @@
 	<select id="list" resultType="Map" parameterType="Map" timeout="10">
 		select
 			r.RESERVATION_SEQ
-			,r.MEMBER_SEQ
+			,r.ID
 			,r.EQUIP_SEQ
 			,r.RESERVE_DATE
 			,r.RESERVE_S_TIME
@@ -18,7 +18,7 @@
 			,m.NAME
 			,e.EQUIP_NAME
 		from RESERVATION r, MEMBER m, EQUIP e
-		where r.MEMBER_SEQ = m.MEMBER_SEQ
+		where r.ID = m.ID
 		and r.EQUIP_SEQ = e.EQUIP_SEQ
 		order by r.RESERVATION_SEQ
 	</select>
@@ -26,7 +26,7 @@
 	<select id="listpagination" resultType="Map" parameterType="Map">
 	select 
 		r.RESERVATION_SEQ
-		,r.MEMBER_SEQ
+		,r.ID
 		,r.EQUIP_SEQ
 		,r.RESERVE_DATE
 		,r.RESERVE_S_TIME
@@ -36,7 +36,7 @@
 		,m.NAME
 		,e.EQUIP_NAME
 	from RESERVATION r, MEMBER m, EQUIP e
-	where r.MEMBER_SEQ = m.MEMBER_SEQ
+	where r.ID = m.ID
 	and r.EQUIP_SEQ = e.EQUIP_SEQ
 	order by RESERVATION_SEQ ASC
 	Limit
@@ -60,24 +60,19 @@
 		where ABILITY_SEQ = #{ABILITY_SEQ}
 	</update> -->
 	
-	<insert id="merge">
-	INSERT INTO ABILITIES (
-		ABILITY_NAME 
-		,ABILITY_SEQ
-		)
-		values(
-		#{ABILITY_NAME}
-		,#{ABILITY_SEQ}
-		)
-		ON DUPLICATE KEY UPDATE 
-		ABILITY_NAME = #{ABILITY_NAME}
-		,ABILITY_SEQ = #{ABILITY_SEQ}
-			
-	</insert>
+	<update id="merge" parameterType="Map">
+		update RESERVATION
+		set 
+		RETURN_CHECK = #{RETURN_CHECK}
+		,NUM_OF_PROTOTYPE = #{NUM_OF_PROTOTYPE}
+		where
+		RESERVATION_SEQ = #{RESERVATION_SEQ}
+	</update>
+		
 	<select id="read" resultType="Map" parameterType="Map">
 		select
 			r.RESERVATION_SEQ
-			,r.MEMBER_SEQ
+			,r.ID
 			,r.EQUIP_SEQ
 			,r.RESERVE_DATE
 			,r.RESERVE_S_TIME
@@ -86,12 +81,13 @@
 			,r.RETURN_CHECK
 			,m.NAME
 			,e.EQUIP_NAME
-      		<!-- ,img.PHYSICALFILE_NAME -->
-		from RESERVATION r, MEMBER m, EQUIP e<!-- , result_image img -->
-		where r.MEMBER_SEQ = m.MEMBER_SEQ
+      		,img.PHYSICALFILE_NAME 
+		from MEMBER m, EQUIP e, RESERVATION r LEFT OUTER JOIN result_image img 
+    	ON r.RESERVATION_SEQ = img.SOURCE_UNIQUE_SEQ
+		where r.ID = m.ID
 		and r.EQUIP_SEQ = e.EQUIP_SEQ
-    	<!-- and r.RESERVATION_SEQ = img.SOURCE_UNIQUE_SEQ -->
 		and r.RESERVATION_SEQ = #{RESERVATION_SEQ}
+	
 	</select>
 	
 	<!-- <delete id="delete" parameterType="Map">

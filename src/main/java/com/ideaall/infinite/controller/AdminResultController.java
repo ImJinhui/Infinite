@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ideaall.infinite.component.MapParamCollector;
 import com.ideaall.infinite.service.AdminResultService;
 
 @Controller
@@ -25,9 +26,9 @@ public class AdminResultController {
     
 	// Receive Parameters from Html Using @RequestParam Map with @PathVariable
 	@RequestMapping(value = MAPPING+"{action}", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView actionMethod(@RequestParam MultiValueMap<Object, Object> paramMultiMap, @RequestParam Map<String, Object> paramMap, 
-			@PathVariable String action, ModelAndView modelandView) {
-
+	public ModelAndView actionMethod(MapParamCollector paramMethodMap, @PathVariable String action, ModelAndView modelandView) {
+		
+		Map<Object,Object> paramMap = paramMethodMap.getMap();
 		String viewName = MAPPING + action ;
 		String forwardView = (String) paramMap.get("forwardView") ;
 
@@ -38,6 +39,11 @@ public class AdminResultController {
 		if ("result_read".equalsIgnoreCase(action)) {
 			resultMap = (Map<String, Object>) service.getObject(paramMap);
 		} else if("result_list".equalsIgnoreCase(action)) {
+			resultMap = (Map<String, Object>) service.getListPagination(paramMap);
+		} else if("result_edit".equalsIgnoreCase(action)) {
+			resultMap = (Map<String, Object>) service.getObject(paramMap);
+		} else if("result_merge".equalsIgnoreCase(action)) {
+			service.saveObject(paramMap);
 			resultMap = (Map<String, Object>) service.getListPagination(paramMap);
 		}
 		

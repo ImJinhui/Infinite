@@ -181,6 +181,13 @@ function printDate1(val) {			/* 동작은 위의 날짜함수와 같음. 차이�
      	}
 } 
 </script>
+
+<script>
+$(document).ready(function(){
+    $('.collapsible').collapsible();
+  }); 
+</script>
+
 <style>
 .collapsible {
    -webkit-box-shadow: none; 
@@ -190,17 +197,6 @@ function printDate1(val) {			/* 동작은 위의 날짜함수와 같음. 차이�
 .collapsible-body{
 	padding : 1.5rem;
 }
-</style>
-
-
-
-<script>
-$(document).ready(function(){
-    $('.collapsible').collapsible();
-  }); 
-</script>
-
-<style>
 .accordion {
     background-color: #eee;
     color: #444;
@@ -269,9 +265,9 @@ $(document).ready(function(){
 	<!-- <div id='calendar'></div> -->
 <div id="pagebody">
 <div class="row center-align">
-	<a class="waves-effect waves-light btn" id="beforepage"><i class="material-icons left">navigate_before</i>1주 전</a>
-	<a class="waves-effect waves-light btn modal-trigger" onclick="reservecheck()" href="#modal1">예약목록보기</a>
-	<a class="waves-effect waves-light btn" id="nextpage"><i class="material-icons right">navigate_next</i>1주 뒤</a>
+	<a class="left waves-effect waves-light btn" id="beforepage"><i class="material-icons left">navigate_before</i>1주 전</a>
+	<a class="waves-effect waves-light btn modal-trigger" onclick="reservecheck()" href="#modal1" style="padding: 0 2rem;">예약하기</a>
+	<a class="right waves-effect waves-light btn" id="nextpage"><i class="material-icons right">navigate_next</i>1주 뒤</a>
 </div>
 <div id="newpage">
 <div id="datediv">
@@ -321,8 +317,13 @@ setTimeout(function(){	/* 아래 정의된 기능을 페이지가 실행되고 1
 <div id="modal1" class="modal">				<!-- 오전,오후 버튼을 눌렀을때  해당 예약정보를 모달 테이블에 추가함-->
   <form role="form" method="POST" action="<c:url value='/reserve/reserve_complete'/>">
     <div class="modal-content">
-      <table>
-      	
+       <div class="row">
+			<div class="input-field col s12">
+				<span><i class="modal-close material-icons right">close</i></span>
+				<h4>임시저장내역</h4>
+			</div>
+		</div>
+      <table class="highlight centered">
         <thead>
           <tr>
               <th>장비명</th>
@@ -344,7 +345,6 @@ setTimeout(function(){	/* 아래 정의된 기능을 페이지가 실행되고 1
 	  	</table>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">닫기</a>
       <button class="waves-effect waves-light btn-large" id="btn_reserve" type="submit">예약하기</button>
     </div>
     </form>
@@ -420,7 +420,7 @@ function addreserve(string){
 	 }
 	 $('#'+arr[0]+arr[1]+arr[2]+'id').css("background-color","#ffb74d");/* 선택한 버튼 색상 변경 */
 	 var addDiv = '<tr id='+arr[0]+arr[1]+arr[2]+'><td NAME="EQUIP_SEQ">'+arr[0]+'</td><td NAME="RESERVE_DATE">'+arr[1]+'</td><td NAME="RESERVE_S_TIME">'+reserve_s_time+'</td>'
-	 +'<td NAME="RESERVE_E_TIME">'+reserve_e_time+'</td><td><button value='+arr[0]+arr[1]+arr[2]+' class="btn_delete">X</button></td><input name="EQUIP_SEQ" type="hidden" value='+arr[0]+' class="insertvalue">'
+	 +'<td NAME="RESERVE_E_TIME">'+reserve_e_time+'</td><td><button value='+arr[0]+arr[1]+arr[2]+' class="btn-small btn_delete">X</button></td><input name="EQUIP_SEQ" type="hidden" value='+arr[0]+' class="insertvalue">'
 	 +'<input name="RESERVE_DATE" type="hidden" value='+arr[1]+' class="insertvalue"><input name="RESERVE_S_TIME" type="hidden" value='+reserve_s_time+' class="insertvalue"><input name="RESERVE_E_TIME" type="hidden" value='+reserve_e_time+' class="insertvalue">'
  	 +'<input name="ID" type="hidden" value="${principalName}" class="insertvalue">'  // member_id값 추가
  	 +'</tr>'; /* 선택한 버튼의 정보를 이용해 모달창에 예약목록 정보에 tr태그로 추가함 */

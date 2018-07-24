@@ -12,28 +12,37 @@ $(document).ready(function(){
 <!-- 장비추가 널 체크  -->
 <script>
 function checkNull(){
-	if ($("#subCate").find(":selected").val()==null || $("#subCate").find(":selected").val()=="Choose your option") {
+	if ($("#subCate").find(":selected").val() == null
+				|| $("#subCate").find(":selected").val() == "Choose your option") {
 			alert("장비종류값을 입력해주세요");
 			$("#subCate").focus();
-			return $('#equipInsertForm').submit(false);
-		} else if ($("#equip_seq").val().length < 1) {
+			return false;
+		} else if ($("#equip_seq").trim().val().length < 1) {
 			alert("장비아이디값을 입력해주세요");
 			$("#equip_seq").focus();
-			return $('#equipInsertForm').submit(false);
-		} else if ($("#description").val().length < 1) {
-			alert("장비설명값을 입력해주세요");
-			$("#description").focus();
-			return $('#equipInsertForm').submit(false);
-		} else if ($("#equip_name").val().length < 1) {
+			return false;
+		} else if ($("#equip_name").trim().val().length < 1) {
 			alert("장비이름값을 입력해주세요");
 			$("#equip_name").focus();
-			return $('#equipInsertForm').submit(false);
+			return false;
+		} else if ($("#description").trim().val().length < 1) {
+			alert("장비설명값을 입력해주세요");
+			$("#description").focus();
+			return false;
+		} else if (!($('input:radio[name=AVAILABLE]').is(':checked'))) {
+			alert("사용가능여부를 입력해주세요");
+			$("#available").focus();
+			return false;
+		} else if ($("#attachedfiles").val().length < 1) {
+			alert("장비이미지파일 입력해주세요");
+			$("#attachedfiles").focus();
+			return false;
 		}
-		return $('#equipInsertForm').submit();
+		$('#equipInsert').submit();
 	}
-	
 </script>
 <!-- /장비추가 널 체크  -->
+
 <!-- 장비 selectbox ajax -->
 <script type="text/javascript">
  var fn_cate_select = function(url, params) {
@@ -162,7 +171,7 @@ function checkNull(){
 				
 			<input type="hidden" name="FILE_SEQ" value="${resultMap.resultObject.ATTACHFILE_SEQ}" />
 				
-		<button class="btn waves-effect waves-light right" onclick="checkNull();" name="action">
+		<button class="btn waves-effect waves-light right" onclick="return checkNull();" name="action">
 			장비수정 <i class="material-icons right">send</i>
 		</button>
 	</form>
