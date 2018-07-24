@@ -51,7 +51,7 @@ public class AdminMemberController {
 		else if ("member_ability".equalsIgnoreCase(action)) {
 			resultList = (List<Object>) memberservice.getAbilityList(paramMap);
 
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Calendar c1 = Calendar.getInstance();
 			String obtain_date = sdf.format(c1.getTime());
 			resultMap.put("OBTAIN_DATE", obtain_date);
