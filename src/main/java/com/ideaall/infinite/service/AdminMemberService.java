@@ -73,6 +73,24 @@ public class AdminMemberService {
 
 		return resultObject;
 	}
+	
+	public Object insertPlace(Object dataMap) {
+		Map<String, Object> parmaMap = new HashMap<String, Object>();
+		
+	/*	장소 sub_category 가져오기*/
+		String sqlMapId = "ability.place";
+		List resultList=(List) dao.getList(sqlMapId, dataMap);
+		
+		((Map<Object, Object>) dataMap).put("place",resultList);
+	
+		sqlMapId = "member.insertplace";
+
+		Object resultObject = dao.getObject(sqlMapId, dataMap);
+		return resultObject;
+
+	}
+	
+	
 
 	public Object update(Object dataMap) {
 		String sqlMapId = "member.update";
@@ -91,7 +109,7 @@ public class AdminMemberService {
 	}
 
 	public Object getObject1(Object dataMap) {
-		String sqlMapId = "member.read1";
+		String sqlMapId = "member.read1"; 
 		Object resultObject = dao.getObject(sqlMapId, dataMap);
 
 		return resultObject;

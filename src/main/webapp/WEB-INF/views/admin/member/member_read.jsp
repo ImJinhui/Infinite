@@ -187,6 +187,21 @@
 				</div>
 			</div>
 
+
+			<div class="row">
+				<div class="input-field col s12">
+					<p>
+						<label> <input name="AUTHORITY_SEQ" value ="2" type="radio"  /> <span>매니저</span>
+						</label>
+					</p>
+					<p>
+						<label> <input name="AUTHORITY_SEQ" value="1" type="radio" checked /> <span>일반회원</span>
+						</label>
+					</p>
+
+				</div>
+			</div>
+
 			<!-- 능력테이블 -->
 			<div class="row">
 				<div class="input-field col s12">

@@ -59,16 +59,30 @@
 		),'TRUE')
 
 	</insert>
-
+	
+	 <insert id="insertplace" parameterType="java.util.Map">
+	  <if test="place.size != 0">
+	 insert into member_ability_rel(MEMBER_SEQ, ABILITY_SEQ, MANAGER, OBTAIN_DATE) values
+	 
+	 <foreach collection="place" item="item" separator="," >
+	 (#{MEMBER_SEQ},#{item.ABILITY_SEQ},'자동',CURRENT_DATE())
+	 
+	 </foreach>
+	</if>
+	
+	</insert> 
+	<!-- <insert id="insertAbility"> insert into member_ability_rel MEMBER_SEQ, 
+		ABILITY_SEQ </insert> -->
+		
 	<update id="update">
-		update member set ID=#{ID}, PASSWORD=#{PASSWORD},
+		replace member set ID=#{ID}, PASSWORD=#{PASSWORD},
 		NAME=#{NAME} where ID =
 		#{ID}
 	</update>
 
 	<update id="adminupdate">
 		update member set ID=#{ID}, PASSWORD=#{PASSWORD},
-		NAME=#{NAME}, TEL=#{TEL}, SUB_ADDR_SEQ=#{cate2} where MEMBER_SEQ =
+		NAME=#{NAME}, TEL=#{TEL}, SUB_ADDR_SEQ=#{cate2}, AUTHORITY_SEQ=#{AUTHORITY_SEQ} where MEMBER_SEQ =
 		#{MEMBER_SEQ}
 	</update>
 
@@ -102,7 +116,8 @@
 			<otherwise>
 				select
 				m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL
-				from MEMBER m
+				from
+				MEMBER m
 				where
 				m.ID=#{id}
 			</otherwise>
@@ -124,15 +139,18 @@
 
 
 	<select id="read1" resultType="Map" parameterType="Map">
-		select
-		m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, sub.SUB_ADDR_NAME,
-		addr.ADDR_NAME
-		from MEMBER m, address addr, sub_address sub
-		where
-		m.SUB_ADDR_SEQ = sub.SUB_ADDR_SEQ
-		and sub.ADDR_SEQ = addr.ADDR_SEQ
-		and
-		m.MEMBER_SEQ=#{MEMBER_SEQ}
+	
+				select
+				m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL,
+				sub.SUB_ADDR_SEQ, addr.ADDR_SEQ
+				from MEMBER m, address addr, sub_address sub
+				where
+				m.SUB_ADDR_SEQ = sub.SUB_ADDR_SEQ
+				and
+				sub.ADDR_SEQ = addr.ADDR_SEQ
+				and
+				m.MEMBER_SEQ=#{MEMBER_SEQ}
+
 	</select>
 
 	<select id="read2" resultType="Map" parameterType="Map">
@@ -151,16 +169,14 @@
 	</select>
 
 	<select id="getmemberADDR" resultType="Map" parameterType="Map">
-		select sub.SUB_ADDR_NAME,sub.SUB_ADDR_SEQ, addr.ADDR_NAME,
+	select sub.SUB_ADDR_NAME,sub.SUB_ADDR_SEQ, addr.ADDR_NAME,
 		addr.ADDR_SEQ
-		from member m, sub_address sub,
-		address addr
+		from member m, sub_address sub,	address addr
 		where
 		m.SUB_ADDR_SEQ=sub.SUB_ADDR_SEQ
-		and sub.ADDR_SEQ =
-		addr.ADDR_SEQ
-		and
-		sub.SUB_ADDR_SEQ=#{SUB_ADDR_SEQ}
+		and sub.ADDR_SEQ =	addr.ADDR_SEQ
+		and m.MEMBER_SEQ=#{MEMBER_SEQ}
+		and sub.SUB_ADDR_SEQ=#{SUB_ADDR_SEQ}
 	</select>
 
 

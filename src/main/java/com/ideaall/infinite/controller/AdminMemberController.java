@@ -69,16 +69,20 @@ public class AdminMemberController {
 		} else if ("member_edit".equalsIgnoreCase(action)) {
 
 		} else if ("member_read".equalsIgnoreCase(action)) {
-			resultList = (List<Object>) commonservice.getADDList(paramMap);//상위주소+하위주소
-			resultMap2 = (Map<String, Object>) memberservice.getmemberADDR(paramMap);//default 회원주소값
-			
+			resultList = (List<Object>) commonservice.getADDList(paramMap);//상위주소+하위주소 카테고리를 불러옴. 
 			resultMap = (Map<String, Object>) memberservice.getObject1(paramMap); //회원정보(이름~전화번호)
+			
+			resultMap2 = (Map<String, Object>) memberservice.getmemberADDR(resultMap);//default 회원주소값
+			
 			resultList2 = (List<Object>) memberservice.getObject2(paramMap);//회원정보(능력)
 			
 
 		} else if ("insert".equalsIgnoreCase(action)) {
 
 			resultMap = (Map<String, Object>) memberservice.insert(paramMap); //회원추가
+			
+			//회원 장비 ability 자동 추가.
+			memberservice.insertPlace(paramMap);
 			resultMap = (Map<String, Object>) commonservice.getInfo(paramMap); //
 			viewName = "/common/login";
 
@@ -117,7 +121,7 @@ public class AdminMemberController {
 
 		modelandView.addObject("paramMap", paramMap);
 		modelandView.addObject("resultMap", resultMap);
-		modelandView.addObject("resultMap2", resultMap);
+		modelandView.addObject("resultMap2", resultMap2);
 		modelandView.addObject("resultList", resultList);
 		modelandView.addObject("resultList2", resultList2);
 		return modelandView;

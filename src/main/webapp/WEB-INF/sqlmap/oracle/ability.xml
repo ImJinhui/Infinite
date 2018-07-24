@@ -28,6 +28,13 @@
 		where ABILITY_SEQ = #{ABILITY_SEQ}
 	</update> -->
 	
+	<select id="place" resultType="Map" parameterType="Map">
+	 select sub.SUB_CATEGORY_NAME, sub.SUB_CATEGORY_SEQ, abil.ABILITY_SEQ
+        from abilities abil, sub_category sub
+        where abil.sub_category_seq = sub.sub_category_seq
+        and sub.CATEGORY_SEQ>'20000'
+	</select>
+	
 	<insert id="merge">
 	INSERT INTO ABILITIES (
 		ABILITY_NAME 
