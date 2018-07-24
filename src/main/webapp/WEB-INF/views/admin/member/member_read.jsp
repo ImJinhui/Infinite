@@ -160,7 +160,7 @@
 					<!-- 대분류 -->
 					<select name="cate1" id="cate1" class="sel_cate"
 						onchange="comboChange(this.value);">
-						<option value="${resultMap2.ADDR_SEQ}" disabled selected>${resultMap2.ADDR_NAME}</option>
+						<option value="${resultMap2.ADDR_SEQ}" >${resultMap2.ADDR_NAME}</option>
 
 						<c:forEach items="${resultList}" var="resultData" varStatus="loop">
 							<option value="${resultData.ADDR_SEQ}">${resultData.ADDR_NAME}</option>
@@ -172,7 +172,7 @@
 					<!-- 소분류 -->
 					<!-- onChange="cate2Select();" -->
 					<select name="cate2" id="cate2">
-						<option value="${resultMap2.SUB_ADDR_SEQ}" disabled selected>${resultMap2.SUB_ADDR_NAME}</option>
+						<option value="${resultMap2.SUB_ADDR_SEQ}" >${resultMap2.SUB_ADDR_NAME}</option>
 					</select>
 
 				</div>
