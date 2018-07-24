@@ -115,7 +115,7 @@ public class AdminMemberService {
 		return resultObject;
 	}
 
-	public Object getObject2(Object dataMap) {
+	public Object getObject2(Object dataMap) {//회원정보 능력list
 		String sqlMapId = "member.read2";
 		Object resultObject = dao.getList(sqlMapId, dataMap);
 

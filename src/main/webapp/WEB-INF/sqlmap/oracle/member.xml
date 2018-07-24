@@ -75,9 +75,8 @@
 		ABILITY_SEQ </insert> -->
 		
 	<update id="update">
-		replace member set ID=#{ID}, PASSWORD=#{PASSWORD},
-		NAME=#{NAME} where ID =
-		#{ID}
+		update member set ID=#{ID}, PASSWORD=#{PASSWORD},
+		NAME=#{NAME} where ID =	#{ID}
 	</update>
 
 	<update id="adminupdate">
@@ -155,16 +154,14 @@
 
 	<select id="read2" resultType="Map" parameterType="Map">
 		select
-		m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, abi.ABILITY_NAME,
-		rel.MANAGER, rel.OBTAIN_DATE
-		from member_ability_rel rel, abilities
-		abi, member m
+		m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, abi.ABILITY_NAME, rel.MANAGER, rel.OBTAIN_DATE
+		from member_ability_rel rel, abilities abi, member m, sub_category sub
 		where m.MEMBER_SEQ = rel.MEMBER_SEQ
-		and rel.ABILITY_SEQ =
-		abi.ABILITY_SEQ
+		and rel.ABILITY_SEQ =abi.ABILITY_SEQ
 		and rel.MEMBER_SEQ = m.MEMBER_SEQ
-		and
-		m.MEMBER_SEQ=#{MEMBER_SEQ}
+		and abi.sub_category_seq = sub.sub_category_seq
+		and 20000>sub.CATEGORY_SEQ
+		and	m.MEMBER_SEQ=#{MEMBER_SEQ}
 		ORDER BY rel.OBTAIN_DATE ASC
 	</select>
 
