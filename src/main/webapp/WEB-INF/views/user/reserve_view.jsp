@@ -266,7 +266,7 @@ $(document).ready(function(){
 <div id="pagebody">
 <div class="row center-align">
 	<a class="left waves-effect waves-light btn" id="beforepage"><i class="material-icons left">navigate_before</i>1주 전</a>
-	<a class="waves-effect waves-light btn modal-trigger" onclick="reservecheck()" href="#modal1" style="padding: 0 2rem;">예약하기</a>
+	<a class="waves-effect waves-light btn modal-trigger" onclick="reservecheck()" href="#modal1" style="padding: 0 2rem; background-color: #FFB74D">예약하기</a>
 	<a class="right waves-effect waves-light btn" id="nextpage"><i class="material-icons right">navigate_next</i>1주 뒤</a>
 </div>
 <div id="newpage">

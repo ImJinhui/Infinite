@@ -71,8 +71,8 @@
 				'1',
 				#{item.RESERVE_DATE},
 				#{item.RESERVE_S_TIME},
-				'1',
-				'x',
+				'0',
+				'F',
 				#{item.RESERVE_E_TIME}
 			)
 		</foreach>

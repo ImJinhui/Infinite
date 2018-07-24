@@ -51,21 +51,21 @@ public class UserService {
 		sqlMapId = "reservation_cate.equipplacelist";
 		Object resultObject = (List<Object>) dao.getList(sqlMapId, dataMap);
 //		resultObject = dao.getList(sqlMapId, dataMap);
-//		
+		
 		return resultObject;
 	}
 	public Object getEquipList(Object dataMap) {
 		String sqlMapId = "reservation_cate.equiplist";
-//
+
 		Object resultObject = dao.getList(sqlMapId, dataMap);
-//		
+		
 		return resultObject;
 	}
 	public Object getReserveList(Object dataMap) {
 		String sqlMapId = "reservation_cate.reservelist";
-//
+
 		Object resultObject = dao.getList(sqlMapId, dataMap);
-//		
+		
 		return resultObject;
 	}
 	public Object insertReserveList(Object dataMap) {

@@ -6,27 +6,15 @@
     
 <mapper namespace="ability">
 	<select id="list" resultType="Map" parameterType="Map" timeout="10">
-		select 
-			ABILITY_SEQ	
-			,ABILITY_NAME
-			,SUB_CATEGORY_SEQ	
-		from ABILITIES
-		where VISIBLE = 'T'
+	  select 
+		a.ABILITY_SEQ	
+		,a.ABILITY_NAME
+		,a.SUB_CATEGORY_SEQ	
+		from ABILITIES a, sub_category s
+	where a.sub_category_seq = s.SUB_CATEGORY_SEQ
+    and a.VISIBLE = 'T'
+    and 20000 > s.category_seq
 	</select>
-	
-	<!-- <insert id="insert" parameterType="Map">
-		insert into ABILITIES
-			(ABILITY_NAME)
-		values (
-			#{ABILITY_NAME}
-			)
-	</insert>
-
-	<update id="update">
-		update ABILITIES
-		set ABILITY_NAME = #{ABILITY_NAME}
-		where ABILITY_SEQ = #{ABILITY_SEQ}
-	</update> -->
 	
 	<select id="place" resultType="Map" parameterType="Map">
 	 select sub.SUB_CATEGORY_NAME, sub.SUB_CATEGORY_SEQ, abil.ABILITY_SEQ

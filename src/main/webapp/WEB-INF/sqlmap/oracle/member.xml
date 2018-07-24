@@ -20,10 +20,12 @@
 
 	<select id="abilitylist" resultType="Map" parameterType="Map">
 		select
-		ma.ABILITY_NAME
-		from MEMBER m, MEMBER_ABILITY_REL mr, ABILITIES ma
-		where mr.ABILITY_SEQ = ma.ABILITY_SEQ
-		and mr.MEMBER_SEQ = m.MEMBER_SEQ
+		abi.ABILITY_NAME
+		from MEMBER m, MEMBER_ABILITY_REL rel, ABILITIES abi, sub_category_seq sub
+		where rel.MEMBER_SEQ = m.MEMBER_SEQ
+		and rel.ABILITY_SEQ = abi.ABILITY_SEQ
+		and abi.sub_category_seq = sub.sub_category_seq
+		and 20000>sub.CATEGORY_SEQ
 		and m.MEMBER_SEQ = #{MEMBER_SEQ}
 	</select>
 
@@ -75,8 +77,13 @@
 		ABILITY_SEQ </insert> -->
 		
 	<update id="update">
-		update member set ID=#{ID}, PASSWORD=#{PASSWORD},
-		NAME=#{NAME} where ID =	#{ID}
+		update member 
+		set 
+		ID=#{ID}
+		, PASSWORD=#{PASSWORD}
+		, NAME=#{NAME} 
+		, TEL=#{TEL} 
+		where ID =	#{ID}
 	</update>
 
 	<update id="adminupdate">

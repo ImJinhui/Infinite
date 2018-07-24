@@ -18,9 +18,9 @@
 	$(document).ready(function() {
 		$('select').formSelect();
 
-		$('#submitBtn').click(function() {
+		/* $('#submitBtn').click(function() {
 			checkform();
-		});
+		}); */
 	});
 </script>
 
@@ -45,64 +45,17 @@
 
 
 	<script>
-	/* 	console.log(passCheck);
-		console.log(doubleCheck);
-
-		var checkform = function() {
-			if (document.myForm.password.value == "") { // 자바스크립트 : 빈문자열 -> false 반환
-				alert("비밀번호를 입력해주세요.");
-				document.myForm.focus();
-				return false;
-			} else if (document.myForm.name == "") {
-				alert("이름을 입력해주세요.");
-				document.myForm.focus();
-				return false;
-
-			}
-
-			 if (passCheck && doubleCheck) {
-				 $('form').attr("action",
-						"<c:url value='/admin/member/insert'/>"); 
-				alert("회원가입이 완료되었습니다.");
-			}  else if (!passCheck && doubleCheck) {
-				alert("비밀번호를 확인해주세요.");
-				document.myForm.focus();
-				return false;
-
-			} else if (passCheck == 1 && !doubleCheck) {
-				alert("아이디를 중복 확인해주세요.");
-				document.myForm.focus();
-				return false;
-				console.log("중복확인");
-			} else if (!passCheck && !doubleCheck) {
-				alert("비밀번호 또는 아이디를 다시 확인해주세요.");
-				document.myForm.focus();
-				return false;
-				console.log("비밀번호확인 중복확인");
-			} 
-
-
-		} */
-	</script>
-	<script>
 	function nullCheck(){
-		 
-		 if ($("#cate1").find(":selected").val() == null
-					|| $("#cate1").find(":selected").val() == "시,도") {
-				alert("주소값을 입력해주세요");
-				$("#cate1").focus();
+		
+		if ($("#name").val().length < 1) {
+				alert("이름을 입력해주세요");
+				$("#name").focus();
 				return false;
-			} else if ($("#cate2").find(":selected").val() == null
-					|| $("#cate2").find(":selected").val() == "군,구") {
-				alert("하위주소값을 입력해주세요");
-				$("#cate2").focus();
+
+			} else if ($("#id").val().length < 1) {
+				alert("아이디값을 입력해주세요");
+				$("#id").focus();
 				return false;
-			} else if ($("#tel").val().length < 1) {
-				alert("전화번호값을 입력해주세요");
-				$("#tel").focus();
-				return false;
-			
-			
 			} else if (!passCheck && doubleCheck) {
 				alert("비밀번호를 확인해주세요.");
 				$("#password_c").focus();
@@ -117,10 +70,17 @@
 				alert("비밀번호 또는 아이디를 다시 확인해주세요.");
 				$("#id").focus();
 				return false;
+			} else if ($("#tel").val().length < 1) {
+				alert("전화번호값을 입력해주세요");
+				$("#tel").focus();
+				return false;
+			} else if ($("#cate2").find(":selected").val() == null
+					|| $("#cate2").find(":selected").val() == "군,구") {
+				alert("주소값을 입력해주세요");
+				$("#cate2").focus();
+				return false;
 			}
-
 			if (passCheck && doubleCheck) {
-
 				$('#memberInsert').submit();
 				alert("회원가입이 완료되었습니다.");
 			}
@@ -145,9 +105,9 @@
 					<i class="material-icons prefix">account_circle</i> <input id="id"
 						type="text" class="validate" name="ID" value="${paramMap.ID}">
 					<label for="id">아이디</label> <a
-						class="waves-effect waves-light btn-small" type="button"
-						style="border-left: 30px" onclick="idcheck()">중복체크</a>
-					<div id="idcheck" name="idcheck"></div>
+						class="waves-effect waves-light btn-small"
+						onclick="idcheck()" style="margin-left: 3rem;">중복체크</a>
+					<span id="idcheck" name="idcheck"></span>
 				</div>
 			</div>
 
@@ -190,7 +150,7 @@
 					<i class="material-icons prefix">lock</i> <input id="password_c"
 						type="password" class="validate"> <label for="password_c">비밀번호
 						재확인</label>
-					<div id="passcheck"></div>
+					<div id="passcheck" style="margin-left: 3rem;"></div>
 					<!-- <div id="passcheck" class="helper-text" data-error="비밀번호가 일치하지 않습니다."></div> -->
 				</div>
 			</div>
@@ -207,7 +167,7 @@
 						/*  $("#passcheck").attr("data-error","비밀번호가 일치하지 않습니다.");  */
 						passCheck = false;
 					} else {
-						$("#passcheck").text("비밀번호 일치");
+						$("#passcheck").text("비밀번호가 일치합니다");
 						passCheck = true;
 					}
 				});
@@ -227,25 +187,6 @@
 						data-error="이메일 형식이 아닙니다." data-success="이메일 형식이 맞습니다."></span>
 				</div>
 			</div>
-			<!--   <div class="row">
-			<div class="input-field col s5">
-      		<i class="material-icons prefix">home</i>
-				<select>
-					<option value="" disabled selected>Choose your option</option>
-					<option value="1">Option 1</option>
-					<option value="2">Option 2</option>
-					<option value="3">Option 3</option>
-				</select> <label>주소</label>
-			</div>
-			<div class="input-field col s4">
-    			  <select>
-					<option value="" disabled selected>Choose your option</option>
-					<option value="1">Option 1</option>
-					<option value="2">Option 2</option>
-					<option value="3">Option 3</option>
-				</select>
-			</div>
-			</div> -->
 			<div class="row">
 				<div class="input-field col s6">
 					<i class="material-icons prefix">home</i>
@@ -265,7 +206,7 @@
 					<!-- 소분류 -->
 					<!-- onChange="cate2Select();" -->
 					<select name="cate2" id="cate2">
-						<option value="${paramMap.cate2}" disabled selected>군,구</option>
+						<option disabled selected>군,구</option>
 					</select>
 				</div>
 			</div>

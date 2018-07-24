@@ -35,7 +35,9 @@
 		,r.RETURN_CHECK
 		,m.NAME
 		,e.EQUIP_NAME
-	from RESERVATION r, MEMBER m, EQUIP e
+		,img.ATTACHFILE_SEQ
+	from MEMBER m, EQUIP e, RESERVATION r LEFT OUTER JOIN result_image img 
+    ON r.RESERVATION_SEQ = img.SOURCE_UNIQUE_SEQ
 	where r.ID = m.ID
 	and r.EQUIP_SEQ = e.EQUIP_SEQ
 	order by RESERVATION_SEQ ASC
@@ -46,20 +48,7 @@
 		select count(RESERVATION_SEQ)
 		from RESERVATION
 	</select>
-	<!-- <insert id="insert" parameterType="Map">
-		insert into ABILITIES
-			(ABILITY_NAME)
-		values (
-			#{ABILITY_NAME}
-			)
-	</insert>
 
-	<update id="update">
-		update ABILITIES
-		set ABILITY_NAME = #{ABILITY_NAME}
-		where ABILITY_SEQ = #{ABILITY_SEQ}
-	</update> -->
-	
 	<update id="merge" parameterType="Map">
 		update RESERVATION
 		set 
@@ -82,6 +71,7 @@
 			,m.NAME
 			,e.EQUIP_NAME
       		,img.PHYSICALFILE_NAME 
+      		,img.ATTACHFILE_SEQ
 		from MEMBER m, EQUIP e, RESERVATION r LEFT OUTER JOIN result_image img 
     	ON r.RESERVATION_SEQ = img.SOURCE_UNIQUE_SEQ
 		where r.ID = m.ID

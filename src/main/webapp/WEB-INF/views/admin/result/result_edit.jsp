@@ -10,6 +10,26 @@ $(document).ready(function(){
   });
 </script>
 
+<!-- 결과수정 널 체크  -->
+<script>
+function checkNull(){
+	if ($("#num_of_prototype").val().length < 1) {
+			alert("시제품개수를 입력해주세요");
+			$("#num_of_prototype").focus();
+			return false;
+		} else if (!($('input:radio[name=RETURN_CHECK]').is(':checked'))) {
+			alert("반납여부를 입력해주세요");
+			$("#return_check").focus();
+			return false;
+		} else if ($("#attachedfiles").val().length < 1) {
+			alert("결과물파일을 입력해주세요");
+			$("#attachedfiles").focus();
+			return false;
+		}
+		$('#resultUpdate').submit();
+	}
+</script>
+<!-- /결과수정 널 체크  -->
 <!-- 페이지 이름 -->
 <nav class="teal">
 	<div class="nav-wrapper">
@@ -25,7 +45,7 @@ $(document).ready(function(){
 <div class="main_body" style="width: 70%">
 	<!-- 수정부분 -->
 	<div class="row box">
-		<form class="col s12" action="<c:url value='/admin/result/result_merge'/>" method="POST" enctype="multipart/form-data">
+		<form id="resultUpdate" class="col s12" action="<c:url value='/admin/result/result_merge'/>" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="forwardView"	value="/admin/result/result_list" />
 			<div class="row">
 				<div class="input-field col s6">
@@ -69,7 +89,7 @@ $(document).ready(function(){
 				<label for="available">반납여부</label>
 			<div class="row">
 				<div class="input-field inline col s12">
-					<p id="available">
+					<p id="return_check">
 						<label> <input name="RETURN_CHECK" value="T" type="radio" />
 							<span>반납</span>
 						</label> <label> <input name="RETURN_CHECK" value="F" type="radio" />
@@ -86,13 +106,14 @@ $(document).ready(function(){
 				</div>
 				<div class="file-path-wrapper">
 					<input id="image" name="IMAGE" class="file-path validate"
-						type="text" placeholder="결과물이미지">
+						type="text" placeholder="${resultMap.PHYSICALFILE_NAME}">
 				</div>
 			</div>
 			<input type="hidden" name="FILE_SEQ"
-				value="${resultMap.resultObject.ATTACHFILE_SEQ}" />
-			<button class="btn waves-effect waves-light right" type="submit">
-				수정 <i class="material-icons right">send</i>
+				value="${resultMap.ATTACHFILE_SEQ}" />
+				
+			<button class="btn waves-effect waves-light right" onclick="return checkNull();" name="action">
+				결과물수정 <i class="material-icons right">send</i>
 			</button>
 		</form>
 	</div>

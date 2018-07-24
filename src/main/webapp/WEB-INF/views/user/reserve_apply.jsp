@@ -239,12 +239,12 @@ $(document).ready(function(){
 	<!-- <div id='calendar'></div> -->
 <div class="row center-align">
 	<a class="left waves-effect waves-light btn" onclick="beforepage()"><i class="material-icons left">navigate_before</i>1주 전</a>
-	<a class="waves-effect waves-light btn modal-trigger" onclick="reservecheck()" href="#modal1">예약하기</a>
+	<a class="waves-effect waves-light btn modal-trigger" onclick="reservecheck()" href="#modal1" style="padding: 0 2rem; background-color: #FFB74D">예약하기</a>
 	<a class="right waves-effect waves-light btn" onclick="nextpage()" ><i class="material-icons right">navigate_next</i>1주 뒤</a>
 </div>
 <div id="firstpage">
 <div id="main_list">
-<div style="padding: 0 1rem 0 1rem;">
+<div style="padding: 0 1rem 0 1rem; font-size: large">
 	<script>
 		printDate(1);
 	</script>
@@ -278,7 +278,7 @@ $(document).ready(function(){
 
 <div id="secondpage">
 <div id="main_list">
-<div style="padding: 0 1rem 0 1rem;">
+<div style="padding: 0 1rem 0 1rem; font-size: large">
 	<script>
 		printDate(2);
 	</script>
@@ -344,7 +344,7 @@ $(document).ready(function(){
 		<input name="RESERVE_DATE" type="hidden" value="1900-1-1" class="insertvalue">
 		<input name="RESERVE_S_TIME" type="hidden" value="09:00" class="insertvalue">
 		<input name="RESERVE_E_TIME" type="hidden" value="13:00" class="insertvalue">
-
+		<input name="ID" type="hidden" value="AA" class="insertvalue">
 	  	</table>
     </div>
     <div class="modal-footer">
@@ -412,7 +412,8 @@ function addreserve(string){
 	 $('#'+arr[0]+arr[1]+arr[2]).css("background-color","#ffb74d");
 	 var addDiv = '<tr id='+arr[0]+arr[1]+arr[2]+'><td NAME="EQUIP_SEQ">'+arr[0]+'</td><td NAME="RESERVE_DATE">'+arr[1]+'</td><td NAME="RESERVE_S_TIME">'+reserve_s_time+'</td>'
 	 +'<td NAME="RESERVE_E_TIME">'+reserve_e_time+'</td><td><button value='+arr[0]+arr[1]+arr[2]+' class="btn-small btn_delete">X</button></td><input name="EQUIP_SEQ" type="hidden" value='+arr[0]+' class="insertvalue">'
-	 +'<input name="RESERVE_DATE" type="hidden" value='+arr[1]+' class="insertvalue"><input name="RESERVE_S_TIME" type="hidden" value='+reserve_s_time+' class="insertvalue"><input name="RESERVE_E_TIME" type="hidden" value='+reserve_e_time+' class="insertvalue">';
+	 +'<input name="RESERVE_DATE" type="hidden" value='+arr[1]+' class="insertvalue"><input name="RESERVE_S_TIME" type="hidden" value='+reserve_s_time+' class="insertvalue"><input name="RESERVE_E_TIME" type="hidden" value='+reserve_e_time+' class="insertvalue">'
+	 +'<input name="ID" type="hidden" value="${principalName}" class="insertvalue">'  // member_id값 추가
 	 +'</tr>';
 	 $('.modal-tbody').append(addDiv);
 }

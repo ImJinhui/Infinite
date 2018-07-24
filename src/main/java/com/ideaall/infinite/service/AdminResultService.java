@@ -44,8 +44,10 @@ public class AdminResultService {
 		resultMap.put("pagination", pagination);
 		sqlMapId = "result.listpagination";
 		((Map<String, Object>) dataMap).put("pagination", pagination);
+		
 		Object resultList = dao.getList(sqlMapId, dataMap);
 		resultMap.put("resultList", resultList);
+		
 		return resultMap;
 	}
 

@@ -64,12 +64,21 @@ $(document).ready(function(){
       </div>
       	<label for="result_img">결과물 사진</label>
       <div id="result_img" class="row box">
-      	<img class="materialboxed" width="100%" src="<c:url value='/resources/uploads/${resultMap.PHYSICALFILE_NAME}'/>" readOnly>
+				<c:choose>
+					<c:when test="${null eq resultMap.PHYSICALFILE_NAME}">
+						<div>제출된 결과물이 없습니다.</div>
+					</c:when>
+					<c:otherwise>
+				<img class="materialboxed" width="100%" src="<c:url value='/resources/uploads/${resultMap.PHYSICALFILE_NAME}'/>" readOnly>
+					</c:otherwise>
+				</c:choose>
       </div>
     </form>
   </div>
   <div class="row">
     <a class="right waves-effect waves-light btn" href="<c:url value='/admin/result/result_edit?RESERVATION_SEQ=${resultMap.RESERVATION_SEQ}'/>">수정</a>
+    
+    <a class="waves-effect waves-light btn" href="<c:url value='/admin/result/result_list'/>">목록</a>
     </div>
   <!-- /수정부분 -->
   </div>

@@ -21,29 +21,6 @@
 	});
 </script>
 
-<script>
-	function checkNull() {
-		if ($("#category_seq").val().length < 1) {
-			alert("대분류번호값을입력해주세요");
-			$("#category_seq").focus();
-			return $('#cateInsert').submit(false);
-		} else if ($("#category_name").val().length < 1) {
-			alert("대분류이름값을입력해주세요");
-			$("#category_name").focus();
-			return $('#cateInsert').submit(false);
-		} else if ($("#sub_category_seq").val().length < 1) {
-			alert("중분류번호값을입력해주세요");
-			$("#sub_category_seq").focus();
-			return $('#cateInsert').submit(false);
-		} else if ($("#sub_category_name").val().length < 1) {
-			alert("중분류이름값을입력해주세요");
-			$("#sub_category_name").focus();
-			return $('#cateInsert').submit(false);
-		}
-		return $('#cateInsert').submit();
-	}
-</script>
-
 <!-- 페이지이름-->
 <nav class="teal">
 	<div class="nav-wrapper">
@@ -81,7 +58,17 @@
 						<td>${resultData.NAME}</td>
 						<td>${resultData.RESERVE_DATE}</td>
 						<td>${resultData.RETURN_CHECK}</td>
-						<td>${resultData.NUM_OF_PROTOTYPE}</td>
+						<%-- <c:if test="null ne ${resultData.ATTACHFILE_SEQ}">
+							<td>${resultData.NUM_OF_PROTOTYPE}</td>
+						</c:if> --%>
+						<c:choose>
+							<c:when test="${null eq resultData.ATTACHFILE_SEQ}">
+								<td>X</td>
+							</c:when>
+							<c:otherwise>
+								<td>O</td>
+							</c:otherwise>
+						</c:choose>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -119,90 +106,6 @@
 		</div>
 	</div>
 </div>
-
-<!-- CATEGORY추가modal -->
- <div id="modal1" class="modal modal-fixed-footer">
-	<div class="modal-content">
-
-		<div class="row">
-			<div class="input-field col s12">
-				<span><i class="modal-close material-icons right">close</i></span>
-				<h4>결과물추가</h4>
-			</div>
-		</div>
-		<div class="row">
-			<form class="col s12">
-				<div class="row">
-					<div class="input-field col s6">
-						<input id="reservation_seq" type="text" class="validate"
-							value="${resultMap.RESERVATION_SEQ}"> <label
-							for="reservation_seq">예약번호</label>
-					</div>
-					<div class="input-field col s6">
-						<input id="member_seq" type="text" class="validate"
-							value="${resultMap.NAME}"> <label for="member_seq">예약자</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s6">
-						<input id="reserve_date" type="text" class="validate"
-							value="${resultMap.RESERVE_DATE}"> <label
-							for="reserve_date">예약일</label>
-					</div>
-					<div class="input-field col s6">
-						<input id="reserve_time" type="text" class="validate"
-							value="${resultMap.RESERVE_S_TIME} ~ ${resultMap.RESERVE_E_TIME}">
-						<label for="reserve_time">예약시간</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s12">
-						<input id="equip_seq" type="text" class="validate"
-							value="${resultMap.EQUIP_NAME}"> <label for="equip_seq">대여장비</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s6">
-						<input id="return_check" type="text" class="validate"
-							value="${resultMap.RETURN_CHECK}"> <label
-							for="return_check">반납여부</label>
-					</div>
-					<div class="input-field col s6">
-						<input id="num_of_prototype" type="text" class="validate"
-							value="${resultMap.NUM_OF_PROTOTYPE}"> <label
-							for="num_of_prototype">시제품개수</label>
-					</div>
-				</div>
-				<div class="file-field input-field">
-					<div class="btn">
-						<span>File</span> <input type="file" name="ATTACHEDFILES">
-					</div>
-					<div class="file-path-wrapper">
-						<input id="image" name="IMAGE" class="file-path validate"
-							type="text" placeholder="결과물이미지">
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-	<div class="modal-footer">
-		<button class="btn waves-effect waves-light" onclick="checkNull();"
-			name="action">
-			추가<i class="material-icons right">send</i>
-		</button>
-	</div>
-</div> 
-
-<!-- /CATEGORY추가modal -->
-
-<!-- 카테고리추가버튼-->
-<!-- <div class="fixed-action-btn">
-	<a class="btn-floating btn-large red modal-trigger" href="#modal1">
-		<i class="large material-icons">add</i>
-	</a>
-</div> -->
-
-<!-- /카테고리추가버튼-->
 <!-- /수정부분-->
 
 <!-- /main -->
