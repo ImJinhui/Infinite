@@ -29,8 +29,17 @@
 
 	$(document).ready(function() {
 		$('select').formSelect();
-
+		
+		var authority = ${resultMap.AUTHORITY_SEQ}
+		console.log(authority);
+		if(authority=='1'){
+			 $('#user').prop("checked", true); //radio button
+		}else if(authority=='2'){
+			 $('#admin').prop("checked", true); //radio button
+		}
 	});
+	
+	
 </script>
 <script type="text/javascript">
 	var comboChange = function(value) {
@@ -190,12 +199,13 @@
 
 			<div class="row">
 				<div class="input-field col s12">
+				
 					<p>
-						<label> <input name="AUTHORITY_SEQ" value ="2" type="radio"  /> <span>매니저</span>
+						<label> <input name="AUTHORITY_SEQ" id="admin" value ="2" type="radio"  /> <span>매니저</span>
 						</label>
 					</p>
 					<p>
-						<label> <input name="AUTHORITY_SEQ" value="1" type="radio" checked /> <span>일반회원</span>
+						<label> <input name="AUTHORITY_SEQ" id="user" value="1" type="radio"  /> <span>일반회원</span>
 						</label>
 					</p>
 
@@ -237,7 +247,7 @@
 			<button class="btn waves-effect waves-light right" type="submit"
 				name="action">
 				수정 <i class="material-icons right">edit</i>
-			</button>
+			</button>    
 			<button class="btn waves-effect waves-light right" type="button"
 				name="action" onclick="member_delete()">
 				<a href="<c:url value='/admin/member/member_delete?'/>"></a> 삭제 <i

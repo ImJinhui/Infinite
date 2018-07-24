@@ -21,11 +21,14 @@
 	<select id="abilitylist" resultType="Map" parameterType="Map">
 		select
 		abi.ABILITY_NAME
-		from MEMBER m, MEMBER_ABILITY_REL rel, ABILITIES abi, sub_category sub
+		from MEMBER m, MEMBER_ABILITY_REL rel, ABILITIES abi,
+		sub_category sub
 		where rel.MEMBER_SEQ = m.MEMBER_SEQ
-		and rel.ABILITY_SEQ = abi.ABILITY_SEQ
+		and rel.ABILITY_SEQ
+		= abi.ABILITY_SEQ
 		and abi.sub_category_seq = sub.sub_category_seq
-		and 20000>sub.CATEGORY_SEQ
+		and
+		20000>sub.CATEGORY_SEQ
 		and m.MEMBER_SEQ = #{MEMBER_SEQ}
 	</select>
 
@@ -61,34 +64,36 @@
 		),'TRUE')
 
 	</insert>
-	
-	 <insert id="insertplace" parameterType="java.util.Map">
-	  <if test="place.size != 0">
-	 insert into member_ability_rel(MEMBER_SEQ, ABILITY_SEQ, MANAGER, OBTAIN_DATE) values
-	 
-	 <foreach collection="place" item="item" separator="," >
-	 (#{MEMBER_SEQ},#{item.ABILITY_SEQ},'자동',CURRENT_DATE())
-	 
-	 </foreach>
-	</if>
-	
-	</insert> 
+
+	<insert id="insertplace" parameterType="java.util.Map">
+		<if test="place.size != 0">
+			insert into member_ability_rel(MEMBER_SEQ, ABILITY_SEQ, MANAGER,
+			OBTAIN_DATE) values
+
+			<foreach collection="place" item="item" separator=",">
+				(#{MEMBER_SEQ},#{item.ABILITY_SEQ},'자동',CURRENT_DATE())
+
+			</foreach>
+		</if>
+
+	</insert>
 	<!-- <insert id="insertAbility"> insert into member_ability_rel MEMBER_SEQ, 
 		ABILITY_SEQ </insert> -->
-		
+
 	<update id="update">
-		update member 
-		set 
+		update member
+		set
 		ID=#{ID}
 		, PASSWORD=#{PASSWORD}
-		, NAME=#{NAME} 
-		, TEL=#{TEL} 
-		where ID =	#{ID}
+		, NAME=#{NAME}
+		, TEL=#{TEL}
+		where ID = #{ID}
 	</update>
 
 	<update id="adminupdate">
 		update member set ID=#{ID}, PASSWORD=#{PASSWORD},
-		NAME=#{NAME}, TEL=#{TEL}, SUB_ADDR_SEQ=#{cate2}, AUTHORITY_SEQ=#{AUTHORITY_SEQ} where MEMBER_SEQ =
+		NAME=#{NAME}, TEL=#{TEL}, SUB_ADDR_SEQ=#{cate2},
+		AUTHORITY_SEQ=#{AUTHORITY_SEQ} where MEMBER_SEQ =
 		#{MEMBER_SEQ}
 	</update>
 
@@ -145,41 +150,49 @@
 
 
 	<select id="read1" resultType="Map" parameterType="Map">
-	
-				select
-				m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL,
-				sub.SUB_ADDR_SEQ, addr.ADDR_SEQ
-				from MEMBER m, address addr, sub_address sub
-				where
-				m.SUB_ADDR_SEQ = sub.SUB_ADDR_SEQ
-				and
-				sub.ADDR_SEQ = addr.ADDR_SEQ
-				and
-				m.MEMBER_SEQ=#{MEMBER_SEQ}
+
+		select
+		m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, m.AUTHORITY_SEQ, m.SUB_ADDR_SEQ,
+		addr.ADDR_SEQ
+		from MEMBER m, address addr, sub_address sub
+		where m.SUB_ADDR_SEQ = sub.SUB_ADDR_SEQ
+		and sub.ADDR_SEQ = addr.ADDR_SEQ
+		and m.MEMBER_SEQ=#{MEMBER_SEQ}
+
+
+		<!-- select m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, m.AUTHORITY_SEQ, 
+			m.SUB_ADDR_SEQ, addr.ADDR_SEQ, from MEMBER m, address addr, sub_address sub 
+			where m.SUB_ADDR_SEQ = sub.SUB_ADDR_SEQ and sub.ADDR_SEQ = addr.ADDR_SEQ 
+			and m.MEMBER_SEQ=#{MEMBER_SEQ} -->
 
 	</select>
 
 	<select id="read2" resultType="Map" parameterType="Map">
 		select
-		m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, abi.ABILITY_NAME, rel.MANAGER, rel.OBTAIN_DATE
-		from member_ability_rel rel, abilities abi, member m, sub_category sub
+		m.MEMBER_SEQ, m.NAME, m.ID, m.PASSWORD, m.TEL, abi.ABILITY_NAME,
+		rel.MANAGER, rel.OBTAIN_DATE
+		from member_ability_rel rel, abilities
+		abi, member m, sub_category sub
 		where m.MEMBER_SEQ = rel.MEMBER_SEQ
-		and rel.ABILITY_SEQ =abi.ABILITY_SEQ
+		and
+		rel.ABILITY_SEQ =abi.ABILITY_SEQ
 		and rel.MEMBER_SEQ = m.MEMBER_SEQ
-		and abi.sub_category_seq = sub.sub_category_seq
+		and
+		abi.sub_category_seq = sub.sub_category_seq
 		and 20000>sub.CATEGORY_SEQ
-		and	m.MEMBER_SEQ=#{MEMBER_SEQ}
+		and m.MEMBER_SEQ=#{MEMBER_SEQ}
 		ORDER BY rel.OBTAIN_DATE ASC
 	</select>
 
 	<select id="getmemberADDR" resultType="Map" parameterType="Map">
-	select sub.SUB_ADDR_NAME,sub.SUB_ADDR_SEQ, addr.ADDR_NAME,
+		select sub.SUB_ADDR_NAME,sub.SUB_ADDR_SEQ, addr.ADDR_NAME,
 		addr.ADDR_SEQ
-		from member m, sub_address sub,	address addr
+		from member m, sub_address sub, address addr
 		where
 		m.SUB_ADDR_SEQ=sub.SUB_ADDR_SEQ
-		and sub.ADDR_SEQ =	addr.ADDR_SEQ
-		and m.MEMBER_SEQ=#{MEMBER_SEQ}
+		and sub.ADDR_SEQ = addr.ADDR_SEQ
+		and
+		m.MEMBER_SEQ=#{MEMBER_SEQ}
 		and sub.SUB_ADDR_SEQ=#{SUB_ADDR_SEQ}
 	</select>
 
