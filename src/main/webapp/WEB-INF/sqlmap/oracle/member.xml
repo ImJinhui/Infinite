@@ -21,7 +21,7 @@
 	<select id="abilitylist" resultType="Map" parameterType="Map">
 		select
 		abi.ABILITY_NAME
-		from MEMBER m, MEMBER_ABILITY_REL rel, ABILITIES abi, sub_category_seq sub
+		from MEMBER m, MEMBER_ABILITY_REL rel, ABILITIES abi, sub_category sub
 		where rel.MEMBER_SEQ = m.MEMBER_SEQ
 		and rel.ABILITY_SEQ = abi.ABILITY_SEQ
 		and abi.sub_category_seq = sub.sub_category_seq
