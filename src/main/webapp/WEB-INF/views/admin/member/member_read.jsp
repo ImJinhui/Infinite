@@ -244,16 +244,16 @@
 			</div>
 			<!-- /능력테이블 -->
 
-			<button class="btn waves-effect waves-light right" type="submit"
-				name="action">
-				수정 <i class="material-icons right">edit</i>
-			</button>    
 			<button class="btn waves-effect waves-light right" type="button"
 				name="action" onclick="member_delete()">
 				<a href="<c:url value='/admin/member/member_delete?'/>"></a> 삭제 <i
 					class="material-icons right">delete</i>
 
 			</button>
+			<button class="btn waves-effect waves-light right" type="submit"
+				name="action">
+				수정 <i class="material-icons right">edit</i>
+			</button>    
 
 
 		</form>
