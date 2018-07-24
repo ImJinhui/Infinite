@@ -101,6 +101,8 @@
 				alert("전화번호값을 입력해주세요");
 				$("#tel").focus();
 				return false;
+			
+			
 			} else if (!passCheck && doubleCheck) {
 				alert("비밀번호를 확인해주세요.");
 				$("#password_c").focus();
