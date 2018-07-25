@@ -99,7 +99,7 @@
 	}
 </script>
 <script type="text/javascript">
-	var member_delete = function() {
+	/* var member_delete = function() {
 		var id = $('#member_id').val();
 
 		$.ajax({
@@ -121,7 +121,7 @@
 			}
 		});
 
-	}
+	} */
 </script>
 
 
@@ -251,12 +251,14 @@
 					name="action">
 					수정 <i class="material-icons right">edit</i>
 				</button>
-				<button class="btn waves-effect waves-light" type="button"
-					name="action" onclick="member_delete()">
-					<a href="<c:url value='/admin/member/member_delete?MEMBER_SEQ=${resultMap.MEMBER_SEQ}'/>"></a> 삭제 <i
+				<!-- <button class="btn waves-effect waves-light" type="button" name="action" onclick="member_delete()"> -->
+				<%-- <button class="btn waves-effect waves-light" type="button" name="action">
+					<a href="<c:url value='/admin/member/member_delete?ID=${resultMap.ID}'/>"></a> 삭제 <i
 						class="material-icons right">delete</i>
-
-				</button>
+				</button> --%>
+				
+				<a class="waves-effect waves-light btn" href="<c:url value='/admin/member/member_delete?ID=${resultMap.ID}'/>">삭제<i
+						class="material-icons right">delete</i></a>
 			</div>
 
 		</form>

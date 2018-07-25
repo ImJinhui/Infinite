@@ -6,21 +6,23 @@
     
 <mapper namespace="result">
 	<select id="list" resultType="Map" parameterType="Map" timeout="10">
-		select
-			r.RESERVATION_SEQ
-			,r.ID
-			,r.EQUIP_SEQ
-			,r.RESERVE_DATE
-			,r.RESERVE_S_TIME
-			,r.RESERVE_E_TIME
-			,r.NUM_OF_PROTOTYPE
-			,r.RETURN_CHECK
-			,m.NAME
-			,e.EQUIP_NAME
-		from RESERVATION r, MEMBER m, EQUIP e
-		where r.ID = m.ID
-		and r.EQUIP_SEQ = e.EQUIP_SEQ
-		order by r.RESERVATION_SEQ
+		select 
+		r.RESERVATION_SEQ
+		,r.ID
+		,r.EQUIP_SEQ
+		,r.RESERVE_DATE
+		,r.RESERVE_S_TIME
+		,r.RESERVE_E_TIME
+		,r.NUM_OF_PROTOTYPE
+		,r.RETURN_CHECK
+		,m.NAME
+		,e.EQUIP_NAME
+		,img.ATTACHFILE_SEQ
+	from MEMBER m, EQUIP e, RESERVATION r LEFT OUTER JOIN result_image img 
+    ON r.RESERVATION_SEQ = img.SOURCE_UNIQUE_SEQ
+	where r.ID = m.ID
+	and r.EQUIP_SEQ = e.EQUIP_SEQ
+	order by RESERVATION_SEQ
 	</select>
 	
 	<select id="listpagination" resultType="Map" parameterType="Map">

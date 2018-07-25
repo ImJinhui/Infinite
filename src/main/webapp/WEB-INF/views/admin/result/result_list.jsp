@@ -116,7 +116,9 @@ $(function(){
 			</ul>
 		</div>
 	</div>
-	<a href="<c:url value='/admin/result/result_print'/>" class="waves-effect waves-light btn">button</a>
+	<div class="row">
+	<a href="<c:url value='/admin/result/result_print'/>" class="waves-effect waves-light btn right">결과물 출력</a>
+	</div>
 </div>
 <!-- /수정부분-->
 

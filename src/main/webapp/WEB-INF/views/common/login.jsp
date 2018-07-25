@@ -65,7 +65,7 @@
 					<c:if test="${not empty param.fail}">
 						<font color="red">
 							<p>아이디와 비밀번호가 일치하지 않습니다.</p>
-							<p>Reason:${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p>
+							<%-- <p>Reason:${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p> --%>
 						</font>
 						<c:remove scope="session" var="SPRING_SECURITY_LAST_EXCEPTION" />
 					</c:if>

@@ -199,12 +199,12 @@
 
 
 	<select id="ability_list" resultType="Map" parameterType="Map">
-		select
-		*from abilities
+		select *
+		from ABILITIES a, SUB_CATEGORY sub
+		where
+		a.SUB_CATEGORY_SEQ = sub.SUB_CATEGORY_SEQ
+		and 20000>sub.CATEGORY_SEQ
 	</select>
-
-	<!-- <select id="find_ability_seq"> select ABILITY_SEQ from abilities where 
-		ABILITY_NAME=#{ability} </select> -->
 
 	<insert id="ability_insert">
 		insert into member_ability_rel (MEMBER_SEQ,
@@ -248,7 +248,7 @@
 	</select>
 
 	<update id="delete">
-		update member set VISIBLE='FLASE' where ID=#{id}
+		update member set VISIBLE=#{VISIBLE} where ID=#{ID}
 	</update>
 
 	<select id="find_name" resultType="Map" parameterType="Map">

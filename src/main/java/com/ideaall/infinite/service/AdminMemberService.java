@@ -221,10 +221,14 @@ public class AdminMemberService {
 	 * return resultObject; }
 	 */
 
-	public void memberdelete(Object dataMap) {
+	public Object memberdelete(Map<String,Object> dataMap) {
 		String sqlMapId = "member.delete";
-		dao.deleteObject(sqlMapId, dataMap);
-
+		
+		dataMap.put("VISIBLE", "FALSE");
+		
+		Integer result = (Integer) dao.saveObject(sqlMapId, dataMap);
+		
+		return 0;
 	}
 
 	public Object abilitycheck(Map<String, Object> paramMap) {

@@ -46,7 +46,7 @@ public class AdminResultController {
 			service.saveObject(paramMap);
 			resultMap = (Map<String, Object>) service.getListPagination(paramMap);
 		} else if("result_print".equalsIgnoreCase(action)) {
-			resultMap = (Map<String, Object>) service.getListPagination(paramMap);
+			resultList = (List<Object>) service.getList(paramMap);
 		}
 		
 

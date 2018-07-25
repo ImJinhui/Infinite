@@ -132,49 +132,6 @@ function checkNull(){
 }
 </style>
 
-<!-- 카테고리별 장비 목록 불러오는 ajax -->
-<script>
-	/* var fn_cate_equipList = function(url, id, params) {
-	$.ajax({
-		type : "POST", 
-		url : url, 
-		data : {"SUB_CATEGORY_SEQ" : params}, 
-		dataType:'json',
-		cache: false,
-		success : function(data) {
-			alert(data);
-			var formTag = ""; */
-	/* formTag += "<div id='equip0' class='col s10'><div class='row'>"; */
-	/* $.each(data, function(i, item) {
-		formTag += '<div class="col s12 m4"><div class="card">';
-		formTag += '<div class="card-image waves-effect waves-block waves-light">';
-		formTag += '<img class="activator" src="<c:url value="/resources/images/lasercutter.PNG"/></div>">';
-		formTag += '<div class="card-content">';
-		formTag += '<span class="card-title activator grey-text text-darken-4">'+item.EQUIP_NAME;
-		formTag += '<i class="material-icons right">more_vert</i></span></div>';
-		formTag += '<div class="card-reveal"><span class="card-title grey-text text-darken-4">'+item.EQUIP_NAME;
-		formTag += '<i class="material-icons right">close</i></span>';
-		formTag += '<p>'+item.DESCRIPTION+'</p>';
-		formTag += '</div></div></div>';
-	}); */
-	/* formTag += '</div></div>'; */
-	/* $('#'+id).html(formTag);
-	},
-	error : function(xhr, status, exception){
-	alert("Failure \n ("+status+")");
-	return false; 
-	}
-	});
-	}
-
-	function equipList(param) {
-	fn_cate_equipList("<c:url value='/wsEquip/equipList'/>", "setEquipList", param);
-	
-	};  */
-</script>
-
-
-
 <!-- 페이지 이름 -->
 <nav class="teal">
 	<div class="nav-wrapper">
@@ -204,7 +161,7 @@ function checkNull(){
 								test="${resultCate.CATEGORY_SEQ == resultSubCate.CATEGORY_SEQ}">
 								<a
 									href="<c:url value='/admin/equip/equip_listByCate?SUB_CATEGORY_SEQ=${resultSubCate.SUB_CATEGORY_SEQ}'/>"
-									<%-- onclick="equipList(${resultSubCate.SUB_CATEGORY_SEQ})" --%> class="collection-item">${resultSubCate.SUB_CATEGORY_NAME}</a>
+								class="collection-item">${resultSubCate.SUB_CATEGORY_NAME}</a>
 							</c:if>
 						</c:forEach>
 					</div>
@@ -226,17 +183,15 @@ function checkNull(){
 							 <img class="activator"	src="<c:url value='/resources/uploads/${resultData.PHYSICALFILE_NAME}'/>">
 						</div>
 						<div class="card-content">
-							<span class="activator grey-text text-darken-4">${resultData.EQUIP_NAME}
+							<span style="cursor: pointer;" class="activator grey-text text-darken-4">${resultData.EQUIP_NAME}
 								<i class="material-icons right">more_vert</i>
 							</span>
 						</div>
 						<div class="card-reveal">
 							<span class="card-title grey-text text-darken-4">${resultData.EQUIP_NAME}<i
 								class="material-icons right">close</i></span>
-							<p>${resultData.DESCRIPTION}</p>
-							<p>${resultData.SUB_CATEGORY_SEQ}</p>
-							<p>${resultData.EQUIP_SEQ}</p>
-							<p>${resultData.MANAGER}</p>
+							<p>장비 설명 : ${resultData.DESCRIPTION}</p>
+							<p>관리자 : ${resultData.MANAGER}</p>
 						</div>
 						<div class="card-action">
 							<a href="<c:url value='/admin/equip/equip_edit?EQUIP_SEQ=${resultData.EQUIP_SEQ}'/>">수정</a>

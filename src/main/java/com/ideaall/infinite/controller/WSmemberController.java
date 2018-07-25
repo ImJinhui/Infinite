@@ -18,10 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ideaall.infinite.service.AdminMemberService;
 import com.ideaall.infinite.service.CommonService;
-import com.ideaall.infinite.utill.PageMaker;
-import com.ideaall.infinite.utill.Paging;
-import com.ideaall.infinite.write.WriteInfo;
-import com.ideaall.infinite.write.WriteService;
+
 
 @Controller
 public class WSmemberController {
@@ -31,9 +28,6 @@ public class WSmemberController {
 
 	@Autowired
 	AdminMemberService memberservice;
-
-	@Autowired
-	WriteService writeService;
 
 	@RequestMapping(value = "/ws/{action}", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json")
