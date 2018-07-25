@@ -33,9 +33,9 @@ public class HomeController {
 	public ModelAndView actionMethod(@RequestParam Map<String, Object> paramMap, ModelAndView modelandView) {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		System.out.println(auth);
+		/*System.out.println(auth);*/
 		Collection<? extends GrantedAuthority> authority = auth.getAuthorities();
-		System.out.println(authority);
+		/*System.out.println(authority);*/
 		paramMap.put("AUTHORITY",authority);
 		
 		String viewName = "/main/index";

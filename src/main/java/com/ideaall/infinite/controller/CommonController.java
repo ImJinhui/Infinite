@@ -35,7 +35,7 @@ public class CommonController {
 
 		String action = (String) paramMap.get("action");
 		String viewName = MAPPING +"/"+ action;
-		System.out.println(viewName);
+/*		System.out.println(viewName);*/
 		String forwardView = (String) paramMap.get("forwardView");
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();

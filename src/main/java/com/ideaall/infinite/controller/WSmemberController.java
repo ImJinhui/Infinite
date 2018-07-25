@@ -51,11 +51,11 @@ public class WSmemberController {
 
 		List<Map> resultList = new ArrayList<>();
 		Map<String, Object> resultMap = new HashMap<>();
-		System.out.println(paramMap.get("ADDR_SEQ"));
+	/*	System.out.println(paramMap.get("ADDR_SEQ"));*/
 
 		resultList = (List<Map>) commonservice.getSubADDList(paramMap);
-		System.out.println(resultList.toString());
-		System.out.println("-----");
+		/*System.out.println(resultList.toString());
+		System.out.println("-----");*/
 
 		resultMap.put("addrList", resultList);
 		return resultMap;
@@ -81,7 +81,7 @@ public class WSmemberController {
 		Map<String, Object> resultMap = new HashMap<>();
 		
 		resultList =  (List)memberservice.abilitycheck(paramMap);
-		System.out.println("반환 데이터 : " + resultList);
+		/*System.out.println("반환 데이터 : " + resultList);*/
 		
 		resultMap.put("resultData", resultList);
 		return resultMap;
