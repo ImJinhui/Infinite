@@ -122,6 +122,16 @@ var fn_timeList = function(url,param1, param2, param3) {
 	        var year = date.getYear();
 	        var dow = date.getDay();
 	        year = (year < 1000) ? year + 1900 : year;
+	        
+	        /* 월, 일이 10보다 작은 경우 변환 */
+	        if(month<10){
+	        	month = '0'+month;
+	        }
+	        if(day<10){
+	        	day = '0'+day;
+	        }
+	        /* 월, 일이 10보다 작은 경우 변환 */
+	        
 	        if(dow==0||dow==1) continue;
 	        else datecount++;
 	        switch(dow){
@@ -244,7 +254,7 @@ $(document).ready(function(){
 </div>
 <div id="firstpage">
 <div id="main_list">
-<div style="padding: 0 1rem 0 1rem; font-size: large">
+<div style="padding: 0 1rem 0 1rem;">
 	<script>
 		printDate(1);
 	</script>
@@ -278,7 +288,7 @@ $(document).ready(function(){
 
 <div id="secondpage">
 <div id="main_list">
-<div style="padding: 0 1rem 0 1rem; font-size: large">
+<div style="padding: 0 1rem 0 1rem;">
 	<script>
 		printDate(2);
 	</script>

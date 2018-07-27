@@ -80,11 +80,9 @@
 			<table class="highlight centered">
 				<thead>
 					<tr>
-						<!-- <th>회원번호</th> -->
+
 						<th>아이디</th>
 						<th>이름</th>
-						<!-- <th>비밀번호</th> -->
-						<!-- 	<th>주소</th> -->
 						<th>전화번호</th>
 						<th>보유능력</th>
 					</tr>
@@ -138,24 +136,6 @@
 							</c:choose>
 						</tr>
 					</c:forEach>
-
-					<%-- <c:forEach items="${resultMap.resultList}" var="resultData"
-						varStatus="loop">
-						<tr style="cursor: pointer;"
-							onclick="location.href='<c:url value="/admin/member/member_read?MEMBER_SEQ=${resultData.MEMBER_SEQ}"/>'"
-							onMouseOver="window.status = '<c:url value="/admin/member/member_read?MEMBER_SEQ=${resultData.MEMBER_SEQ}" />'"
-							onMouseOut=" window.status = '' ">
-
-							<td>${resultData.ID}</td>
-							<td>${resultData.NAME}</td>
-							<td>${resultData.TEL}</td>
-							<td><c:forEach items="${resultData.ABILITY_NAMES}"
-									var="NAMES" varStatus="loop2">
-							${NAMES.ABILITY_NAME}
-							</c:forEach></td>
-
-						</tr>
-					</c:forEach> --%>
 				</tbody>
 
 			</table>
@@ -206,9 +186,6 @@
 
 
 				</c:if>
-
-
-				
 		</div>
 
 		<!-- /수정부분 -->

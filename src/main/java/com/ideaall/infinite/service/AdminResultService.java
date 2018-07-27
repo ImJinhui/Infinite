@@ -23,6 +23,13 @@ public class AdminResultService {
 		
 		return resultObject;
 	}
+	public Object getListByDate(Object dataMap) {
+		String sqlMapId = "result.listByDate";
+		
+		Object resultObject = dao.getList(sqlMapId, dataMap);
+		
+		return resultObject;
+	}
 	
 	public Object getObject(Object dataMap) {
 		String sqlMapId = "result.read";

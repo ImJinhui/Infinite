@@ -98,31 +98,6 @@
 				});
 	}
 </script>
-<script type="text/javascript">
-	/* var member_delete = function() {
-		var id = $('#member_id').val();
-
-		$.ajax({
-			type : "GET", //서버에 보낼 request 방식
-			url : "<c:url value='/admin/member/member_delete'/>", //서버에서 받을 url
-			dataType : "json",
-			data : {
-				"id" : id
-
-			}, //Controller에 보낼 데이터(value = ADDR_SEQ 보내짐)
-			////////
-			success : function(result) { //서버에서 반환받은 데이터를 result에 담는다.
-				console.log(result);
-				alert("회원 삭제가 완료되었습니다.")
-			},
-
-			error : function(jqXHR, textStatus, errorThrown) {
-				alert("오류발생");
-			}
-		});
-
-	} */
-</script>
 
 
 <!-- main -->

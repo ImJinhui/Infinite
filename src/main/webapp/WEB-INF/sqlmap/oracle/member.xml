@@ -91,10 +91,15 @@
 	</update>
 
 	<update id="adminupdate">
-		update member set ID=#{ID}, PASSWORD=#{PASSWORD},
-		NAME=#{NAME}, TEL=#{TEL}, SUB_ADDR_SEQ=#{cate2},
-		AUTHORITY_SEQ=#{AUTHORITY_SEQ} where MEMBER_SEQ =
-		#{MEMBER_SEQ}
+	update member 
+	set 
+	ID = #{ID}
+	, PASSWORD=#{PASSWORD}
+	, NAME=#{NAME}
+	, TEL=#{TEL}
+	, SUB_ADDR_SEQ=#{cate2}
+	, AUTHORITY_SEQ=#{AUTHORITY_SEQ} 
+	where MEMBER_SEQ =	#{MEMBER_SEQ}
 	</update>
 
 	<select id="info" resultType="Map" parameterType="Map">

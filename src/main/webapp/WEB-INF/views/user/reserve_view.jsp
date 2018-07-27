@@ -4,6 +4,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
 <c:set var="principalName" value="${pageContext.request.userPrincipal.name }" />
+
+<script>
+function openAccordion(){
+	$(".accordion").click();
+}
+
+</script>
 <script>
 var newpage = "";
 var addIdList = new Array();
@@ -91,6 +98,16 @@ var fn_timeList = function(url,param1, param2, param3) {	/* 데이터베이스�
 	        var year = date.getYear();	/* 년도 */
 	        var dow = date.getDay();	/* 요일 */
 	        year = (year < 1000) ? year + 1900 : year;
+	        
+	        /* 월, 일이 10보다 작은 경우 변환 */
+	        if(month<10){
+	        	month = '0'+month;
+	        }
+	        if(day<10){
+	        	day = '0'+day;
+	        }
+	        /* 월, 일이 10보다 작은 경우 변환 */
+	        
 	        if(dow==0||dow==1) continue;	/* 일요일이나 월요일은 반복문을 건너띄움. */
 	        else datecount++;	/* 일요일 월요일이 아닐떄만 datecount 변수를 증가시켜 반복문을 5회 반복하게 만듬 */
 	        switch(dow){
@@ -243,9 +260,7 @@ $(document).ready(function(){
 	padding:2rem;
 	border: 1.3px solid #d4d4d4;
 }
-#datediv{
 
-}
 </style>
 
 <!-- main -->
@@ -265,8 +280,10 @@ $(document).ready(function(){
 	<!-- <div id='calendar'></div> -->
 <div id="pagebody">
 <div class="row center-align">
+
 	<a class="left waves-effect waves-light btn" id="beforepage"><i class="material-icons left">navigate_before</i>1주 전</a>
 	<a class="waves-effect waves-light btn modal-trigger" onclick="reservecheck()" href="#modal1" style="padding: 0 2rem; background-color: #FFB74D">예약하기</a>
+	<a class="waves-effect waves-light btn" onclick="openAccordion();">전체 목록 열기</a>
 	<a class="right waves-effect waves-light btn" id="nextpage"><i class="material-icons right">navigate_next</i>1주 뒤</a>
 </div>
 <div id="newpage">
